@@ -1,7 +1,7 @@
 <!-- Side Navigation for Table of Contents -->
 <nav class="side-nav" id="side-nav">
   <div class="side-nav-content">
-    <h4 class="side-nav-title">Contents</h4>
+    <div class="side-nav-title">Operating System Enumeration</div>
     <ul class="side-nav-list" id="toc-list">
       <!-- TOC will be populated by JavaScript -->
     </ul>
@@ -13,20 +13,35 @@ document.addEventListener('DOMContentLoaded', function() {
   const sideNav = document.getElementById('side-nav');
   const tocList = document.getElementById('toc-list');
   
-  // Only show on single post pages
-  if (window.location.pathname.includes('/posts/')) {
+  // Only show on single post pages and pages with headings
+  const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6');
+  
+  if (headings.length > 0 && (window.location.pathname.includes('/posts/') || document.querySelector('.post-content'))) {
     sideNav.style.display = 'block';
+    document.body.classList.add('side-nav-active');
     
-    // Generate TOC from headings
-    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
     const toc = [];
     
     headings.forEach((heading, index) => {
-      // Skip the first h1 (post title)
-      if (heading.tagName === 'H1' && index === 0) return;
-      
-      const id = heading.id || `heading-${index}`;
-      if (!heading.id) {
+      // Create or use existing ID
+      let id = heading.id;
+      if (!id) {
+        // Generate ID from text content
+        id = heading.textContent.trim()
+          .toLowerCase()
+          .replace(/[^\w\s-]/g, '') // Remove special characters
+          .replace(/\s+/g, '-') // Replace spaces with hyphens
+          .replace(/-+/g, '-') // Replace multiple hyphens with single
+          .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+        
+        // Ensure uniqueness
+        let baseId = id;
+        let counter = 1;
+        while (document.getElementById(id)) {
+          id = `${baseId}-${counter}`;
+          counter++;
+        }
+        
         heading.id = id;
       }
       
@@ -41,30 +56,50 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Build TOC HTML
-    let currentLevel = 0;
-    let html = '';
-    
-    toc.forEach(item => {
-      if (item.level > currentLevel) {
-        html += '<ul class="toc-nested">'.repeat(item.level - currentLevel);
-        currentLevel = item.level;
-      } else if (item.level < currentLevel) {
-        html += '</ul>'.repeat(currentLevel - item.level);
-        currentLevel = item.level;
+    // Build nested TOC HTML structure
+    function buildNestedTOC(items, minLevel = null) {
+      if (items.length === 0) return '';
+      
+      if (minLevel === null) {
+        minLevel = Math.min(...items.map(item => item.level));
       }
       
-      html += `<li class="toc-item toc-level-${item.level}">
-        <a href="#${item.id}" class="toc-link" data-target="${item.id}">${item.text}</a>
-      </li>`;
-    });
+      let html = '';
+      let i = 0;
+      
+      while (i < items.length) {
+        const item = items[i];
+        
+        if (item.level === minLevel) {
+          html += `<li class="toc-item toc-level-${item.level}">
+            <a href="#${item.id}" class="toc-link" data-target="${item.id}">${item.text}</a>`;
+          
+          // Look for nested items
+          const nestedItems = [];
+          let j = i + 1;
+          
+          while (j < items.length && items[j].level > minLevel) {
+            nestedItems.push(items[j]);
+            j++;
+          }
+          
+          if (nestedItems.length > 0) {
+            html += '<ul class="toc-nested">' + buildNestedTOC(nestedItems) + '</ul>';
+          }
+          
+          html += '</li>';
+          i = j;
+        } else {
+          i++;
+        }
+      }
+      
+      return html;
+    }
     
-    // Close remaining nested lists
-    html += '</ul>'.repeat(currentLevel);
+    tocList.innerHTML = buildNestedTOC(toc);
     
-    tocList.innerHTML = html;
-    
-    // Add click handlers
+    // Add click handlers for smooth scrolling
     const tocLinks = document.querySelectorAll('.toc-link');
     tocLinks.forEach(link => {
       link.addEventListener('click', function(e) {
@@ -73,9 +108,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const targetElement = document.getElementById(targetId);
         
         if (targetElement) {
-          targetElement.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
+          // Calculate offset for fixed header if needed
+          const offset = 80; // Adjust based on your header height
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
           });
           
           // Update active link
@@ -85,30 +125,45 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Highlight current section on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          const activeLink = document.querySelector(`.toc-link[data-target="${id}"]`);
-          
-          if (activeLink) {
-            tocLinks.forEach(l => l.classList.remove('active'));
-            activeLink.classList.add('active');
-          }
+    // Enhanced scroll tracking for active highlighting
+    function updateActiveLink() {
+      const scrollPosition = window.scrollY + 100; // Offset for better UX
+      let activeHeading = null;
+      
+      // Find the currently visible heading
+      headings.forEach(heading => {
+        const rect = heading.getBoundingClientRect();
+        const absoluteTop = rect.top + window.pageYOffset;
+        
+        if (absoluteTop <= scrollPosition) {
+          activeHeading = heading;
         }
       });
-    }, {
-      rootMargin: '-20% 0px -70% 0px'
+      
+      // Update active state
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        if (activeHeading && link.getAttribute('data-target') === activeHeading.id) {
+          link.classList.add('active');
+        }
+      });
+    }
+    
+    // Throttled scroll handler for better performance
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = setTimeout(updateActiveLink, 10);
     });
     
-    headings.forEach(heading => {
-      if (heading.id) {
-        observer.observe(heading);
-      }
-    });
+    // Initialize active link
+    updateActiveLink();
+    
   } else {
     sideNav.style.display = 'none';
+    document.body.classList.remove('side-nav-active');
   }
 });
 </script>
