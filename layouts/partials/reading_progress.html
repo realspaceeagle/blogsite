@@ -1,0 +1,35 @@
+<!-- Reading Progress Indicator -->
+<div class="reading-progress">
+  <div class="reading-progress-bar"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const progressBar = document.querySelector('.reading-progress-bar');
+  const article = document.querySelector('.post-content');
+  
+  if (progressBar && article) {
+    function updateProgress() {
+      const articleTop = article.offsetTop;
+      const articleHeight = article.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const scrollTop = window.pageYOffset;
+      
+      const articleBottom = articleTop + articleHeight;
+      const windowBottom = scrollTop + windowHeight;
+      
+      let progress = 0;
+      
+      if (scrollTop >= articleTop) {
+        const scrolled = Math.min(windowBottom - articleTop, articleHeight);
+        progress = (scrolled / articleHeight) * 100;
+      }
+      
+      progressBar.style.width = Math.min(progress, 100) + '%';
+    }
+    
+    window.addEventListener('scroll', updateProgress);
+    updateProgress();
+  }
+});
+</script>

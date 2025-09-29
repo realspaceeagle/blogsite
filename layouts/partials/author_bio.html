@@ -1,0 +1,32 @@
+<!-- Author Bio Section -->
+<div class="author-bio">
+  <div class="author-bio-content">
+    <div class="author-avatar">
+      <img src="{{ .Site.Params.author.avatar | default "/images/avatar.jpg" }}" alt="{{ .Site.Params.author.name | default "Author" }}" class="avatar-img">
+    </div>
+    <div class="author-info">
+      <h3 class="author-name">{{ .Site.Params.author.name | default "realspaceeagle" }}</h3>
+      <p class="author-title">{{ .Site.Params.author.title | default "Cybersecurity Professional" }}</p>
+      <p class="author-description">{{ .Site.Params.author.bio | default "Cybersecurity enthusiast sharing knowledge on penetration testing, network security, and system administration. Passionate about offensive security and helping others learn." }}</p>
+      
+      {{ if .Site.Params.author.certifications }}
+      <div class="author-certifications">
+        <h4>Certifications</h4>
+        <div class="cert-badges">
+          {{ range .Site.Params.author.certifications }}
+          <span class="cert-badge">{{ . }}</span>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+      
+      <div class="author-social">
+        {{ range .Site.Params.socialIcons }}
+        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="author-social-link" title="{{ .title }}">
+          {{ partial "svg.html" . }}
+        </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

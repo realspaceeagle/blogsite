@@ -1,0 +1,22 @@
+<!-- Newsletter Subscription -->
+<div class="newsletter-section">
+  <div class="newsletter-content">
+    <div class="newsletter-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+      </svg>
+    </div>
+    <div class="newsletter-text">
+      <h3>Stay Updated on Cybersecurity</h3>
+      <p>Get the latest security techniques, tools, and insights delivered to your inbox. No spam, unsubscribe anytime.</p>
+    </div>
+    <form class="newsletter-form" action="https://formspree.io/f/{{ .Site.Params.newsletter.formspreeId | default "xpzgkrdq" }}" method="POST">
+      <div class="newsletter-input-group">
+        <input type="email" name="email" placeholder="Enter your email address" required class="newsletter-input">
+        <button type="submit" class="newsletter-button">Subscribe</button>
+      </div>
+      <input type="hidden" name="_subject" value="New newsletter subscription">
+      <input type="hidden" name="_next" value="{{ .Site.BaseURL }}">
+    </form>
+  </div>
+</div>

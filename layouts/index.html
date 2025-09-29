@@ -1,0 +1,376 @@
+{{ define "main" }}
+<main class="main homepage">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Cybersecurity Insights & Practical Tutorials</h1>
+      <p class="hero-subtitle">Learn penetration testing, network security, and offensive security techniques through hands-on guides and real-world scenarios.</p>
+      <div class="hero-buttons">
+        <a href="/posts/" class="btn btn-primary">Explore Articles</a>
+        <a href="/projects/" class="btn btn-secondary">View Projects</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-number">{{ len .Site.RegularPages }}</span>
+        <span class="stat-label">Articles</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">{{ len .Site.Taxonomies.tags }}</span>
+        <span class="stat-label">Topics</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">5+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Posts -->
+  <section class="featured-posts">
+    <h2>Latest Security Insights</h2>
+    <div class="posts-grid">
+      {{ range first 6 .Site.RegularPages }}
+      <article class="post-card">
+        {{ if .Params.cover }}
+        <div class="post-card-image">
+          <a href="{{ .Permalink }}">
+            <img src="{{ .Params.cover }}" alt="{{ .Title }}" loading="lazy">
+          </a>
+        </div>
+        {{ end }}
+        <div class="post-card-content">
+          <div class="post-card-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+            <span class="reading-time">{{ .ReadingTime }} min read</span>
+          </div>
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          <p class="post-card-summary">{{ .Summary | truncate 120 }}</p>
+          {{ if .Params.tags }}
+          <div class="post-card-tags">
+            {{ range first 3 .Params.tags }}
+            <span class="tag">{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    <div class="view-all">
+      <a href="/posts/" class="btn btn-outline">View All Articles</a>
+    </div>
+  </section>
+
+  <!-- Tag Cloud Section -->
+  <section class="homepage-tags">
+    {{ partial "tag_cloud.html" . }}
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section class="homepage-newsletter">
+    {{ partial "newsletter.html" . }}
+  </section>
+
+  <!-- Skills & Expertise -->
+  <section class="expertise-section">
+    <h2>Areas of Expertise</h2>
+    <div class="expertise-grid">
+      <div class="expertise-item">
+        <div class="expertise-icon">🔒</div>
+        <h3>Penetration Testing</h3>
+        <p>Comprehensive security assessments, vulnerability discovery, and ethical hacking techniques.</p>
+      </div>
+      <div class="expertise-item">
+        <div class="expertise-icon">🌐</div>
+        <h3>Network Security</h3>
+        <p>Network enumeration, traffic analysis, and infrastructure security hardening.</p>
+      </div>
+      <div class="expertise-item">
+        <div class="expertise-icon">🛡️</div>
+        <h3>Incident Response</h3>
+        <p>Digital forensics, malware analysis, and security incident investigation.</p>
+      </div>
+      <div class="expertise-item">
+        <div class="expertise-icon">🔧</div>
+        <h3>Security Tools</h3>
+        <p>Custom tool development, automation scripts, and security framework expertise.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<style>
+/* Homepage Styles */
+.homepage {
+  max-width: 1200px;
+}
+
+.hero-section {
+  text-align: center;
+  padding: 60px 0;
+  background: linear-gradient(135deg, var(--entry) 0%, var(--theme) 100%);
+  border-radius: var(--radius);
+  margin-bottom: 50px;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  color: var(--primary);
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  color: var(--secondary);
+  margin: 0 0 30px 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.btn {
+  padding: 15px 30px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--theme);
+}
+
+.btn-primary:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background: var(--primary);
+  color: var(--theme);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: var(--theme);
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.featured-posts {
+  margin-bottom: 50px;
+}
+
+.featured-posts h2 {
+  text-align: center;
+  margin: 0 0 40px 0;
+  font-size: 36px;
+  color: var(--primary);
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.post-card {
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.post-card-image {
+  height: 200px;
+  overflow: hidden;
+}
+
+.post-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-card-content {
+  padding: 25px;
+}
+
+.post-card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: var(--secondary);
+}
+
+.post-card-content h3 {
+  margin: 0 0 15px 0;
+  font-size: 20px;
+}
+
+.post-card-content h3 a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.post-card-content h3 a:hover {
+  color: var(--secondary);
+}
+
+.post-card-summary {
+  color: var(--secondary);
+  line-height: 1.6;
+  margin: 0 0 15px 0;
+}
+
+.post-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.post-card-tags .tag {
+  background: var(--tertiary);
+  color: var(--primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.view-all {
+  text-align: center;
+}
+
+.homepage-tags,
+.homepage-newsletter {
+  margin-bottom: 50px;
+}
+
+.expertise-section {
+  margin-bottom: 50px;
+}
+
+.expertise-section h2 {
+  text-align: center;
+  margin: 0 0 40px 0;
+  font-size: 36px;
+  color: var(--primary);
+}
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.expertise-item {
+  text-align: center;
+  padding: 30px 20px;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: transform 0.3s ease;
+}
+
+.expertise-item:hover {
+  transform: translateY(-5px);
+}
+
+.expertise-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.expertise-item h3 {
+  margin: 0 0 15px 0;
+  color: var(--primary);
+  font-size: 20px;
+}
+
+.expertise-item p {
+  color: var(--secondary);
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 768px) {
+  .hero-title {
+    font-size: 36px;
+  }
+  
+  .hero-subtitle {
+    font-size: 18px;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-stats {
+    flex-direction: row;
+    gap: 20px;
+  }
+  
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .expertise-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+{{ end }}

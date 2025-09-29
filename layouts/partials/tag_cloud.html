@@ -1,0 +1,17 @@
+<!-- Tag Cloud -->
+<div class="tag-cloud">
+  <h3>Explore Topics</h3>
+  <div class="tag-cloud-container">
+    {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+    {{ $count := .Count }}
+    {{ $weight := div (mul $count 100) $.Site.Taxonomies.tags.ByCount.First.Count }}
+    <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" 
+       class="tag-cloud-item" 
+       style="font-size: {{ add 0.8 (div $weight 50) }}em; opacity: {{ add 0.6 (div $weight 250) }};"
+       title="{{ $count }} post{{ if ne $count 1 }}s{{ end }}">
+      {{ $name }}
+      <span class="tag-count">({{ $count }})</span>
+    </a>
+    {{ end }}
+  </div>
+</div>

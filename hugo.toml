@@ -22,7 +22,7 @@ ignoreLogs = ['warning-goldmark-raw-html']
   comments = true
   hidemeta = false
   hideSummary = false
-  showtoc = false
+  showtoc = true
   tocopen = false
   search = true
   
@@ -42,6 +42,22 @@ ignoreLogs = ['warning-goldmark-raw-html']
   repo = "realspaceeagle/realspaceeagle.github.io"
   issueTerm = "pathname"
   theme = "preferred-color-scheme"
+
+  # Author configuration
+  [params.author]
+  name = "realspaceeagle"
+  title = "Cybersecurity Professional & Penetration Tester"
+  bio = "Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience."
+  avatar = "/images/avatar.svg"
+  certifications = ["OSCP", "CEH", "CISSP", "GCIH"]
+
+  # Newsletter configuration
+  [params.newsletter]
+  formspreeId = "xpzgkrdq"
+
+  # Contact form configuration  
+  [params.contact]
+  formspreeId = "xpzgkrdq"
 
   # Social Media Icons
   [[params.socialIcons]]
@@ -104,6 +120,12 @@ ignoreLogs = ['warning-goldmark-raw-html']
   identifier = "categories"
   name = "Categories"
   url = "/categories/"
+  weight = 55
+
+  [[menu.main]]
+  identifier = "projects"
+  name = "Projects"
+  url = "/projects/"
   weight = 55
 
   [[menu.main]]

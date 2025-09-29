@@ -1,0 +1,98 @@
+<!-- Enhanced Search -->
+<div class="search-enhanced">
+  <div class="search-container">
+    <div class="search-input-wrapper">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      </svg>
+      <input type="text" id="search-input" placeholder="Search articles, tools, techniques..." autocomplete="off">
+      <button class="search-clear" id="search-clear" style="display: none;">×</button>
+    </div>
+    
+    <div class="search-filters">
+      <select id="search-category">
+        <option value="">All Categories</option>
+        <option value="security">Security</option>
+        <option value="networking">Networking</option>
+        <option value="tools">Tools</option>
+        <option value="tutorials">Tutorials</option>
+      </select>
+      
+      <select id="search-sort">
+        <option value="relevance">Relevance</option>
+        <option value="date">Date</option>
+        <option value="title">Title</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="search-results" id="search-results" style="display: none;">
+    <div class="search-results-header">
+      <span class="search-results-count" id="results-count"></span>
+      <span class="search-query" id="search-query"></span>
+    </div>
+    <div class="search-results-list" id="results-list"></div>
+  </div>
+  
+  <div class="search-suggestions">
+    <h4>Popular Searches</h4>
+    <div class="suggestion-tags">
+      <span class="suggestion-tag" data-search="nmap">nmap</span>
+      <span class="suggestion-tag" data-search="penetration testing">penetration testing</span>
+      <span class="suggestion-tag" data-search="network enumeration">network enumeration</span>
+      <span class="suggestion-tag" data-search="linux">linux</span>
+      <span class="suggestion-tag" data-search="security tools">security tools</span>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('search-input');
+  const searchClear = document.getElementById('search-clear');
+  const searchResults = document.getElementById('search-results');
+  const resultsList = document.getElementById('results-list');
+  const resultsCount = document.getElementById('results-count');
+  const searchQuery = document.getElementById('search-query');
+  const suggestionTags = document.querySelectorAll('.suggestion-tag');
+  
+  // Handle suggestion clicks
+  suggestionTags.forEach(tag => {
+    tag.addEventListener('click', function() {
+      searchInput.value = this.dataset.search;
+      performSearch();
+    });
+  });
+  
+  // Handle clear button
+  searchClear.addEventListener('click', function() {
+    searchInput.value = '';
+    searchResults.style.display = 'none';
+    this.style.display = 'none';
+  });
+  
+  // Handle input changes
+  searchInput.addEventListener('input', function() {
+    if (this.value.length > 0) {
+      searchClear.style.display = 'block';
+      if (this.value.length > 2) {
+        performSearch();
+      }
+    } else {
+      searchClear.style.display = 'none';
+      searchResults.style.display = 'none';
+    }
+  });
+  
+  function performSearch() {
+    const query = searchInput.value.toLowerCase();
+    searchQuery.textContent = `"${query}"`;
+    searchResults.style.display = 'block';
+    
+    // This would integrate with your existing search functionality
+    // For now, showing placeholder
+    resultsList.innerHTML = '<div class="search-result-item"><h4>Search functionality integration needed</h4><p>Connect this to your existing Hugo search</p></div>';
+    resultsCount.textContent = 'Integrating with Hugo search...';
+  }
+});
+</script>

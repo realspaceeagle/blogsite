@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{ partial "reading_progress.html" . }}
 <main class="main single-page">
   {{ partial "side_nav.html" . }}
   
@@ -16,6 +17,12 @@
       {{- if (.Param "ShowShareButtons") }}
       {{- partial "share_icons.html" . -}}
       {{- end }}
+      
+      {{ partial "author_bio.html" . }}
+      
+      {{ partial "related_posts.html" . }}
+      
+      {{ partial "newsletter.html" . }}
     </footer>
     
     {{- if (.Param "comments") }}
