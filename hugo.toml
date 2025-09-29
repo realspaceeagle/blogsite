@@ -28,6 +28,14 @@ ignoreLogs = ['warning-goldmark-raw-html']
   # Analytics settings
   env = "production"
 
+  # Favicon configuration
+  [params.assets]
+  favicon = "favicon.svg"
+  favicon16x16 = "favicon.svg"
+  favicon32x32 = "favicon.svg"
+  apple_touch_icon = "favicon.svg"
+  safari_pinned_tab = "favicon.svg"
+
   # Social Media Icons
   [[params.socialIcons]]
   name = "linkedin"
