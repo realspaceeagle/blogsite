@@ -28,6 +28,15 @@ ignoreLogs = ['warning-goldmark-raw-html']
   # Analytics settings
   env = "production"
 
+  # Social Media Icons
+  [[params.socialIcons]]
+  name = "linkedin"
+  url = "https://www.linkedin.com/in/dream4ip/"
+
+  [[params.socialIcons]]
+  name = "x"
+  url = "https://twitter.com/haran_loga"
+
 # Enable taxonomies for tags and categories
 [taxonomies]
   category = "categories"
