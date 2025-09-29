@@ -1,9 +1,33 @@
 /* Enhanced Scroll Behavior and Page Performance */
 
+/* Sticky Header */
+.header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    background: var(--theme) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Add padding to body to account for fixed header */
+body {
+    padding-top: 60px !important;
+}
+
+/* Adjust main content for fixed header */
+.main {
+    margin-top: 0 !important;
+}
+
 /* Fast scroll behavior for the entire page */
 html {
     scroll-behavior: auto; /* Faster than smooth */
-    scroll-padding-top: 60px; /* Offset for fixed headers */
+    scroll-padding-top: 120px; /* Offset for fixed headers */
 }
 
 /* Optimize scroll performance with faster scrolling */
@@ -98,7 +122,12 @@ pre, code {
 /* Optimize scroll for mobile devices */
 @media (max-width: 768px) {
     html {
-        scroll-padding-top: 80px;
+        scroll-padding-top: 140px;
+    }
+    
+    /* Adjust body padding for mobile */
+    body {
+        padding-top: 70px !important;
     }
     
     /* Reduce animations on mobile for better performance */

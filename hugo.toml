@@ -31,11 +31,18 @@ ignoreLogs = ['warning-goldmark-raw-html']
   # Social Media Icons
   [[params.socialIcons]]
   name = "linkedin"
+  title = "Connect on LinkedIn"
   url = "https://www.linkedin.com/in/dream4ip/"
 
   [[params.socialIcons]]
   name = "x"
+  title = "Follow on X/Twitter"
   url = "https://twitter.com/haran_loga"
+
+  [[params.socialIcons]]
+  name = "github"
+  title = "View Code on GitHub"
+  url = "https://github.com/realspaceeagle"
 
 # Enable taxonomies for tags and categories
 [taxonomies]
