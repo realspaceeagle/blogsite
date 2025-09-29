@@ -8,52 +8,83 @@
 
 /* Terminal-style code blocks */
 .highlight {
-  background-color: #1a1a1a !important;
-  border-radius: 8px;
-  border: 1px solid #333;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: #0d1117 !important;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 1rem 0 !important;
+  overflow: hidden;
 }
 
 .highlight pre {
-  background-color: #1a1a1a !important;
-  color: #ffffff !important;
+  background-color: #0d1117 !important;
+  color: #e6edf3 !important;
   font-family: 'Source Code Pro', 'Fira Code', 'JetBrains Mono', 'Consolas', 'Monaco', monospace !important;
-  font-size: 16px !important;
-  line-height: 1.4 !important;
-  padding: 1rem !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  padding: 16px !important;
   margin: 0 !important;
   overflow-x: auto;
-  border-radius: 8px;
+  border-radius: 0;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+/* Fix padding alignment issues */
+.highlight pre code {
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  white-space: pre;
+  word-break: normal;
+  word-wrap: normal;
 }
 
 /* Terminal command prompt styling */
 .highlight .gp {
-  color: #00ff00 !important; /* Green for command prompt */
+  color: #7dd3fc !important; /* Light blue for command prompt */
   font-weight: 600;
 }
 
 .highlight .go {
-  color: #ffffff !important; /* White for command text */
+  color: #e6edf3 !important; /* Light gray for command text */
 }
 
-/* Syntax highlighting for terminal output */
-.highlight .k { color: #ff6b6b !important; } /* Keywords - red */
-.highlight .s { color: #4ecdc4 !important; } /* Strings - teal */
-.highlight .c { color: #6c757d !important; } /* Comments - gray */
-.highlight .n { color: #ffffff !important; } /* Names - white */
-.highlight .o { color: #ffd93d !important; } /* Operators - yellow */
-.highlight .p { color: #ffffff !important; } /* Punctuation - white */
-.highlight .nb { color: #ff6b6b !important; } /* Built-ins - red */
-.highlight .s2 { color: #4ecdc4 !important; } /* String literals - teal */
+/* Improved syntax highlighting for better readability */
+.highlight .k { color: #ff7b72 !important; } /* Keywords - coral red */
+.highlight .s { color: #7ee787 !important; } /* Strings - light green */
+.highlight .c { color: #8b949e !important; } /* Comments - muted gray */
+.highlight .n { color: #e6edf3 !important; } /* Names - light gray */
+.highlight .o { color: #ffa657 !important; } /* Operators - orange */
+.highlight .p { color: #e6edf3 !important; } /* Punctuation - light gray */
+.highlight .nb { color: #ff7b72 !important; } /* Built-ins - coral red */
+.highlight .s2 { color: #7ee787 !important; } /* String literals - light green */
+.highlight .nf { color: #d2a8ff !important; } /* Function names - purple */
+.highlight .nc { color: #ffa657 !important; } /* Class names - orange */
+.highlight .nd { color: #ffa657 !important; } /* Decorators - orange */
+.highlight .err { color: #f85149 !important; } /* Errors - bright red */
 
-/* Terminal-style inline code */
+/* Improved inline code styling */
 code {
-  background-color: #2d2d2d !important;
-  color: #ffffff !important;
+  background-color: #21262d !important;
+  color: #e6edf3 !important;
   font-family: 'Source Code Pro', 'Fira Code', 'JetBrains Mono', 'Consolas', monospace !important;
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
-  font-size: 0.95em;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+  border: 1px solid #30363d;
+}
+
+/* Ensure inline code doesn't inherit styles from code blocks */
+p code, li code, td code, th code {
+  background-color: #21262d !important;
+  color: #e6edf3 !important;
+  padding: 0.2em 0.4em !important;
+  margin: 0 !important;
+  white-space: nowrap;
 }
 
 /* Terminal-style blockquotes */
@@ -323,6 +354,24 @@ li {
   display: none;
   font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Smooth scrollbar for side nav */
+.side-nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.side-nav::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.side-nav::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 3px;
+}
+
+.side-nav::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .side-nav-title {

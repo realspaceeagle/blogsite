@@ -1,7 +1,7 @@
 <!-- Side Navigation for Table of Contents -->
 <nav class="side-nav" id="side-nav">
   <div class="side-nav-content">
-    <div class="side-nav-title">Operating System Enumeration</div>
+    <div class="side-nav-title" id="toc-title">Contents</div>
     <ul class="side-nav-list" id="toc-list">
       <!-- TOC will be populated by JavaScript -->
     </ul>
@@ -13,10 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const sideNav = document.getElementById('side-nav');
   const tocList = document.getElementById('toc-list');
   
-  // Only show on single post pages and pages with headings
+  // Only show on blog post pages (not about, contact, etc.)
+  const isPostPage = window.location.pathname.includes('/posts/');
   const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6');
   
-  if (headings.length > 0 && (window.location.pathname.includes('/posts/') || document.querySelector('.post-content'))) {
+  if (isPostPage && headings.length > 0) {
     sideNav.style.display = 'block';
     document.body.classList.add('side-nav-active');
     
