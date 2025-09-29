@@ -989,11 +989,11 @@ body:not(.dark) .toc-level-6 { color: #ced4da; }
 
 /* Adjust main content when side nav is present */
 body.side-nav-active {
-  margin-left: 250px;
+  margin-left: 0;
 }
 
 body.side-nav-active .main-content {
-  margin-left: 250px;
+  margin-left: 0;
 }
 
 /* Ensure header doesn't conflict with sidebar */
@@ -1004,17 +1004,17 @@ body.side-nav-active .header {
 
 /* Adjust main content padding for pages with sidebar and sticky header */
 body.side-nav-active .main {
-  margin-left: 0 !important;
-  padding-left: 270px !important;
+  margin-left: 250px !important;
+  padding-left: 2rem !important;
   padding-top: 0 !important;
-  padding-right: 20px !important;
+  padding-right: 2rem !important;
 }
 
 /* Ensure post content has proper spacing */
 body.side-nav-active .post-content {
   max-width: none !important;
   margin-left: 0 !important;
-  padding: 2rem 1rem !important;
+  padding: 0 !important;
 }
 
 /* Responsive design for mobile and tablets */
@@ -1032,12 +1032,13 @@ body.side-nav-active .post-content {
   }
   
   body.side-nav-active .main {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    margin-left: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
   
   body.side-nav-active .post-content {
-    padding: 1rem !important;
+    padding: 0 !important;
   }
   
   body.side-nav-active .header {
