@@ -109,17 +109,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const targetElement = document.getElementById(targetId);
         
         if (targetElement) {
-          // Calculate offset for fixed header if needed
-          const offset = 80; // Adjust based on your header height
+          // Calculate offset for better positioning
+          const headerHeight = 60; // Adjust based on your header height
+          const extraOffset = 20; // Additional space for better reading
           const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight - extraOffset;
+          
+          // Disable scroll tracking temporarily to prevent conflicts
+          window.removeEventListener('scroll', handleScroll);
           
           window.scrollTo({
-            top: offsetPosition,
+            top: Math.max(0, offsetPosition),
             behavior: 'smooth'
           });
           
-          // Update active link
+          // Re-enable scroll tracking after smooth scroll completes
+          setTimeout(() => {
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            updateActiveLink(); // Update immediately after scroll
+          }, 800);
+          
+          // Update active link immediately
           tocLinks.forEach(l => l.classList.remove('active'));
           this.classList.add('active');
         }
@@ -128,19 +138,33 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Enhanced scroll tracking with expanding/collapsing sections
     function updateActiveLink() {
-      const scrollPosition = window.scrollY + 100; // Offset for better UX
+      const scrollPosition = window.scrollY + window.innerHeight * 0.3; // Better offset calculation
       let activeHeading = null;
       let activeParentSection = null;
+      let closestDistance = Infinity;
       
-      // Find the currently visible heading
+      // Find the currently visible heading with improved logic
       headings.forEach(heading => {
         const rect = heading.getBoundingClientRect();
         const absoluteTop = rect.top + window.pageYOffset;
+        const distance = Math.abs(absoluteTop - scrollPosition);
         
-        if (absoluteTop <= scrollPosition) {
+        // Check if heading is in viewport or above current scroll position
+        if (absoluteTop <= scrollPosition + 50 && distance < closestDistance) {
           activeHeading = heading;
+          closestDistance = distance;
         }
       });
+      
+      // If no heading found above, get the first visible heading in viewport
+      if (!activeHeading) {
+        headings.forEach(heading => {
+          const rect = heading.getBoundingClientRect();
+          if (rect.top >= 0 && rect.top <= window.innerHeight && !activeHeading) {
+            activeHeading = heading;
+          }
+        });
+      }
       
       if (activeHeading) {
         // Find the parent section (h2) for the current heading
@@ -174,6 +198,18 @@ document.addEventListener('DOMContentLoaded', function() {
         // Set active for current heading
         if (activeHeading && linkTarget === activeHeading.id) {
           link.classList.add('active');
+          
+          // Scroll the active link into view in the sidebar
+          const sideNavRect = sideNav.getBoundingClientRect();
+          const linkRect = link.getBoundingClientRect();
+          
+          if (linkRect.top < sideNavRect.top || linkRect.bottom > sideNavRect.bottom) {
+            link.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'center',
+              inline: 'nearest'
+            });
+          }
         }
         
         // Handle section expansion/collapse
@@ -199,14 +235,30 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
     
-    // Throttled scroll handler for better performance
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
+    // Improved scroll handler with better performance
+    let ticking = false;
+    
+    function requestTick() {
+      if (!ticking) {
+        requestAnimationFrame(updateActiveLink);
+        ticking = true;
       }
-      scrollTimeout = setTimeout(updateActiveLink, 10);
-    });
+    }
+    
+    function handleScroll() {
+      requestTick();
+    }
+    
+    // Reset ticking flag after update
+    const originalUpdateActiveLink = updateActiveLink;
+    updateActiveLink = function() {
+      originalUpdateActiveLink();
+      ticking = false;
+    };
+    
+    // Add scroll listeners
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
     
     // Initialize sections - collapse all except first
     function initializeSections() {
