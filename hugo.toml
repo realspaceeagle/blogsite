@@ -37,19 +37,11 @@ ignoreLogs = ['warning-goldmark-raw-html']
   apple_touch_icon = "favicon.svg"
   safari_pinned_tab = "favicon.svg"
 
-  # Comment system configuration (Giscus)
-  [params.giscus]
+  # Comment system configuration (Utterances)
+  [params.utterances]
   repo = "realspaceeagle/realspaceeagle.github.io"
-  repoId = "R_kgDONGCNLA"
-  category = "General"
-  categoryId = "DIC_kwDONGCNLM4CkCsF"
-  mapping = "pathname"
-  strict = "0"
-  reactionsEnabled = "1"
-  emitMetadata = "0"
-  inputPosition = "bottom"
-  theme = "preferred_color_scheme"
-  lang = "en"
+  issueTerm = "pathname"
+  theme = "preferred-color-scheme"
 
   # Social Media Icons
   [[params.socialIcons]]
