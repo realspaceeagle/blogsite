@@ -72,6 +72,20 @@ theme = 'PaperMod'
   url = "/contact/"
   weight = 60
 
+# Syntax highlighting configuration
+[markup]
+  [markup.highlight]
+    style = "github-dark"
+    lineNos = false
+    lineNumbersInTable = false
+    noClasses = false
+    codeFences = true
+    guessSyntax = true
+    hl_Lines = ""
+    tabWidth = 4
+    anchorLineNos = false
+    lineAnchors = ""
+
 # Fuse.js search configuration
 [params.fuseOpts]
   isCaseSensitive = false

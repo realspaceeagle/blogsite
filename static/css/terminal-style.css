@@ -123,8 +123,92 @@ body:not(.dark) .highlight {
   color: #e6e6e6 !important; /* Light gray for command output */
 }
 
-/* Authentic Ubuntu terminal syntax highlighting */
-/* Based on Ubuntu's default terminal color scheme */
+/* Language-specific syntax highlighting with Ubuntu terminal colors */
+
+/* BASH/Shell highlighting */
+.highlight.language-bash .k,
+.highlight.language-shell .k,
+.highlight.language-sh .k { color: #55ff55 !important; } /* Keywords - bright green */
+
+.highlight.language-bash .s,
+.highlight.language-shell .s,
+.highlight.language-sh .s,
+.highlight.language-bash .s2,
+.highlight.language-shell .s2,
+.highlight.language-sh .s2 { color: #ffff55 !important; } /* Strings - bright yellow */
+
+.highlight.language-bash .c,
+.highlight.language-shell .c,
+.highlight.language-sh .c { color: #5555ff !important; } /* Comments - bright blue */
+
+.highlight.language-bash .nv,
+.highlight.language-shell .nv,
+.highlight.language-sh .nv { color: #55ffff !important; } /* Variables - bright cyan */
+
+/* PYTHON highlighting */
+.highlight.language-python .k { color: #ff55ff !important; } /* Keywords - bright magenta */
+.highlight.language-python .kn { color: #ff55ff !important; } /* Import keywords */
+.highlight.language-python .s,
+.highlight.language-python .s2 { color: #55ff55 !important; } /* Strings - bright green */
+.highlight.language-python .c { color: #5555ff !important; } /* Comments - bright blue */
+.highlight.language-python .nf { color: #55ffff !important; } /* Functions - bright cyan */
+.highlight.language-python .nc { color: #ffff55 !important; } /* Classes - bright yellow */
+.highlight.language-python .nb { color: #ff55ff !important; } /* Built-ins - bright magenta */
+
+/* JAVASCRIPT highlighting */
+.highlight.language-javascript .k,
+.highlight.language-js .k { color: #ffff55 !important; } /* Keywords - bright yellow */
+.highlight.language-javascript .s,
+.highlight.language-js .s,
+.highlight.language-javascript .s2,
+.highlight.language-js .s2 { color: #55ff55 !important; } /* Strings - bright green */
+.highlight.language-javascript .c1,
+.highlight.language-js .c1 { color: #5555ff !important; } /* Comments - bright blue */
+.highlight.language-javascript .nf,
+.highlight.language-js .nf { color: #55ffff !important; } /* Functions - bright cyan */
+.highlight.language-javascript .nx,
+.highlight.language-js .nx { color: #ffffff !important; } /* Variables - white */
+
+/* SQL highlighting */
+.highlight.language-sql .k { color: #ff55ff !important; } /* Keywords - bright magenta */
+.highlight.language-sql .s,
+.highlight.language-sql .s2 { color: #55ff55 !important; } /* Strings - bright green */
+.highlight.language-sql .c { color: #5555ff !important; } /* Comments - bright blue */
+.highlight.language-sql .n { color: #55ffff !important; } /* Names - bright cyan */
+
+/* JAVA highlighting */
+.highlight.language-java .k { color: #ffff55 !important; } /* Keywords - bright yellow */
+.highlight.language-java .kt { color: #ff55ff !important; } /* Types - bright magenta */
+.highlight.language-java .s,
+.highlight.language-java .s2 { color: #55ff55 !important; } /* Strings - bright green */
+.highlight.language-java .c1 { color: #5555ff !important; } /* Comments - bright blue */
+.highlight.language-java .nf { color: #55ffff !important; } /* Methods - bright cyan */
+.highlight.language-java .nc { color: #ffff55 !important; } /* Classes - bright yellow */
+
+/* C/C++ highlighting */
+.highlight.language-c .k,
+.highlight.language-cpp .k { color: #ff55ff !important; } /* Keywords - bright magenta */
+.highlight.language-c .s,
+.highlight.language-cpp .s,
+.highlight.language-c .s2,
+.highlight.language-cpp .s2 { color: #55ff55 !important; } /* Strings - bright green */
+.highlight.language-c .c1,
+.highlight.language-cpp .c1 { color: #5555ff !important; } /* Comments - bright blue */
+.highlight.language-c .nf,
+.highlight.language-cpp .nf { color: #55ffff !important; } /* Functions - bright cyan */
+
+/* JSON highlighting */
+.highlight.language-json .nt { color: #55ffff !important; } /* Property names - bright cyan */
+.highlight.language-json .s2 { color: #55ff55 !important; } /* String values - bright green */
+.highlight.language-json .mi { color: #ff55ff !important; } /* Numbers - bright magenta */
+.highlight.language-json .kc { color: #ffff55 !important; } /* Constants - bright yellow */
+
+/* YAML highlighting */
+.highlight.language-yaml .nt { color: #55ffff !important; } /* Keys - bright cyan */
+.highlight.language-yaml .s { color: #55ff55 !important; } /* Values - bright green */
+.highlight.language-yaml .c { color: #5555ff !important; } /* Comments - bright blue */
+
+/* Default/Generic syntax highlighting for all languages */
 .highlight .k { color: #55ff55 !important; } /* Keywords - bright green */
 .highlight .s { color: #ffff55 !important; } /* Strings - bright yellow */
 .highlight .c { color: #5555ff !important; } /* Comments - bright blue */
