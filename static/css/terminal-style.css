@@ -6,43 +6,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
-/* 0xdf-style code blocks */
+/* 0xdf-style unified code blocks - single block appearance */
 .highlight {
-  background-color: #1e1e1e !important;
-  border-radius: 0px;
-  border: none;
-  margin: 1rem 0 !important;
-  overflow: hidden;
-  box-shadow: none;
-}
-
-.highlight pre {
   background-color: #1e1e1e !important;
   color: #ffffff !important;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
   font-size: 13px !important;
   line-height: 1.4 !important;
   padding: 12px !important;
-  margin: 0 !important;
+  margin: 1rem 0 !important;
   overflow-x: auto;
-  border-radius: 0;
+  border: none !important;
+  border-radius: 0 !important;
   white-space: pre;
   word-wrap: normal;
-  border: none;
 }
 
-/* Fix padding alignment issues */
-.highlight pre code {
-  background: none !important;
+.highlight pre {
+  background: transparent !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
   padding: 0 !important;
   margin: 0 !important;
-  border-radius: 0 !important;
-  color: inherit !important;
-  font-size: inherit !important;
-  white-space: pre;
-  word-break: normal;
-  word-wrap: normal;
   border: none !important;
+  border-radius: 0 !important;
+  white-space: inherit;
+  word-wrap: inherit;
+  overflow: visible;
+}
+
+.highlight pre code {
+  background: transparent !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  white-space: inherit;
+  word-wrap: inherit;
 }
 
 /* 0xdf-style syntax highlighting - minimal colors */
