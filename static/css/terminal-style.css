@@ -1003,23 +1003,29 @@ body.side-nav-active .header {
   width: 100% !important;
 }
 
-/* Make blog main layout match about page - only add sidebar offset */
+/* Make blog main layout follow PaperMod responsive pattern with sidebar offset */
 body.side-nav-active .main {
   margin-left: 250px !important;
-  padding: 0 !important;
+  padding: var(--gap) !important;
+  max-width: calc(var(--main-width) + var(--gap) * 2) !important;
   width: auto !important;
 }
 
-/* Make blog post content match about page content styling */
+/* Blog post content follows PaperMod responsive design */
 body.side-nav-active .post-content {
-  max-width: none !important;
-  margin: 0 !important;
+  color: var(--content) !important;
+  margin: 30px 0 !important;
+  max-width: 100% !important;
   padding: 0 !important;
   width: auto !important;
 }
 
-/* Responsive design for mobile and tablets */
-@media (max-width: 1024px) {
+/* PaperMod responsive design - mobile breakpoint at 768px */
+@media (max-width: 768px) {
+  :root {
+    --gap: 14px; /* PaperMod mobile gap reduction */
+  }
+  
   .side-nav {
     display: none !important;
   }
@@ -1034,9 +1040,9 @@ body.side-nav-active .post-content {
   
   body.side-nav-active .main {
     margin-left: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    width: 100% !important;
+    padding: var(--gap) !important;
+    max-width: calc(var(--main-width) + var(--gap) * 2) !important;
+    width: auto !important;
   }
   
   body.side-nav-active .post-content {
