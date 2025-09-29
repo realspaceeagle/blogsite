@@ -12,7 +12,6 @@ weight: 1
 
 📍 London, United Kingdom  
 📧 araharan.x.loganayagam@hotmail.com  
-📱 +44-79-09718634  
 
 ### Connect With Me
 💼 [LinkedIn](https://www.linkedin.com/in/dream4ip/) - Professional Network  
