@@ -1036,14 +1036,16 @@ body.side-nav-active .post-content {
   
   body.side-nav-active .main {
     margin-left: 0 !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
   }
   
   body.side-nav-active .post-content {
-    padding: 1rem !important;
-    margin: 0 auto !important;
+    padding: 1rem 0.5rem !important;
+    margin: 0 !important;
     max-width: none !important;
+    width: 100% !important;
   }
   
   body.side-nav-active .header {
@@ -1061,7 +1063,8 @@ body.side-nav-active .post-content {
   
   .post-content {
     max-width: 100%;
-    padding: 0 1rem;
+    padding: 1rem 1.5rem;
+    margin: 0;
   }
 }
 
@@ -1076,7 +1079,9 @@ body.side-nav-active .post-content {
   .post-content {
     font-size: 16px;
     line-height: 1.6;
-    padding: 0 0.5rem;
+    padding: 1rem 2rem !important;
+    margin: 0 !important;
+    width: 100% !important;
   }
   
   .post-content p {
