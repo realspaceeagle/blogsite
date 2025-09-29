@@ -1,9 +1,10 @@
 /* Terminal Aesthetic Styling */
 /* Inspired by 0xdf's blog design */
 
-/* Import monospace fonts */
+/* Import readable fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 
 /* Terminal-style code blocks */
 .highlight {
@@ -16,11 +17,11 @@
 .highlight pre {
   background-color: #1a1a1a !important;
   color: #ffffff !important;
-  font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', 'Monaco', monospace !important;
-  font-size: 14px;
-  line-height: 1.5;
-  padding: 1.5rem;
-  margin: 0;
+  font-family: 'Source Code Pro', 'Fira Code', 'JetBrains Mono', 'Consolas', 'Monaco', monospace !important;
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+  padding: 0.8rem !important;
+  margin: 0 !important;
   overflow-x: auto;
 }
 
@@ -48,10 +49,10 @@
 code {
   background-color: #2d2d2d !important;
   color: #ffffff !important;
-  font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', monospace !important;
+  font-family: 'Source Code Pro', 'Fira Code', 'JetBrains Mono', 'Consolas', monospace !important;
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
-  font-size: 0.9em;
+  font-size: 0.95em;
 }
 
 /* Terminal-style blockquotes */
@@ -101,8 +102,9 @@ table tr:hover td {
 
 .nav a {
   color: #ffffff;
-  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 500;
+  font-size: 16px;
 }
 
 .nav a:hover {
@@ -115,9 +117,10 @@ table tr:hover td {
   background-color: #2d2d2d;
   color: #ffffff;
   border: 1px solid #333;
-  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   border-radius: 4px;
   transition: all 0.3s ease;
+  font-size: 14px;
 }
 
 .btn:hover {
@@ -131,9 +134,10 @@ input, textarea, select {
   background-color: #2d2d2d;
   color: #ffffff;
   border: 1px solid #333;
-  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   border-radius: 4px;
   padding: 0.5rem;
+  font-size: 14px;
 }
 
 input:focus, textarea:focus, select:focus {
@@ -181,30 +185,73 @@ a:hover {
 /* Terminal-style headings */
 h1, h2, h3, h4, h5, h6 {
   color: #ffffff;
-  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   font-weight: 600;
+  line-height: 1.3;
 }
 
 h1 {
   color: #00ff00;
   border-bottom: 2px solid #333;
   padding-bottom: 0.5rem;
+  font-size: 2.2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Blog post content styling */
+.post-content {
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+.post-content p {
+  margin-bottom: 1.2rem;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.post-content ul, .post-content ol {
+  margin-bottom: 1.2rem;
+  padding-left: 1.5rem;
+}
+
+.post-content li {
+  margin-bottom: 0.5rem;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* Terminal-style list items */
 ul, ol {
-  color: #ffffff;
-  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  color: #e0e0e0;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 li {
   margin: 0.5rem 0;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* Terminal-style metadata */
 .post-meta {
   color: #6c757d;
-  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   font-size: 0.9em;
 }
 
@@ -212,10 +259,10 @@ li {
 .tag {
   background-color: #2d2d2d;
   color: #4ecdc4;
-  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
-  font-size: 0.8em;
+  font-size: 0.85em;
   margin: 0.2rem;
   display: inline-block;
 }
@@ -244,14 +291,27 @@ li {
   background-color: #1a1a1a;
   border-top: 1px solid #333;
   color: #6c757d;
-  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
 }
 
 /* Responsive design for mobile */
 @media (max-width: 768px) {
   .highlight pre {
-    font-size: 12px;
-    padding: 1rem;
+    font-size: 14px !important;
+    padding: 0.6rem !important;
+  }
+  
+  .post-content {
+    font-size: 15px;
+  }
+  
+  .post-content p {
+    font-size: 15px;
+  }
+  
+  .post-content li {
+    font-size: 15px;
   }
   
   table {
@@ -259,6 +319,18 @@ li {
   }
   
   .nav a {
-    font-size: 0.9em;
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.3rem;
   }
 }
