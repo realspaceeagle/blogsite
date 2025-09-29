@@ -115,7 +115,7 @@ body:not(.dark) .highlight {
 
 /* Ubuntu terminal command prompt and output colors */
 .highlight .gp {
-  color: #00ff41 !important; /* Bright Ubuntu green for command prompt $ */
+  color: #55ff55 !important; /* Bright Ubuntu green for command prompt $ */
   font-weight: 700;
 }
 
@@ -123,70 +123,86 @@ body:not(.dark) .highlight {
   color: #e6e6e6 !important; /* Light gray for command output */
 }
 
-/* Ubuntu terminal syntax highlighting - authentic terminal colors */
-.highlight .k { color: #ff79c6 !important; } /* Keywords - bright magenta */
-.highlight .s { color: #f1fa8c !important; } /* Strings - bright yellow */
-.highlight .c { color: #6272a4 !important; } /* Comments - muted blue */
-.highlight .n { color: #f8f8f2 !important; } /* Names - bright white */
+/* Authentic Ubuntu terminal syntax highlighting */
+/* Based on Ubuntu's default terminal color scheme */
+.highlight .k { color: #55ff55 !important; } /* Keywords - bright green */
+.highlight .s { color: #ffff55 !important; } /* Strings - bright yellow */
+.highlight .c { color: #5555ff !important; } /* Comments - bright blue */
+.highlight .n { color: #ffffff !important; } /* Names - bright white */
 .highlight .o { color: #ff5555 !important; } /* Operators - bright red */
-.highlight .p { color: #f8f8f2 !important; } /* Punctuation - bright white */
-.highlight .nb { color: #bd93f9 !important; } /* Built-ins - light purple */
-.highlight .s2 { color: #f1fa8c !important; } /* String literals - bright yellow */
-.highlight .nf { color: #50fa7b !important; } /* Function names - bright green */
-.highlight .nc { color: #8be9fd !important; } /* Class names - cyan */
-.highlight .nd { color: #ffb86c !important; } /* Decorators - orange */
+.highlight .p { color: #ffffff !important; } /* Punctuation - bright white */
+.highlight .nb { color: #ff55ff !important; } /* Built-ins - bright magenta */
+.highlight .s2 { color: #ffff55 !important; } /* String literals - bright yellow */
+.highlight .nf { color: #55ffff !important; } /* Function names - bright cyan */
+.highlight .nc { color: #55ffff !important; } /* Class names - bright cyan */
+.highlight .nd { color: #ffaa55 !important; } /* Decorators - orange */
 .highlight .err { color: #ff5555 !important; } /* Errors - bright red */
-.highlight .m { color: #bd93f9 !important; } /* Numbers - light purple */
-.highlight .mi { color: #bd93f9 !important; } /* Integers - light purple */
-.highlight .mf { color: #bd93f9 !important; } /* Floats - light purple */
+.highlight .m { color: #ff55ff !important; } /* Numbers - bright magenta */
+.highlight .mi { color: #ff55ff !important; } /* Integers - bright magenta */
+.highlight .mf { color: #ff55ff !important; } /* Floats - bright magenta */
 
-/* Additional Ubuntu terminal specific highlighting */
-.highlight .w { color: #f8f8f2 !important; } /* Whitespace - white */
-.highlight .cp { color: #ff79c6 !important; } /* Preprocessor - magenta */
-.highlight .cpf { color: #f1fa8c !important; } /* Preprocessor file - yellow */
-.highlight .cs { color: #6272a4 !important; } /* Comment special - muted blue */
-.highlight .dl { color: #f1fa8c !important; } /* String delimiter - yellow */
-.highlight .fm { color: #50fa7b !important; } /* Function magic - green */
-.highlight .il { color: #bd93f9 !important; } /* Integer long - purple */
-.highlight .kc { color: #bd93f9 !important; } /* Keyword constant - purple */
-.highlight .kd { color: #ff79c6 !important; } /* Keyword declaration - magenta */
-.highlight .kn { color: #ff79c6 !important; } /* Keyword namespace - magenta */
-.highlight .kp { color: #ff79c6 !important; } /* Keyword pseudo - magenta */
-.highlight .kr { color: #ff79c6 !important; } /* Keyword reserved - magenta */
-.highlight .kt { color: #8be9fd !important; } /* Keyword type - cyan */
-.highlight .ld { color: #f1fa8c !important; } /* Literal date - yellow */
-.highlight .na { color: #50fa7b !important; } /* Name attribute - green */
-.highlight .nl { color: #f8f8f2 !important; } /* Name label - white */
-.highlight .nn { color: #f8f8f2 !important; } /* Name namespace - white */
-.highlight .nt { color: #ff79c6 !important; } /* Name tag - magenta */
-.highlight .nv { color: #f8f8f2 !important; } /* Name variable - white */
-.highlight .ow { color: #ff79c6 !important; } /* Operator word - magenta */
-.highlight .sa { color: #f1fa8c !important; } /* String affix - yellow */
-.highlight .sb { color: #f1fa8c !important; } /* String backtick - yellow */
-.highlight .sc { color: #f1fa8c !important; } /* String char - yellow */
-.highlight .sd { color: #f1fa8c !important; } /* String doc - yellow */
-.highlight .se { color: #f1fa8c !important; } /* String escape - yellow */
-.highlight .sh { color: #f1fa8c !important; } /* String heredoc - yellow */
-.highlight .si { color: #f1fa8c !important; } /* String interpol - yellow */
-.highlight .sr { color: #f1fa8c !important; } /* String regex - yellow */
-.highlight .ss { color: #f1fa8c !important; } /* String symbol - yellow */
-.highlight .sx { color: #f1fa8c !important; } /* String other - yellow */
-.highlight .vc { color: #f8f8f2 !important; } /* Name variable class - white */
-.highlight .vg { color: #f8f8f2 !important; } /* Name variable global - white */
-.highlight .vi { color: #f8f8f2 !important; } /* Name variable instance - white */
-.highlight .vm { color: #f8f8f2 !important; } /* Name variable magic - white */
+/* Ubuntu terminal ANSI color mappings */
+.highlight .w { color: #ffffff !important; } /* Whitespace - bright white */
+.highlight .cp { color: #55ff55 !important; } /* Preprocessor - bright green */
+.highlight .cpf { color: #ffff55 !important; } /* Preprocessor file - bright yellow */
+.highlight .cs { color: #5555ff !important; } /* Comment special - bright blue */
+.highlight .dl { color: #ffff55 !important; } /* String delimiter - bright yellow */
+.highlight .fm { color: #55ffff !important; } /* Function magic - bright cyan */
+.highlight .il { color: #ff55ff !important; } /* Integer long - bright magenta */
+.highlight .kc { color: #ff55ff !important; } /* Keyword constant - bright magenta */
+.highlight .kd { color: #55ff55 !important; } /* Keyword declaration - bright green */
+.highlight .kn { color: #55ff55 !important; } /* Keyword namespace - bright green */
+.highlight .kp { color: #55ff55 !important; } /* Keyword pseudo - bright green */
+.highlight .kr { color: #55ff55 !important; } /* Keyword reserved - bright green */
+.highlight .kt { color: #55ffff !important; } /* Keyword type - bright cyan */
+.highlight .ld { color: #ffff55 !important; } /* Literal date - bright yellow */
+.highlight .na { color: #55ffff !important; } /* Name attribute - bright cyan */
+.highlight .nl { color: #ffffff !important; } /* Name label - bright white */
+.highlight .nn { color: #ffffff !important; } /* Name namespace - bright white */
+.highlight .nt { color: #55ff55 !important; } /* Name tag - bright green */
+.highlight .nv { color: #ffffff !important; } /* Name variable - bright white */
+.highlight .ow { color: #55ff55 !important; } /* Operator word - bright green */
+.highlight .sa { color: #ffff55 !important; } /* String affix - bright yellow */
+.highlight .sb { color: #ffff55 !important; } /* String backtick - bright yellow */
+.highlight .sc { color: #ffff55 !important; } /* String char - bright yellow */
+.highlight .sd { color: #ffff55 !important; } /* String doc - bright yellow */
+.highlight .se { color: #ffff55 !important; } /* String escape - bright yellow */
+.highlight .sh { color: #ffff55 !important; } /* String heredoc - bright yellow */
+.highlight .si { color: #ffff55 !important; } /* String interpol - bright yellow */
+.highlight .sr { color: #ffff55 !important; } /* String regex - bright yellow */
+.highlight .ss { color: #ffff55 !important; } /* String symbol - bright yellow */
+.highlight .sx { color: #ffff55 !important; } /* String other - bright yellow */
+.highlight .vc { color: #ffffff !important; } /* Name variable class - bright white */
+.highlight .vg { color: #ffffff !important; } /* Name variable global - bright white */
+.highlight .vi { color: #ffffff !important; } /* Name variable instance - bright white */
+.highlight .vm { color: #ffffff !important; } /* Name variable magic - bright white */
 
-/* Terminal command styling for bash/shell code */
-.highlight .highlight {
-  color: #f8f8f2 !important; /* Default text - bright white */
-}
-
-/* Dollar sign and hash prompt styling */
+/* Ubuntu terminal command prompt colors */
 .highlight .gp .s,
 .highlight .gp .nv {
-  color: #00ff41 !important; /* Green for $ and # prompts */
+  color: #55ff55 !important; /* Bright green for $ and # prompts */
   font-weight: 700;
 }
+
+/* Standard Ubuntu terminal ANSI colors */
+.ansi-black { color: #000000 !important; }
+.ansi-red { color: #aa0000 !important; }
+.ansi-green { color: #00aa00 !important; }
+.ansi-yellow { color: #aa5500 !important; }
+.ansi-blue { color: #0000aa !important; }
+.ansi-magenta { color: #aa00aa !important; }
+.ansi-cyan { color: #00aaaa !important; }
+.ansi-white { color: #aaaaaa !important; }
+
+/* Bright Ubuntu terminal ANSI colors */
+.ansi-bright-black { color: #555555 !important; }
+.ansi-bright-red { color: #ff5555 !important; }
+.ansi-bright-green { color: #55ff55 !important; }
+.ansi-bright-yellow { color: #ffff55 !important; }
+.ansi-bright-blue { color: #5555ff !important; }
+.ansi-bright-magenta { color: #ff55ff !important; }
+.ansi-bright-cyan { color: #55ffff !important; }
+.ansi-bright-white { color: #ffffff !important; }
 
 /* Light theme syntax highlighting */
 body:not(.dark) .highlight .k { color: #0000ff !important; } /* Keywords - blue */
