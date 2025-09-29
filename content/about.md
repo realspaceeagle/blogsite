@@ -299,15 +299,83 @@ Created a comprehensive web and mobile application connecting farmers and middle
 
 ---
 
-## Certifications
+## 🏆 Certifications & Professional Badges
 
-```bash
-# Professional Certifications
-✓ Practical Ethical Hacking (TCM Security)
-✓ The Bits and Bytes of Computer Networking (Google)
-✓ Introduction to Cybersecurity Tools & Cyber Attacks (IBM)
-✓ Go Programming (HackerRank)
+<div style="scroll-behavior: smooth; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin: 20px 0;">
+
+### 🎯 **Cybersecurity Certifications**
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
+
+#### **Offensive Security (OffSec)**
+<div style="border: 2px solid #00ff00; border-radius: 10px; padding: 15px; background: linear-gradient(135deg, #1a1a1a, #2d2d2d);">
+<img src="https://images.credly.com/size/340x340/images/ec81134d-e80b-4eb5-ae07-0eb8e1a60fcd/image.png" alt="OffSec Certified Professional" style="width: 80px; height: 80px; float: left; margin-right: 15px; border-radius: 8px;">
+<strong>🔴 Offensive Security Certified Professional (OSCP)</strong><br>
+<em>Status: In Progress</em><br>
+<small>Advanced penetration testing and ethical hacking</small>
+</div>
+
+#### **CREST (Council of Registered Ethical Security Testers)**
+<div style="border: 2px solid #0066cc; border-radius: 10px; padding: 15px; background: linear-gradient(135deg, #1a1a1a, #2d2d2d);">
+<img src="https://www.crest-approved.org/wp-content/uploads/2020/01/CREST-Logo-2020.png" alt="CREST Certification" style="width: 80px; height: 80px; float: left; margin-right: 15px; border-radius: 8px; background: white; padding: 5px;">
+<strong>🛡️ CREST Practitioner Security Analyst (CPSA)</strong><br>
+<em>Status: Planned 2024</em><br>
+<small>Industry-recognized penetration testing certification</small>
+</div>
+
+</div>
+
+### ✅ **Completed Certifications**
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin: 20px 0;">
+
+<div style="border: 1px solid #444; border-radius: 8px; padding: 12px; background: #1e1e1e;">
+<img src="https://images.credly.com/size/340x340/images/0b4b0b54-6b8d-4c7f-b0ea-7c5b9b2e1a1a/TCM-Security-Logo.png" alt="TCM Security" style="width: 40px; height: 40px; float: left; margin-right: 10px; border-radius: 4px;">
+<strong>🎯 Practical Ethical Hacking</strong><br>
+<small>TCM Security - Hands-on penetration testing</small>
+</div>
+
+<div style="border: 1px solid #444; border-radius: 8px; padding: 12px; background: #1e1e1e;">
+<img src="https://images.credly.com/size/340x340/images/d41de2b7-cbc2-47ec-bcf1-ebecbe83872f/GCC_badge_IT_Support_1000x1000.png" alt="Google Certificate" style="width: 40px; height: 40px; float: left; margin-right: 10px; border-radius: 4px;">
+<strong>🌐 Computer Networking</strong><br>
+<small>Google - Network fundamentals and protocols</small>
+</div>
+
+<div style="border: 1px solid #444; border-radius: 8px; padding: 12px; background: #1e1e1e;">
+<img src="https://images.credly.com/size/340x340/images/0572427c-6226-4334-b400-6c71d8bb7e1b/IBM_Cybersecurity_Analyst_Professional_Certificate.png" alt="IBM Certificate" style="width: 40px; height: 40px; float: left; margin-right: 10px; border-radius: 4px;">
+<strong>🔒 Cybersecurity Tools & Attacks</strong><br>
+<small>IBM - Security tools and threat analysis</small>
+</div>
+
+<div style="border: 1px solid #444; border-radius: 8px; padding: 12px; background: #1e1e1e;">
+<img src="https://hrcdn.net/fcore/assets/badges/go-programming-2-6a4ce0e46b.svg" alt="HackerRank Go" style="width: 40px; height: 40px; float: left; margin-right: 10px; border-radius: 4px;">
+<strong>🐹 Go Programming</strong><br>
+<small>HackerRank - Advanced Go development skills</small>
+</div>
+
+</div>
+
+### 🎯 **Certification Roadmap**
+
+```yaml
+2024_goals:
+  offensive_security: 🔴
+    - target: "OSCP (Offensive Security Certified Professional)"
+    - timeline: "Q2 2024"
+    - focus: "Advanced penetration testing methodologies"
+  
+  cloud_security: ☁️
+    - target: "AWS Certified Security - Specialty"
+    - timeline: "Q3 2024"
+    - focus: "Cloud security architecture and implementation"
+  
+  industry_recognition: 🏆
+    - target: "CREST CPSA (Practitioner Security Analyst)"
+    - timeline: "Q4 2024"
+    - focus: "Industry-standard penetration testing certification"
 ```
+
+</div>
 
 ---
 
