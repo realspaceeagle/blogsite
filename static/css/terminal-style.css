@@ -705,17 +705,17 @@ h4, h5, h6 {
   scroll-margin-top: 100px;
 }
 
-/* Blog post content styling */
+/* Blog post content styling - match about page content */
 .post-content {
   font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: #e0e0e0;
-  margin: 0 auto;
+  margin: 0;
   transition: none;
-  max-width: 1200px;
-  padding: 1.5rem 4rem;
-  width: 100%;
+  max-width: none;
+  padding: 0;
+  width: auto;
 }
 
 /* Improve text contrast for better readability */
@@ -988,7 +988,7 @@ body:not(.dark) .toc-level-4 { color: #868e96; }
 body:not(.dark) .toc-level-5 { color: #adb5bd; }
 body:not(.dark) .toc-level-6 { color: #ced4da; }
 
-/* Adjust main content when side nav is present */
+/* Adjust main content when side nav is present - match about page layout */
 body.side-nav-active {
   margin-left: 0;
 }
@@ -997,27 +997,25 @@ body.side-nav-active .main-content {
   margin-left: 0;
 }
 
-/* Ensure header doesn't conflict with sidebar */
+/* Ensure header appears same on blog and about pages */
 body.side-nav-active .header {
   left: 0 !important;
   width: 100% !important;
 }
 
-/* Adjust main content padding for pages with sidebar and sticky header */
+/* Make blog main layout match about page - only add sidebar offset */
 body.side-nav-active .main {
   margin-left: 250px !important;
-  padding-left: 0 !important;
-  padding-top: 0 !important;
-  padding-right: 0 !important;
-  width: calc(100vw - 250px) !important;
+  padding: 0 !important;
+  width: auto !important;
 }
 
-/* Ensure post content has proper spacing */
+/* Make blog post content match about page content styling */
 body.side-nav-active .post-content {
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-  padding: 1.5rem 2rem !important;
-  width: calc(100% - 4rem) !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
 }
 
 /* Responsive design for mobile and tablets */
