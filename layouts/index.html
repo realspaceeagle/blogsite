@@ -16,7 +16,7 @@
         <span class="stat-label">Articles</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number">{{ len .Site.Taxonomies.tags }}</span>
+        <span class="stat-number">{{ if .Site.Taxonomies.tags }}{{ len .Site.Taxonomies.tags }}{{ else }}0{{ end }}</span>
         <span class="stat-label">Topics</span>
       </div>
       <div class="stat-item">

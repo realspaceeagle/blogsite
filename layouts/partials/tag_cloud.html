@@ -2,9 +2,15 @@
 <div class="tag-cloud">
   <h3>Explore Topics</h3>
   <div class="tag-cloud-container">
+    {{ if .Site.Taxonomies.tags }}
+    {{ $maxCount := 1 }}
+    {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+    {{ if gt .Count $maxCount }}{{ $maxCount = .Count }}{{ end }}
+    {{ end }}
+    
     {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
     {{ $count := .Count }}
-    {{ $weight := div (mul $count 100) $.Site.Taxonomies.tags.ByCount.First.Count }}
+    {{ $weight := div (mul $count 100) $maxCount }}
     <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" 
        class="tag-cloud-item" 
        style="font-size: {{ add 0.8 (div $weight 50) }}em; opacity: {{ add 0.6 (div $weight 250) }};"
@@ -12,6 +18,9 @@
       {{ $name }}
       <span class="tag-count">({{ $count }})</span>
     </a>
+    {{ end }}
+    {{ else }}
+    <p class="no-tags">No tags available yet. Check back as more content is added!</p>
     {{ end }}
   </div>
 </div>

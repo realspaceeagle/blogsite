@@ -160,3 +160,15 @@ ignoreLogs = ['warning-goldmark-raw-html']
   threshold = 0.4
   minMatchCharLength = 0
   keys = ["title", "permalink", "summary", "content"]
+
+# Related posts configuration
+[related]
+  includeNewer = true
+  threshold = 80
+  toLower = false
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+  [[related.indices]]
+    name = "categories"
+    weight = 80
