@@ -12,6 +12,12 @@
       {{ .Content }}
     </div>
     
+    <footer class="post-footer">
+      {{- if (.Param "ShowShareButtons") }}
+      {{- partial "share_icons.html" . -}}
+      {{- end }}
+    </footer>
+    
     {{ partial "post_nav_links.html" . }}
   </article>
 </main>
