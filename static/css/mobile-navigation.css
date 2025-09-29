@@ -141,26 +141,15 @@ body.mobile-menu-open {
 }
 
 .social-icons .social-link {
-    font-size: 11px;
-    font-weight: 600;
-    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-    color: var(--content) !important;
-    text-decoration: none !important;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    background: var(--code-bg);
-    padding: 4px 6px;
-    border-radius: 4px;
+    font-size: 12px;
+    font-weight: normal;
+    font-family: monospace;
+    color: var(--content);
+    text-decoration: none;
+    background: var(--theme);
+    padding: 4px 8px;
     border: 1px solid var(--border);
-    transition: all 0.2s ease;
-}
-
-.social-icons .social-link:hover {
-    background: var(--primary) !important;
-    color: var(--theme) !important;
-    border-color: var(--primary);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 0 2px;
 }
 
 /* Responsive Breakpoints */
@@ -215,8 +204,8 @@ body.mobile-menu-open {
     }
     
     .social-icons .social-link {
-        font-size: 10px;
-        padding: 3px 5px;
+        font-size: 11px;
+        padding: 3px 6px;
     }
     
     /* Mobile menu adjustments */
@@ -259,8 +248,8 @@ body.mobile-menu-open {
     }
     
     .social-icons .social-link {
-        font-size: 9px;
-        padding: 2px 4px;
+        font-size: 10px;
+        padding: 2px 5px;
     }
 }
 
