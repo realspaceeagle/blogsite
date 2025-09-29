@@ -1,4 +1,4 @@
-baseURL = 'http://localhost:1313/'
+baseURL = 'https://realspaceeagle.github.io/blogsite/'
 languageCode = 'en-us'
 title = 'My Blog'
 theme = 'PaperMod'
