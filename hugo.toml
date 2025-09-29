@@ -26,7 +26,6 @@ ignoreLogs = ['warning-goldmark-raw-html']
   search = true
   
   # Analytics settings
-  analytics = true
   env = "production"
 
 # Enable taxonomies for tags and categories
