@@ -78,16 +78,20 @@
             
             <div class="logo-switches">
                 <!-- Social Media Icons -->
-                {{- if site.Params.socialIcons }}
                 <div class="social-icons">
-                    {{- range site.Params.socialIcons }}
-                    <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" 
-                       title="{{ .title | default .name }}" aria-label="{{ .title | default .name }}">
-                        {{- partial "svg.html" . }}
+                    <a href="https://www.linkedin.com/in/dream4ip/" target="_blank" rel="noopener noreferrer" 
+                       title="Connect on LinkedIn" aria-label="LinkedIn Profile">
+                        💼
                     </a>
-                    {{- end }}
+                    <a href="https://twitter.com/haran_loga" target="_blank" rel="noopener noreferrer" 
+                       title="Follow on X/Twitter" aria-label="Twitter Profile">
+                        🐦
+                    </a>
+                    <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener noreferrer" 
+                       title="View Code on GitHub" aria-label="GitHub Profile">
+                        🐙
+                    </a>
                 </div>
-                {{- end }}
                 
                 {{- if (not site.Params.disableThemeToggle) }}
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">

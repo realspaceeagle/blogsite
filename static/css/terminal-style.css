@@ -995,6 +995,19 @@ body.side-nav-active .main-content {
   margin-left: 250px;
 }
 
+/* Ensure header doesn't conflict with sidebar */
+body.side-nav-active .header {
+  left: 0 !important;
+  width: 100% !important;
+}
+
+/* Adjust main content padding for pages with sidebar and sticky header */
+body.side-nav-active .main {
+  margin-left: 0 !important;
+  padding-left: 250px !important;
+  padding-top: 60px !important;
+}
+
 /* Responsive design for mobile and tablets */
 @media (max-width: 1024px) {
   .side-nav {
@@ -1007,6 +1020,15 @@ body.side-nav-active .main-content {
   
   body.side-nav-active .main-content {
     margin-left: 0;
+  }
+  
+  body.side-nav-active .main {
+    padding-left: 0 !important;
+  }
+  
+  body.side-nav-active .header {
+    left: 0 !important;
+    width: 100% !important;
   }
 }
 
