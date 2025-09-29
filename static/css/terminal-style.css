@@ -26,19 +26,45 @@ html {
 
 /* Ubuntu terminal-style code blocks */
 .highlight {
-  background-color: #2c001e !important;
+  background: linear-gradient(135deg, #2c001e 0%, #1a0014 100%) !important;
   color: #ffffff !important;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-family: 'Ubuntu Mono', 'Consolas', 'Monaco', 'Courier New', monospace !important;
   font-size: 14px !important;
-  line-height: 1.5 !important;
-  padding: 16px !important;
+  line-height: 1.6 !important;
+  padding: 20px !important;
   margin: 1.5rem 0 !important;
   overflow-x: auto;
-  border: none !important;
-  border-radius: 4px !important;
+  border: 2px solid #4a0e2f !important;
+  border-radius: 8px !important;
   white-space: pre;
   word-wrap: normal;
   position: relative;
+  box-shadow: 0 4px 15px rgba(44, 0, 30, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ubuntu terminal window header */
+.highlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(to bottom, #4a0e2f, #2c001e);
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid #1a0014;
+}
+
+/* Ubuntu terminal buttons */
+.highlight::after {
+  content: '● ● ●';
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  color: #ff5f56;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 4px;
 }
 
 /* Light theme code blocks */
@@ -53,7 +79,7 @@ body:not(.dark) .highlight {
   font-family: inherit !important;
   font-size: inherit !important;
   line-height: inherit !important;
-  padding: 0 !important;
+  padding: 35px 0 0 0 !important;
   margin: 0 !important;
   border: none !important;
   border-radius: 0 !important;
