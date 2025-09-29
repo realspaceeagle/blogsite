@@ -6,6 +6,9 @@ theme = 'PaperMod'
 # Google Analytics configuration
 googleAnalytics = "G-GPTRZ14YZS"
 
+# Suppress raw HTML warnings
+ignoreLogs = ['warning-goldmark-raw-html']
+
 [params]
   defaultTheme = "auto"
   ShowReadingTime = true
@@ -98,6 +101,9 @@ googleAnalytics = "G-GPTRZ14YZS"
     tabWidth = 4
     anchorLineNos = false
     lineAnchors = ""
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
 # Fuse.js search configuration
 [params.fuseOpts]
