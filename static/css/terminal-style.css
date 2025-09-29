@@ -520,44 +520,6 @@ body:not(.dark) .toc-nested {
   border-left: 1px solid #dee2e6;
 }
 
-/* Initially hide nested sections */
-.toc-nested {
-  display: none;
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 0.3s ease, max-height 0.3s ease;
-}
-
-/* Show nested sections when parent is expanded */
-.toc-item.expanded .toc-nested {
-  display: block !important;
-  opacity: 1 !important;
-  max-height: 500px !important;
-}
-
-/* Add indicator for expandable sections */
-.toc-item > .toc-link::after {
-  content: '';
-  float: right;
-  font-size: 0.7rem;
-  transition: transform 0.3s ease;
-  color: #666;
-}
-
-.toc-item.has-nested > .toc-link::after {
-  content: '▶';
-}
-
-.toc-item.expanded.has-nested > .toc-link::after {
-  transform: rotate(90deg);
-  color: #4ecdc4;
-}
-
-/* Light theme arrow indicators */
-body:not(.dark) .toc-item.expanded.has-nested > .toc-link::after {
-  color: #0d6efd;
-}
 
 .toc-level-1 { 
   font-weight: 500; 

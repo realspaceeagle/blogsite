@@ -100,13 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     tocList.innerHTML = buildNestedTOC(toc);
     
-    // Add has-nested class to items with nested lists
-    document.querySelectorAll('.toc-item').forEach(item => {
-      if (item.querySelector('.toc-nested')) {
-        item.classList.add('has-nested');
-      }
-    });
-    
     // Add click handlers for smooth scrolling
     const tocLinks = document.querySelectorAll('.toc-link');
     tocLinks.forEach(link => {
@@ -116,158 +109,52 @@ document.addEventListener('DOMContentLoaded', function() {
         const targetElement = document.getElementById(targetId);
         
         if (targetElement) {
-          // Calculate offset for better positioning
-          const headerHeight = 60; // Adjust based on your header height
-          const extraOffset = 20; // Additional space for better reading
-          const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerHeight - extraOffset;
-          
-          // Disable scroll tracking temporarily to prevent conflicts
-          window.removeEventListener('scroll', handleScroll);
-          
-          window.scrollTo({
-            top: Math.max(0, offsetPosition),
-            behavior: 'smooth'
+          targetElement.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
           });
           
-          // Re-enable scroll tracking after smooth scroll completes
-          setTimeout(() => {
-            window.addEventListener('scroll', handleScroll, { passive: true });
-            updateActiveLink(); // Update immediately after scroll
-          }, 800);
-          
-          // Update active link immediately
+          // Update active link
           tocLinks.forEach(l => l.classList.remove('active'));
           this.classList.add('active');
         }
       });
     });
     
-    // Simple and reliable scroll tracking
+    // Simple scroll tracking for active highlighting
     function updateActiveLink() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const windowHeight = window.innerHeight;
-      const offset = 150; // Offset from top for better UX
+      const scrollPosition = window.scrollY + 100;
+      let activeHeading = null;
       
-      let currentHeading = null;
-      let currentSection = null;
-      
-      // Find the current heading (simple approach)
-      for (let i = headings.length - 1; i >= 0; i--) {
-        const heading = headings[i];
+      // Find the currently visible heading
+      headings.forEach(heading => {
         const rect = heading.getBoundingClientRect();
-        const elementTop = rect.top + scrollTop;
+        const absoluteTop = rect.top + window.pageYOffset;
         
-        if (elementTop <= scrollTop + offset) {
-          currentHeading = heading;
-          break;
-        }
-      }
-      
-      // If at top of page and no heading found, use first heading
-      if (!currentHeading && scrollTop < 200 && headings.length > 0) {
-        currentHeading = headings[0];
-      }
-      
-      // Find current section (H2) for expansion
-      if (currentHeading) {
-        const level = parseInt(currentHeading.tagName.substring(1));
-        if (level === 2) {
-          currentSection = currentHeading;
-        } else if (level > 2) {
-          // Find the parent H2
-          for (let i = Array.from(headings).indexOf(currentHeading) - 1; i >= 0; i--) {
-            if (headings[i].tagName === 'H2') {
-              currentSection = headings[i];
-              break;
-            }
-          }
-        }
-      }
-      
-      // Update all TOC links
-      tocLinks.forEach(link => {
-        const targetId = link.getAttribute('data-target');
-        const linkElement = document.getElementById(targetId);
-        const isActive = currentHeading && targetId === currentHeading.id;
-        
-        // Update active state
-        if (isActive) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-        
-        // Handle section expansion for H2 elements
-        if (linkElement && linkElement.tagName === 'H2') {
-          const parentItem = link.closest('.toc-item');
-          const nestedList = parentItem ? parentItem.querySelector('.toc-nested') : null;
-          
-          if (nestedList) {
-            const shouldExpand = currentSection && targetId === currentSection.id;
-            
-            if (shouldExpand) {
-              nestedList.style.display = 'block';
-              nestedList.style.opacity = '1';
-              nestedList.style.maxHeight = 'none';
-              parentItem.classList.add('expanded');
-            } else {
-              nestedList.style.display = 'none';
-              nestedList.style.opacity = '0';
-              nestedList.style.maxHeight = '0';
-              parentItem.classList.remove('expanded');
-            }
-          }
+        if (absoluteTop <= scrollPosition) {
+          activeHeading = heading;
         }
       });
       
-      // Auto-scroll sidebar to keep active link visible
-      if (currentHeading) {
-        const activeLink = document.querySelector(`.toc-link[data-target="${currentHeading.id}"]`);
-        if (activeLink) {
-          const sideNavRect = sideNav.getBoundingClientRect();
-          const linkRect = activeLink.getBoundingClientRect();
-          
-          // Check if link is outside visible area
-          if (linkRect.top < sideNavRect.top + 50 || linkRect.bottom > sideNavRect.bottom - 50) {
-            sideNav.scrollTo({
-              top: sideNav.scrollTop + (linkRect.top - sideNavRect.top) - sideNavRect.height / 2,
-              behavior: 'smooth'
-            });
-          }
+      // Update active state
+      tocLinks.forEach(link => {
+        link.classList.remove('active');
+        if (activeHeading && link.getAttribute('data-target') === activeHeading.id) {
+          link.classList.add('active');
         }
-      }
+      });
     }
     
-    // Simple throttled scroll handler
+    // Throttled scroll handler
     let scrollTimeout;
-    function handleScroll() {
+    window.addEventListener('scroll', function() {
       if (scrollTimeout) {
         clearTimeout(scrollTimeout);
       }
-      scrollTimeout = setTimeout(updateActiveLink, 50);
-    }
+      scrollTimeout = setTimeout(updateActiveLink, 10);
+    });
     
-    // Add scroll listener
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Initialize sections - collapse all except first
-    function initializeSections() {
-      const allSections = document.querySelectorAll('.toc-item');
-      allSections.forEach((section, index) => {
-        const nestedList = section.querySelector('.toc-nested');
-        if (nestedList) {
-          // Collapse all sections initially
-          nestedList.style.display = 'none';
-          nestedList.style.opacity = '0';
-          nestedList.style.maxHeight = '0';
-          section.classList.remove('expanded');
-        }
-      });
-    }
-    
-    // Initialize sections and active link
-    initializeSections();
+    // Initialize active link
     updateActiveLink();
     
   } else {
