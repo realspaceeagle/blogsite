@@ -28,17 +28,6 @@ $ echo "Exclusive content and early access to new posts"
 
 ---
 
-## 📝 Contact Form
-
-Have a specific question or want to get in touch? Use the form below:
-
-<iframe src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-
-*To set up the contact form:*
-1. *Go to [forms.google.com](https://forms.google.com) and create a new form*
-2. *After creating, click "Send" → "Embed HTML" and copy the form ID*
-3. *Replace "YOUR_GOOGLE_FORM_ID" above with your actual form ID*
-
 ---
 
 ## 🌐 Connect on Social Media

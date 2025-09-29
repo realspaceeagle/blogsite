@@ -23,7 +23,7 @@ weight: 1
 
 ## About This Blog & Who I Am
 
-Welcome to my cybersecurity knowledge hub! I'm **Araharan Loganayagam**, a passionate **Cybersecurity Engineer** based in London, specializing in modern security challenges across cloud, AI, and application ecosystems. This blog serves as my digital fortress where I share cutting-edge insights, battle-tested techniques, and real-world security methodologies with the global cybersecurity community.
+I'm **Araharan Loganayagam**, a passionate **Cybersecurity Engineer** based in London, specializing in modern security challenges across cloud, AI, and application ecosystems. This platform serves as my digital fortress where I share cutting-edge insights, battle-tested techniques, and real-world security methodologies with the global cybersecurity community.
 
 ### What Drives Me
 ```bash
