@@ -186,33 +186,9 @@ body.mobile-menu-open {
         order: 2;
     }
     
-    /* Adjust social icons for mobile */
+    /* Hide social icons on mobile */
     .social-icons {
-        gap: 8px;
-    }
-    
-    .social-icons a {
-        width: auto;
-        height: auto;
-        min-width: 28px;
-        min-height: 24px;
-    }
-    
-    .social-icons svg {
-        width: 16px;
-        height: 16px;
-    }
-    
-    .social-icons .social-link {
-        font-size: 10px;
-        padding: 2px 5px;
-        border-radius: 2px;
-        min-width: 20px;
-        min-height: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 500;
+        display: none;
     }
     
     /* Mobile menu adjustments */
@@ -242,30 +218,7 @@ body.mobile-menu-open {
         font-size: 0.95rem;
     }
     
-    .social-icons a {
-        width: auto;
-        height: auto;
-        min-width: 24px;
-        min-height: 20px;
-    }
-    
-    .social-icons svg {
-        width: 14px;
-        height: 14px;
-    }
-    
-    .social-icons .social-link {
-        font-size: 9px;
-        padding: 1px 4px;
-        border-radius: 2px;
-        min-width: 18px;
-        min-height: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-    }
+    /* Social icons already hidden for mobile */
 }
 
 /* Large screen - ensure desktop menu is visible */
