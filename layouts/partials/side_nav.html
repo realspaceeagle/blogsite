@@ -126,10 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Enhanced scroll tracking for active highlighting
+    // Enhanced scroll tracking with expanding/collapsing sections
     function updateActiveLink() {
       const scrollPosition = window.scrollY + 100; // Offset for better UX
       let activeHeading = null;
+      let activeParentSection = null;
       
       // Find the currently visible heading
       headings.forEach(heading => {
@@ -141,11 +142,59 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
       
-      // Update active state
+      if (activeHeading) {
+        // Find the parent section (h2) for the current heading
+        const currentLevel = parseInt(activeHeading.tagName.substring(1));
+        
+        if (currentLevel > 2) {
+          // For h3, h4, h5, h6 - find the closest preceding h2
+          const headingIndex = Array.from(headings).indexOf(activeHeading);
+          for (let i = headingIndex - 1; i >= 0; i--) {
+            const heading = headings[i];
+            if (heading.tagName === 'H2') {
+              activeParentSection = heading;
+              break;
+            }
+          }
+        } else if (currentLevel === 2) {
+          activeParentSection = activeHeading;
+        }
+      }
+      
+      // Update active state and expand/collapse sections
       tocLinks.forEach(link => {
+        const linkTarget = link.getAttribute('data-target');
+        const linkElement = document.getElementById(linkTarget);
+        const linkLevel = linkElement ? parseInt(linkElement.tagName.substring(1)) : 0;
+        const linkParent = link.closest('.toc-item');
+        
+        // Remove active class from all
         link.classList.remove('active');
-        if (activeHeading && link.getAttribute('data-target') === activeHeading.id) {
+        
+        // Set active for current heading
+        if (activeHeading && linkTarget === activeHeading.id) {
           link.classList.add('active');
+        }
+        
+        // Handle section expansion/collapse
+        const nestedList = linkParent ? linkParent.querySelector('.toc-nested') : null;
+        
+        if (linkLevel === 2) { // Main sections (h2)
+          if (nestedList) {
+            if (activeParentSection && linkTarget === activeParentSection.id) {
+              // Expand this section
+              nestedList.style.display = 'block';
+              nestedList.style.maxHeight = 'none';
+              nestedList.style.opacity = '1';
+              linkParent.classList.add('expanded');
+            } else {
+              // Collapse this section
+              nestedList.style.display = 'none';
+              nestedList.style.maxHeight = '0';
+              nestedList.style.opacity = '0';
+              linkParent.classList.remove('expanded');
+            }
+          }
         }
       });
     }
@@ -159,7 +208,23 @@ document.addEventListener('DOMContentLoaded', function() {
       scrollTimeout = setTimeout(updateActiveLink, 10);
     });
     
-    // Initialize active link
+    // Initialize sections - collapse all except first
+    function initializeSections() {
+      const allSections = document.querySelectorAll('.toc-item');
+      allSections.forEach((section, index) => {
+        const nestedList = section.querySelector('.toc-nested');
+        if (nestedList) {
+          // Collapse all sections initially
+          nestedList.style.display = 'none';
+          nestedList.style.opacity = '0';
+          nestedList.style.maxHeight = '0';
+          section.classList.remove('expanded');
+        }
+      });
+    }
+    
+    // Initialize sections and active link
+    initializeSections();
     updateActiveLink();
     
   } else {

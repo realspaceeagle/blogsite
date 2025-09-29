@@ -6,12 +6,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 
-/* 0xdf-style unified code blocks - single block appearance */
+/* 0xdf-style unified code blocks - single block appearance with theme support */
 .highlight {
-  background-color: #1e1e1e !important;
+  background-color: #000000 !important;
   color: #ffffff !important;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
-  font-size: 13px !important;
+  font-size: 14px !important;
   line-height: 1.4 !important;
   padding: 12px !important;
   margin: 1rem 0 !important;
@@ -20,6 +20,12 @@
   border-radius: 0 !important;
   white-space: pre;
   word-wrap: normal;
+}
+
+/* Light theme code blocks */
+body:not(.dark) .highlight {
+  background-color: #f8f8f8 !important;
+  color: #333333 !important;
 }
 
 .highlight pre {
@@ -60,7 +66,7 @@
   color: #ffffff !important; /* White for command output */
 }
 
-/* Simple syntax highlighting matching 0xdf's style */
+/* Simple syntax highlighting matching 0xdf's style - Dark theme */
 .highlight .k { color: #569cd6 !important; } /* Keywords - blue */
 .highlight .s { color: #ce9178 !important; } /* Strings - orange */
 .highlight .c { color: #6a9955 !important; } /* Comments - green */
@@ -77,26 +83,62 @@
 .highlight .mi { color: #b5cea8 !important; } /* Integers - light green */
 .highlight .mf { color: #b5cea8 !important; } /* Floats - light green */
 
-/* 0xdf-style inline code */
+/* Light theme syntax highlighting */
+body:not(.dark) .highlight .k { color: #0000ff !important; } /* Keywords - blue */
+body:not(.dark) .highlight .s { color: #a31515 !important; } /* Strings - red */
+body:not(.dark) .highlight .c { color: #008000 !important; } /* Comments - green */
+body:not(.dark) .highlight .n { color: #333333 !important; } /* Names - dark gray */
+body:not(.dark) .highlight .o { color: #333333 !important; } /* Operators - dark gray */
+body:not(.dark) .highlight .p { color: #333333 !important; } /* Punctuation - dark gray */
+body:not(.dark) .highlight .nb { color: #0000ff !important; } /* Built-ins - blue */
+body:not(.dark) .highlight .s2 { color: #a31515 !important; } /* String literals - red */
+body:not(.dark) .highlight .nf { color: #795e26 !important; } /* Function names - brown */
+body:not(.dark) .highlight .nc { color: #267f99 !important; } /* Class names - teal */
+body:not(.dark) .highlight .nd { color: #0000ff !important; } /* Decorators - blue */
+body:not(.dark) .highlight .err { color: #cd3131 !important; } /* Errors - red */
+body:not(.dark) .highlight .m { color: #098658 !important; } /* Numbers - green */
+body:not(.dark) .highlight .mi { color: #098658 !important; } /* Integers - green */
+body:not(.dark) .highlight .mf { color: #098658 !important; } /* Floats - green */
+
+/* Light theme command prompt */
+body:not(.dark) .highlight .gp { color: #008000 !important; } /* Green command prompt */
+body:not(.dark) .highlight .go { color: #333333 !important; } /* Dark gray output */
+
+/* 0xdf-style inline code with theme support */
 code {
-  background-color: #2d2d2d !important;
+  background-color: #000000 !important;
   color: #ffffff !important;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
   padding: 2px 4px;
   border-radius: 0px;
-  font-size: 13px;
+  font-size: 14px;
   border: none;
+}
+
+/* Light theme inline code */
+body:not(.dark) code {
+  background-color: #f0f0f0 !important;
+  color: #333333 !important;
 }
 
 /* Ensure inline code doesn't inherit styles from code blocks */
 p code, li code, td code, th code {
-  background-color: #2d2d2d !important;
+  background-color: #000000 !important;
   color: #ffffff !important;
   padding: 2px 4px !important;
   margin: 0 !important;
   white-space: nowrap;
-  font-size: 13px !important;
+  font-size: 14px !important;
   border: none !important;
+}
+
+/* Light theme inline code in content */
+body:not(.dark) p code, 
+body:not(.dark) li code, 
+body:not(.dark) td code, 
+body:not(.dark) th code {
+  background-color: #f0f0f0 !important;
+  color: #333333 !important;
 }
 
 /* Terminal-style blockquotes */
@@ -351,7 +393,7 @@ li {
   font-size: 14px;
 }
 
-/* Side Navigation Styling - 0xdf Style */
+/* Side Navigation Styling - 0xdf Style with theme support */
 .side-nav {
   position: fixed;
   left: 0;
@@ -366,6 +408,13 @@ li {
   display: none;
   font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Light theme side navigation */
+body:not(.dark) .side-nav {
+  background-color: #f8f9fa;
+  border-right: 1px solid #dee2e6;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Smooth scrollbar for side nav */
@@ -395,6 +444,12 @@ li {
   padding-bottom: 0.6rem;
   text-transform: none;
   letter-spacing: 0.02em;
+}
+
+/* Light theme side nav title */
+body:not(.dark) .side-nav-title {
+  color: #0d6efd;
+  border-bottom: 1px solid #dee2e6;
 }
 
 .side-nav-list {
@@ -434,12 +489,63 @@ li {
   font-weight: 500;
 }
 
+/* Light theme TOC links */
+body:not(.dark) .toc-link {
+  color: #495057;
+}
+
+body:not(.dark) .toc-link:hover {
+  color: #0d6efd;
+  background-color: #e9ecef;
+}
+
+body:not(.dark) .toc-link.active {
+  color: #0d6efd;
+  background-color: #e9ecef;
+  border-left: 2px solid #0d6efd;
+}
+
 .toc-nested {
   list-style: none;
   padding-left: 0.8rem;
   margin: 0.1rem 0;
   border-left: 1px solid #333;
   margin-left: 0.6rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+/* Light theme nested TOC */
+body:not(.dark) .toc-nested {
+  border-left: 1px solid #dee2e6;
+}
+
+/* Initially hide nested sections */
+.toc-nested {
+  display: none;
+  opacity: 0;
+  max-height: 0;
+}
+
+/* Show nested sections when parent is expanded */
+.toc-item.expanded .toc-nested {
+  display: block !important;
+  opacity: 1 !important;
+  max-height: none !important;
+}
+
+/* Add indicator for expandable sections */
+.toc-item:has(.toc-nested) > .toc-link::after {
+  content: '▶';
+  float: right;
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+  color: #666;
+}
+
+.toc-item.expanded:has(.toc-nested) > .toc-link::after {
+  transform: rotate(90deg);
+  color: #4ecdc4;
 }
 
 .toc-level-1 { 
@@ -470,6 +576,12 @@ li {
   font-size: 0.7rem;
   color: #777777;
 }
+
+/* Light theme TOC levels */
+body:not(.dark) .toc-level-3 { color: #6c757d; }
+body:not(.dark) .toc-level-4 { color: #868e96; }
+body:not(.dark) .toc-level-5 { color: #adb5bd; }
+body:not(.dark) .toc-level-6 { color: #ced4da; }
 
 /* Adjust main content when side nav is present */
 body.side-nav-active {
