@@ -5,9 +5,6 @@ theme = 'PaperMod'
 
 # Configure homepage to show About page content
 [params]
-  homeInfoParams = true
-  homeInfoParams.Title = "About Me"
-  homeInfoParams.Content = "Welcome to my blog! I'm passionate about sharing knowledge and experiences through writing."
   defaultTheme = "auto"
   ShowReadingTime = true
   ShowShareButtons = true
@@ -22,6 +19,11 @@ theme = 'PaperMod'
   showtoc = false
   tocopen = false
   search = true
+
+# Home info parameters
+[params.homeInfoParams]
+  Title = "About Me"
+  Content = "Welcome to my blog! I'm passionate about sharing knowledge and experiences through writing."
 
 # Enable taxonomies for tags and categories
 [taxonomies]
