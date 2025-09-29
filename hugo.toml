@@ -13,6 +13,7 @@ ignoreLogs = ['warning-goldmark-raw-html']
   defaultTheme = "auto"
   ShowReadingTime = true
   ShowShareButtons = true
+  ShareButtons = ["x", "linkedin", "reddit", "telegram", "whatsapp", "email", "copy"]
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
