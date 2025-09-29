@@ -13,7 +13,12 @@ weight: 1
 📍 London, United Kingdom  
 📧 araharan.x.loganayagam@hotmail.com  
 📱 +44-79-09718634  
-🔗 [LinkedIn](https://linkedin.com/in/araharan-loganayagam) | [GitHub](https://github.com/realspaceeagle)
+
+### Connect With Me
+💼 [LinkedIn](https://www.linkedin.com/in/dream4ip/) - Professional Network  
+🐙 [GitHub](https://github.com/realspaceeagle) - Code Repository  
+📝 [Medium](https://medium.com/@haranloga95) - Technical Articles  
+🐦 [Twitter](https://twitter.com/haran_loga) - Security Updates
 
 ---
 
