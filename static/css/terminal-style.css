@@ -24,9 +24,9 @@ html {
   }
 }
 
-/* 0xdf-style unified code blocks - single block appearance with theme support */
+/* Ubuntu terminal-style code blocks */
 .highlight {
-  background-color: #380429 !important;
+  background-color: #2c001e !important;
   color: #ffffff !important;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
   font-size: 14px !important;
@@ -75,32 +75,32 @@ body:not(.dark) .highlight {
   word-wrap: inherit;
 }
 
-/* 0xdf-style syntax highlighting - minimal colors */
+/* Enhanced command prompt and output colors */
 .highlight .gp {
-  color: #00ff00 !important; /* Green for command prompt */
-  font-weight: normal;
+  color: #2ecc71 !important; /* Bright green for command prompt */
+  font-weight: 600;
 }
 
 .highlight .go {
-  color: #ffffff !important; /* White for command output */
+  color: #ecf0f1 !important; /* Light gray for command output */
 }
 
-/* Simple syntax highlighting matching 0xdf's style - Dark theme */
-.highlight .k { color: #569cd6 !important; } /* Keywords - blue */
-.highlight .s { color: #ce9178 !important; } /* Strings - orange */
-.highlight .c { color: #6a9955 !important; } /* Comments - green */
-.highlight .n { color: #ffffff !important; } /* Names - white */
-.highlight .o { color: #ffffff !important; } /* Operators - white */
-.highlight .p { color: #ffffff !important; } /* Punctuation - white */
-.highlight .nb { color: #569cd6 !important; } /* Built-ins - blue */
-.highlight .s2 { color: #ce9178 !important; } /* String literals - orange */
-.highlight .nf { color: #dcdcaa !important; } /* Function names - yellow */
-.highlight .nc { color: #4ec9b0 !important; } /* Class names - teal */
-.highlight .nd { color: #569cd6 !important; } /* Decorators - blue */
-.highlight .err { color: #f44747 !important; } /* Errors - red */
-.highlight .m { color: #b5cea8 !important; } /* Numbers - light green */
-.highlight .mi { color: #b5cea8 !important; } /* Integers - light green */
-.highlight .mf { color: #b5cea8 !important; } /* Floats - light green */
+/* Enhanced syntax highlighting for better readability on dark background */
+.highlight .k { color: #7dc4e4 !important; } /* Keywords - bright blue */
+.highlight .s { color: #f1c40f !important; } /* Strings - bright yellow */
+.highlight .c { color: #95a5a6 !important; } /* Comments - light gray */
+.highlight .n { color: #ffffff !important; } /* Names - bright white */
+.highlight .o { color: #e74c3c !important; } /* Operators - bright red */
+.highlight .p { color: #ffffff !important; } /* Punctuation - bright white */
+.highlight .nb { color: #9b59b6 !important; } /* Built-ins - purple */
+.highlight .s2 { color: #f1c40f !important; } /* String literals - bright yellow */
+.highlight .nf { color: #2ecc71 !important; } /* Function names - bright green */
+.highlight .nc { color: #3498db !important; } /* Class names - bright blue */
+.highlight .nd { color: #e67e22 !important; } /* Decorators - orange */
+.highlight .err { color: #ff6b6b !important; } /* Errors - bright red */
+.highlight .m { color: #1abc9c !important; } /* Numbers - teal */
+.highlight .mi { color: #1abc9c !important; } /* Integers - teal */
+.highlight .mf { color: #1abc9c !important; } /* Floats - teal */
 
 /* Light theme syntax highlighting */
 body:not(.dark) .highlight .k { color: #0000ff !important; } /* Keywords - blue */
@@ -123,9 +123,9 @@ body:not(.dark) .highlight .mf { color: #098658 !important; } /* Floats - green 
 body:not(.dark) .highlight .gp { color: #008000 !important; } /* Green command prompt */
 body:not(.dark) .highlight .go { color: #333333 !important; } /* Dark gray output */
 
-/* 0xdf-style inline code with theme support */
+/* Ubuntu terminal-style inline code */
 code {
-  background-color: #380429 !important;
+  background-color: #2c001e !important;
   color: #ffffff !important;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
   padding: 3px 6px;
@@ -142,7 +142,7 @@ body:not(.dark) code {
 
 /* Ensure inline code doesn't inherit styles from code blocks */
 p code, li code, td code, th code {
-  background-color: #380429 !important;
+  background-color: #2c001e !important;
   color: #ffffff !important;
   padding: 2px 4px !important;
   margin: 0 !important;
