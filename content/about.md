@@ -21,11 +21,25 @@ weight: 1
 
 ---
 
-## Professional Summary
+## About This Blog & Who I Am
 
-Results-driven **Cybersecurity Engineer** with over **3 years of experience** in security engineering and an additional year in software engineering. Skilled in evaluating and implementing advanced security solutions to protect against cyber threats. Experienced in deploying and managing security measures within DevOps practices to enhance system integrity and resilience.
+Welcome to my cybersecurity knowledge hub! I'm **Araharan Loganayagam**, a passionate **Cybersecurity Engineer** based in London. This blog serves as my digital platform to share practical insights, advanced techniques, and real-world security methodologies with the cybersecurity community.
 
-Demonstrates extensive commercial experience with a proven track record of adaptability, effectively performing in dynamic environments. Committed to continuous learning and professional development, with the ability to work both independently and collaboratively within cross-functional teams.
+### What Drives Me
+```bash
+# My mission in cybersecurity
+$ echo "Building resilient digital defenses through knowledge sharing"
+$ echo "Empowering security professionals with practical techniques"
+$ echo "Bridging the gap between theory and hands-on implementation"
+```
+
+I believe that cybersecurity knowledge should be accessible, practical, and continuously evolving. Through my experience in penetration testing, DevSecOps, and cloud security, I've developed a deep appreciation for the art of defensive security and the importance of sharing these skills with others.
+
+### My Approach to Security
+- **Hands-on Learning**: Every technique shared here has been tested and validated
+- **Real-world Application**: Focus on practical scenarios and actual implementation
+- **Community Growth**: Contributing to the collective knowledge of security professionals
+- **Continuous Evolution**: Staying current with emerging threats and defensive strategies
 
 ---
 
@@ -70,137 +84,6 @@ Ansible | Zeek | Suricata
 - **MITRE ATT&CK** - Threat intelligence
 - **NIST 800-53** - Security controls
 - **GDPR** - Data protection compliance
-
----
-
-## Professional Experience
-
-### TECEZE Ltd | Cyber Security Engineer
-**London, UK | September 2022 – Present**
-
-#### Vulnerability Assessment & Penetration Testing
-```bash
-# Achievement: 95% vulnerability remediation within SLA
-$ nmap -sV -sC --script vuln target.com
-$ python3 exploit.py --target 192.168.1.100
-```
-- Conducted comprehensive vulnerability assessments and penetration tests
-- Enforced secure coding practices based on OWASP Top Ten guidelines
-- Leveraged advanced tools including Burp Suite for application security testing
-
-#### DevSecOps Implementation
-```yaml
-# CI/CD Security Integration
-pipeline:
-  security_scan:
-    - static_analysis: SonarQube
-    - dependency_check: OWASP Dependency Check
-    - container_scan: Aqua Security
-```
-- Integrated static analysis tools into Jenkins pipelines
-- Ensured secure code deployment throughout build processes
-- Implemented security gates in CI/CD workflows
-
-#### Cloud Security Excellence
-```bash
-# AWS Security Audit Results
-$ aws s3api get-bucket-acl --bucket company-data
-# Result: 20+ misconfigurations identified and remediated
-# Achievement: 100% CIS Level 1 benchmark compliance
-```
-- Conducted comprehensive AWS security audit against CIS benchmarks
-- Identified and remediated 20+ critical misconfigurations
-- Strengthened container security with Docker and Kubernetes best practices
-
-#### Security Automation
-```python
-# Automated Security Tasks - 8 hours/week saved
-def automate_log_triage():
-    # Log analysis automation
-    return security_events
-
-def provision_users():
-    # Automated user provisioning with security controls
-    return user_accounts
-```
-- Created automated scripts in Python, Golang, and Bash
-- Improved team productivity by 40% through security automation
-- Reduced manual security tasks by 8 hours per week
-
-#### Active Directory Security Testing
-```bash
-# AD Compromise Techniques Demonstrated
-$ python3 GetNPUsers.py domain.com/ -usersfile users.txt -format hashcat
-$ python3 GetUserSPNs.py domain.com/user:password -dc-ip 192.168.1.10
-$ python3 secretsdump.py domain.com/admin@192.168.1.10
-```
-- Successfully compromised AD using kerberoasting, AS-REP roasting
-- Executed Pass-the-Hash and LLMNR poisoning attacks
-- Escalated to Domain Admin privileges in multiple engagements
-
-#### Security Training & Awareness
-- Led threat modelling exercises reducing security risks by 35%
-- Delivered secure coding workshops for 50+ developers and IT staff
-- Achieved 30% reduction in repeat security mistakes
-
-### TECEZE Ltd | Security Analyst
-**Chennai, India | July 2021 – August 2022**
-
-#### Access Control & Privilege Management
-```bash
-# Access Review Results
-$ ldapsearch -h dc.company.com -b "dc=company,dc=com" "(memberOf=*admin*)"
-# Achievement: 30+ excessive privilege accounts identified and revoked
-```
-- Conducted comprehensive access permissions review across 5 critical systems
-- Implemented principle of least privilege across organization
-
-#### SIEM & Incident Response
-```yaml
-# SIEM Optimization Results
-incident_response_time:
-  before: 4 hours
-  after: 2 hours
-  improvement: 50%
-
-alert_accuracy:
-  false_positives_reduced: 50%
-  analyst_time_saved: 20%
-```
-- Developed SIEM correlation rules and incident playbooks
-- Improved alert fidelity by tuning out false positives
-- Enhanced threat detection capabilities organization-wide
-
-#### Multi-Factor Authentication Deployment
-```bash
-# MFA Implementation Success
-$ echo "Organization-wide MFA adoption: 100%"
-$ echo "Industry average: 57%"
-$ echo "Endpoint devices secured: 200+"
-$ echo "Malware incidents reduction: 30%"
-```
-
-**Environment & Tools:** Burp Suite, OWASP Top10, AWS, Azure Sentinel, Docker, Active Directory, Jenkins, SIEM, Kubernetes, Endpoint Protection, CI/CD Security, Python, Golang, Terraform, Ansible, Linux, kube-bench
-
-### SENZMATE Ltd | Software Engineer
-**Colombo, Sri Lanka | August 2019 – April 2020**
-
-#### Full-Stack Development
-```javascript
-// SenzAgro Platform Development
-const senzAgroAPI = {
-    backend: "Spring Boot + Java",
-    frontend: "Angular + TypeScript", 
-    cloud: "AWS Services",
-    iot: "MQTT Protocol"
-};
-```
-- Developed SenzAgro's interactive web client using Spring Boot and Java
-- Created dynamic frontend with Angular and TypeScript
-- Contributed to IoT platform development and sensor data analysis
-- Successfully launched first version meeting all project milestones
-
-**Environment & Tools:** Spring Boot, Java, Angular, Docker, TypeScript, AWS, MQTT, HTML5, CSS
 
 ---
 
