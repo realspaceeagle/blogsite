@@ -1,3 +1,11 @@
+<!-- Scroll progress indicator -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- Scroll to top button -->
+<button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">
+  ↑
+</button>
+
 <!-- Side Navigation for Table of Contents -->
 <nav class="side-nav" id="side-nav">
   <div class="side-nav-content">
@@ -161,5 +169,67 @@ document.addEventListener('DOMContentLoaded', function() {
     sideNav.style.display = 'none';
     document.body.classList.remove('side-nav-active');
   }
+  
+  // Enhanced scroll functionality
+  const scrollProgress = document.getElementById('scroll-progress');
+  const scrollToTopBtn = document.getElementById('scroll-to-top');
+  
+  // Scroll progress indicator
+  function updateScrollProgress() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / scrollHeight) * 100;
+    
+    if (scrollProgress) {
+      scrollProgress.style.width = scrollPercent + '%';
+    }
+    
+    // Show/hide scroll to top button
+    if (scrollToTopBtn) {
+      if (scrollTop > 300) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    }
+  }
+  
+  // Scroll to top functionality
+  if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+  
+  // Enhanced scroll listener with throttling
+  let scrollTicking = false;
+  function handleScroll() {
+    if (!scrollTicking) {
+      requestAnimationFrame(() => {
+        updateScrollProgress();
+        if (isPostPage && headings.length > 0) {
+          updateActiveLink();
+        }
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
+  }
+  
+  // Replace the existing scroll listener
+  window.removeEventListener('scroll', function() {
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+    scrollTimeout = setTimeout(updateActiveLink, 10);
+  });
+  
+  window.addEventListener('scroll', handleScroll);
+  
+  // Initialize scroll progress
+  updateScrollProgress();
 });
 </script>
