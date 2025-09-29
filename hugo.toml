@@ -3,6 +3,9 @@ languageCode = 'en-us'
 title = 'realspaceeagle'
 theme = 'PaperMod'
 
+# Google Analytics configuration
+googleAnalytics = "G-GPTRZ14YZS"
+
 [params]
   defaultTheme = "auto"
   ShowReadingTime = true
@@ -18,6 +21,10 @@ theme = 'PaperMod'
   showtoc = false
   tocopen = false
   search = true
+  
+  # Analytics settings
+  analytics = true
+  env = "production"
 
 # Enable taxonomies for tags and categories
 [taxonomies]
@@ -71,6 +78,12 @@ theme = 'PaperMod'
   name = "Contact"
   url = "/contact/"
   weight = 60
+
+  [[menu.main]]
+  identifier = "analytics"
+  name = "Analytics"
+  url = "/analytics/"
+  weight = 70
 
 # Syntax highlighting configuration
 [markup]
