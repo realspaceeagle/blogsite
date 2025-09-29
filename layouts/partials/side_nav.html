@@ -100,6 +100,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     tocList.innerHTML = buildNestedTOC(toc);
     
+    // Add has-nested class to items with nested lists
+    document.querySelectorAll('.toc-item').forEach(item => {
+      if (item.querySelector('.toc-nested')) {
+        item.classList.add('has-nested');
+      }
+    });
+    
     // Add click handlers for smooth scrolling
     const tocLinks = document.querySelectorAll('.toc-link');
     tocLinks.forEach(link => {
@@ -136,129 +143,113 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Enhanced scroll tracking with expanding/collapsing sections
+    // Simple and reliable scroll tracking
     function updateActiveLink() {
-      const scrollPosition = window.scrollY + window.innerHeight * 0.3; // Better offset calculation
-      let activeHeading = null;
-      let activeParentSection = null;
-      let closestDistance = Infinity;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const offset = 150; // Offset from top for better UX
       
-      // Find the currently visible heading with improved logic
-      headings.forEach(heading => {
+      let currentHeading = null;
+      let currentSection = null;
+      
+      // Find the current heading (simple approach)
+      for (let i = headings.length - 1; i >= 0; i--) {
+        const heading = headings[i];
         const rect = heading.getBoundingClientRect();
-        const absoluteTop = rect.top + window.pageYOffset;
-        const distance = Math.abs(absoluteTop - scrollPosition);
+        const elementTop = rect.top + scrollTop;
         
-        // Check if heading is in viewport or above current scroll position
-        if (absoluteTop <= scrollPosition + 50 && distance < closestDistance) {
-          activeHeading = heading;
-          closestDistance = distance;
+        if (elementTop <= scrollTop + offset) {
+          currentHeading = heading;
+          break;
         }
-      });
-      
-      // If no heading found above, get the first visible heading in viewport
-      if (!activeHeading) {
-        headings.forEach(heading => {
-          const rect = heading.getBoundingClientRect();
-          if (rect.top >= 0 && rect.top <= window.innerHeight && !activeHeading) {
-            activeHeading = heading;
-          }
-        });
       }
       
-      if (activeHeading) {
-        // Find the parent section (h2) for the current heading
-        const currentLevel = parseInt(activeHeading.tagName.substring(1));
-        
-        if (currentLevel > 2) {
-          // For h3, h4, h5, h6 - find the closest preceding h2
-          const headingIndex = Array.from(headings).indexOf(activeHeading);
-          for (let i = headingIndex - 1; i >= 0; i--) {
-            const heading = headings[i];
-            if (heading.tagName === 'H2') {
-              activeParentSection = heading;
+      // If at top of page and no heading found, use first heading
+      if (!currentHeading && scrollTop < 200 && headings.length > 0) {
+        currentHeading = headings[0];
+      }
+      
+      // Find current section (H2) for expansion
+      if (currentHeading) {
+        const level = parseInt(currentHeading.tagName.substring(1));
+        if (level === 2) {
+          currentSection = currentHeading;
+        } else if (level > 2) {
+          // Find the parent H2
+          for (let i = Array.from(headings).indexOf(currentHeading) - 1; i >= 0; i--) {
+            if (headings[i].tagName === 'H2') {
+              currentSection = headings[i];
               break;
             }
           }
-        } else if (currentLevel === 2) {
-          activeParentSection = activeHeading;
         }
       }
       
-      // Update active state and expand/collapse sections
+      // Update all TOC links
       tocLinks.forEach(link => {
-        const linkTarget = link.getAttribute('data-target');
-        const linkElement = document.getElementById(linkTarget);
-        const linkLevel = linkElement ? parseInt(linkElement.tagName.substring(1)) : 0;
-        const linkParent = link.closest('.toc-item');
+        const targetId = link.getAttribute('data-target');
+        const linkElement = document.getElementById(targetId);
+        const isActive = currentHeading && targetId === currentHeading.id;
         
-        // Remove active class from all
-        link.classList.remove('active');
-        
-        // Set active for current heading
-        if (activeHeading && linkTarget === activeHeading.id) {
+        // Update active state
+        if (isActive) {
           link.classList.add('active');
-          
-          // Scroll the active link into view in the sidebar
-          const sideNavRect = sideNav.getBoundingClientRect();
-          const linkRect = link.getBoundingClientRect();
-          
-          if (linkRect.top < sideNavRect.top || linkRect.bottom > sideNavRect.bottom) {
-            link.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'center',
-              inline: 'nearest'
-            });
-          }
+        } else {
+          link.classList.remove('active');
         }
         
-        // Handle section expansion/collapse
-        const nestedList = linkParent ? linkParent.querySelector('.toc-nested') : null;
-        
-        if (linkLevel === 2) { // Main sections (h2)
+        // Handle section expansion for H2 elements
+        if (linkElement && linkElement.tagName === 'H2') {
+          const parentItem = link.closest('.toc-item');
+          const nestedList = parentItem ? parentItem.querySelector('.toc-nested') : null;
+          
           if (nestedList) {
-            if (activeParentSection && linkTarget === activeParentSection.id) {
-              // Expand this section
+            const shouldExpand = currentSection && targetId === currentSection.id;
+            
+            if (shouldExpand) {
               nestedList.style.display = 'block';
-              nestedList.style.maxHeight = 'none';
               nestedList.style.opacity = '1';
-              linkParent.classList.add('expanded');
+              nestedList.style.maxHeight = 'none';
+              parentItem.classList.add('expanded');
             } else {
-              // Collapse this section
               nestedList.style.display = 'none';
-              nestedList.style.maxHeight = '0';
               nestedList.style.opacity = '0';
-              linkParent.classList.remove('expanded');
+              nestedList.style.maxHeight = '0';
+              parentItem.classList.remove('expanded');
             }
           }
         }
       });
-    }
-    
-    // Improved scroll handler with better performance
-    let ticking = false;
-    
-    function requestTick() {
-      if (!ticking) {
-        requestAnimationFrame(updateActiveLink);
-        ticking = true;
+      
+      // Auto-scroll sidebar to keep active link visible
+      if (currentHeading) {
+        const activeLink = document.querySelector(`.toc-link[data-target="${currentHeading.id}"]`);
+        if (activeLink) {
+          const sideNavRect = sideNav.getBoundingClientRect();
+          const linkRect = activeLink.getBoundingClientRect();
+          
+          // Check if link is outside visible area
+          if (linkRect.top < sideNavRect.top + 50 || linkRect.bottom > sideNavRect.bottom - 50) {
+            sideNav.scrollTo({
+              top: sideNav.scrollTop + (linkRect.top - sideNavRect.top) - sideNavRect.height / 2,
+              behavior: 'smooth'
+            });
+          }
+        }
       }
     }
     
+    // Simple throttled scroll handler
+    let scrollTimeout;
     function handleScroll() {
-      requestTick();
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = setTimeout(updateActiveLink, 50);
     }
     
-    // Reset ticking flag after update
-    const originalUpdateActiveLink = updateActiveLink;
-    updateActiveLink = function() {
-      originalUpdateActiveLink();
-      ticking = false;
-    };
-    
-    // Add scroll listeners
+    // Add scroll listener
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
     
     // Initialize sections - collapse all except first
     function initializeSections() {

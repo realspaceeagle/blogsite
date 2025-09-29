@@ -8,7 +8,7 @@
 
 /* 0xdf-style unified code blocks - single block appearance with theme support */
 .highlight {
-  background-color: #000000 !important;
+  background-color: #0a0a0a !important;
   color: #ffffff !important;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
   font-size: 14px !important;
@@ -106,7 +106,7 @@ body:not(.dark) .highlight .go { color: #333333 !important; } /* Dark gray outpu
 
 /* 0xdf-style inline code with theme support */
 code {
-  background-color: #000000 !important;
+  background-color: #0a0a0a !important;
   color: #ffffff !important;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
   padding: 2px 4px;
@@ -123,7 +123,7 @@ body:not(.dark) code {
 
 /* Ensure inline code doesn't inherit styles from code blocks */
 p code, li code, td code, th code {
-  background-color: #000000 !important;
+  background-color: #0a0a0a !important;
   color: #ffffff !important;
   padding: 2px 4px !important;
   margin: 0 !important;
@@ -525,27 +525,38 @@ body:not(.dark) .toc-nested {
   display: none;
   opacity: 0;
   max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
 }
 
 /* Show nested sections when parent is expanded */
 .toc-item.expanded .toc-nested {
   display: block !important;
   opacity: 1 !important;
-  max-height: none !important;
+  max-height: 500px !important;
 }
 
 /* Add indicator for expandable sections */
-.toc-item:has(.toc-nested) > .toc-link::after {
-  content: '▶';
+.toc-item > .toc-link::after {
+  content: '';
   float: right;
   font-size: 0.7rem;
   transition: transform 0.3s ease;
   color: #666;
 }
 
-.toc-item.expanded:has(.toc-nested) > .toc-link::after {
+.toc-item.has-nested > .toc-link::after {
+  content: '▶';
+}
+
+.toc-item.expanded.has-nested > .toc-link::after {
   transform: rotate(90deg);
   color: #4ecdc4;
+}
+
+/* Light theme arrow indicators */
+body:not(.dark) .toc-item.expanded.has-nested > .toc-link::after {
+  color: #0d6efd;
 }
 
 .toc-level-1 { 
