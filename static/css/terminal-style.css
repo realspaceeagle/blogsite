@@ -1007,7 +1007,7 @@ body.side-nav-active .header {
 body.side-nav-active .main {
   margin-left: 250px !important;
   padding: var(--gap) !important;
-  max-width: calc((var(--main-width) * 2) + var(--gap) * 2) !important;
+  max-width: calc(((var(--main-width) * 2) + var(--gap) * 2) * 0.8) !important;
   width: auto !important;
 }
 
