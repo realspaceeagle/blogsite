@@ -714,7 +714,8 @@ h4, h5, h6 {
   margin-left: 0;
   transition: none;
   max-width: none;
-  padding: 1.5rem;
+  padding: 1.5rem 4rem;
+  width: 100%;
 }
 
 /* Improve text contrast for better readability */
@@ -1005,16 +1006,18 @@ body.side-nav-active .header {
 /* Adjust main content padding for pages with sidebar and sticky header */
 body.side-nav-active .main {
   margin-left: 250px !important;
-  padding-left: 2rem !important;
+  padding-left: 0 !important;
   padding-top: 0 !important;
-  padding-right: 2rem !important;
+  padding-right: 0 !important;
+  width: calc(100vw - 250px) !important;
 }
 
 /* Ensure post content has proper spacing */
 body.side-nav-active .post-content {
   max-width: none !important;
   margin-left: 0 !important;
-  padding: 0 !important;
+  padding: 1.5rem 2rem !important;
+  width: 100% !important;
 }
 
 /* Responsive design for mobile and tablets */
