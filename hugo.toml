@@ -19,7 +19,7 @@ ignoreLogs = ['warning-goldmark-raw-html']
   ShowCodeCopyButtons = true
   disableSpecial1stPost = false
   disableScrollToTop = false
-  comments = false
+  comments = true
   hidemeta = false
   hideSummary = false
   showtoc = false
@@ -36,6 +36,20 @@ ignoreLogs = ['warning-goldmark-raw-html']
   favicon32x32 = "favicon.svg"
   apple_touch_icon = "favicon.svg"
   safari_pinned_tab = "favicon.svg"
+
+  # Comment system configuration (Giscus)
+  [params.giscus]
+  repo = "realspaceeagle/realspaceeagle.github.io"
+  repoId = "R_kgDONGCNLA"
+  category = "General"
+  categoryId = "DIC_kwDONGCNLM4CkCsF"
+  mapping = "pathname"
+  strict = "0"
+  reactionsEnabled = "1"
+  emitMetadata = "0"
+  inputPosition = "bottom"
+  theme = "preferred_color_scheme"
+  lang = "en"
 
   # Social Media Icons
   [[params.socialIcons]]

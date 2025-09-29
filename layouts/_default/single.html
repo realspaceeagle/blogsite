@@ -18,6 +18,10 @@
       {{- end }}
     </footer>
     
+    {{- if (.Param "comments") }}
+    {{- partial "comments.html" . }}
+    {{- end }}
+    
     {{ partial "post_nav_links.html" . }}
   </article>
 </main>
