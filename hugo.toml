@@ -3,7 +3,6 @@ languageCode = 'en-us'
 title = 'realspaceeagle'
 theme = 'PaperMod'
 
-# Configure homepage to show About page content
 [params]
   defaultTheme = "auto"
   ShowReadingTime = true
@@ -20,11 +19,6 @@ theme = 'PaperMod'
   tocopen = false
   search = true
 
-# Home info parameters
-[params.homeInfoParams]
-  Title = "About Me"
-  Content = "Welcome to my blog! I'm passionate about sharing knowledge and experiences through writing."
-
 # Enable taxonomies for tags and categories
 [taxonomies]
   category = "categories"
@@ -37,40 +31,46 @@ theme = 'PaperMod'
 
 [menu]
   [[menu.main]]
-  identifier = "about"
-  name = "About"
+  identifier = "home"
+  name = "Home"
   url = "/"
   weight = 10
+
+  [[menu.main]]
+  identifier = "about"
+  name = "About"
+  url = "/about/"
+  weight = 20
 
   [[menu.main]]
   identifier = "archives"
   name = "Archives"
   url = "/archives/"
-  weight = 20
+  weight = 30
 
   [[menu.main]]
   identifier = "search"
   name = "Search"
   url = "/search/"
-  weight = 30
+  weight = 40
 
   [[menu.main]]
   identifier = "tags"
   name = "Tags"
   url = "/tags/"
-  weight = 40
+  weight = 50
 
   [[menu.main]]
   identifier = "categories"
   name = "Categories"
   url = "/categories/"
-  weight = 45
+  weight = 55
 
   [[menu.main]]
   identifier = "contact"
   name = "Contact"
   url = "/contact/"
-  weight = 50
+  weight = 60
 
 # Fuse.js search configuration
 [params.fuseOpts]

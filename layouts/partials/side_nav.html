@@ -1,0 +1,114 @@
+<!-- Side Navigation for Table of Contents -->
+<nav class="side-nav" id="side-nav">
+  <div class="side-nav-content">
+    <h4 class="side-nav-title">Contents</h4>
+    <ul class="side-nav-list" id="toc-list">
+      <!-- TOC will be populated by JavaScript -->
+    </ul>
+  </div>
+</nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sideNav = document.getElementById('side-nav');
+  const tocList = document.getElementById('toc-list');
+  
+  // Only show on single post pages
+  if (window.location.pathname.includes('/posts/')) {
+    sideNav.style.display = 'block';
+    
+    // Generate TOC from headings
+    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    const toc = [];
+    
+    headings.forEach((heading, index) => {
+      // Skip the first h1 (post title)
+      if (heading.tagName === 'H1' && index === 0) return;
+      
+      const id = heading.id || `heading-${index}`;
+      if (!heading.id) {
+        heading.id = id;
+      }
+      
+      const level = parseInt(heading.tagName.substring(1));
+      const text = heading.textContent.trim();
+      
+      toc.push({
+        id: id,
+        level: level,
+        text: text,
+        element: heading
+      });
+    });
+    
+    // Build TOC HTML
+    let currentLevel = 0;
+    let html = '';
+    
+    toc.forEach(item => {
+      if (item.level > currentLevel) {
+        html += '<ul class="toc-nested">'.repeat(item.level - currentLevel);
+        currentLevel = item.level;
+      } else if (item.level < currentLevel) {
+        html += '</ul>'.repeat(currentLevel - item.level);
+        currentLevel = item.level;
+      }
+      
+      html += `<li class="toc-item toc-level-${item.level}">
+        <a href="#${item.id}" class="toc-link" data-target="${item.id}">${item.text}</a>
+      </li>`;
+    });
+    
+    // Close remaining nested lists
+    html += '</ul>'.repeat(currentLevel);
+    
+    tocList.innerHTML = html;
+    
+    // Add click handlers
+    const tocLinks = document.querySelectorAll('.toc-link');
+    tocLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('data-target');
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // Update active link
+          tocLinks.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+    });
+    
+    // Highlight current section on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          const activeLink = document.querySelector(`.toc-link[data-target="${id}"]`);
+          
+          if (activeLink) {
+            tocLinks.forEach(l => l.classList.remove('active'));
+            activeLink.classList.add('active');
+          }
+        }
+      });
+    }, {
+      rootMargin: '-20% 0px -70% 0px'
+    });
+    
+    headings.forEach(heading => {
+      if (heading.id) {
+        observer.observe(heading);
+      }
+    });
+  } else {
+    sideNav.style.display = 'none';
+  }
+});
+</script>
