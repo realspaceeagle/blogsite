@@ -8,7 +8,7 @@
 
 /* 0xdf-style unified code blocks - single block appearance with theme support */
 .highlight {
-  background-color: #0a0a0a !important;
+  background-color: #380429 !important;
   color: #ffffff !important;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
   font-size: 14px !important;
@@ -107,7 +107,7 @@ body:not(.dark) .highlight .go { color: #333333 !important; } /* Dark gray outpu
 
 /* 0xdf-style inline code with theme support */
 code {
-  background-color: #0a0a0a !important;
+  background-color: #380429 !important;
   color: #ffffff !important;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
   padding: 3px 6px;
@@ -124,7 +124,7 @@ body:not(.dark) code {
 
 /* Ensure inline code doesn't inherit styles from code blocks */
 p code, li code, td code, th code {
-  background-color: #0a0a0a !important;
+  background-color: #380429 !important;
   color: #ffffff !important;
   padding: 2px 4px !important;
   margin: 0 !important;
