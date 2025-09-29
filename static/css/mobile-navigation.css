@@ -140,6 +140,14 @@ body.mobile-menu-open {
     fill: currentColor;
 }
 
+.social-icons .social-link {
+    font-size: 12px;
+    font-weight: bold;
+    font-family: monospace;
+    color: var(--content) !important;
+    text-decoration: none !important;
+}
+
 /* Responsive Breakpoints */
 @media (max-width: 768px) {
     /* Show mobile menu toggle */
