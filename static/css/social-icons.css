@@ -1,0 +1,109 @@
+/* Social Media Icons Styling */
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 12px;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    color: var(--content);
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+.social-icons a:hover {
+    background-color: var(--theme);
+    border-color: var(--border);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.social-icons svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.8;
+    transition: all 0.2s ease;
+}
+
+/* LinkedIn specific styling */
+.social-icons a[href*="linkedin"]:hover {
+    background-color: #0077b5;
+    border-color: #0077b5;
+    color: white;
+}
+
+/* Twitter specific styling */
+.social-icons a[href*="twitter"]:hover {
+    background-color: #1da1f2;
+    border-color: #1da1f2;
+    color: white;
+}
+
+/* Dark mode adjustments */
+.dark .social-icons a {
+    color: var(--content);
+}
+
+.dark .social-icons a:hover {
+    background-color: var(--theme);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .social-icons {
+        gap: 8px;
+        margin-right: 8px;
+    }
+    
+    .social-icons a {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .social-icons svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Header layout adjustments */
+.logo-switches {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Ensure proper spacing with theme toggle */
+#theme-toggle {
+    margin-left: 4px;
+}
+
+/* Animation for icons */
+@keyframes socialHover {
+    0% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-2px) scale(1.05); }
+    100% { transform: translateY(-1px) scale(1.02); }
+}
+
+.social-icons a:hover {
+    animation: socialHover 0.3s ease;
+}
+
+/* Accessibility improvements */
+.social-icons a:focus {
+    outline: 2px solid var(--theme);
+    outline-offset: 2px;
+}
+
+.social-icons a:focus:not(:focus-visible) {
+    outline: none;
+}

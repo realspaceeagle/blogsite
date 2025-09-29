@@ -314,12 +314,6 @@ Created a comprehensive web and mobile application connecting farmers and middle
 <small>Advanced penetration testing and ethical hacking</small>
 </div>
 
-#### **CREST (Council of Registered Ethical Security Testers)**
-<div style="border: 2px solid #0066cc; border-radius: 10px; padding: 15px; background: linear-gradient(135deg, #1a1a1a, #2d2d2d);">
-<strong>CREST Practitioner Security Analyst (CPSA)</strong><br>
-<em>Status: Planned 2024</em><br>
-<small>Industry-recognized penetration testing certification</small>
-</div>
 
 </div>
 
@@ -363,10 +357,6 @@ Created a comprehensive web and mobile application connecting farmers and middle
     - timeline: "Q3 2024"
     - focus: "Cloud security architecture and implementation"
   
-  industry_recognition: 🏆
-    - target: "CREST CPSA (Practitioner Security Analyst)"
-    - timeline: "Q4 2024"
-    - focus: "Industry-standard penetration testing certification"
 ```
 
 </div>

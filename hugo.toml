@@ -81,12 +81,6 @@ ignoreLogs = ['warning-goldmark-raw-html']
   url = "/contact/"
   weight = 60
 
-  [[menu.main]]
-  identifier = "analytics"
-  name = "Analytics"
-  url = "/analytics/"
-  weight = 70
-
 # Syntax highlighting configuration
 [markup]
   [markup.highlight]

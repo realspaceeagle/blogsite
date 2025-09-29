@@ -1,25 +1,43 @@
 /* Enhanced Scroll Behavior and Page Performance */
 
-/* Smooth scroll behavior for the entire page */
+/* Fast scroll behavior for the entire page */
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto; /* Faster than smooth */
     scroll-padding-top: 60px; /* Offset for fixed headers */
 }
 
-/* Optimize scroll performance */
+/* Optimize scroll performance with faster scrolling */
 * {
-    scroll-behavior: smooth;
+    scroll-behavior: auto; /* Remove smooth scrolling for speed */
+}
+
+/* Increase scroll wheel sensitivity */
+body {
+    scroll-snap-type: none; /* Remove scroll snapping for faster scrolling */
 }
 
 /* Improve scrolling performance on mobile */
 body {
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
+    /* Increase scroll sensitivity */
+    scroll-behavior: auto !important;
+}
+
+/* Faster scroll wheel response */
+html, body {
+    scroll-snap-type: none;
+    overscroll-behavior-y: none;
+}
+
+/* Remove scroll delays */
+:root {
+    scroll-behavior: auto !important;
 }
 
 /* Enhanced scroll speed and responsiveness */
 .main, main, article {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
 }
 
 /* Optimize image loading during scroll */
@@ -28,9 +46,9 @@ img {
     transition: transform 0.2s ease-out;
 }
 
-/* Smooth scrolling for anchor links */
+/* Fast scrolling for anchor links */
 a[href^="#"] {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
 }
 
 /* Enhanced scroll performance for content sections */
