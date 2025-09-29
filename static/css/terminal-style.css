@@ -708,12 +708,13 @@ h4, h5, h6 {
 /* Blog post content styling */
 .post-content {
   font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 17px;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.6;
   color: #e0e0e0;
   margin-left: 0;
-  transition: margin-left 0.3s ease;
-  max-width: 80ch;
+  transition: none;
+  max-width: none;
+  padding: 1.5rem;
 }
 
 /* Improve text contrast for better readability */
@@ -742,9 +743,9 @@ body.side-nav-active .post-content {
 }
 
 .post-content p {
-  margin-bottom: 1.5rem;
-  font-size: 17px;
-  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .post-content ul, .post-content ol {
@@ -753,9 +754,9 @@ body.side-nav-active .post-content {
 }
 
 .post-content li {
-  margin-bottom: 0.7rem;
-  font-size: 17px;
-  line-height: 1.7;
+  margin-bottom: 0.5rem;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* Terminal-style list items */
@@ -1004,8 +1005,16 @@ body.side-nav-active .header {
 /* Adjust main content padding for pages with sidebar and sticky header */
 body.side-nav-active .main {
   margin-left: 0 !important;
-  padding-left: 250px !important;
-  padding-top: 60px !important;
+  padding-left: 270px !important;
+  padding-top: 0 !important;
+  padding-right: 20px !important;
+}
+
+/* Ensure post content has proper spacing */
+body.side-nav-active .post-content {
+  max-width: none !important;
+  margin-left: 0 !important;
+  padding: 2rem 1rem !important;
 }
 
 /* Responsive design for mobile and tablets */
@@ -1024,6 +1033,11 @@ body.side-nav-active .main {
   
   body.side-nav-active .main {
     padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  body.side-nav-active .post-content {
+    padding: 1rem !important;
   }
   
   body.side-nav-active .header {
