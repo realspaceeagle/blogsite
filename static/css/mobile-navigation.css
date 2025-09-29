@@ -204,8 +204,15 @@ body.mobile-menu-open {
     }
     
     .social-icons .social-link {
-        font-size: 11px;
-        padding: 3px 6px;
+        font-size: 10px;
+        padding: 4px 7px;
+        border-radius: 4px;
+        min-width: 26px;
+        min-height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
     }
     
     /* Mobile menu adjustments */
@@ -248,8 +255,16 @@ body.mobile-menu-open {
     }
     
     .social-icons .social-link {
-        font-size: 10px;
-        padding: 2px 5px;
+        font-size: 9px;
+        padding: 3px 6px;
+        border-radius: 3px;
+        min-width: 22px;
+        min-height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+        letter-spacing: 0.5px;
     }
 }
 
