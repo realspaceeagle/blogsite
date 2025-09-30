@@ -67,21 +67,36 @@
       <h2>Follow Me on Twitter</h2>
       <div class="twitter-content">
         <p>Stay updated with my latest cybersecurity insights, research, and discoveries.</p>
-        <div class="twitter-links">
-          <a href="https://twitter.com/haran_loga" target="_blank" class="twitter-profile-link">
-            <div class="twitter-card">
-              <div class="twitter-icon">𝕏</div>
-              <div class="twitter-info">
-                <h3>@haran_loga</h3>
-                <p>Follow for cybersecurity insights, penetration testing tutorials, and security research updates</p>
+        <div class="twitter-content-area">
+          <!-- Hugo Twitter Shortcodes for specific tweets -->
+          <div class="recent-tweets">
+            <h3>Recent Tweets</h3>
+            <div class="tweets-grid">
+              <!-- You can add specific tweet IDs here using Hugo's twitter shortcode -->
+              <!-- Example: {{< twitter 1234567890 >}} -->
+              <div class="tweet-placeholder">
+                <p>Add your latest tweet IDs using Hugo's twitter shortcode:</p>
+                <code>{{&lt; twitter TWEET_ID &gt;}}</code>
               </div>
             </div>
-          </a>
+          </div>
           
-          <div class="twitter-cta">
-            <a href="https://twitter.com/haran_loga" target="_blank" class="btn-twitter">
-              Follow on X/Twitter
+          <div class="twitter-follow-section">
+            <a href="https://twitter.com/haran_loga" target="_blank" class="twitter-profile-link">
+              <div class="twitter-card">
+                <div class="twitter-icon">𝕏</div>
+                <div class="twitter-info">
+                  <h3>@haran_loga</h3>
+                  <p>Follow for cybersecurity insights, penetration testing tutorials, and security research updates</p>
+                </div>
+              </div>
             </a>
+            
+            <div class="twitter-cta">
+              <a href="https://twitter.com/haran_loga" target="_blank" class="btn-twitter">
+                Follow on X/Twitter
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -339,7 +354,47 @@
   margin-right: auto;
 }
 
-.twitter-links {
+.twitter-content-area {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.recent-tweets {
+  margin-bottom: 40px;
+}
+
+.recent-tweets h3 {
+  font-size: 24px;
+  color: var(--primary);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.tweets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.tweet-placeholder {
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  color: var(--secondary);
+}
+
+.tweet-placeholder code {
+  background: var(--theme);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: monospace;
+  color: var(--primary);
+}
+
+.twitter-follow-section {
   max-width: 600px;
   margin: 0 auto;
 }
