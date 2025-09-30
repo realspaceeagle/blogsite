@@ -232,24 +232,6 @@ body.mobile-menu-open {
     }
 }
 
-/* Header layout adjustments for sidebar pages */
-body.side-nav-active .nav {
-    max-width: 100% !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-}
-
-body.side-nav-active .logo {
-    margin-left: 0 !important;
-}
-
-/* Ensure proper spacing on larger screens with sidebar */
-@media (min-width: 1025px) {
-    body.side-nav-active .nav {
-        padding-left: 2rem !important;
-        padding-right: 2rem !important;
-    }
-}
 
 /* Dark mode specific adjustments */
 .dark .mobile-menu {

@@ -6,7 +6,9 @@
       "Bash(rm:*)",
       "Bash(mkdir:*)",
       "Bash(unzip:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "WebFetch(domain:0xdf.gitlab.io)",
+      "Bash(find:*)"
     ],
     "deny": []
   }
