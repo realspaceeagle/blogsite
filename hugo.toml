@@ -24,6 +24,7 @@ ignoreLogs = ['warning-goldmark-raw-html']
   hideSummary = false
   showtoc = true
   tocopen = false
+  UseHugoToc = true
   search = true
   
   # Analytics settings
@@ -149,6 +150,10 @@ ignoreLogs = ['warning-goldmark-raw-html']
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
+    ordered = false
 
 # Fuse.js search configuration
 [params.fuseOpts]
