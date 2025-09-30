@@ -27,33 +27,23 @@
   </section>
 
   <!-- Featured Posts -->
-  <section class="featured-posts">
+  <section class="featured-posts compact">
     <h2>Latest Security Insights</h2>
-    <div class="posts-grid">
-      {{ range first 6 .Site.RegularPages }}
-      <article class="post-card">
-        {{ if .Params.cover }}
-        <div class="post-card-image">
-          <a href="{{ .Permalink }}">
-            <img src="{{ .Params.cover }}" alt="{{ .Title }}" loading="lazy">
-          </a>
+    <div class="posts-list">
+      {{ range first 8 .Site.RegularPages }}
+      <article class="post-item">
+        <div class="post-meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
+          <span class="reading-time">{{ .ReadingTime }}min</span>
         </div>
-        {{ end }}
-        <div class="post-card-content">
-          <div class="post-card-meta">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-            <span class="reading-time">{{ .ReadingTime }} min read</span>
-          </div>
-          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-          <p class="post-card-summary">{{ .Summary | truncate 120 }}</p>
-          {{ if .Params.tags }}
-          <div class="post-card-tags">
-            {{ range first 3 .Params.tags }}
-            <span class="tag">{{ . }}</span>
-            {{ end }}
-          </div>
+        <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+        {{ if .Params.tags }}
+        <div class="post-tags">
+          {{ range first 2 .Params.tags }}
+          <span class="tag">{{ . }}</span>
           {{ end }}
         </div>
+        {{ end }}
       </article>
       {{ end }}
     </div>
@@ -202,92 +192,77 @@
 }
 
 .featured-posts {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .featured-posts h2 {
   text-align: center;
-  margin: 0 0 40px 0;
-  font-size: 36px;
+  margin: 0 0 25px 0;
+  font-size: 28px;
   color: var(--primary);
 }
 
-.posts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-  margin-bottom: 40px;
+.featured-posts.compact h2 {
+  font-size: 24px;
+  margin: 0 0 20px 0;
 }
 
-.post-card {
+.posts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.post-item {
   background: var(--entry);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.post-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+.post-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.post-card-image {
-  height: 200px;
-  overflow: hidden;
-}
-
-.post-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.post-card-content {
-  padding: 25px;
-}
-
-.post-card-meta {
+.post-item .post-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  font-size: 14px;
+  margin-bottom: 10px;
+  font-size: 13px;
   color: var(--secondary);
 }
 
-.post-card-content h3 {
-  margin: 0 0 15px 0;
-  font-size: 20px;
+.post-item h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  line-height: 1.4;
 }
 
-.post-card-content h3 a {
+.post-item h3 a {
   color: var(--primary);
   text-decoration: none;
 }
 
-.post-card-content h3 a:hover {
+.post-item h3 a:hover {
   color: var(--secondary);
 }
 
-.post-card-summary {
-  color: var(--secondary);
-  line-height: 1.6;
-  margin: 0 0 15px 0;
-}
-
-.post-card-tags {
+.post-item .post-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
-.post-card-tags .tag {
+.post-item .tag {
   background: var(--tertiary);
   color: var(--primary);
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 11px;
 }
 
 .view-all {
@@ -364,8 +339,17 @@
     gap: 20px;
   }
   
-  .posts-grid {
+  .posts-list {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .post-item {
+    padding: 15px;
+  }
+  
+  .post-item h3 {
+    font-size: 16px;
   }
   
   .expertise-grid {
