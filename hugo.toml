@@ -1,6 +1,6 @@
 baseURL = 'https://realspaceeagle.github.io/'
 languageCode = 'en-us'
-title = 'realspaceeagle - Cybersecurity Expert & Penetration Tester'
+title = 'realspaceeagle'
 theme = 'PaperMod'
 
 # SEO and Meta configuration
@@ -52,7 +52,7 @@ ignoreLogs = ['warning-goldmark-raw-html']
   [params.opengraph]
   locale = "en_US"
   type = "website"
-  site_name = "realspaceeagle - Cybersecurity Expert"
+  site_name = "realspaceeagle"
   
   [params.twitter]
   card = "summary_large_image"
