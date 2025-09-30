@@ -11,7 +11,11 @@
       "Bash(find:*)",
       "WebFetch(domain:help.x.com)",
       "WebFetch(domain:discourse.gohugo.io)",
-      "Bash(hugo:*)"
+      "Bash(hugo:*)",
+      "WebFetch(domain:twitter.com)",
+      "WebFetch(domain:x.com)",
+      "Bash(git config:*)",
+      "Bash(curl:*)"
     ],
     "deny": []
   }

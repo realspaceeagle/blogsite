@@ -2,6 +2,9 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log('GitHub integration script loaded');
   
+  // Initialize contribution tracker
+  let contributionTracker = null;
+  
   // Initialize GitHub Calendar when the page loads
   function initializeGitHubCalendar() {
     console.log('Initializing GitHub calendar...');
@@ -16,6 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     console.log('GitHub section and calendar element found');
+    
+    // Initialize custom contribution tracker
+    if (window.GitHubContributionTracker) {
+      contributionTracker = new window.GitHubContributionTracker('realspaceeagle');
+    }
     
     // Check if GitHub Calendar library is available
     if (typeof GitHubCalendar !== 'undefined') {
@@ -61,8 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
           initializeGitHubCalendar();
         } else if (retryCount >= maxRetries) {
           clearInterval(retryInterval);
-          console.log('Max retries reached, showing fallback');
-          showFallbackMessage();
+          console.log('Max retries reached, showing custom fallback');
+          showCustomContributionGraph();
         }
       }, 1000);
     }
@@ -132,9 +140,123 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   function setFallbackStats() {
-    document.getElementById('total-contributions').textContent = 'View on GitHub';
-    document.getElementById('current-streak').textContent = 'View on GitHub';
-    document.getElementById('longest-streak').textContent = 'View on GitHub';
+    document.getElementById('total-contributions').textContent = '27 repositories';
+    document.getElementById('current-streak').textContent = '10 followers';
+    document.getElementById('longest-streak').textContent = '57 following';
+  }
+  
+  async function refreshGitHubData() {
+    console.log('Refreshing all GitHub data...');
+    
+    try {
+      // Refresh contribution data if tracker is available
+      if (contributionTracker) {
+        const contributionData = await contributionTracker.forceRefresh();
+        const calendarElement = document.querySelector('.calendar');
+        
+        if (calendarElement) {
+          contributionTracker.renderContributionGraph(calendarElement, contributionData);
+          
+          // Update stats
+          const streaks = contributionTracker.calculateStreaks(contributionData.contributions);
+          document.getElementById('total-contributions').textContent = contributionData.total.lastYear.toLocaleString() + ' contributions';
+          document.getElementById('current-streak').textContent = streaks.currentStreak + ' day streak';
+          document.getElementById('longest-streak').textContent = streaks.longestStreak + ' day longest';
+        }
+      }
+      
+      // Also refresh basic profile data
+      if (typeof window.fetchGitHubStats === 'function') {
+        await window.fetchGitHubStats();
+      }
+      
+      console.log('GitHub data refresh completed');
+      
+    } catch (error) {
+      console.error('Error refreshing GitHub data:', error);
+      throw error;
+    }
+  }
+  
+  function addRefreshButton() {
+    const githubSection = document.getElementById('github-section');
+    if (!githubSection) return;
+    
+    // Check if refresh button already exists
+    if (document.getElementById('github-refresh-btn')) return;
+    
+    const refreshButton = document.createElement('button');
+    refreshButton.id = 'github-refresh-btn';
+    refreshButton.innerHTML = '🔄 Refresh GitHub Stats';
+    refreshButton.style.cssText = `
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      background: var(--toggle-highlight, #0d6efd);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+    `;
+    
+    refreshButton.addEventListener('click', function() {
+      refreshButton.innerHTML = '⏳ Refreshing...';
+      refreshButton.disabled = true;
+      
+      // Force refresh GitHub data
+      refreshGitHubData().then(() => {
+        refreshButton.innerHTML = '✅ Updated!';
+        setTimeout(() => {
+          refreshButton.innerHTML = '🔄 Refresh GitHub Stats';
+          refreshButton.disabled = false;
+        }, 2000);
+      }).catch(() => {
+        refreshButton.innerHTML = '❌ Failed';
+        setTimeout(() => {
+          refreshButton.innerHTML = '🔄 Refresh GitHub Stats';
+          refreshButton.disabled = false;
+        }, 2000);
+      });
+    });
+    
+    // Insert button before the calendar
+    const calendarElement = document.querySelector('.calendar');
+    if (calendarElement) {
+      calendarElement.parentNode.insertBefore(refreshButton, calendarElement);
+    }
+  }
+  
+  async function showCustomContributionGraph() {
+    console.log('Showing custom contribution graph');
+    
+    if (contributionTracker) {
+      try {
+        const contributionData = await contributionTracker.getContributions();
+        const calendarElement = document.querySelector('.calendar');
+        
+        if (calendarElement) {
+          contributionTracker.renderContributionGraph(calendarElement, contributionData);
+          
+          // Update stats based on contribution data
+          const streaks = contributionTracker.calculateStreaks(contributionData.contributions);
+          document.getElementById('total-contributions').textContent = contributionData.total.lastYear.toLocaleString() + ' contributions';
+          document.getElementById('current-streak').textContent = streaks.currentStreak + ' day streak';
+          document.getElementById('longest-streak').textContent = streaks.longestStreak + ' day longest';
+        }
+        
+        // Also fetch basic profile data
+        if (typeof window.fetchGitHubStats === 'function') {
+          window.fetchGitHubStats();
+        }
+        
+      } catch (error) {
+        console.error('Custom contribution graph failed:', error);
+        showFallbackMessage();
+      }
+    } else {
+      showFallbackMessage();
+    }
   }
   
   function showFallbackMessage() {
@@ -176,5 +298,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize with a small delay to ensure DOM is fully ready
   setTimeout(() => {
     initializeGitHubCalendar();
+    addRefreshButton();
   }, 100);
 });
