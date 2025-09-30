@@ -1,0 +1,135 @@
+<!-- Blog Post Sidebar Navigation - Only shown on post pages -->
+<aside class="blog-sidebar" id="blogSidebar">
+  <div class="sidebar-content">
+    <h3 class="sidebar-title">Contents</h3>
+    <nav class="sidebar-nav">
+      <ul class="toc-list" id="tocList">
+        <!-- TOC will be populated by JavaScript -->
+      </ul>
+    </nav>
+  </div>
+</aside>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Only run on blog post pages
+  const isPostPage = window.location.pathname.includes('/posts/');
+  const sidebar = document.getElementById('blogSidebar');
+  const tocList = document.getElementById('tocList');
+  
+  if (!isPostPage || !sidebar || !tocList) {
+    if (sidebar) sidebar.style.display = 'none';
+    return;
+  }
+  
+  // Find all headings in post content
+  const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6');
+  
+  if (headings.length === 0) {
+    sidebar.style.display = 'none';
+    return;
+  }
+  
+  // Show sidebar and add class to body
+  sidebar.style.display = 'block';
+  document.body.classList.add('has-blog-sidebar');
+  
+  // Generate TOC
+  let tocHTML = '';
+  headings.forEach((heading, index) => {
+    // Ensure heading has an ID
+    if (!heading.id) {
+      const id = heading.textContent
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+      
+      let uniqueId = id;
+      let counter = 1;
+      while (document.getElementById(uniqueId)) {
+        uniqueId = `${id}-${counter}`;
+        counter++;
+      }
+      heading.id = uniqueId;
+    }
+    
+    const level = parseInt(heading.tagName.substring(1));
+    const text = heading.textContent.trim();
+    const indent = (level - 1) * 0.8; // Indent based on heading level
+    
+    tocHTML += `
+      <li class="toc-item toc-level-${level}" style="padding-left: ${indent}rem;">
+        <a href="#${heading.id}" class="toc-link" data-target="${heading.id}">
+          ${text}
+        </a>
+      </li>
+    `;
+  });
+  
+  tocList.innerHTML = tocHTML;
+  
+  // Add smooth scrolling and highlighting
+  const tocLinks = document.querySelectorAll('.toc-link');
+  
+  // Click handlers for smooth scrolling
+  tocLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('data-target');
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        // Remove active class from all links
+        tocLinks.forEach(l => l.classList.remove('active'));
+        
+        // Add active class to clicked link
+        this.classList.add('active');
+        
+        // Smooth scroll to target
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+  
+  // Intersection Observer for automatic highlighting
+  const observerOptions = {
+    root: null,
+    rootMargin: '-20% 0% -35% 0%',
+    threshold: 0
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const headingId = entry.target.id;
+      const tocLink = document.querySelector(`.toc-link[data-target="${headingId}"]`);
+      
+      if (entry.isIntersecting && tocLink) {
+        // Remove active class from all links
+        tocLinks.forEach(link => link.classList.remove('active'));
+        
+        // Add active class to current link
+        tocLink.classList.add('active');
+      }
+    });
+  }, observerOptions);
+  
+  // Observe all headings
+  headings.forEach(heading => {
+    if (heading.id) {
+      observer.observe(heading);
+    }
+  });
+  
+  // Handle scroll to top case
+  window.addEventListener('scroll', function() {
+    if (window.scrollY === 0) {
+      tocLinks.forEach(link => link.classList.remove('active'));
+    }
+  });
+});
+</script>

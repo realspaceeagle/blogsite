@@ -1,0 +1,181 @@
+/* Blog Post Sidebar - Only affects pages with .has-blog-sidebar class */
+
+/* Sidebar container */
+.blog-sidebar {
+  position: fixed;
+  left: 0;
+  top: 60px; /* Below header */
+  width: 280px;
+  height: calc(100vh - 60px);
+  background: var(--theme);
+  border-right: 1px solid var(--border);
+  z-index: 999;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: none; /* Hidden by default, shown by JavaScript */
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Sidebar content container */
+.sidebar-content {
+  padding: 1.5rem 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar title */
+.sidebar-title {
+  color: var(--primary);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* TOC list container */
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* TOC items */
+.toc-item {
+  margin: 0.2rem 0;
+}
+
+/* TOC links */
+.toc-link {
+  display: block;
+  padding: 0.4rem 0.6rem;
+  color: var(--secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  border-radius: 4px;
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+  word-wrap: break-word;
+}
+
+.toc-link:hover {
+  color: var(--primary);
+  background: var(--code-bg);
+  border-left-color: var(--primary);
+}
+
+.toc-link.active {
+  color: var(--primary);
+  background: var(--code-bg);
+  border-left-color: var(--primary);
+  font-weight: 500;
+}
+
+/* Different levels styling */
+.toc-level-1 .toc-link {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.toc-level-2 .toc-link {
+  font-weight: 400;
+  font-size: 0.875rem;
+}
+
+.toc-level-3 .toc-link,
+.toc-level-4 .toc-link,
+.toc-level-5 .toc-link,
+.toc-level-6 .toc-link {
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--tertiary);
+}
+
+/* Scrollbar styling for sidebar */
+.blog-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.blog-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.blog-sidebar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.blog-sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* Body adjustments when sidebar is present - ONLY for blog posts */
+body.has-blog-sidebar .main {
+  margin-left: 280px;
+  transition: margin-left 0.3s ease;
+}
+
+/* Ensure content doesn't overflow */
+body.has-blog-sidebar .post-content {
+  max-width: 100%;
+}
+
+/* Mobile responsiveness - hide sidebar on small screens */
+@media (max-width: 1024px) {
+  .blog-sidebar {
+    display: none !important;
+  }
+  
+  body.has-blog-sidebar .main {
+    margin-left: 0;
+  }
+}
+
+/* Dark mode adjustments */
+.dark .blog-sidebar {
+  background: var(--theme);
+  border-right-color: var(--border);
+}
+
+.dark .sidebar-title {
+  color: var(--primary);
+  border-bottom-color: var(--border);
+}
+
+.dark .toc-link {
+  color: var(--secondary);
+}
+
+.dark .toc-link:hover,
+.dark .toc-link.active {
+  color: var(--primary);
+  background: var(--code-bg);
+}
+
+/* Smooth transitions */
+.blog-sidebar,
+.toc-link,
+body.has-blog-sidebar .main {
+  transition: all 0.3s ease;
+}
+
+/* Focus states for accessibility */
+.toc-link:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Print styles - hide sidebar when printing */
+@media print {
+  .blog-sidebar {
+    display: none !important;
+  }
+  
+  body.has-blog-sidebar .main {
+    margin-left: 0 !important;
+  }
+}
