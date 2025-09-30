@@ -1,4 +1,4 @@
-+++
+﻿+++
 title = 'Projects & Tools'
 date = '2024-01-01'
 draft = false
@@ -282,8 +282,7 @@ Explore my collection of security tools, research projects, and contributions to
 
 </div>
 
-<div id="github-section" class="project-section">
-
+<div id="github-section" class="project-section">{{< rawhtml >}}
 <div class="github-overview">
   <div class="github-overview-card">
     <div class="github-overview-header">
@@ -352,6 +351,7 @@ Explore my collection of security tools, research projects, and contributions to
     </div>
   </div>
 </div>
+{{< /rawhtml >}}
 
 <div class="github-activity-section">
   <h2>Development Activity</h2>
@@ -500,3 +500,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 *Want to collaborate on a project or need security consulting? [Get in touch](/contact/) - I'm always interested in working on challenging security problems.*
+
+
