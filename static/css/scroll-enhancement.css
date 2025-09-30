@@ -201,6 +201,89 @@ button, .btn, .nav-link {
     transition: all 0.2s ease-out;
 }
 
+/* Collapsible Table of Contents Styles */
+.toc-item-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toc-expand {
+    cursor: pointer;
+    color: var(--primary);
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.toc-expand:hover {
+    color: var(--primary-hover);
+    transform: scale(1.1);
+}
+
+.toc-item.has-children {
+    /* Style for items with children */
+}
+
+.toc-item.expanded > .toc-item-wrapper .toc-expand {
+    transform: rotate(90deg);
+}
+
+.toc-nested.collapsed {
+    display: none;
+}
+
+.toc-nested {
+    display: block;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ensure proper spacing for nested items */
+.toc-item .toc-link {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Hover effects for expand buttons */
+.toc-item-wrapper:hover .toc-expand {
+    color: var(--primary);
+}
+
+/* Improve visual hierarchy */
+.toc-level-1 > .toc-item-wrapper {
+    font-weight: 600;
+}
+
+.toc-level-2 > .toc-item-wrapper {
+    font-weight: 500;
+    padding-left: 8px;
+}
+
+.toc-level-3 > .toc-item-wrapper,
+.toc-level-4 > .toc-item-wrapper,
+.toc-level-5 > .toc-item-wrapper,
+.toc-level-6 > .toc-item-wrapper {
+    font-weight: normal;
+    padding-left: 16px;
+}
+
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -210,5 +293,13 @@ button, .btn, .nav-link {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+    
+    .toc-nested {
+        animation: none;
+    }
+    
+    .toc-expand {
+        transition: none;
     }
 }

@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Build nested TOC HTML structure
-    function buildNestedTOC(items, minLevel = null) {
+    // Build collapsible nested TOC HTML structure
+    function buildNestedTOC(items, minLevel = null, isTopLevel = true) {
       if (items.length === 0) return '';
       
       if (minLevel === null) {
@@ -80,10 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const item = items[i];
         
         if (item.level === minLevel) {
-          html += `<li class="toc-item toc-level-${item.level}">
-            <a href="#${item.id}" class="toc-link" data-target="${item.id}">${item.text}</a>`;
-          
-          // Look for nested items
+          // Look for nested items first to determine if we need expand/collapse
           const nestedItems = [];
           let j = i + 1;
           
@@ -92,8 +89,17 @@ document.addEventListener('DOMContentLoaded', function() {
             j++;
           }
           
-          if (nestedItems.length > 0) {
-            html += '<ul class="toc-nested">' + buildNestedTOC(nestedItems) + '</ul>';
+          const hasChildren = nestedItems.length > 0;
+          const expandIcon = hasChildren ? '<span class="toc-expand">▶</span>' : '';
+          
+          html += `<li class="toc-item toc-level-${item.level}${hasChildren ? ' has-children' : ''}">
+            <div class="toc-item-wrapper">
+              ${expandIcon}
+              <a href="#${item.id}" class="toc-link" data-target="${item.id}">${item.text}</a>
+            </div>`;
+          
+          if (hasChildren) {
+            html += `<ul class="toc-nested${isTopLevel ? ' collapsed' : ''}">${buildNestedTOC(nestedItems, null, false)}</ul>`;
           }
           
           html += '</li>';
@@ -107,6 +113,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     tocList.innerHTML = buildNestedTOC(toc);
+    
+    // Add click handlers for expand/collapse functionality
+    const expandButtons = document.querySelectorAll('.toc-expand');
+    expandButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const listItem = this.closest('.toc-item');
+        const nestedList = listItem.querySelector('.toc-nested');
+        
+        if (nestedList) {
+          const isCollapsed = nestedList.classList.contains('collapsed');
+          
+          if (isCollapsed) {
+            nestedList.classList.remove('collapsed');
+            this.textContent = '▼';
+            listItem.classList.add('expanded');
+          } else {
+            nestedList.classList.add('collapsed');
+            this.textContent = '▶';
+            listItem.classList.remove('expanded');
+          }
+        }
+      });
+    });
     
     // Add click handlers for smooth scrolling
     const tocLinks = document.querySelectorAll('.toc-link');
@@ -125,6 +157,21 @@ document.addEventListener('DOMContentLoaded', function() {
           // Update active link
           tocLinks.forEach(l => l.classList.remove('active'));
           this.classList.add('active');
+          
+          // Auto-expand parent sections when navigating to a nested heading
+          const parentItem = this.closest('.toc-item').parentElement.closest('.toc-item');
+          if (parentItem && parentItem.classList.contains('has-children')) {
+            const parentNestedList = parentItem.querySelector('.toc-nested');
+            const parentExpandButton = parentItem.querySelector('.toc-expand');
+            
+            if (parentNestedList && parentNestedList.classList.contains('collapsed')) {
+              parentNestedList.classList.remove('collapsed');
+              if (parentExpandButton) {
+                parentExpandButton.textContent = '▼';
+              }
+              parentItem.classList.add('expanded');
+            }
+          }
         }
       });
     });
