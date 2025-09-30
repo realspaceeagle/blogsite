@@ -67,25 +67,22 @@
       <h2>Follow Me on Twitter</h2>
       <div class="twitter-content">
         <p>Stay updated with my latest cybersecurity insights, research, and discoveries.</p>
-        <div class="twitter-timeline-wrapper">
-          <a class="twitter-timeline" 
-             data-width="100%" 
-             data-height="400" 
-             data-theme="dark" 
-             data-tweet-limit="3"
-             data-chrome="nofooter noborders"
-             href="https://twitter.com/haran_loga?ref_src=twsrc%5Etfw">
-            Tweets by haran_loga
+        <div class="twitter-links">
+          <a href="https://twitter.com/haran_loga" target="_blank" class="twitter-profile-link">
+            <div class="twitter-card">
+              <div class="twitter-icon">𝕏</div>
+              <div class="twitter-info">
+                <h3>@haran_loga</h3>
+                <p>Follow for cybersecurity insights, penetration testing tutorials, and security research updates</p>
+              </div>
+            </div>
           </a>
-          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
-        <div class="twitter-follow-button">
-          <a href="https://twitter.com/haran_loga?ref_src=twsrc%5Etfw" 
-             class="twitter-follow-button" 
-             data-show-count="false" 
-             data-size="large">
-            Follow @haran_loga
-          </a>
+          
+          <div class="twitter-cta">
+            <a href="https://twitter.com/haran_loga" target="_blank" class="btn-twitter">
+              Follow on X/Twitter
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -342,17 +339,70 @@
   margin-right: auto;
 }
 
-.twitter-timeline-wrapper {
-  max-width: 800px;
-  margin: 0 auto 30px auto;
+.twitter-links {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.twitter-profile-link {
+  text-decoration: none;
+  display: block;
+  margin-bottom: 30px;
+}
+
+.twitter-card {
   background: var(--entry);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.twitter-follow-button {
-  margin-top: 20px;
+.twitter-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.twitter-icon {
+  font-size: 48px;
+  color: #1DA1F2;
+  font-weight: bold;
+}
+
+.twitter-info h3 {
+  margin: 0 0 10px 0;
+  color: var(--primary);
+  font-size: 24px;
+}
+
+.twitter-info p {
+  margin: 0;
+  color: var(--secondary);
+  line-height: 1.5;
+}
+
+.twitter-cta {
+  text-align: center;
+}
+
+.btn-twitter {
+  display: inline-block;
+  background: #1DA1F2;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-twitter:hover {
+  background: #0d8bd9;
+  transform: translateY(-2px);
 }
 
 .expertise-section {
@@ -435,6 +485,20 @@
   
   .expertise-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .twitter-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .twitter-icon {
+    font-size: 36px;
+  }
+  
+  .twitter-info h3 {
+    font-size: 20px;
   }
 }
 </style>
