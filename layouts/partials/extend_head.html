@@ -31,9 +31,12 @@
 <!-- CTF Writeup CSS -->
 <link rel="stylesheet" href="{{ "css/ctf-writeup.css" | relURL }}">
 
-<!-- GitHub Calendar Library -->
-<link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
-<script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
+<!-- GitHub Calendar Library with fallback -->
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar-responsive.css" onerror="this.remove();" />
+<script src="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar.min.js" onerror="this.remove();"></script>
+
+<!-- GitHub API Fallback Script -->
+<script src="{{ "js/github-api-fallback.js" | relURL }}" defer></script>
 
 <!-- GitHub Integration Script -->
 <script src="{{ "js/github-integration.js" | relURL }}" defer></script>
