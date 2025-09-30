@@ -49,7 +49,6 @@ ignoreLogs = ['warning-goldmark-raw-html']
   title = "Cybersecurity Professional & Penetration Tester"
   bio = "Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience."
   avatar = "/images/avatar.svg"
-  certifications = ["OSCP", "CEH", "CISSP", "GCIH"]
 
   # Newsletter configuration
   [params.newsletter]

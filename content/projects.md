@@ -86,15 +86,7 @@ Explore my collection of security tools, research projects, and contributions to
 
 ---
 
-## Certifications & Skills
-
-### Professional Certifications
-- **OSCP** - Offensive Security Certified Professional
-- **CEH** - Certified Ethical Hacker  
-- **CISSP** - Certified Information Systems Security Professional
-- **GCIH** - GIAC Certified Incident Handler
-
-### Technical Skills
+## Technical Skills
 **Languages:** Python, PowerShell, Bash, JavaScript, C/C++, Assembly  
 **Frameworks:** Metasploit, Burp Suite, Nmap, Wireshark, OSINT Tools  
 **Platforms:** Linux, Windows, macOS, Docker, Cloud (AWS/Azure)  
