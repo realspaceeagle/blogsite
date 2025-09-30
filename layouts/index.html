@@ -68,17 +68,9 @@
       <div class="twitter-content">
         <p>Stay updated with my latest cybersecurity insights, research, and discoveries.</p>
         <div class="twitter-content-area">
-          <!-- Hugo Twitter Shortcodes for specific tweets -->
-          <div class="recent-tweets">
-            <h3>Recent Tweets</h3>
-            <div class="tweets-grid">
-              <!-- You can add specific tweet IDs here using Hugo's twitter shortcode -->
-              <!-- Example: {{< twitter 1234567890 >}} -->
-              <div class="tweet-placeholder">
-                <p>Add your latest tweet IDs using Hugo's twitter shortcode:</p>
-                <code>{{&lt; twitter TWEET_ID &gt;}}</code>
-              </div>
-            </div>
+          <!-- Auto-Fetching Twitter Timeline -->
+          <div class="twitter-timeline-container">
+            {{< twitter-auto username="haran_loga" count="5" >}}
           </div>
           
           <div class="twitter-follow-section">

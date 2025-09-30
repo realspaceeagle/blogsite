@@ -1,0 +1,294 @@
+{{- $username := .Get "username" | default "haran_loga" -}}
+{{- $count := .Get "count" | default "5" -}}
+
+<div class="twitter-auto-timeline" data-username="{{ $username }}" data-count="{{ $count }}">
+    <div class="twitter-loading">
+        <div class="loading-spinner"></div>
+        <p>Loading latest tweets from @{{ $username }}...</p>
+    </div>
+</div>
+
+<script>
+(function() {
+    const container = document.querySelector('.twitter-auto-timeline[data-username="{{ $username }}"]');
+    if (!container) return;
+    
+    const username = '{{ $username }}';
+    const count = parseInt('{{ $count }}');
+    
+    async function fetchTweets() {
+        try {
+            // Try multiple methods to get real tweets
+            const tweets = await tryMultipleSources(username, count);
+            if (tweets && tweets.length > 0) {
+                renderTweets(tweets, container);
+            } else {
+                showFallback(container, username);
+            }
+        } catch (error) {
+            console.error('Error fetching tweets:', error);
+            showFallback(container, username);
+        }
+    }
+    
+    async function tryMultipleSources(username, count) {
+        // Method 1: Try Nitter RSS
+        try {
+            const nitterData = await fetchFromNitter(username, count);
+            if (nitterData && nitterData.length > 0) return nitterData;
+        } catch (e) {
+            console.log('Nitter failed:', e.message);
+        }
+        
+        // Method 2: Try alternative RSS services
+        try {
+            const altData = await fetchFromAlternativeRSS(username, count);
+            if (altData && altData.length > 0) return altData;
+        } catch (e) {
+            console.log('Alternative RSS failed:', e.message);
+        }
+        
+        // Method 3: Use embedded tweets (requires tweet IDs)
+        return getEmbeddedTweets(username);
+    }
+    
+    async function fetchFromNitter(username, count) {
+        const nitterInstances = [
+            'nitter.poast.org',
+            'nitter.it',
+            'nitter.privacydev.net',
+            'nitter.1d4.us',
+            'nitter.net'
+        ];
+        
+        for (const instance of nitterInstances) {
+            try {
+                // Direct fetch from Nitter RSS
+                const rssUrl = `https://${instance}/${username}/rss`;
+                
+                // Use a CORS proxy
+                const proxyUrls = [
+                    `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`,
+                    `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`,
+                    `https://corsproxy.io/?${encodeURIComponent(rssUrl)}`
+                ];
+                
+                for (const proxyUrl of proxyUrls) {
+                    try {
+                        const response = await fetch(proxyUrl);
+                        if (!response.ok) continue;
+                        
+                        const data = await response.json();
+                        
+                        let items = [];
+                        if (data.contents) {
+                            // allorigins format
+                            const parser = new DOMParser();
+                            const xmlDoc = parser.parseFromString(data.contents, 'text/xml');
+                            const rssItems = xmlDoc.querySelectorAll('item');
+                            items = Array.from(rssItems).slice(0, count).map(item => ({
+                                title: item.querySelector('title')?.textContent || '',
+                                description: item.querySelector('description')?.textContent || '',
+                                link: item.querySelector('link')?.textContent || '',
+                                pubDate: item.querySelector('pubDate')?.textContent || ''
+                            }));
+                        } else if (data.items) {
+                            // rss2json format
+                            items = data.items.slice(0, count);
+                        }
+                        
+                        if (items.length > 0) {
+                            return items.map(item => ({
+                                id: extractTweetId(item.link),
+                                text: cleanTweetText(item.description || item.title),
+                                date: new Date(item.pubDate),
+                                link: convertToTwitterLink(item.link),
+                                author: username,
+                                source: `nitter-${instance}`
+                            }));
+                        }
+                    } catch (proxyError) {
+                        console.log(`Proxy ${proxyUrl} failed:`, proxyError.message);
+                        continue;
+                    }
+                }
+            } catch (instanceError) {
+                console.log(`Instance ${instance} failed:`, instanceError.message);
+                continue;
+            }
+        }
+        
+        throw new Error('All Nitter instances failed');
+    }
+    
+    async function fetchFromAlternativeRSS(username, count) {
+        // Try Twitter's atom feed if available (less reliable)
+        try {
+            const atomUrl = `https://twitter.com/${username}.atom`;
+            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(atomUrl)}`;
+            
+            const response = await fetch(proxyUrl);
+            if (response.ok) {
+                const data = await response.json();
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data.contents, 'text/xml');
+                const entries = xmlDoc.querySelectorAll('entry');
+                
+                if (entries.length > 0) {
+                    return Array.from(entries).slice(0, count).map(entry => ({
+                        id: extractTweetId(entry.querySelector('id')?.textContent || ''),
+                        text: cleanTweetText(entry.querySelector('content')?.textContent || ''),
+                        date: new Date(entry.querySelector('published')?.textContent || ''),
+                        link: entry.querySelector('link')?.getAttribute('href') || '',
+                        author: username,
+                        source: 'twitter-atom'
+                    }));
+                }
+            }
+        } catch (e) {
+            console.log('Twitter atom feed failed:', e.message);
+        }
+        
+        throw new Error('Alternative RSS sources failed');
+    }
+    
+    function getEmbeddedTweets(username) {
+        // Fallback to manually specified tweet IDs
+        const fallbackTweetIds = window.TwitterConfig?.recentTweetIds || [];
+        
+        return fallbackTweetIds.slice(0, 5).map(id => ({
+            id: id,
+            embedded: true,
+            link: `https://twitter.com/${username}/status/${id}`,
+            author: username,
+            source: 'manual'
+        }));
+    }
+    
+    function extractTweetId(url) {
+        if (!url) return null;
+        const match = url.match(/status\/(\d+)/);
+        return match ? match[1] : null;
+    }
+    
+    function convertToTwitterLink(nitterLink) {
+        if (!nitterLink) return '';
+        return nitterLink.replace(/https:\/\/[^\/]+\//, 'https://twitter.com/');
+    }
+    
+    function cleanTweetText(html) {
+        if (!html) return '';
+        const div = document.createElement('div');
+        div.innerHTML = html;
+        return div.textContent || div.innerText || '';
+    }
+    
+    function renderTweets(tweets, container) {
+        const tweetsHtml = tweets.map(tweet => {
+            if (tweet.embedded) {
+                return `
+                    <div class="tweet-embed-container">
+                        <blockquote class="twitter-tweet" data-theme="dark">
+                            <a href="${tweet.link}"></a>
+                        </blockquote>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="custom-tweet">
+                        <div class="tweet-header">
+                            <div class="tweet-author">
+                                <strong>@${tweet.author}</strong>
+                                <span class="tweet-source">(${tweet.source})</span>
+                            </div>
+                            <div class="tweet-date">${formatDate(tweet.date)}</div>
+                        </div>
+                        <div class="tweet-content">
+                            ${formatTweetText(tweet.text)}
+                        </div>
+                        <div class="tweet-actions">
+                            <a href="${tweet.link}" target="_blank" class="tweet-link">View on Twitter</a>
+                        </div>
+                    </div>
+                `;
+            }
+        }).join('');
+        
+        container.innerHTML = `
+            <div class="twitter-timeline-header">
+                <h3>Latest Tweets</h3>
+                <div class="last-update">Auto-updated: ${formatDate(new Date())}</div>
+            </div>
+            <div class="tweets-container">
+                ${tweetsHtml}
+            </div>
+            <div class="twitter-follow-link">
+                <a href="https://twitter.com/${username}" target="_blank" class="btn-twitter-follow">
+                    Follow @${username}
+                </a>
+            </div>
+        `;
+        
+        // Load Twitter widgets for embedded tweets
+        if (tweets.some(t => t.embedded)) {
+            loadTwitterWidgets();
+        }
+    }
+    
+    function showFallback(container, username) {
+        container.innerHTML = `
+            <div class="twitter-fallback">
+                <div class="twitter-icon">𝕏</div>
+                <h3>Follow me on Twitter</h3>
+                <p>Get the latest cybersecurity insights and updates</p>
+                <a href="https://twitter.com/${username}" target="_blank" class="btn-twitter-follow">
+                    Follow @${username}
+                </a>
+                <div class="manual-updates">
+                    <p><small>Tweets will auto-load when available. Visit my profile for the latest updates.</small></p>
+                </div>
+            </div>
+        `;
+    }
+    
+    function formatTweetText(text) {
+        if (!text) return '';
+        return text
+            .replace(/(https?:\/\/\S+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>')
+            .replace(/@(\w+)/g, '<a href="https://twitter.com/$1" target="_blank" rel="noopener">@$1</a>')
+            .replace(/#(\w+)/g, '<a href="https://twitter.com/hashtag/$1" target="_blank" rel="noopener">#$1</a>');
+    }
+    
+    function formatDate(date) {
+        if (!date || !(date instanceof Date)) return 'Unknown';
+        return date.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+    
+    function loadTwitterWidgets() {
+        if (!window.twttr) {
+            const script = document.createElement('script');
+            script.src = 'https://platform.twitter.com/widgets.js';
+            script.async = true;
+            script.onload = () => {
+                if (window.twttr && window.twttr.widgets) {
+                    window.twttr.widgets.load();
+                }
+            };
+            document.head.appendChild(script);
+        } else if (window.twttr.widgets) {
+            window.twttr.widgets.load();
+        }
+    }
+    
+    // Start fetching tweets
+    fetchTweets();
+    
+    // Auto-refresh every 5 minutes
+    setInterval(fetchTweets, 300000);
+})();
+</script>
