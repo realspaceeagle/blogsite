@@ -215,6 +215,11 @@ body.mobile-menu-open {
     margin: 0;
 }
 
+/* Remove header max-width restriction for full-width layout */
+.nav {
+    max-width: none;
+}
+
 /* Large screen - ensure desktop menu is visible */
 @media (min-width: 769px) {
     .mobile-menu-toggle {
