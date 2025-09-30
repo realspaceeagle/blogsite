@@ -173,6 +173,36 @@ Jan 30 12:15:00 server01 apache2[1234]: [client 192.168.1.100:45678] "GET / HTTP
 Jan 30 12:15:01 server01 apache2[1234]: [client 192.168.1.101:45679] "GET /favicon.ico HTTP/1.1" 404 1234 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
 ```
 
+### Advanced Log Analysis
+
+```bash
+# Analyze failed login attempts
+$ journalctl _SYSTEMD_UNIT=ssh.service | grep "Failed password"
+Jan 30 12:30:00 server01 sshd[5678]: Failed password for invalid user admin from 192.168.1.200 port 45123 ssh2
+Jan 30 12:30:05 server01 sshd[5679]: Failed password for root from 192.168.1.200 port 45124 ssh2
+
+# Find most frequent error patterns
+$ journalctl --since "1 hour ago" -p err | awk '{print $5}' | sort | uniq -c | sort -rn
+     15 apache2[1234]:
+      8 systemd[1]:
+      3 kernel:
+
+# Monitor authentication logs
+$ tail -f /var/log/auth.log | grep --line-buffered -E "(Failed|Accepted)"
+Jan 30 12:45:00 server01 sshd[6789]: Accepted publickey for user1 from 192.168.1.150 port 52341 ssh2
+Jan 30 12:45:30 server01 sshd[6790]: Failed password for invalid user test from 192.168.1.200 port 52342 ssh2
+
+# Parse Apache access logs for suspicious activity
+$ awk '$9 ~ /^4/ || $9 ~ /^5/ {print $0}' /var/log/apache2/access.log | tail -10
+192.168.1.200 - - [30/Jan/2024:12:50:00 +0000] "GET /admin HTTP/1.1" 404 1234 "-" "Mozilla/5.0"
+192.168.1.201 - - [30/Jan/2024:12:50:15 +0000] "POST /login HTTP/1.1" 500 2345 "-" "curl/7.68.0"
+
+# Log analysis with grep patterns
+$ grep -E "(error|fail|denied|invalid)" /var/log/syslog | tail -5
+Jan 30 13:00:00 server01 kernel: [12345.678] USB disconnect, address 1
+Jan 30 13:00:15 server01 NetworkManager[1111]: <error> failed to connect to wireless network
+```
+
 ## Automation Scripts
 
 ### System Health Check Script
@@ -284,6 +314,57 @@ ClientAliveCountMax 2
 
 # Restart SSH service
 $ sudo systemctl restart ssh
+```
+
+## Container Management
+
+### Docker Operations
+
+```bash
+# List running containers
+$ docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED        STATUS        PORTS                  NAMES
+a1b2c3d4e5f6   nginx:latest   "nginx"       2 hours ago    Up 2 hours    0.0.0.0:80->80/tcp     webserver
+7g8h9i0j1k2l   mysql:8.0      "mysqld"      2 hours ago    Up 2 hours    0.0.0.0:3306->3306/tcp database
+
+# Container resource usage
+$ docker stats
+CONTAINER ID   NAME        CPU %     MEM USAGE / LIMIT     MEM %     NET I/O       BLOCK I/O     PIDS
+a1b2c3d4e5f6   webserver   0.05%     12.34MiB / 1.943GiB   0.62%     1.23kB / 0B   0B / 0B       3
+7g8h9i0j1k2l   database    0.15%     123.4MiB / 1.943GiB   6.20%     0B / 0B       0B / 0B       37
+
+# Container logs
+$ docker logs webserver --tail 50 -f
+192.168.1.100 - - [30/Jan/2024:12:00:00 +0000] "GET / HTTP/1.1" 200 1234 "-" "Mozilla/5.0"
+192.168.1.101 - - [30/Jan/2024:12:00:01 +0000] "GET /favicon.ico HTTP/1.1" 404 162 "-" "Mozilla/5.0"
+
+# Execute commands in container
+$ docker exec -it webserver /bin/bash
+root@a1b2c3d4e5f6:/# ls -la
+total 12
+drwxr-xr-x   1 root root 4096 Jan 30 12:00 .
+drwxr-xr-x   1 root root 4096 Jan 30 12:00 ..
+drwxr-xr-x   2 root root 4096 Jan 30 11:30 var
+```
+
+### Container Security Monitoring
+
+```bash
+# Check container security with docker-bench-security
+$ git clone https://github.com/docker/docker-bench-security.git
+$ cd docker-bench-security
+$ sudo ./docker-bench-security.sh
+
+# Container vulnerability scanning
+$ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /tmp:/tmp anchore/syft:latest packages docker:nginx:latest
+
+# Monitor container network connections
+$ docker exec webserver netstat -tuln
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN
+tcp6       0      0 :::80                   :::*                    LISTEN
 ```
 
 ## Performance Monitoring
