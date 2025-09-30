@@ -1,6 +1,5 @@
 {{ define "main" }}
-<div class="homepage-container">
-  <main class="main homepage">
+<main class="main homepage">
     <!-- Hero Section -->
     <section class="hero-section">
       <div class="hero-content">
@@ -111,59 +110,49 @@
     </section>
   </main>
 
-  <!-- Twitter Feed Sidebar -->
-  <aside class="twitter-sidebar">
-    <div class="twitter-widget-container">
-      <h3>Latest Updates</h3>
-      <a class="twitter-timeline" 
-         data-width="320"
-         data-height="600" 
-         data-dnt="false" 
-         data-theme="dark"
-         data-border-color="#333"
-         href="https://twitter.com/haran_loga?ref_src=twsrc%5Etfw">
-        Follow @haran_loga on Twitter for the latest cybersecurity insights and updates.
-      </a>
-      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-      <noscript>
-        <div class="fallback-message">
-          <p>Follow <a href="https://twitter.com/haran_loga" target="_blank">@haran_loga</a> on Twitter</p>
-        </div>
-      </noscript>
-    </div>
-  </aside>
-</div>
+<!-- Twitter Feed Sidebar -->
+<aside class="twitter-sidebar">
+  <div class="twitter-widget-container">
+    <h3>Latest Updates</h3>
+    <a class="twitter-timeline" 
+       data-width="320"
+       data-height="600" 
+       data-dnt="false" 
+       data-theme="dark"
+       data-border-color="#333"
+       href="https://twitter.com/haran_loga?ref_src=twsrc%5Etfw">
+      Follow @haran_loga on Twitter for the latest cybersecurity insights and updates.
+    </a>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <noscript>
+      <div class="fallback-message">
+        <p>Follow <a href="https://twitter.com/haran_loga" target="_blank">@haran_loga</a> on Twitter</p>
+      </div>
+    </noscript>
+  </div>
+</aside>
 
 <style>
-/* Homepage Container */
-.homepage-container {
-  display: flex;
-  max-width: 1400px;
-  margin: 0 auto;
-  gap: 30px;
-  padding: 0 20px;
-}
-
-/* Main Content */
+/* Homepage Styles */
 .homepage {
-  flex: 1;
-  min-width: 0;
+  max-width: 1200px;
 }
 
-/* Twitter Sidebar */
+/* Twitter Sidebar - Fixed positioned on right side */
 .twitter-sidebar {
+  position: fixed;
+  top: 20px;
+  right: 20px;
   width: 350px;
-  flex-shrink: 0;
+  z-index: 1000;
 }
 
 .twitter-widget-container {
-  position: sticky;
-  top: 20px;
   background: var(--entry);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .twitter-widget-container h3 {
@@ -410,29 +399,13 @@
   line-height: 1.6;
 }
 
-@media screen and (max-width: 1024px) {
-  .homepage-container {
-    flex-direction: column;
-    max-width: 100%;
-    gap: 20px;
-  }
-  
+@media screen and (max-width: 1400px) {
   .twitter-sidebar {
-    width: 100%;
-    order: -1;
-  }
-  
-  .twitter-widget-container {
-    position: relative;
-    top: auto;
+    display: none;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .homepage-container {
-    padding: 0 15px;
-  }
-  
   .hero-title {
     font-size: 36px;
   }
@@ -466,10 +439,6 @@
   
   .expertise-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .twitter-widget-container {
-    padding: 15px;
   }
 }
 </style>
