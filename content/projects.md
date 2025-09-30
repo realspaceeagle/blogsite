@@ -443,7 +443,8 @@ Explore my collection of security tools, research projects, and contributions to
   </div>
 </div>
 
-</div>`n`n<script>
+</div>`n`n{{< rawhtml >}}
+<script>
 document.addEventListener('DOMContentLoaded', function() {
   const toggleButtons = document.querySelectorAll('.toggle-btn');
   const sections = document.querySelectorAll('.project-section');
@@ -495,6 +496,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // GitHub calendar initialization is handled by github-integration.js
 </script>
+{{< /rawhtml >}}
 
 
 *Want to collaborate on a project or need security consulting? [Get in touch](/contact/) - I'm always interested in working on challenging security problems.*
