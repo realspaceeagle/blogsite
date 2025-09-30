@@ -10,7 +10,8 @@
       "WebFetch(domain:0xdf.gitlab.io)",
       "Bash(find:*)",
       "WebFetch(domain:help.x.com)",
-      "WebFetch(domain:discourse.gohugo.io)"
+      "WebFetch(domain:discourse.gohugo.io)",
+      "Bash(hugo:*)"
     ],
     "deny": []
   }
