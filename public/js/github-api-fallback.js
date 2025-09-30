@@ -18,10 +18,14 @@ async function fetchGitHubStats() {
     const hasCustomGraph = calendarElement && calendarElement.querySelector('.contribution-graph');
     
     if (userData) {
-      // Always update the stats
-      document.getElementById('total-contributions').textContent = userData.public_repos + ' repositories';
-      document.getElementById('current-streak').textContent = userData.followers + ' followers';  
-      document.getElementById('longest-streak').textContent = userData.following + ' following';
+      // Always update the stats with just the numbers
+      const totalContribElement = document.getElementById('total-contributions');
+      const currentStreakElement = document.getElementById('current-streak');
+      const longestStreakElement = document.getElementById('longest-streak');
+      
+      if (totalContribElement) totalContribElement.textContent = userData.public_repos;
+      if (currentStreakElement) currentStreakElement.textContent = userData.followers;
+      if (longestStreakElement) longestStreakElement.textContent = userData.following;
       
       // Only show profile card if no custom graph exists
       if (calendarElement && !hasCustomGraph) {

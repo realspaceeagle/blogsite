@@ -257,6 +257,78 @@ class GitHubContributionTracker {
         color: var(--secondary, #8b949e);
       }
       
+      /* GitHub Stats Styling */
+      .github-stats-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+      
+      .github-stat-item {
+        background: linear-gradient(135deg, var(--toggle-highlight, #0d6efd) 0%, var(--toggle-highlight-hover, #0b5ed7) 100%);
+        color: white;
+        padding: 1rem;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .dark .github-stat-item {
+        background: linear-gradient(135deg, #1f6feb 0%, #0969da 100%);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      
+      .github-stat-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      }
+      
+      .dark .github-stat-item:hover {
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      }
+      
+      .github-stat-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+        color: white;
+      }
+      
+      .github-stat-label {
+        font-size: 0.875rem;
+        opacity: 0.9;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      
+      /* Alternative color schemes for stats */
+      .github-stat-item.repos {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      }
+      
+      .github-stat-item.followers {
+        background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);
+      }
+      
+      .github-stat-item.following {
+        background: linear-gradient(135deg, #fd7e14 0%, #ffc107 100%);
+      }
+      
+      .dark .github-stat-item.repos {
+        background: linear-gradient(135deg, #2ea043 0%, #1a7f37 100%);
+      }
+      
+      .dark .github-stat-item.followers {
+        background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+      }
+      
+      .dark .github-stat-item.following {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      }
+      
       .contribution-calendar {
         display: flex;
         gap: 2px;

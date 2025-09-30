@@ -140,9 +140,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   function setFallbackStats() {
-    document.getElementById('total-contributions').textContent = '27 repositories';
-    document.getElementById('current-streak').textContent = '10 followers';
-    document.getElementById('longest-streak').textContent = '57 following';
+    const totalContribElement = document.getElementById('total-contributions');
+    const currentStreakElement = document.getElementById('current-streak');
+    const longestStreakElement = document.getElementById('longest-streak');
+    
+    if (totalContribElement) totalContribElement.textContent = '27';
+    if (currentStreakElement) currentStreakElement.textContent = '10';
+    if (longestStreakElement) longestStreakElement.textContent = '57';
   }
   
   async function refreshGitHubData() {
@@ -159,9 +163,13 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // Update stats
           const streaks = contributionTracker.calculateStreaks(contributionData.contributions);
-          document.getElementById('total-contributions').textContent = contributionData.total.lastYear.toLocaleString() + ' contributions';
-          document.getElementById('current-streak').textContent = streaks.currentStreak + ' day streak';
-          document.getElementById('longest-streak').textContent = streaks.longestStreak + ' day longest';
+          const totalContribElement = document.getElementById('total-contributions');
+          const currentStreakElement = document.getElementById('current-streak');
+          const longestStreakElement = document.getElementById('longest-streak');
+          
+          if (totalContribElement) totalContribElement.textContent = contributionData.total.lastYear.toLocaleString();
+          if (currentStreakElement) currentStreakElement.textContent = streaks.currentStreak;
+          if (longestStreakElement) longestStreakElement.textContent = streaks.longestStreak;
         }
       }
       
@@ -240,9 +248,13 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // Update stats based on contribution data
           const streaks = contributionTracker.calculateStreaks(contributionData.contributions);
-          document.getElementById('total-contributions').textContent = contributionData.total.lastYear.toLocaleString() + ' contributions';
-          document.getElementById('current-streak').textContent = streaks.currentStreak + ' day streak';
-          document.getElementById('longest-streak').textContent = streaks.longestStreak + ' day longest';
+          const totalContribElement = document.getElementById('total-contributions');
+          const currentStreakElement = document.getElementById('current-streak');
+          const longestStreakElement = document.getElementById('longest-streak');
+          
+          if (totalContribElement) totalContribElement.textContent = contributionData.total.lastYear.toLocaleString();
+          if (currentStreakElement) currentStreakElement.textContent = streaks.currentStreak;
+          if (longestStreakElement) longestStreakElement.textContent = streaks.longestStreak;
         }
         
         // Don't show profile card fallback - keep the contribution graph
