@@ -1,9 +1,15 @@
 +++
 date = '2024-12-01T00:00:00+00:00'
+lastmod = '2024-12-01T00:00:00+00:00'
 draft = false
-title = 'HackTheBox: Mentor Walkthrough'
+title = 'HackTheBox: Mentor Walkthrough - Complete Penetration Testing Guide'
+description = 'Detailed step-by-step walkthrough of HackTheBox Mentor machine (10.10.11.193). Learn reconnaissance, SNMP enumeration, web exploitation, and privilege escalation techniques with practical examples.'
+summary = 'Complete penetration testing walkthrough of HackTheBox Mentor machine covering reconnaissance, enumeration, exploitation, and privilege escalation with detailed explanations and screenshots.'
+keywords = ['hackthebox mentor', 'penetration testing walkthrough', 'snmp enumeration', 'web exploitation', 'privilege escalation', 'ethical hacking tutorial', 'cybersecurity', 'infosec']
 tags = ['hackthebox', 'penetration-testing', 'web-exploitation', 'snmp', 'privilege-escalation']
 categories = ['HackTheBox']
+author = 'realspaceeagle'
+image = '/images/mentor-htb/mentor-01.png'
 +++
 
 # HackTheBox: Mentor Walkthrough

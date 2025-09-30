@@ -1,10 +1,24 @@
 baseURL = 'https://realspaceeagle.github.io/'
 languageCode = 'en-us'
-title = 'realspaceeagle'
+title = 'realspaceeagle - Cybersecurity Expert & Penetration Tester'
 theme = 'PaperMod'
+
+# SEO and Meta configuration
+description = "Expert cybersecurity insights, penetration testing tutorials, and hands-on security demonstrations. Learn ethical hacking, network security, and defensive techniques with real-world scenarios."
+keywords = ["cybersecurity", "penetration testing", "ethical hacking", "network security", "vulnerability assessment", "security tutorials", "infosec", "cyber defense"]
+author = "realspaceeagle"
 
 # Google Analytics configuration
 googleAnalytics = "G-GPTRZ14YZS"
+
+# Enable robots.txt generation
+enableRobotsTXT = true
+
+# Enable XML sitemap
+[sitemap]
+  changefreq = 'weekly'
+  filename = 'sitemap.xml'
+  priority = 0.5
 
 # Suppress raw HTML warnings
 ignoreLogs = ['warning-goldmark-raw-html']
@@ -28,6 +42,22 @@ ignoreLogs = ['warning-goldmark-raw-html']
   
   # Analytics settings
   env = "production"
+  
+  # SEO Settings
+  description = "Expert cybersecurity insights, penetration testing tutorials, and hands-on security demonstrations. Learn ethical hacking, network security, and defensive techniques with real-world scenarios."
+  keywords = ["cybersecurity", "penetration testing", "ethical hacking", "network security", "vulnerability assessment", "security tutorials", "infosec", "cyber defense", "hackthebox", "oscp", "malware analysis"]
+  images = ["/images/og-image.svg"]
+  
+  # Open Graph / Twitter Card settings
+  [params.opengraph]
+  locale = "en_US"
+  type = "website"
+  site_name = "realspaceeagle - Cybersecurity Expert"
+  
+  [params.twitter]
+  card = "summary_large_image"
+  site = "@haran_loga"
+  creator = "@haran_loga"
 
   # Favicon configuration
   [params.assets]
