@@ -201,87 +201,108 @@ button, .btn, .nav-link {
     transition: all 0.2s ease-out;
 }
 
-/* Collapsible Table of Contents Styles */
-.toc-item-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+/* Collapsible Table of Contents Styles using details/summary */
+.toc-details {
+    margin: 0;
+    padding: 0;
 }
 
-.toc-expand {
+.toc-summary {
+    list-style: none;
     cursor: pointer;
+    padding: 4px 0;
+    margin: 0;
+    display: block;
+    position: relative;
+}
+
+.toc-summary::-webkit-details-marker {
+    display: none;
+}
+
+.toc-summary::marker {
+    display: none;
+}
+
+.toc-summary::before {
+    content: "▶";
     color: var(--primary);
     font-size: 12px;
-    width: 16px;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-right: 8px;
     transition: transform 0.2s ease;
-    user-select: none;
-    flex-shrink: 0;
+    display: inline-block;
+    width: 12px;
 }
 
-.toc-expand:hover {
+.toc-details[open] .toc-summary::before {
+    transform: rotate(90deg);
+    content: "▼";
+}
+
+.toc-summary:hover::before {
     color: var(--primary-hover);
     transform: scale(1.1);
 }
 
-.toc-item.has-children {
-    /* Style for items with children */
+.toc-details[open] .toc-summary:hover::before {
+    transform: rotate(90deg) scale(1.1);
 }
 
-.toc-item.expanded > .toc-item-wrapper .toc-expand {
-    transform: rotate(90deg);
+.toc-summary .toc-link {
+    text-decoration: none;
+    color: var(--content);
+    font-size: 14px;
+    line-height: 1.4;
 }
 
-.toc-nested.collapsed {
-    display: none;
-}
-
-.toc-nested {
-    display: block;
-    animation: fadeIn 0.2s ease-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Ensure proper spacing for nested items */
-.toc-item .toc-link {
-    flex: 1;
-    min-width: 0;
-}
-
-/* Hover effects for expand buttons */
-.toc-item-wrapper:hover .toc-expand {
+.toc-summary .toc-link:hover {
     color: var(--primary);
 }
 
+.toc-nested {
+    margin: 4px 0 8px 20px;
+    padding: 0;
+    border-left: 2px solid var(--border);
+    padding-left: 12px;
+}
+
 /* Improve visual hierarchy */
-.toc-level-1 > .toc-item-wrapper {
+.toc-level-1 .toc-summary .toc-link {
     font-weight: 600;
+    font-size: 15px;
 }
 
-.toc-level-2 > .toc-item-wrapper {
+.toc-level-2 .toc-summary .toc-link {
     font-weight: 500;
-    padding-left: 8px;
+    font-size: 14px;
 }
 
-.toc-level-3 > .toc-item-wrapper,
-.toc-level-4 > .toc-item-wrapper,
-.toc-level-5 > .toc-item-wrapper,
-.toc-level-6 > .toc-item-wrapper {
+.toc-level-3 .toc-summary .toc-link,
+.toc-level-4 .toc-summary .toc-link,
+.toc-level-5 .toc-summary .toc-link,
+.toc-level-6 .toc-summary .toc-link {
     font-weight: normal;
-    padding-left: 16px;
+    font-size: 13px;
+}
+
+/* For items without children */
+.toc-item:not(.has-children) .toc-link {
+    display: block;
+    padding: 4px 0;
+    text-decoration: none;
+    color: var(--content);
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.toc-item:not(.has-children) .toc-link:hover {
+    color: var(--primary);
+}
+
+/* Active link styling */
+.toc-link.active {
+    color: var(--primary) !important;
+    font-weight: 600 !important;
 }
 
 /* Reduce motion for users who prefer it */
