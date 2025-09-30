@@ -7,7 +7,7 @@
 window.TwitterConfig = {
     username: 'haran_loga',
     recentTweetIds: [
-        '1972685845124489257',  // Latest tweet
+        '1973075193426784360',  // Latest tweet
         // Add your recent tweet IDs here
         // Example format: '1234567890123456789',
         // You can get tweet IDs from the URL: twitter.com/username/status/TWEET_ID
