@@ -120,7 +120,7 @@ body.mobile-menu-open {
     color: var(--content);
     text-decoration: none;
     transition: all 0.3s ease;
-    padding: 2px;
+    padding: 0px;
 }
 
 .social-link:hover {
@@ -129,8 +129,8 @@ body.mobile-menu-open {
 }
 
 .social-link svg {
-    width: 16px;
-    height: 16px;
+    width: 8px;
+    height: 8px;
     transition: transform 0.3s ease;
 }
 
