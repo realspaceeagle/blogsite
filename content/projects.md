@@ -314,90 +314,19 @@ Explore my collection of security tools, research projects, and contributions to
   </div>
 </div>
 
-<div class="github-repositories">
-  <h2>Featured Repositories</h2>
-  <div class="repos-grid">
-    
-    <div class="repo-card">
-      <div class="repo-header">
-        <h3 class="repo-name">Security-Tools-Collection</h3>
-        <span class="repo-visibility">Public</span>
-      </div>
-      <p class="repo-description">Comprehensive collection of cybersecurity tools and scripts for penetration testing and security research.</p>
-      <div class="repo-stats">
-        <div class="repo-stat">
-          <span class="repo-language">Python</span>
-        </div>
-        <div class="repo-stat">
-          <svg class="star-icon" viewBox="0 0 16 16" width="16" height="16">
-            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path>
-          </svg>
-          <span>15</span>
-        </div>
-        <div class="repo-stat">
-          <svg class="fork-icon" viewBox="0 0 16 16" width="16" height="16">
-            <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path>
-          </svg>
-          <span>8</span>
-        </div>
-      </div>
-      <a href="https://github.com/realspaceeagle" class="repo-link">View Repository →</a>
-    </div>
+## Featured Repositories
 
-    <div class="repo-card">
-      <div class="repo-header">
-        <h3 class="repo-name">Network-Scanner</h3>
-        <span class="repo-visibility">Public</span>
-      </div>
-      <p class="repo-description">Advanced network reconnaissance tool with stealth capabilities and comprehensive reporting features.</p>
-      <div class="repo-stats">
-        <div class="repo-stat">
-          <span class="repo-language">Python</span>
-        </div>
-        <div class="repo-stat">
-          <svg class="star-icon" viewBox="0 0 16 16" width="16" height="16">
-            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path>
-          </svg>
-          <span>23</span>
-        </div>
-        <div class="repo-stat">
-          <svg class="fork-icon" viewBox="0 0 16 16" width="16" height="16">
-            <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path>
-          </svg>
-          <span>12</span>
-        </div>
-      </div>
-      <a href="https://github.com/realspaceeagle" class="repo-link">View Repository →</a>
-    </div>
+**Security-Tools-Collection** ⭐ 15 🍴 8  
+*Comprehensive collection of cybersecurity tools and scripts for penetration testing and security research.*  
+**Language:** Python | [View Repository →](https://github.com/realspaceeagle)
 
-    <div class="repo-card">
-      <div class="repo-header">
-        <h3 class="repo-name">Vulnerability-Scanner</h3>
-        <span class="repo-visibility">Public</span>
-      </div>
-      <p class="repo-description">Automated vulnerability assessment tool with integration for popular security frameworks and custom reporting.</p>
-      <div class="repo-stats">
-        <div class="repo-stat">
-          <span class="repo-language">Bash</span>
-        </div>
-        <div class="repo-stat">
-          <svg class="star-icon" viewBox="0 0 16 16" width="16" height="16">
-            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path>
-          </svg>
-          <span>31</span>
-        </div>
-        <div class="repo-stat">
-          <svg class="fork-icon" viewBox="0 0 16 16" width="16" height="16">
-            <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"></path>
-          </svg>
-          <span>18</span>
-        </div>
-      </div>
-      <a href="https://github.com/realspaceeagle" class="repo-link">View Repository →</a>
-    </div>
+**Network-Scanner** ⭐ 23 🍴 12  
+*Advanced network reconnaissance tool with stealth capabilities and comprehensive reporting features.*  
+**Language:** Python | [View Repository →](https://github.com/realspaceeagle)
 
-  </div>
-</div>
+**Vulnerability-Scanner** ⭐ 31 🍴 18  
+*Automated vulnerability assessment tool with integration for popular security frameworks and custom reporting.*  
+**Language:** Bash | [View Repository →](https://github.com/realspaceeagle)
 
 <div class="github-profile-link">
   <a href="https://github.com/realspaceeagle" class="github-profile-btn">
@@ -430,57 +359,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Initialize GitHub Calendar
-if (typeof GitHubCalendar !== 'undefined') {
-  GitHubCalendar(".calendar", "realspaceeagle", {
-    responsive: true,
-    tooltips: true,
-    summary_text: 'Summary of pull requests, issues opened, and commits made by realspaceeagle',
-    cache: 300000, // Cache for 5 minutes
-    transformData: function(data) {
-      // Extract stats for display
-      const contributions = data.contributions;
-      const totalContributions = contributions.reduce((total, day) => total + day.count, 0);
-      
-      // Update stats display
-      document.getElementById('total-contributions').textContent = totalContributions.toLocaleString();
-      
-      // Calculate streaks
-      let currentStreak = 0;
-      let longestStreak = 0;
-      let tempStreak = 0;
-      
-      for (let i = contributions.length - 1; i >= 0; i--) {
-        if (contributions[i].count > 0) {
-          tempStreak++;
-          if (i === contributions.length - 1 || currentStreak === 0) {
-            currentStreak = tempStreak;
-          }
-        } else {
-          if (tempStreak > longestStreak) {
-            longestStreak = tempStreak;
-          }
-          if (i === contributions.length - 1) {
-            currentStreak = 0;
-          }
-          tempStreak = 0;
-        }
-      }
-      
-      if (tempStreak > longestStreak) {
-        longestStreak = tempStreak;
-      }
-      
-      document.getElementById('current-streak').textContent = currentStreak + ' days';
-      document.getElementById('longest-streak').textContent = longestStreak + ' days';
-      
-      return data;
-    }
-  });
-} else {
-  // Fallback if library doesn't load
-  document.querySelector('.calendar').innerHTML = '<p>GitHub contributions calendar is temporarily unavailable.</p>';
-}
+// GitHub calendar initialization is handled by github-integration.js
 </script>
 
 

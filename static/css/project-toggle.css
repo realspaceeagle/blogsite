@@ -779,6 +779,23 @@
   fill: currentColor;
 }
 
+/* Fix for any malformed HTML rendering */
+.github-section div[class*="repo-card"]:not(.repo-card) {
+  display: none;
+}
+
+/* Ensure calendar container is properly styled */
+.calendar {
+  min-height: 200px;
+  width: 100%;
+}
+
+/* Hide any text content that might leak outside containers */
+#github-section > text,
+#github-section > div:not([class]) {
+  display: none;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .project-toggle-buttons {
