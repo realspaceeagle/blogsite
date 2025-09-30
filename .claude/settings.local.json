@@ -4,7 +4,9 @@
       "Bash(git push:*)",
       "Bash(git add:*)",
       "Bash(rm:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(unzip:*)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }

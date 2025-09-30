@@ -117,31 +117,25 @@ body.mobile-menu-open {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: var(--tertiary);
-    color: var(--primary);
-    border-radius: 8px;
+    color: var(--content);
     text-decoration: none;
     transition: all 0.3s ease;
-    padding: 9px;
+    padding: 4px;
 }
 
 .social-link:hover {
-    background: var(--primary);
-    color: var(--theme);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: var(--primary);
+    transform: translateY(-1px);
 }
 
 .social-link svg {
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
     transition: transform 0.3s ease;
 }
 
 .social-link:hover svg {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 /* Responsive Breakpoints */
