@@ -17,7 +17,8 @@ Essential commands and techniques for Linux system administration, covering ever
 ```bash
 # System information
 $ uname -a
-Linux server01 5.4.0-74-generic #83-Ubuntu SMP Sat May 8 02:35:39 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+Linux server01 5.4.0-74-generic #83-Ubuntu SMP Sat May 8 02:35:39 UTC 2021 \
+x86_64 x86_64 x86_64 GNU/Linux
 
 # CPU information
 $ lscpu
@@ -95,7 +96,8 @@ systemd─┬─ModemManager───2*[{ModemManager}]
         ├─colord───2*[{colord}]
         ├─cron
         ├─dbus-daemon
-        ├─gdm3───gdm-session-wor───gdm-wayland-ses───gnome-session-b───gnome-session-c───gnome-shell───3*[{gnome-shell}]
+        ├─gdm3───gdm-session-wor───gdm-wayland-ses───gnome-session-b───\
+          gnome-session-c───gnome-shell───3*[{gnome-shell}]
         ├─irqbalance
         ├─kerneloops
         ├─packagekitd───2*[{packagekitd}]
@@ -140,7 +142,8 @@ $ systemctl status apache2
              └─1236 /usr/sbin/apache2 -k start
 
 Jan 30 10:00:00 server01 systemd[1]: Starting The Apache HTTP Server...
-Jan 30 10:00:00 server01 apache2[1234]: AH00558: apache2: Could not reliably determine the server's fully qualified domain name
+Jan 30 10:00:00 server01 apache2[1234]: AH00558: apache2: Could not reliably \
+  determine the server's fully qualified domain name
 Jan 30 10:00:00 server01 systemd[1]: Started The Apache HTTP Server.
 
 # Start/stop services
@@ -163,7 +166,8 @@ $ sudo systemctl disable apache2
 $ journalctl -u apache2
 -- Logs begin at Mon 2024-01-30 10:00:00 UTC, end at Mon 2024-01-30 12:15:00 UTC. --
 Jan 30 10:00:00 server01 systemd[1]: Starting The Apache HTTP Server...
-Jan 30 10:00:00 server01 apache2[1234]: AH00558: apache2: Could not reliably determine the server's fully qualified domain name
+Jan 30 10:00:00 server01 apache2[1234]: AH00558: apache2: Could not reliably \
+  determine the server's fully qualified domain name
 Jan 30 10:00:00 server01 systemd[1]: Started The Apache HTTP Server.
 
 # Real-time log monitoring

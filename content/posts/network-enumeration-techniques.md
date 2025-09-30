@@ -114,10 +114,13 @@ Nmap done: 1 IP address (1 host up) scanned in 45.67 seconds
 
 ```bash
 # SNMP community string enumeration
-$ onesixtyone -c /usr/share/metasploit-framework/data/wordlists/snmp_default_pass.txt 192.168.1.10
+$ onesixtyone -c /usr/share/metasploit-framework/data/wordlists/snmp_default_pass.txt \
+  192.168.1.10
 Scanning 1 hosts, 122 communities
-192.168.1.10 [public] Linux router 4.15.0-99-generic #100-Ubuntu SMP Wed Apr 22 20:32:56 UTC 2020 x86_64
-192.168.1.10 [internal] Linux router 4.15.0-99-generic #100-Ubuntu SMP Wed Apr 22 20:32:56 UTC 2020 x86_64
+192.168.1.10 [public] Linux router 4.15.0-99-generic #100-Ubuntu SMP \
+  Wed Apr 22 20:32:56 UTC 2020 x86_64
+192.168.1.10 [internal] Linux router 4.15.0-99-generic #100-Ubuntu SMP \
+  Wed Apr 22 20:32:56 UTC 2020 x86_64
 
 # SNMP walk with valid community string
 $ snmpwalk -v2c -c public 192.168.1.10
@@ -206,7 +209,8 @@ $ dig axfr @192.168.1.10 example.com
 ; <<>> DiG 9.18.12 <<>> axfr @192.168.1.10 example.com
 ; (1 server found)
 ;; global options: +cmd
-example.com.        3600    IN    SOA    ns1.example.com. admin.example.com. 2024013001 3600 1800 604800 86400
+example.com.        3600    IN    SOA    ns1.example.com. admin.example.com. \
+  2024013001 3600 1800 604800 86400
 example.com.        3600    IN    NS     ns1.example.com.
 www.example.com.    3600    IN    A      192.168.1.10
 mail.example.com.   3600    IN    A      192.168.1.11

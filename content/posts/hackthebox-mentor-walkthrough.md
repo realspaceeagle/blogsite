@@ -46,8 +46,8 @@ PORT   STATE SERVICE REASON         VERSION
 22/tcp open  ssh     syn-ack ttl 63 OpenSSH 8.9p1 Ubuntu 3 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey:
 |   256 c7:3b:fc:3c:f9:ce:ee:8b:48:18:d5:d1:af:8e:c2:bb (ECDSA)
-| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBO6yWCATcj2UeU/SgSa+
-|                   wK2fP5ixsrHb6pgufdO378n+BLNiDB6ljwm3U3PPdbdQqGZo1K7Tfsz+ejZj1nV80RY=
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBO6yWCATc
+|   j2UeU/SgSa+wK2fP5ixsrHb6pgufdO378n+BLNiDB6ljwm3U3PPdbdQqGZo1K7Tfsz+ejZj1nV80RY=
 |   256 44:40:08:4c:0e:cb:d4:f1:8e:7e:ed:a8:5c:68:a4:f7 (ED25519)
 |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJjv9f3Jbxj42smHEXcChFPMNh1bqlAFHLi4Nr7w9fdv
 80/tcp open  http    syn-ack ttl 63 Apache httpd 2.4.52
@@ -103,7 +103,8 @@ Content-Length: 5506
 ### Subdomain Enumeration
 
 ```bash
-ffuf -u http://mentorquotes.htb -H 'HOST: FUZZ.mentorquotes.htb' -w /opt/SecLists/Discovery/DNS/subdomains-top1million-20000.txt -fw 18 -mc all
+ffuf -u http://mentorquotes.htb -H 'HOST: FUZZ.mentorquotes.htb' \
+  -w /opt/SecLists/Discovery/DNS/subdomains-top1million-20000.txt -fw 18 -mc all
 ```
 
 **Results:**
@@ -151,7 +152,8 @@ MTIzNEBleGFtcGxlLmNvbSJ9.2VA3k2okByNuNtJ0vfrpgzdVCbN5N4aV_0d1vdGg5vM
 Let's fuzz for additional endpoints:
 
 ```bash
-ffuf -request api.req -request-proto http -w /opt/SecLists/Discovery/Web-Content/api/api-endpoints.txt -mc all
+ffuf -request api.req -request-proto http \
+  -w /opt/SecLists/Discovery/Web-Content/api/api-endpoints.txt -mc all
 ```
 
 ![API Fuzzing Results](/images/mentor-htb/mentor-06.png)
@@ -189,7 +191,8 @@ iso.3.6.1.2.1.1.8.0 = Timeticks: (0) 0:00:00.00
 Let's try different community strings:
 
 ```bash
-python3 /opt/snmpbrute.py -t 10.10.11.193 -f /opt/SecLists/Discovery/SNMP/common-snmp-community-strings-onesixtyone.txt -b
+python3 /opt/snmpbrute.py -t 10.10.11.193 \
+  -f /opt/SecLists/Discovery/SNMP/common-snmp-community-strings-onesixtyone.txt -b
 ```
 
 Let's try the "internal" community string:
