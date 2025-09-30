@@ -1,0 +1,30 @@
+{{- $type := .Get "type" | default "user" -}}
+{{- $flag := .Get "flag" -}}
+
+<div class="flag-box {{ $type }}-flag">
+    <div class="flag-title">{{ title $type }} Flag</div>
+    {{- if $flag }}
+    <div class="flag-content">{{ $flag }}</div>
+    {{- else }}
+    <div class="flag-content">{{ .Inner | chomp }}</div>
+    {{- end }}
+</div>
+
+<style>
+.flag-title {
+    font-size: 14px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.flag-content {
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    word-break: break-all;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+</style>

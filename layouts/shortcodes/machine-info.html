@@ -1,0 +1,47 @@
+{{- $name := .Get "name" -}}
+{{- $os := .Get "os" -}}
+{{- $difficulty := .Get "difficulty" -}}
+{{- $creator := .Get "creator" -}}
+{{- $release := .Get "release" -}}
+{{- $retire := .Get "retire" -}}
+{{- $ip := .Get "ip" -}}
+
+<div class="machine-info">
+    <table>
+        <tr>
+            <td><strong>Machine Name</strong></td>
+            <td>{{ $name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Operating System</strong></td>
+            <td>{{ $os }}</td>
+        </tr>
+        <tr>
+            <td><strong>Difficulty</strong></td>
+            <td><span class="difficulty-{{ lower $difficulty }}">{{ $difficulty }}</span></td>
+        </tr>
+        <tr>
+            <td><strong>Creator</strong></td>
+            <td>{{ $creator }}</td>
+        </tr>
+        <tr>
+            <td><strong>Release Date</strong></td>
+            <td>{{ $release }}</td>
+        </tr>
+        <tr>
+            <td><strong>Retire Date</strong></td>
+            <td>{{ $retire }}</td>
+        </tr>
+        <tr>
+            <td><strong>IP Address</strong></td>
+            <td><code class="ip-address">{{ $ip }}</code></td>
+        </tr>
+    </table>
+</div>
+
+<style>
+.difficulty-easy { color: #28a745; font-weight: 600; }
+.difficulty-medium { color: #ffc107; font-weight: 600; }
+.difficulty-hard { color: #dc3545; font-weight: 600; }
+.difficulty-insane { color: #6f42c1; font-weight: 600; }
+</style>

@@ -1,0 +1,29 @@
+{{- $prompt := .Get "prompt" | default "user@kali" -}}
+{{- $host := .Get "host" | default "~" -}}
+
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-prompt">{{ $prompt }}:{{ $host }}$</span>
+    </div>
+    <div class="terminal-content">
+        {{ .Inner | chomp }}
+    </div>
+</div>
+
+<style>
+.terminal-header {
+    color: #00ff00;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+}
+
+.terminal-content {
+    color: #ffffff;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+</style>

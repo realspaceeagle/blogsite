@@ -1,0 +1,9 @@
+{{- $type := .Get "type" -}}
+{{- $title := cond (eq $type "required") "Skills Required" "Skills Learned" -}}
+
+<div class="skills-box">
+    <h4>{{ $title }}</h4>
+    <ul>
+        {{ .Inner | markdownify }}
+    </ul>
+</div>
