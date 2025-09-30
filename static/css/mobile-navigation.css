@@ -120,7 +120,7 @@ body.mobile-menu-open {
     color: var(--content);
     text-decoration: none;
     transition: all 0.3s ease;
-    padding: 4px;
+    padding: 2px;
 }
 
 .social-link:hover {
