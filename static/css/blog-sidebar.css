@@ -4,8 +4,8 @@
 :root {
   --primary-rgb: 30, 144, 255; /* Default primary color RGB */
   --sidebar-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --sidebar-highlight: #E95420; /* Ubuntu orange-pink */
-  --sidebar-highlight-rgb: 233, 84, 32;
+  --sidebar-highlight: #360624; /* Dark purple/magenta */
+  --sidebar-highlight-rgb: 54, 6, 36;
   --sidebar-main-heading: #2E8B57; /* Sea green for main headings */
   --sidebar-main-heading-rgb: 46, 139, 87;
 }
@@ -13,8 +13,8 @@
 /* Dark theme adjustments */
 .dark {
   --primary-rgb: 74, 144, 226;
-  --sidebar-highlight: #FF6B9D; /* Brighter pink for dark mode */
-  --sidebar-highlight-rgb: 255, 107, 157;
+  --sidebar-highlight: #5A1A42; /* Lighter purple for dark mode */
+  --sidebar-highlight-rgb: 90, 26, 66;
   --sidebar-main-heading: #20B2AA; /* Light sea green for dark mode */
   --sidebar-main-heading-rgb: 32, 178, 170;
 }
