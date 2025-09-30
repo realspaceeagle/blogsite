@@ -117,17 +117,38 @@
     <a class="twitter-timeline" 
        data-width="320"
        data-height="500" 
-       data-tweet-limit="3"
+       data-theme="dark"
+       data-tweet-limit="5"
        data-chrome="noheader nofooter noborders"
-       href="https://twitter.com/haran_loga">
-      Tweets by @haran_loga
+       href="https://twitter.com/haran_loga?ref_src=twsrc%5Etfw">
+      Tweets by haran_loga
     </a>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <noscript>
-      <div class="fallback-message">
-        <p>Follow <a href="https://twitter.com/haran_loga" target="_blank">@haran_loga</a> on Twitter</p>
-      </div>
-    </noscript>
+    
+    <!-- Loading indicator -->
+    <div id="twitter-loading" style="text-align: center; padding: 20px; color: var(--secondary);">
+      Loading tweets...
+    </div>
+    
+    <!-- Fallback for when widget fails to load -->
+    <div id="twitter-fallback" style="display: none; text-align: center; padding: 20px;">
+      <p style="color: var(--secondary); margin-bottom: 15px;">Unable to load tweets</p>
+      <a href="https://twitter.com/haran_loga" target="_blank" style="color: var(--primary); text-decoration: none; padding: 10px 20px; border: 1px solid var(--border); border-radius: 5px;">
+        View on Twitter
+      </a>
+    </div>
+    
+    <script>
+      // Show fallback after 10 seconds if widget doesn't load
+      setTimeout(function() {
+        if (!document.querySelector('.twitter-timeline iframe')) {
+          document.getElementById('twitter-loading').style.display = 'none';
+          document.getElementById('twitter-fallback').style.display = 'block';
+        } else {
+          document.getElementById('twitter-loading').style.display = 'none';
+        }
+      }, 10000);
+    </script>
   </div>
 </aside>
 
