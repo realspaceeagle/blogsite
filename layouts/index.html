@@ -70,7 +70,7 @@
         <div class="twitter-content-area">
           <!-- Auto-Fetching Twitter Timeline -->
           <div class="twitter-timeline-container">
-            {{< twitter-auto username="haran_loga" count="5" >}}
+            {{ partial "twitter-auto.html" (dict "username" "haran_loga" "count" "5") }}
           </div>
           
           <div class="twitter-follow-section">
