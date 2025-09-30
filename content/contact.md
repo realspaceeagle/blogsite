@@ -10,8 +10,6 @@ layout: "single"
 
 I'd love to connect with fellow cybersecurity professionals, enthusiasts, and anyone interested in security research! Whether you have questions about techniques, want to discuss security topics, or collaborate on projects, feel free to reach out.
 
-{{ partial "contact_form.html" . }}
-
 ---
 
 ## 📧 Email Subscription

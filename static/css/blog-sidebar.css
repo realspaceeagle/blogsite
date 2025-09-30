@@ -4,11 +4,19 @@
 :root {
   --primary-rgb: 30, 144, 255; /* Default primary color RGB */
   --sidebar-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --sidebar-highlight: #E95420; /* Ubuntu orange-pink */
+  --sidebar-highlight-rgb: 233, 84, 32;
+  --sidebar-main-heading: #2E8B57; /* Sea green for main headings */
+  --sidebar-main-heading-rgb: 46, 139, 87;
 }
 
 /* Dark theme adjustments */
 .dark {
   --primary-rgb: 74, 144, 226;
+  --sidebar-highlight: #FF6B9D; /* Brighter pink for dark mode */
+  --sidebar-highlight-rgb: 255, 107, 157;
+  --sidebar-main-heading: #20B2AA; /* Light sea green for dark mode */
+  --sidebar-main-heading-rgb: 32, 178, 170;
 }
 
 /* Sidebar container */
@@ -27,7 +35,7 @@
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
   /* Firefox scrollbar styling */
   scrollbar-width: thin;
-  scrollbar-color: var(--primary) rgba(0, 0, 0, 0.1);
+  scrollbar-color: var(--sidebar-highlight) rgba(0, 0, 0, 0.1);
 }
 
 /* Sidebar content container */
@@ -40,7 +48,7 @@
 
 /* Sidebar title */
 .sidebar-title {
-  color: var(--primary);
+  color: var(--sidebar-highlight);
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 1rem 0;
@@ -57,7 +65,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--primary), rgba(var(--primary-rgb), 0.5));
+  background: linear-gradient(90deg, var(--sidebar-highlight), rgba(var(--sidebar-highlight-rgb), 0.5));
   animation: titleUnderline 1s ease-out 0.5s forwards;
 }
 
@@ -82,7 +90,7 @@
 .reading-progress {
   width: 100%;
   height: 4px;
-  background: rgba(var(--primary-rgb), 0.1);
+  background: rgba(var(--sidebar-highlight-rgb), 0.1);
   border-radius: 2px;
   margin: 0.75rem 0 1rem 0;
   overflow: hidden;
@@ -91,7 +99,7 @@
 
 .progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary), rgba(var(--primary-rgb), 0.7));
+  background: linear-gradient(90deg, var(--sidebar-highlight), rgba(var(--sidebar-highlight-rgb), 0.7));
   border-radius: 2px;
   width: 0%;
   transition: width 0.3s ease;
@@ -105,7 +113,7 @@
   right: 0;
   width: 20px;
   height: 100%;
-  background: linear-gradient(90deg, transparent, var(--primary));
+  background: linear-gradient(90deg, transparent, var(--sidebar-highlight));
   transform: translateX(10px);
   animation: progressGlow 2s ease-in-out infinite;
 }
@@ -130,7 +138,7 @@
   max-height: calc(100vh - 200px); /* Reserve space for title and padding */
   /* Firefox scrollbar styling */
   scrollbar-width: auto;
-  scrollbar-color: var(--primary) rgba(0, 0, 0, 0.05);
+  scrollbar-color: var(--sidebar-highlight) rgba(0, 0, 0, 0.05);
 }
 
 /* Custom scrollbar for TOC list */
@@ -145,7 +153,7 @@
 }
 
 .toc-list::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: var(--sidebar-highlight);
   border-radius: 6px;
   border: 2px solid var(--theme);
   min-height: 20px;
@@ -207,14 +215,14 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(var(--primary-rgb), 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--sidebar-highlight-rgb), 0.1), transparent);
   transition: left 0.5s ease;
 }
 
 .toc-link:hover {
-  color: var(--primary);
+  color: var(--sidebar-highlight);
   background: var(--code-bg);
-  border-left-color: var(--primary);
+  border-left-color: var(--sidebar-highlight);
   transform: translateX(4px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
@@ -224,9 +232,9 @@
 }
 
 .toc-link.active {
-  color: var(--primary);
-  background: linear-gradient(135deg, var(--code-bg), rgba(var(--primary-rgb), 0.05));
-  border-left-color: var(--primary);
+  color: var(--sidebar-highlight);
+  background: linear-gradient(135deg, var(--code-bg), rgba(var(--sidebar-highlight-rgb), 0.05));
+  border-left-color: var(--sidebar-highlight);
   font-weight: 500;
   transform: translateX(6px);
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
@@ -235,21 +243,49 @@
 
 @keyframes activeGlow {
   0% {
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2), 0 0 8px rgba(var(--primary-rgb), 0.3);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2), 0 0 8px rgba(var(--sidebar-highlight-rgb), 0.3);
   }
   100% {
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2), 0 0 16px rgba(var(--primary-rgb), 0.5);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2), 0 0 16px rgba(var(--sidebar-highlight-rgb), 0.5);
   }
 }
 
 /* Different levels styling */
 .toc-level-1 .toc-link {
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--sidebar-main-heading);
+  border-left-width: 4px;
+}
+
+.toc-level-1 .toc-link:hover {
+  color: var(--sidebar-main-heading);
+  border-left-color: var(--sidebar-main-heading);
+  background: rgba(var(--sidebar-main-heading-rgb), 0.1);
+}
+
+.toc-level-1 .toc-link.active {
+  color: var(--sidebar-main-heading);
+  border-left-color: var(--sidebar-main-heading);
+  background: linear-gradient(135deg, rgba(var(--sidebar-main-heading-rgb), 0.1), rgba(var(--sidebar-main-heading-rgb), 0.05));
+  animation: mainHeadingGlow 2s ease-in-out infinite alternate;
+}
+
+.toc-level-1 .toc-link::before {
+  background: linear-gradient(90deg, transparent, rgba(var(--sidebar-main-heading-rgb), 0.15), transparent);
+}
+
+@keyframes mainHeadingGlow {
+  0% {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2), 0 0 8px rgba(var(--sidebar-main-heading-rgb), 0.4);
+  }
+  100% {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2), 0 0 16px rgba(var(--sidebar-main-heading-rgb), 0.6);
+  }
 }
 
 .toc-level-2 .toc-link {
-  font-weight: 400;
+  font-weight: 500;
   font-size: 0.875rem;
 }
 
@@ -274,7 +310,7 @@
 }
 
 .blog-sidebar::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: var(--sidebar-highlight);
   border-radius: 5px;
   border: 1px solid var(--theme);
   min-height: 30px;
@@ -381,7 +417,7 @@ body.has-blog-sidebar main.main.single-page {
 }
 
 .dark .sidebar-title {
-  color: var(--primary);
+  color: var(--sidebar-highlight);
   border-bottom-color: var(--border);
 }
 
@@ -391,8 +427,18 @@ body.has-blog-sidebar main.main.single-page {
 
 .dark .toc-link:hover,
 .dark .toc-link.active {
-  color: var(--primary);
+  color: var(--sidebar-highlight);
   background: var(--code-bg);
+}
+
+.dark .toc-level-1 .toc-link {
+  color: var(--sidebar-main-heading);
+}
+
+.dark .toc-level-1 .toc-link:hover,
+.dark .toc-level-1 .toc-link.active {
+  color: var(--sidebar-main-heading);
+  border-left-color: var(--sidebar-main-heading);
 }
 
 /* Smooth transitions */
