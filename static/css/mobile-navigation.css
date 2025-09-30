@@ -117,20 +117,25 @@ body.mobile-menu-open {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--content);
+    width: 20px;
+    height: 20px;
+    background: var(--tertiary);
+    color: var(--primary);
+    border-radius: 4px;
     text-decoration: none;
     transition: all 0.3s ease;
     padding: 0px;
 }
 
 .social-link:hover {
-    color: var(--primary);
+    background: var(--primary);
+    color: var(--theme);
     transform: translateY(-1px);
 }
 
 .social-link svg {
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     transition: transform 0.3s ease;
 }
 
