@@ -117,14 +117,10 @@ body.mobile-menu-open {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
-    background: var(--tertiary);
-    color: var(--primary);
-    border-radius: 4px;
+    color: var(--content);
     text-decoration: none;
     transition: all 0.3s ease;
-    padding: 0px;
+    padding: 2px;
 }
 
 .social-link:hover {
