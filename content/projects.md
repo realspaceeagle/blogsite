@@ -331,18 +331,48 @@ document.addEventListener('DOMContentLoaded', function() {
   const toggleButtons = document.querySelectorAll('.toggle-btn');
   const sections = document.querySelectorAll('.project-section');
   
+  // Function to switch to a specific tab
+  function switchToTab(targetSection) {
+    // Remove active class from all buttons and sections
+    toggleButtons.forEach(btn => btn.classList.remove('active'));
+    sections.forEach(section => section.classList.remove('active'));
+    
+    // Add active class to target button and section
+    const targetButton = document.querySelector(`[data-section="${targetSection}"]`);
+    const targetSectionElement = document.getElementById(targetSection + '-section');
+    
+    if (targetButton && targetSectionElement) {
+      targetButton.classList.add('active');
+      targetSectionElement.classList.add('active');
+    }
+  }
+  
+  // Check URL hash and restore active tab
+  function restoreActiveTab() {
+    const hash = window.location.hash.substring(1); // Remove the '#'
+    if (hash && ['projects', 'tools', 'github'].includes(hash)) {
+      switchToTab(hash);
+    }
+  }
+  
+  // Restore tab on page load
+  restoreActiveTab();
+  
   toggleButtons.forEach(button => {
     button.addEventListener('click', function() {
       const targetSection = this.getAttribute('data-section');
       
-      // Remove active class from all buttons and sections
-      toggleButtons.forEach(btn => btn.classList.remove('active'));
-      sections.forEach(section => section.classList.remove('active'));
+      // Update URL hash without page reload
+      history.pushState(null, null, '#' + targetSection);
       
-      // Add active class to clicked button and target section
-      this.classList.add('active');
-      document.getElementById(targetSection + '-section').classList.add('active');
+      // Switch to the target tab
+      switchToTab(targetSection);
     });
+  });
+  
+  // Listen for browser back/forward button
+  window.addEventListener('popstate', function() {
+    restoreActiveTab();
   });
 });
 

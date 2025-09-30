@@ -208,9 +208,17 @@ document.addEventListener('DOMContentLoaded', function() {
       transition: opacity 0.2s;
     `;
     
-    refreshButton.addEventListener('click', function() {
+    refreshButton.addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent any default behavior
+      e.stopPropagation(); // Stop event bubbling
+      
       refreshButton.innerHTML = '⏳ Refreshing...';
       refreshButton.disabled = true;
+      
+      // Ensure we stay on the GitHub tab
+      if (!window.location.hash.includes('github')) {
+        history.pushState(null, null, '#github');
+      }
       
       // Force refresh GitHub data
       refreshGitHubData().then(() => {
