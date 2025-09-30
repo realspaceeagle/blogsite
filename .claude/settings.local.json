@@ -8,7 +8,9 @@
       "Bash(unzip:*)",
       "Bash(mv:*)",
       "WebFetch(domain:0xdf.gitlab.io)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "WebFetch(domain:help.x.com)",
+      "WebFetch(domain:discourse.gohugo.io)"
     ],
     "deny": []
   }

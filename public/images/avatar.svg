@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <style>
+      .bg { fill: #1a1a2e; }
+      .face { fill: #e94560; }
+      .eye { fill: #16213e; }
+      .detail { fill: #0f3460; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <circle class="bg" cx="50" cy="50" r="50"/>
+  
+  <!-- Head -->
+  <circle class="face" cx="50" cy="45" r="28"/>
+  
+  <!-- Eyes -->
+  <circle class="eye" cx="42" cy="38" r="3"/>
+  <circle class="eye" cx="58" cy="38" r="3"/>
+  
+  <!-- Nose -->
+  <circle class="detail" cx="50" cy="45" r="1"/>
+  
+  <!-- Mouth -->
+  <path class="detail" d="M45 52 Q50 55 55 52" stroke="#16213e" stroke-width="2" fill="none"/>
+  
+  <!-- Hoodie -->
+  <path class="detail" d="M22 75 Q22 65 30 60 L35 58 Q40 55 50 55 Q60 55 65 58 L70 60 Q78 65 78 75 L78 90 Q78 95 73 95 L27 95 Q22 95 22 90 Z"/>
+  
+  <!-- Hood -->
+  <path class="bg" d="M30 60 Q35 50 50 50 Q65 50 70 60 Q75 65 75 70 Q70 55 50 55 Q30 55 25 70 Q25 65 30 60"/>
+  
+  <!-- Tech elements -->
+  <rect class="eye" x="85" y="15" width="2" height="8" rx="1"/>
+  <rect class="eye" x="88" y="18" width="2" height="5" rx="1"/>
+  <rect class="eye" x="13" y="20" width="2" height="6" rx="1"/>
+  <rect class="eye" x="10" y="23" width="2" height="3" rx="1"/>
+</svg>

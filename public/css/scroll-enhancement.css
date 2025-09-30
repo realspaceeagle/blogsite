@@ -1,0 +1,313 @@
+/* Enhanced Scroll Behavior and Page Performance */
+
+/* Sticky Header */
+.header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    background: var(--theme) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+
+/* Add padding to body to account for fixed header */
+body {
+    padding-top: 60px !important;
+}
+
+/* Adjust main content for fixed header */
+.main {
+    margin-top: 0 !important;
+}
+
+/* Fast scroll behavior for the entire page */
+html {
+    scroll-behavior: auto; /* Faster than smooth */
+    scroll-padding-top: 120px; /* Offset for fixed headers */
+}
+
+/* Optimize scroll performance with faster scrolling */
+* {
+    scroll-behavior: auto; /* Remove smooth scrolling for speed */
+}
+
+/* Increase scroll wheel sensitivity */
+body {
+    scroll-snap-type: none; /* Remove scroll snapping for faster scrolling */
+}
+
+/* Improve scrolling performance on mobile */
+body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    /* Increase scroll sensitivity */
+    scroll-behavior: auto !important;
+}
+
+/* Faster scroll wheel response */
+html, body {
+    scroll-snap-type: none;
+    overscroll-behavior-y: none;
+}
+
+/* Remove scroll delays */
+:root {
+    scroll-behavior: auto !important;
+}
+
+/* Enhanced scroll speed and responsiveness */
+.main, main, article {
+    scroll-behavior: auto;
+}
+
+/* Optimize image loading during scroll */
+img {
+    will-change: transform;
+    transition: transform 0.2s ease-out;
+}
+
+/* Fast scrolling for anchor links */
+a[href^="#"] {
+    scroll-behavior: auto;
+}
+
+/* Enhanced scroll performance for content sections */
+section, div {
+    contain: layout style paint;
+}
+
+/* Improve scroll performance for code blocks */
+pre, code {
+    contain: layout;
+}
+
+/* Certification section specific enhancements */
+.certifications-grid {
+    will-change: scroll-position;
+    transform: translateZ(0); /* Enable hardware acceleration */
+}
+
+/* Smooth fade-in animation for scroll */
+@keyframes fadeInOnScroll {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply fade-in to sections */
+.fade-in-section {
+    animation: fadeInOnScroll 0.6s ease-out;
+}
+
+/* Certification badges hover effects */
+.cert-badge {
+    transition: all 0.3s ease;
+    will-change: transform;
+}
+
+.cert-badge:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+}
+
+/* Optimize scroll for mobile devices */
+@media (max-width: 768px) {
+    html {
+        scroll-padding-top: 140px;
+    }
+    
+    /* Adjust body padding for mobile */
+    body {
+        padding-top: 70px !important;
+    }
+    
+    /* Reduce animations on mobile for better performance */
+    * {
+        animation-duration: 0.3s !important;
+        transition-duration: 0.3s !important;
+    }
+}
+
+/* Parallax scroll effect for hero sections (optional) */
+.parallax-scroll {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Improve scroll performance for long content */
+.long-content {
+    contain: layout style;
+    content-visibility: auto;
+    contain-intrinsic-size: 1000px;
+}
+
+/* Enhanced scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00ff00;
+}
+
+/* Firefox scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #555 #1a1a1a;
+}
+
+/* Performance optimization for certification images */
+.cert-image {
+    image-rendering: optimizeQuality;
+    loading: lazy;
+    will-change: transform;
+}
+
+/* Smooth transitions for interactive elements */
+button, .btn, .nav-link {
+    transition: all 0.2s ease-out;
+}
+
+/* Collapsible Table of Contents Styles using details/summary */
+.toc-details {
+    margin: 0;
+    padding: 0;
+}
+
+.toc-summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 4px 0;
+    margin: 0;
+    display: block;
+    position: relative;
+}
+
+.toc-summary::-webkit-details-marker {
+    display: none;
+}
+
+.toc-summary::marker {
+    display: none;
+}
+
+.toc-summary::before {
+    content: "▶";
+    color: var(--primary);
+    font-size: 12px;
+    margin-right: 8px;
+    transition: transform 0.2s ease;
+    display: inline-block;
+    width: 12px;
+}
+
+.toc-details[open] .toc-summary::before {
+    transform: rotate(90deg);
+    content: "▼";
+}
+
+.toc-summary:hover::before {
+    color: var(--primary-hover);
+    transform: scale(1.1);
+}
+
+.toc-details[open] .toc-summary:hover::before {
+    transform: rotate(90deg) scale(1.1);
+}
+
+.toc-summary .toc-link {
+    text-decoration: none;
+    color: var(--content);
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.toc-summary .toc-link:hover {
+    color: var(--primary);
+}
+
+.toc-nested {
+    margin: 4px 0 8px 20px;
+    padding: 0;
+    border-left: 2px solid var(--border);
+    padding-left: 12px;
+}
+
+/* Improve visual hierarchy */
+.toc-level-1 .toc-summary .toc-link {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.toc-level-2 .toc-summary .toc-link {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.toc-level-3 .toc-summary .toc-link,
+.toc-level-4 .toc-summary .toc-link,
+.toc-level-5 .toc-summary .toc-link,
+.toc-level-6 .toc-summary .toc-link {
+    font-weight: normal;
+    font-size: 13px;
+}
+
+/* For items without children */
+.toc-item:not(.has-children) .toc-link {
+    display: block;
+    padding: 4px 0;
+    text-decoration: none;
+    color: var(--content);
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.toc-item:not(.has-children) .toc-link:hover {
+    color: var(--primary);
+}
+
+/* Active link styling */
+.toc-link.active {
+    color: var(--primary) !important;
+    font-weight: 600 !important;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .toc-nested {
+        animation: none;
+    }
+    
+    .toc-expand {
+        transition: none;
+    }
+}

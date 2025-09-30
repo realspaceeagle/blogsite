@@ -1,11 +1,1 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>Categories on My Blog</title>
-    <link>http://localhost:1313/categories/</link>
-    <description>Recent content in Categories on My Blog</description>
-    <generator>Hugo -- 0.150.1</generator>
-    <language>en-us</language>
-    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Categories on realspaceeagle - Cybersecurity Expert &amp; Penetration Tester</title><link>https://realspaceeagle.github.io/categories/</link><description>Recent content in Categories on realspaceeagle - Cybersecurity Expert &amp; Penetration Tester</description><image><title>realspaceeagle - Cybersecurity Expert &amp; Penetration Tester</title><url>https://realspaceeagle.github.io/images/og-image.svg</url><link>https://realspaceeagle.github.io/images/og-image.svg</link></image><generator>Hugo -- 0.150.1</generator><language>en-us</language><lastBuildDate>Sun, 01 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://realspaceeagle.github.io/categories/index.xml" rel="self" type="application/rss+xml"/><item><title>HackTheBox</title><link>https://realspaceeagle.github.io/categories/hackthebox/</link><pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate><guid>https://realspaceeagle.github.io/categories/hackthebox/</guid><description/></item><item><title>System-Administration</title><link>https://realspaceeagle.github.io/categories/system-administration/</link><pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate><guid>https://realspaceeagle.github.io/categories/system-administration/</guid><description/></item><item><title>Security</title><link>https://realspaceeagle.github.io/categories/security/</link><pubDate>Tue, 30 Jan 2024 00:00:00 +0000</pubDate><guid>https://realspaceeagle.github.io/categories/security/</guid><description/></item></channel></rss>

@@ -1,0 +1,112 @@
+/* Enhanced share button styling */
+.share-buttons {
+    margin: 20px 0;
+    padding: 15px;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.share-buttons li {
+    list-style: none;
+}
+
+.share-buttons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--tertiary);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.share-buttons a:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.share-buttons svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--primary);
+}
+
+.share-buttons a:hover svg {
+    fill: var(--theme);
+}
+
+/* Platform-specific colors on hover */
+.share-buttons a[href*="x.com"]:hover,
+.share-buttons a[href*="twitter"]:hover {
+    background: #1da1f2;
+}
+
+.share-buttons a[href*="linkedin"]:hover {
+    background: #0077b5;
+}
+
+.share-buttons a[href*="reddit"]:hover {
+    background: #ff4500;
+}
+
+.share-buttons a[href*="telegram"]:hover {
+    background: #0088cc;
+}
+
+.share-buttons a[href*="whatsapp"]:hover {
+    background: #25d366;
+}
+
+.share-buttons a[href*="discord"]:hover {
+    background: #5865f2;
+}
+
+.share-buttons a[href*="pinterest"]:hover {
+    background: #bd081c;
+}
+
+.share-buttons a[href*="mailto"]:hover {
+    background: #ea4335;
+}
+
+.share-buttons a[aria-label*="copy"]:hover {
+    background: #666;
+}
+
+/* Dark mode adjustments */
+.dark .share-buttons {
+    background: var(--entry);
+}
+
+.dark .share-buttons a {
+    background: var(--tertiary);
+}
+
+.dark .share-buttons svg {
+    fill: var(--primary);
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 480px) {
+    .share-buttons {
+        gap: 8px;
+    }
+    
+    .share-buttons a {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .share-buttons svg {
+        width: 20px;
+        height: 20px;
+    }
+}

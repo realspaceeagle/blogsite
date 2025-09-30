@@ -1,0 +1,931 @@
+/* Terminal Aesthetic Styling */
+/* Inspired by 0xdf's blog design */
+
+/* Import readable fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+/* Enhanced smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Account for header */
+}
+
+/* Custom scrolling improvements */
+* {
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Ubuntu terminal-style code blocks */
+.highlight {
+  background: linear-gradient(135deg, #2c001e 0%, #1a0014 100%) !important;
+  color: #f8f8f2 !important; /* Bright white default text */
+  font-family: 'Ubuntu Mono', 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  padding: 20px !important;
+  margin: 1.5rem 0 !important;
+  overflow-x: auto;
+  border: 2px solid #4a0e2f !important;
+  border-radius: 8px !important;
+  white-space: pre;
+  word-wrap: normal;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(44, 0, 30, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ubuntu terminal window header */
+.highlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(to bottom, #4a0e2f, #2c001e);
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid #1a0014;
+}
+
+/* Ubuntu terminal buttons */
+.highlight::after {
+  content: '● ● ●';
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  color: #ff5f56;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 4px;
+}
+
+/* Light theme code blocks */
+body:not(.dark) .highlight {
+  background-color: #f8f8f8 !important;
+  color: #333333 !important;
+}
+
+.highlight pre {
+  background: transparent !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  padding: 35px 0 0 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  white-space: inherit;
+  word-wrap: inherit;
+  overflow: visible;
+}
+
+.highlight pre code {
+  background: transparent !important;
+  color: #f8f8f2 !important; /* Ensure bright white text */
+  font-family: inherit !important;
+  font-size: inherit !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  white-space: inherit;
+  word-wrap: inherit;
+}
+
+/* Ensure all text elements in code blocks are visible */
+.highlight * {
+  color: #f8f8f2 !important; /* Default bright white for all content */
+}
+
+/* Override specific elements for better readability */
+.highlight code,
+.highlight pre,
+.highlight span {
+  color: #f8f8f2 !important; /* Bright white base text */
+}
+
+/* Ubuntu terminal command prompt and output colors */
+.highlight .gp {
+  color: #55ff55 !important; /* Bright Ubuntu green for command prompt $ */
+  font-weight: 700;
+}
+
+.highlight .go {
+  color: #e6e6e6 !important; /* Light gray for command output */
+}
+
+/* Language-specific syntax highlighting with Ubuntu terminal colors */
+
+/* BASH/Shell highlighting */
+.highlight.language-bash .k,
+.highlight.language-shell .k,
+.highlight.language-sh .k { color: #55ff55 !important; } /* Keywords - bright green */
+
+.highlight.language-bash .s,
+.highlight.language-shell .s,
+.highlight.language-sh .s,
+.highlight.language-bash .s2,
+.highlight.language-shell .s2,
+.highlight.language-sh .s2 { color: #ffff55 !important; } /* Strings - bright yellow */
+
+.highlight.language-bash .c,
+.highlight.language-shell .c,
+.highlight.language-sh .c { color: #5555ff !important; } /* Comments - bright blue */
+
+.highlight.language-bash .nv,
+.highlight.language-shell .nv,
+.highlight.language-sh .nv { color: #55ffff !important; } /* Variables - bright cyan */
+
+/* PYTHON highlighting */
+.highlight.language-python .k { color: #ff55ff !important; } /* Keywords - bright magenta */
+.highlight.language-python .kn { color: #ff55ff !important; } /* Import keywords */
+.highlight.language-python .s,
+.highlight.language-python .s2 { color: #55ff55 !important; } /* Strings - bright green */
+.highlight.language-python .c { color: #5555ff !important; } /* Comments - bright blue */
+.highlight.language-python .nf { color: #55ffff !important; } /* Functions - bright cyan */
+.highlight.language-python .nc { color: #ffff55 !important; } /* Classes - bright yellow */
+.highlight.language-python .nb { color: #ff55ff !important; } /* Built-ins - bright magenta */
+
+/* JAVASCRIPT highlighting */
+.highlight.language-javascript .k,
+.highlight.language-js .k { color: #ffff55 !important; } /* Keywords - bright yellow */
+.highlight.language-javascript .s,
+.highlight.language-js .s,
+.highlight.language-javascript .s2,
+.highlight.language-js .s2 { color: #55ff55 !important; } /* Strings - bright green */
+.highlight.language-javascript .c1,
+.highlight.language-js .c1 { color: #5555ff !important; } /* Comments - bright blue */
+.highlight.language-javascript .nf,
+.highlight.language-js .nf { color: #55ffff !important; } /* Functions - bright cyan */
+.highlight.language-javascript .nx,
+.highlight.language-js .nx { color: #ffffff !important; } /* Variables - white */
+
+/* SQL highlighting */
+.highlight.language-sql .k { color: #ff55ff !important; } /* Keywords - bright magenta */
+.highlight.language-sql .s,
+.highlight.language-sql .s2 { color: #55ff55 !important; } /* Strings - bright green */
+.highlight.language-sql .c { color: #5555ff !important; } /* Comments - bright blue */
+.highlight.language-sql .n { color: #55ffff !important; } /* Names - bright cyan */
+
+/* JAVA highlighting */
+.highlight.language-java .k { color: #ffff55 !important; } /* Keywords - bright yellow */
+.highlight.language-java .kt { color: #ff55ff !important; } /* Types - bright magenta */
+.highlight.language-java .s,
+.highlight.language-java .s2 { color: #55ff55 !important; } /* Strings - bright green */
+.highlight.language-java .c1 { color: #5555ff !important; } /* Comments - bright blue */
+.highlight.language-java .nf { color: #55ffff !important; } /* Methods - bright cyan */
+.highlight.language-java .nc { color: #ffff55 !important; } /* Classes - bright yellow */
+
+/* C/C++ highlighting */
+.highlight.language-c .k,
+.highlight.language-cpp .k { color: #ff55ff !important; } /* Keywords - bright magenta */
+.highlight.language-c .s,
+.highlight.language-cpp .s,
+.highlight.language-c .s2,
+.highlight.language-cpp .s2 { color: #55ff55 !important; } /* Strings - bright green */
+.highlight.language-c .c1,
+.highlight.language-cpp .c1 { color: #5555ff !important; } /* Comments - bright blue */
+.highlight.language-c .nf,
+.highlight.language-cpp .nf { color: #55ffff !important; } /* Functions - bright cyan */
+
+/* JSON highlighting */
+.highlight.language-json .nt { color: #55ffff !important; } /* Property names - bright cyan */
+.highlight.language-json .s2 { color: #55ff55 !important; } /* String values - bright green */
+.highlight.language-json .mi { color: #ff55ff !important; } /* Numbers - bright magenta */
+.highlight.language-json .kc { color: #ffff55 !important; } /* Constants - bright yellow */
+
+/* YAML highlighting */
+.highlight.language-yaml .nt { color: #55ffff !important; } /* Keys - bright cyan */
+.highlight.language-yaml .s { color: #55ff55 !important; } /* Values - bright green */
+.highlight.language-yaml .c { color: #5555ff !important; } /* Comments - bright blue */
+
+/* Default/Generic syntax highlighting for all languages */
+.highlight .k { color: #55ff55 !important; } /* Keywords - bright green */
+.highlight .s { color: #ffff55 !important; } /* Strings - bright yellow */
+.highlight .c { color: #5555ff !important; } /* Comments - bright blue */
+.highlight .n { color: #ffffff !important; } /* Names - bright white */
+.highlight .o { color: #ff5555 !important; } /* Operators - bright red */
+.highlight .p { color: #ffffff !important; } /* Punctuation - bright white */
+.highlight .nb { color: #ff55ff !important; } /* Built-ins - bright magenta */
+.highlight .s2 { color: #ffff55 !important; } /* String literals - bright yellow */
+.highlight .nf { color: #55ffff !important; } /* Function names - bright cyan */
+.highlight .nc { color: #55ffff !important; } /* Class names - bright cyan */
+.highlight .nd { color: #ffaa55 !important; } /* Decorators - orange */
+.highlight .err { color: #ff5555 !important; } /* Errors - bright red */
+.highlight .m { color: #ff55ff !important; } /* Numbers - bright magenta */
+.highlight .mi { color: #ff55ff !important; } /* Integers - bright magenta */
+.highlight .mf { color: #ff55ff !important; } /* Floats - bright magenta */
+
+/* Ubuntu terminal ANSI color mappings */
+.highlight .w { color: #ffffff !important; } /* Whitespace - bright white */
+.highlight .cp { color: #55ff55 !important; } /* Preprocessor - bright green */
+.highlight .cpf { color: #ffff55 !important; } /* Preprocessor file - bright yellow */
+.highlight .cs { color: #5555ff !important; } /* Comment special - bright blue */
+.highlight .dl { color: #ffff55 !important; } /* String delimiter - bright yellow */
+.highlight .fm { color: #55ffff !important; } /* Function magic - bright cyan */
+.highlight .il { color: #ff55ff !important; } /* Integer long - bright magenta */
+.highlight .kc { color: #ff55ff !important; } /* Keyword constant - bright magenta */
+.highlight .kd { color: #55ff55 !important; } /* Keyword declaration - bright green */
+.highlight .kn { color: #55ff55 !important; } /* Keyword namespace - bright green */
+.highlight .kp { color: #55ff55 !important; } /* Keyword pseudo - bright green */
+.highlight .kr { color: #55ff55 !important; } /* Keyword reserved - bright green */
+.highlight .kt { color: #55ffff !important; } /* Keyword type - bright cyan */
+.highlight .ld { color: #ffff55 !important; } /* Literal date - bright yellow */
+.highlight .na { color: #55ffff !important; } /* Name attribute - bright cyan */
+.highlight .nl { color: #ffffff !important; } /* Name label - bright white */
+.highlight .nn { color: #ffffff !important; } /* Name namespace - bright white */
+.highlight .nt { color: #55ff55 !important; } /* Name tag - bright green */
+.highlight .nv { color: #ffffff !important; } /* Name variable - bright white */
+.highlight .ow { color: #55ff55 !important; } /* Operator word - bright green */
+.highlight .sa { color: #ffff55 !important; } /* String affix - bright yellow */
+.highlight .sb { color: #ffff55 !important; } /* String backtick - bright yellow */
+.highlight .sc { color: #ffff55 !important; } /* String char - bright yellow */
+.highlight .sd { color: #ffff55 !important; } /* String doc - bright yellow */
+.highlight .se { color: #ffff55 !important; } /* String escape - bright yellow */
+.highlight .sh { color: #ffff55 !important; } /* String heredoc - bright yellow */
+.highlight .si { color: #ffff55 !important; } /* String interpol - bright yellow */
+.highlight .sr { color: #ffff55 !important; } /* String regex - bright yellow */
+.highlight .ss { color: #ffff55 !important; } /* String symbol - bright yellow */
+.highlight .sx { color: #ffff55 !important; } /* String other - bright yellow */
+.highlight .vc { color: #ffffff !important; } /* Name variable class - bright white */
+.highlight .vg { color: #ffffff !important; } /* Name variable global - bright white */
+.highlight .vi { color: #ffffff !important; } /* Name variable instance - bright white */
+.highlight .vm { color: #ffffff !important; } /* Name variable magic - bright white */
+
+/* Ubuntu terminal command prompt colors */
+.highlight .gp .s,
+.highlight .gp .nv {
+  color: #55ff55 !important; /* Bright green for $ and # prompts */
+  font-weight: 700;
+}
+
+/* Standard Ubuntu terminal ANSI colors */
+.ansi-black { color: #000000 !important; }
+.ansi-red { color: #aa0000 !important; }
+.ansi-green { color: #00aa00 !important; }
+.ansi-yellow { color: #aa5500 !important; }
+.ansi-blue { color: #0000aa !important; }
+.ansi-magenta { color: #aa00aa !important; }
+.ansi-cyan { color: #00aaaa !important; }
+.ansi-white { color: #aaaaaa !important; }
+
+/* Bright Ubuntu terminal ANSI colors */
+.ansi-bright-black { color: #555555 !important; }
+.ansi-bright-red { color: #ff5555 !important; }
+.ansi-bright-green { color: #55ff55 !important; }
+.ansi-bright-yellow { color: #ffff55 !important; }
+.ansi-bright-blue { color: #5555ff !important; }
+.ansi-bright-magenta { color: #ff55ff !important; }
+.ansi-bright-cyan { color: #55ffff !important; }
+.ansi-bright-white { color: #ffffff !important; }
+
+/* Light theme syntax highlighting */
+body:not(.dark) .highlight .k { color: #0000ff !important; } /* Keywords - blue */
+body:not(.dark) .highlight .s { color: #a31515 !important; } /* Strings - red */
+body:not(.dark) .highlight .c { color: #008000 !important; } /* Comments - green */
+body:not(.dark) .highlight .n { color: #333333 !important; } /* Names - dark gray */
+body:not(.dark) .highlight .o { color: #333333 !important; } /* Operators - dark gray */
+body:not(.dark) .highlight .p { color: #333333 !important; } /* Punctuation - dark gray */
+body:not(.dark) .highlight .nb { color: #0000ff !important; } /* Built-ins - blue */
+body:not(.dark) .highlight .s2 { color: #a31515 !important; } /* String literals - red */
+body:not(.dark) .highlight .nf { color: #795e26 !important; } /* Function names - brown */
+body:not(.dark) .highlight .nc { color: #267f99 !important; } /* Class names - teal */
+body:not(.dark) .highlight .nd { color: #0000ff !important; } /* Decorators - blue */
+body:not(.dark) .highlight .err { color: #cd3131 !important; } /* Errors - red */
+body:not(.dark) .highlight .m { color: #098658 !important; } /* Numbers - green */
+body:not(.dark) .highlight .mi { color: #098658 !important; } /* Integers - green */
+body:not(.dark) .highlight .mf { color: #098658 !important; } /* Floats - green */
+
+/* Light theme command prompt */
+body:not(.dark) .highlight .gp { color: #008000 !important; } /* Green command prompt */
+body:not(.dark) .highlight .go { color: #333333 !important; } /* Dark gray output */
+
+/* Ubuntu terminal-style inline code */
+code {
+  background-color: #2c001e !important;
+  color: #ffffff !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 14px;
+  border: none;
+}
+
+/* Light theme inline code */
+body:not(.dark) code {
+  background-color: #f0f0f0 !important;
+  color: #333333 !important;
+}
+
+/* Ensure inline code doesn't inherit styles from code blocks */
+p code, li code, td code, th code {
+  background-color: #2c001e !important;
+  color: #ffffff !important;
+  padding: 2px 4px !important;
+  margin: 0 !important;
+  white-space: nowrap;
+  font-size: 14px !important;
+  border: none !important;
+}
+
+/* Light theme inline code in content */
+body:not(.dark) p code, 
+body:not(.dark) li code, 
+body:not(.dark) td code, 
+body:not(.dark) th code {
+  background-color: #f0f0f0 !important;
+  color: #333333 !important;
+}
+
+/* Terminal-style blockquotes */
+blockquote {
+  background-color: #1a1a1a;
+  border-left: 4px solid #00ff00;
+  color: #ffffff;
+  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Terminal-style tables */
+table {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Fira Code', 'JetBrains Mono', monospace;
+}
+
+table th {
+  background-color: #2d2d2d;
+  color: #00ff00;
+  font-weight: 600;
+  padding: 0.75rem;
+  border-bottom: 1px solid #333;
+}
+
+table td {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 0.75rem;
+  border-bottom: 1px solid #333;
+}
+
+table tr:hover td {
+  background-color: #2d2d2d;
+}
+
+/* Terminal-style navigation */
+.nav {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333;
+}
+
+.nav a {
+  color: #ffffff;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.nav a:hover {
+  color: #00ff00;
+  background-color: #2d2d2d;
+}
+
+/* Terminal-style buttons */
+.btn {
+  background-color: #2d2d2d;
+  color: #ffffff;
+  border: 1px solid #333;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.btn:hover {
+  background-color: #00ff00;
+  color: #1a1a1a;
+  border-color: #00ff00;
+}
+
+/* Terminal-style form elements */
+input, textarea, select {
+  background-color: #2d2d2d;
+  color: #ffffff;
+  border: 1px solid #333;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 14px;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #00ff00;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 255, 0, 0.2);
+}
+
+/* Enhanced Ubuntu terminal-style scrollbars */
+::-webkit-scrollbar {
+  width: 14px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(to bottom, #1a0014, #2c001e);
+  border: 1px solid #4a0e2f;
+  border-radius: 8px;
+  margin: 4px 0;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #4a4a4a, #2a2a2a);
+  border: 1px solid #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 
+    0 2px 6px rgba(42, 42, 42, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #5a5a5a, #3a3a3a);
+  box-shadow: 
+    0 4px 12px rgba(74, 74, 74, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: scaleX(1.1);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(to bottom, #3a3a3a, #1a1a1a);
+  box-shadow: 
+    0 2px 8px rgba(42, 42, 42, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Scrollbar corner styling */
+::-webkit-scrollbar-corner {
+  background: #1a0014;
+  border: 1px solid #4a0e2f;
+}
+
+/* Light theme scrollbar */
+body:not(.dark) ::-webkit-scrollbar-track {
+  background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+  border: 1px solid #cccccc;
+}
+
+body:not(.dark) ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #0066cc, #004499);
+  border: 1px solid #cccccc;
+  box-shadow: 
+    0 2px 6px rgba(0, 102, 204, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+body:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #0077dd, #0055aa);
+  box-shadow: 
+    0 4px 12px rgba(0, 102, 204, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+body:not(.dark) ::-webkit-scrollbar-corner {
+  background: #f0f0f0;
+  border: 1px solid #cccccc;
+}
+
+/* Scroll progress indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, #55ff55, #00ff41, #55ffff);
+  z-index: 9999;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 10px rgba(85, 255, 85, 0.6);
+}
+
+/* Light theme scroll progress */
+body:not(.dark) .scroll-progress {
+  background: linear-gradient(90deg, #0066cc, #0077dd, #0088ee);
+  box-shadow: 0 0 10px rgba(0, 102, 204, 0.6);
+}
+
+/* Scroll-to-top button enhancement */
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #55ff55, #00aa00);
+  border: 2px solid #4a0e2f;
+  border-radius: 50%;
+  color: #000000;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 4px 15px rgba(85, 255, 85, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+  background: linear-gradient(135deg, #66ff66, #00cc00);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 8px 25px rgba(85, 255, 85, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.scroll-to-top:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Light theme scroll-to-top */
+body:not(.dark) .scroll-to-top {
+  background: linear-gradient(135deg, #0066cc, #004499);
+  color: #ffffff;
+  border: 2px solid #cccccc;
+  box-shadow: 
+    0 4px 15px rgba(0, 102, 204, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+body:not(.dark) .scroll-to-top:hover {
+  background: linear-gradient(135deg, #0077dd, #0055aa);
+  box-shadow: 
+    0 8px 25px rgba(0, 102, 204, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Terminal-style selection */
+::selection {
+  background-color: #4ecdc4;
+  color: #000000;
+}
+
+/* Light theme selection */
+body:not(.dark) ::selection {
+  background-color: #0066cc;
+  color: #ffffff;
+}
+
+/* Focus styles for better accessibility */
+button:focus,
+input:focus,
+textarea:focus,
+a:focus {
+  outline: 2px solid #4ecdc4;
+  outline-offset: 2px;
+}
+
+body:not(.dark) button:focus,
+body:not(.dark) input:focus,
+body:not(.dark) textarea:focus,
+body:not(.dark) a:focus {
+  outline-color: #0066cc;
+}
+
+/* Terminal-style links */
+a {
+  color: #4ecdc4;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: #00ff00;
+  text-decoration-color: #00ff00;
+}
+
+/* Content links for better readability */
+.post-content a {
+  color: #4ecdc4;
+  text-decoration: underline;
+  text-decoration-color: rgba(78, 205, 196, 0.3);
+  font-weight: 500;
+}
+
+.post-content a:hover {
+  color: #00ff00;
+  text-decoration-color: #00ff00;
+}
+
+/* Light theme links */
+body:not(.dark) a {
+  color: #0066cc;
+}
+
+body:not(.dark) a:hover {
+  color: #004499;
+}
+
+body:not(.dark) .post-content a {
+  color: #0066cc;
+  text-decoration-color: rgba(0, 102, 204, 0.3);
+}
+
+body:not(.dark) .post-content a:hover {
+  color: #004499;
+  text-decoration-color: #004499;
+}
+
+/* Terminal-style headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Hide duplicate h1 in post content */
+.post-content h1:first-of-type {
+  display: none;
+}
+
+h1 {
+  color: #00ff00;
+  border-bottom: 2px solid #333;
+  padding-bottom: 0.5rem;
+  font-size: 2.2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.2rem;
+  scroll-margin-top: 100px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 100px;
+}
+
+h4, h5, h6 {
+  scroll-margin-top: 100px;
+}
+
+/* Blog post content styling - match about page content */
+.post-content {
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #e0e0e0;
+  margin: 0;
+  transition: none;
+  max-width: none;
+  padding: 0;
+  width: auto;
+}
+
+/* Improve text contrast for better readability */
+.post-content {
+  color: #f0f0f0;
+}
+
+body:not(.dark) .post-content {
+  color: #2a2a2a;
+}
+
+/* Better visual breaks between sections */
+.post-content > * + h2 {
+  margin-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 2rem;
+}
+
+body:not(.dark) .post-content > * + h2 {
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+
+.post-content p {
+  margin-bottom: 1.2rem;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.post-content ul, .post-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.post-content li {
+  margin-bottom: 0.5rem;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Terminal-style list items */
+ul, ol {
+  color: #e0e0e0;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+li {
+  margin: 0.5rem 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Terminal-style metadata */
+.post-meta {
+  color: #6c757d;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.9em;
+}
+
+/* Terminal-style tags */
+.tag {
+  background-color: #2d2d2d;
+  color: #4ecdc4;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+  margin: 0.2rem;
+  display: inline-block;
+}
+
+.tag:hover {
+  background-color: #4ecdc4;
+  color: #1a1a1a;
+}
+
+/* Terminal-style search results */
+.search-result {
+  background-color: #2d2d2d;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.search-result:hover {
+  background-color: #333;
+  border-color: #00ff00;
+}
+
+/* Terminal-style footer */
+.footer {
+  background-color: #1a1a1a;
+  border-top: 1px solid #333;
+  color: #6c757d;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+}
+
+
+
+
+
+/* PaperMod responsive design - mobile breakpoint at 768px */
+@media (max-width: 768px) {
+  :root {
+    --gap: 14px; /* PaperMod mobile gap reduction */
+  }
+  
+  .post-content {
+    max-width: 100%;
+    padding: 1rem 1.5rem;
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .highlight {
+    margin: 1rem -1rem !important;
+    border-radius: 0 !important;
+    padding: 12px !important;
+    font-size: 13px !important;
+  }
+  
+  .post-content {
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 1rem 2rem !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  
+  .post-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+  }
+  
+  .post-content li {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.3rem; }
+}
+
+/* Subtle loading indicator for images */
+img {
+  transition: opacity 0.3s ease;
+}
+
+img:not([src]) {
+  opacity: 0.5;
+}
+
+/* Better blockquote styling */
+blockquote {
+  background-color: rgba(78, 205, 196, 0.05);
+  border-left: 4px solid #4ecdc4;
+  color: #f0f0f0;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  padding: 1.2rem 1.8rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+  position: relative;
+}
+
+body:not(.dark) blockquote {
+  background-color: rgba(0, 102, 204, 0.05);
+  border-left-color: #0066cc;
+  color: #2a2a2a;
+}
+
+/* Improve table styling */
+table {
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body:not(.dark) table {
+  background-color: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Better button styling */
+.btn {
+  background-color: #2d2d2d;
+  color: #ffffff;
+  border: 1px solid #444;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #4ecdc4;
+  color: #1a1a1a;
+  border-color: #4ecdc4;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(78, 205, 196, 0.3);
+}
