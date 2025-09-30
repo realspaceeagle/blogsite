@@ -160,7 +160,7 @@ class GitHubContributionTracker {
         </div>
         <div class="contribution-legend">
           <span>Less</span>
-          ${[0,1,2,3,4].map(level => `<div class="contribution-day level-${level}"></div>`).join('')}
+          ${[0,1,2,3,4].map(level => `<div class="contribution-day level-${level}" title="Level ${level}"></div>`).join('')}
           <span>More</span>
         </div>
       </div>
@@ -220,6 +220,13 @@ class GitHubContributionTracker {
         border-radius: 8px;
         padding: 1rem;
         margin: 1rem 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      
+      .dark .contribution-graph {
+        background: var(--entry, #0d1117);
+        border: 1px solid var(--border, #30363d);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
       }
       
       .contribution-header {
@@ -232,11 +239,22 @@ class GitHubContributionTracker {
       .contribution-header h4 {
         margin: 0;
         color: var(--primary, #24292e);
+        font-weight: 600;
+        font-size: 1rem;
+      }
+      
+      .dark .contribution-header h4 {
+        color: var(--primary, #f0f6fc);
       }
       
       .contribution-count {
         color: var(--secondary, #586069);
-        font-size: 0.9rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+      }
+      
+      .dark .contribution-count {
+        color: var(--secondary, #8b949e);
       }
       
       .contribution-calendar {
@@ -257,26 +275,60 @@ class GitHubContributionTracker {
         height: 12px;
         border-radius: 2px;
         cursor: pointer;
+        transition: all 0.2s ease;
+        border: 1px solid rgba(27, 31, 35, 0.06);
       }
       
-      .contribution-day.level-0 { background-color: var(--entry, #ebedf0); }
+      .dark .contribution-day {
+        border: 1px solid rgba(240, 246, 252, 0.1);
+      }
+      
+      .contribution-day:hover {
+        border: 1px solid rgba(27, 31, 35, 0.15);
+        transform: scale(1.1);
+      }
+      
+      .dark .contribution-day:hover {
+        border: 1px solid rgba(240, 246, 252, 0.3);
+      }
+      
+      /* GitHub-style contribution colors (light theme) */
+      .contribution-day.level-0 { background-color: #ebedf0; }
       .contribution-day.level-1 { background-color: #9be9a8; }
       .contribution-day.level-2 { background-color: #40c463; }
       .contribution-day.level-3 { background-color: #30a14e; }
       .contribution-day.level-4 { background-color: #216e39; }
       
+      /* GitHub-style contribution colors (dark theme) */
+      .dark .contribution-day.level-0 { background-color: #161b22; }
+      .dark .contribution-day.level-1 { background-color: #0e4429; }
+      .dark .contribution-day.level-2 { background-color: #006d32; }
+      .dark .contribution-day.level-3 { background-color: #26a641; }
+      .dark .contribution-day.level-4 { background-color: #39d353; }
+      
       .contribution-legend {
         display: flex;
         align-items: center;
         gap: 4px;
-        font-size: 0.8rem;
-        color: var(--secondary, #586069);
-        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        color: var(--secondary, #656d76);
+        margin-top: 0.75rem;
+        justify-content: flex-end;
+      }
+      
+      .dark .contribution-legend {
+        color: var(--secondary, #7d8590);
       }
       
       .contribution-legend .contribution-day {
         width: 10px;
         height: 10px;
+        margin: 0 1px;
+      }
+      
+      .contribution-legend span {
+        margin: 0 4px;
+        font-weight: 400;
       }
       
       @media (max-width: 768px) {
