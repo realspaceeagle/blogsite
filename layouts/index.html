@@ -12,7 +12,7 @@
     </div>
     <div class="hero-stats">
       <div class="stat-item">
-        <span class="stat-number">{{ len .Site.RegularPages }}</span>
+        <span class="stat-number">{{ len (where .Site.RegularPages "Section" "posts") }}</span>
         <span class="stat-label">Articles</span>
       </div>
       <div class="stat-item">
