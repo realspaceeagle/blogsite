@@ -1,0 +1,126 @@
+/* Project Toggle Styling */
+
+.project-toggle-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.project-toggle-buttons {
+  display: inline-flex;
+  background: var(--code-bg);
+  border-radius: 8px;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
+}
+
+.toggle-btn {
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--secondary);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  min-width: 100px;
+}
+
+.toggle-btn:hover {
+  color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.1);
+  transform: translateY(-1px);
+}
+
+.toggle-btn.active {
+  background: var(--sidebar-highlight);
+  color: var(--theme);
+  box-shadow: 0 2px 8px rgba(var(--sidebar-highlight-rgb), 0.3);
+  font-weight: 600;
+}
+
+.toggle-btn.active:hover {
+  background: var(--sidebar-highlight);
+  color: var(--theme);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(var(--sidebar-highlight-rgb), 0.4);
+}
+
+/* Project Section Styling */
+.project-section {
+  display: none;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.project-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .project-toggle-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .toggle-btn {
+    margin: 2px 0;
+    border-radius: 4px;
+  }
+  
+  .project-toggle-container {
+    margin: 1rem 0;
+  }
+}
+
+/* Dark mode adjustments */
+.dark .project-toggle-buttons {
+  background: var(--code-bg);
+  border-color: var(--border);
+}
+
+.dark .toggle-btn {
+  color: var(--secondary);
+}
+
+.dark .toggle-btn:hover {
+  color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.1);
+}
+
+.dark .toggle-btn.active {
+  background: var(--sidebar-highlight);
+  color: var(--theme);
+}
+
+/* Focus states for accessibility */
+.toggle-btn:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.toggle-btn.active:focus {
+  outline: 2px solid var(--theme);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions */
+.project-section,
+.toggle-btn {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
