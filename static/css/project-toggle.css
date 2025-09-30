@@ -31,7 +31,7 @@
   padding: 0.75rem 1.5rem;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--secondary);
+  color: #ffffff; /* White color for inactive state */
   cursor: pointer;
   border-radius: 6px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -40,21 +40,21 @@
 }
 
 .toggle-btn:hover {
-  color: var(--primary);
-  background: rgba(var(--primary-rgb), 0.1);
+  color: #ffffff; /* Keep white on hover */
+  background: rgba(255, 255, 255, 0.1);
   transform: translateY(-1px);
 }
 
 .toggle-btn.active {
   background: var(--toggle-highlight);
-  color: var(--theme);
+  color: #ffffff; /* White text for active state */
   box-shadow: 0 2px 8px rgba(var(--toggle-highlight-rgb), 0.3);
   font-weight: 600;
 }
 
 .toggle-btn.active:hover {
   background: var(--toggle-highlight);
-  color: var(--theme);
+  color: #ffffff; /* Keep white on active hover */
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(var(--toggle-highlight-rgb), 0.4);
 }
@@ -177,12 +177,20 @@
 }
 
 .tech-tag {
-  background: rgba(var(--toggle-highlight-rgb), 0.1);
-  color: var(--toggle-highlight);
+  background: transparent;
+  color: var(--secondary);
+  border: 1px solid var(--border);
   padding: 0.25rem 0.75rem;
   border-radius: 16px;
   font-size: 0.8rem;
   font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+  background: var(--code-bg);
+  border-color: var(--toggle-highlight);
+  color: var(--toggle-highlight);
 }
 
 .project-features {
@@ -617,17 +625,17 @@
 }
 
 .dark .toggle-btn {
-  color: var(--secondary);
+  color: #ffffff; /* White text in dark mode */
 }
 
 .dark .toggle-btn:hover {
-  color: var(--primary);
-  background: rgba(var(--primary-rgb), 0.1);
+  color: #ffffff; /* Keep white on hover in dark mode */
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .dark .toggle-btn.active {
   background: var(--toggle-highlight);
-  color: var(--theme);
+  color: #ffffff; /* White text for active state in dark mode */
 }
 
 .dark .project-card,
