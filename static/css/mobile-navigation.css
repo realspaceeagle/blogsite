@@ -207,6 +207,14 @@ body.mobile-menu-open {
     /* Social icons already hidden for mobile */
 }
 
+/* Header element spacing override */
+.lang-switch li,
+.lang-switch ul,
+.logo-switches {
+    display: inline-flex;
+    margin: 0;
+}
+
 /* Large screen - ensure desktop menu is visible */
 @media (min-width: 769px) {
     .mobile-menu-toggle {
