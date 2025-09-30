@@ -1,0 +1,84 @@
+/* Enhanced Code Copy Button Styling */
+.copy-code {
+    display: block !important; /* Always show copy button, not just on hover */
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    user-select: none;
+    line-height: 1.2;
+}
+
+.copy-code:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.05);
+}
+
+.copy-code:active {
+    transform: scale(0.95);
+}
+
+/* Dark mode adjustments */
+.dark .copy-code {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .copy-code:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Ensure code blocks have proper positioning */
+div.highlight,
+pre {
+    position: relative;
+}
+
+/* Add subtle animation when copied */
+.copy-code.copied {
+    background: #22c55e !important;
+    color: white !important;
+}
+
+/* Better positioning for different code block types */
+.highlight .copy-code {
+    top: 8px;
+    right: 8px;
+}
+
+pre .copy-code {
+    top: 8px;
+    right: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .copy-code {
+        font-size: 11px;
+        padding: 3px 6px;
+        top: 6px;
+        right: 6px;
+    }
+}
+
+/* Add icon to copy button */
+.copy-code::before {
+    content: "📋 ";
+    font-size: 10px;
+    margin-right: 2px;
+}
+
+.copy-code.copied::before {
+    content: "✅ ";
+}
