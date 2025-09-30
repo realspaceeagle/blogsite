@@ -832,7 +832,10 @@ li {
   border-right: 1px solid #444;
   padding: 1.5rem 1rem;
   overflow-y: auto;
+  overflow-x: hidden;
   z-index: 1000;
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a #1a1a1a;
   display: none;
   font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
@@ -886,6 +889,35 @@ body:not(.dark) .side-nav-title {
   list-style: none;
   padding: 0;
   margin: 0;
+  max-height: calc(100vh - 180px); /* Reserve space for title and padding */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Side nav content container */
+.side-nav-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Scrollbar styling for TOC list */
+.side-nav-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.side-nav-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.side-nav-list::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 3px;
+}
+
+.side-nav-list::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
 }
 
 .toc-item {
@@ -921,6 +953,16 @@ body:not(.dark) .side-nav-title {
   font-weight: 500;
 }
 
+/* Enhanced TOC active styling for better visibility */
+.toc a.active {
+  color: #4ecdc4 !important;
+  background-color: rgba(78, 205, 196, 0.2) !important;
+  border-left: 3px solid #4ecdc4 !important;
+  font-weight: 600 !important;
+  padding-left: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
 /* Light theme TOC links */
 body:not(.dark) .toc-link {
   color: #495057;
@@ -937,6 +979,15 @@ body:not(.dark) .toc-link.active {
   border-left: 2px solid #0d6efd;
 }
 
+/* Enhanced light theme TOC active styling */
+body:not(.dark) .toc a.active {
+  color: #0d6efd !important;
+  background-color: rgba(13, 110, 253, 0.1) !important;
+  border-left: 3px solid #0d6efd !important;
+  font-weight: 600 !important;
+  padding-left: 8px !important;
+}
+
 .toc-nested {
   list-style: none;
   padding-left: 0.8rem;
@@ -944,7 +995,8 @@ body:not(.dark) .toc-link.active {
   border-left: 1px solid #333;
   margin-left: 0.6rem;
   transition: all 0.3s ease;
-  overflow: hidden;
+  overflow: visible;
+  max-height: none;
 }
 
 /* Light theme nested TOC */
@@ -1007,7 +1059,7 @@ body.side-nav-active .header {
 body.side-nav-active .main {
   margin-left: 250px !important;
   padding: var(--gap) !important;
-  max-width: 1050px !important;
+  max-width: 950px !important;
   width: auto !important;
 }
 
