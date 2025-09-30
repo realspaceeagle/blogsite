@@ -137,13 +137,22 @@
   max-width: 1200px;
 }
 
+/* Add margin to prevent overlap with Twitter widget on large screens */
+@media screen and (min-width: 1201px) {
+  .homepage {
+    margin-right: 360px;
+  }
+}
+
 /* Twitter Sidebar - Fixed positioned on right side */
 .twitter-sidebar {
   position: fixed;
-  top: 20px;
+  top: 100px;
   right: 20px;
-  width: 350px;
+  width: 320px;
   z-index: 1000;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
 }
 
 .twitter-widget-container {
