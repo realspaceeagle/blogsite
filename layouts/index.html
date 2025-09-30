@@ -116,14 +116,20 @@
     <div class="twitter-widget-container">
       <h3>Latest Updates</h3>
       <a class="twitter-timeline" 
+         data-width="320"
          data-height="600" 
-         data-theme="dark" 
-         data-tweet-limit="5"
-         data-chrome="nofooter noborders transparent"
+         data-dnt="false" 
+         data-theme="dark"
+         data-border-color="#333"
          href="https://twitter.com/haran_loga?ref_src=twsrc%5Etfw">
-        Tweets by @haran_loga
+        Follow @haran_loga on Twitter for the latest cybersecurity insights and updates.
       </a>
       <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <noscript>
+        <div class="fallback-message">
+          <p>Follow <a href="https://twitter.com/haran_loga" target="_blank">@haran_loga</a> on Twitter</p>
+        </div>
+      </noscript>
     </div>
   </aside>
 </div>
@@ -167,6 +173,17 @@
   text-align: center;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--border);
+}
+
+.twitter-timeline {
+  border-radius: var(--radius) !important;
+}
+
+.twitter-widget-container .fallback-message {
+  text-align: center;
+  color: var(--secondary);
+  font-style: italic;
+  margin-top: 20px;
 }
 
 .hero-section {
