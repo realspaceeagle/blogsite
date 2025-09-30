@@ -19,14 +19,6 @@
         </div>
       </div>
       {{ end }}
-      
-      <div class="author-social">
-        {{ range .Site.Params.socialIcons }}
-        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="author-social-link" title="{{ .title }}">
-          {{ partial "svg.html" . }}
-        </a>
-        {{ end }}
-      </div>
     </div>
   </div>
 </div>
