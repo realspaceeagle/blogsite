@@ -110,98 +110,10 @@
     </section>
   </main>
 
-<!-- Twitter Feed Sidebar -->
-<aside class="twitter-sidebar">
-  <div class="twitter-widget-container">
-    <h3>Latest Updates</h3>
-    <a class="twitter-timeline" 
-       data-width="320"
-       data-height="500" 
-       data-theme="dark"
-       data-tweet-limit="5"
-       data-chrome="noheader nofooter noborders"
-       href="https://twitter.com/haran_loga?ref_src=twsrc%5Etfw">
-      Tweets by haran_loga
-    </a>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    
-    <!-- Loading indicator -->
-    <div id="twitter-loading" style="text-align: center; padding: 20px; color: var(--secondary);">
-      Loading tweets...
-    </div>
-    
-    <!-- Fallback for when widget fails to load -->
-    <div id="twitter-fallback" style="display: none; text-align: center; padding: 20px;">
-      <p style="color: var(--secondary); margin-bottom: 15px;">Unable to load tweets</p>
-      <a href="https://twitter.com/haran_loga" target="_blank" style="color: var(--primary); text-decoration: none; padding: 10px 20px; border: 1px solid var(--border); border-radius: 5px;">
-        View on Twitter
-      </a>
-    </div>
-    
-    <script>
-      // Show fallback after 10 seconds if widget doesn't load
-      setTimeout(function() {
-        if (!document.querySelector('.twitter-timeline iframe')) {
-          document.getElementById('twitter-loading').style.display = 'none';
-          document.getElementById('twitter-fallback').style.display = 'block';
-        } else {
-          document.getElementById('twitter-loading').style.display = 'none';
-        }
-      }, 10000);
-    </script>
-  </div>
-</aside>
-
 <style>
 /* Homepage Styles */
 .homepage {
   max-width: 1200px;
-}
-
-/* Add margin to prevent overlap with Twitter widget on large screens */
-@media screen and (min-width: 1201px) {
-  .homepage {
-    margin-right: 360px;
-  }
-}
-
-/* Twitter Sidebar - Fixed positioned on right side */
-.twitter-sidebar {
-  position: fixed;
-  top: 100px;
-  right: 20px;
-  width: 320px;
-  z-index: 1000;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-}
-
-.twitter-widget-container {
-  background: var(--entry);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-.twitter-widget-container h3 {
-  margin: 0 0 15px 0;
-  color: var(--primary);
-  font-size: 20px;
-  text-align: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
-}
-
-.twitter-timeline {
-  border-radius: var(--radius) !important;
-}
-
-.twitter-widget-container .fallback-message {
-  text-align: center;
-  color: var(--secondary);
-  font-style: italic;
-  margin-top: 20px;
 }
 
 .hero-section {
@@ -426,12 +338,6 @@
 .expertise-item p {
   color: var(--secondary);
   line-height: 1.6;
-}
-
-@media screen and (max-width: 1200px) {
-  .twitter-sidebar {
-    display: none;
-  }
 }
 
 @media screen and (max-width: 768px) {
