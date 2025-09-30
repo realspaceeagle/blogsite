@@ -383,20 +383,25 @@ body.has-blog-sidebar .post-single {
     display: none !important;
   }
   
-  body.has-blog-sidebar .main {
+  body.has-blog-sidebar .main,
+  body.has-blog-sidebar main.main.single-page {
     margin-left: 0 !important;
     max-width: calc(var(--main-width) + var(--gap) * 2) !important;
     width: auto !important;
+    padding: var(--gap) !important;
+    box-sizing: border-box !important;
   }
 }
 
-/* Override any theme styles that might interfere */
-body.has-blog-sidebar main.main.single-page {
-  margin-left: 280px !important;
-  max-width: 950px !important;
-  padding: var(--gap) !important;
-  width: auto !important;
-  box-sizing: border-box !important;
+/* Override any theme styles that might interfere - ONLY on desktop */
+@media (min-width: 1025px) {
+  body.has-blog-sidebar main.main.single-page {
+    margin-left: 280px !important;
+    max-width: 950px !important;
+    padding: var(--gap) !important;
+    width: auto !important;
+    box-sizing: border-box !important;
+  }
 }
 
 /* Override for large screens specifically */
