@@ -148,6 +148,7 @@ class GitHubContributionTracker {
   renderContributionGraph(container, data) {
     const contributions = data.contributions || [];
     const weeks = this.groupByWeeks(contributions);
+    const months = this.getMonthLabels(weeks);
     
     container.innerHTML = `
       <div class="contribution-graph">
@@ -155,8 +156,24 @@ class GitHubContributionTracker {
           <h4>Contribution Activity</h4>
           <span class="contribution-count">${data.total.lastYear} contributions in the last year</span>
         </div>
-        <div class="contribution-calendar">
-          ${this.renderWeeks(weeks)}
+        <div class="contribution-calendar-wrapper">
+          <div class="contribution-months">
+            ${months.map(month => `<span class="month-label" style="grid-column: span ${month.weeks};">${month.name}</span>`).join('')}
+          </div>
+          <div class="contribution-calendar">
+            <div class="contribution-days-header">
+              <span class="day-label"></span>
+              <span class="day-label">Mon</span>
+              <span class="day-label"></span>
+              <span class="day-label">Wed</span>
+              <span class="day-label"></span>
+              <span class="day-label">Fri</span>
+              <span class="day-label"></span>
+            </div>
+            <div class="contribution-weeks">
+              ${this.renderWeeks(weeks)}
+            </div>
+          </div>
         </div>
         <div class="contribution-legend">
           <span>Less</span>
@@ -192,6 +209,39 @@ class GitHubContributionTracker {
     }
     
     return weeks.slice(-52); // Last 52 weeks
+  }
+
+  getMonthLabels(weeks) {
+    const months = [];
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let currentMonth = -1;
+    let weekCount = 0;
+    
+    weeks.forEach((week, index) => {
+      const weekDate = new Date(week[0].date);
+      const month = weekDate.getMonth();
+      
+      if (month !== currentMonth) {
+        if (weekCount > 0) {
+          months[months.length - 1].weeks = weekCount;
+        }
+        months.push({
+          name: monthNames[month],
+          weeks: 1
+        });
+        currentMonth = month;
+        weekCount = 1;
+      } else {
+        weekCount++;
+      }
+    });
+    
+    // Set the week count for the last month
+    if (months.length > 0) {
+      months[months.length - 1].weeks = weekCount;
+    }
+    
+    return months;
   }
 
   renderWeeks(weeks) {
@@ -329,17 +379,70 @@ class GitHubContributionTracker {
         background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
       }
       
-      .contribution-calendar {
-        display: flex;
+      .contribution-calendar-wrapper {
+        position: relative;
+        margin: 1rem 0;
+      }
+      
+      .contribution-months {
+        display: grid;
+        grid-template-columns: repeat(52, 1fr);
         gap: 2px;
-        overflow-x: auto;
-        padding: 0.5rem 0;
+        margin-bottom: 0.5rem;
+        padding-left: 30px;
+      }
+      
+      .month-label {
+        font-size: 0.75rem;
+        color: var(--secondary, #656d76);
+        text-align: left;
+        font-weight: 400;
+      }
+      
+      .dark .month-label {
+        color: var(--secondary, #7d8590);
+      }
+      
+      .contribution-calendar {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+        gap: 8px;
+        align-items: start;
+      }
+      
+      .contribution-days-header {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-top: 0;
+      }
+      
+      .day-label {
+        height: 12px;
+        font-size: 0.75rem;
+        color: var(--secondary, #656d76);
+        display: flex;
+        align-items: center;
+        margin-bottom: 2px;
+      }
+      
+      .dark .day-label {
+        color: var(--secondary, #7d8590);
+      }
+      
+      .contribution-weeks {
+        display: grid;
+        grid-template-columns: repeat(52, 1fr);
+        gap: 2px;
+        width: 100%;
+        max-width: 100%;
       }
       
       .contribution-week {
         display: flex;
         flex-direction: column;
         gap: 2px;
+        min-width: 0;
       }
       
       .contribution-day {
@@ -404,19 +507,72 @@ class GitHubContributionTracker {
       }
       
       @media (max-width: 768px) {
+        .contribution-months {
+          padding-left: 25px;
+        }
+        
         .contribution-calendar {
-          font-size: 0.8rem;
+          grid-template-columns: 25px 1fr;
+          gap: 6px;
+        }
+        
+        .contribution-weeks {
+          grid-template-columns: repeat(52, minmax(8px, 1fr));
+          gap: 1px;
         }
         
         .contribution-day {
-          width: 10px;
-          height: 10px;
+          width: 8px;
+          height: 8px;
+        }
+        
+        .day-label {
+          height: 8px;
+          font-size: 0.65rem;
+          margin-bottom: 1px;
+        }
+        
+        .month-label {
+          font-size: 0.65rem;
         }
         
         .contribution-header {
           flex-direction: column;
           align-items: flex-start;
           gap: 0.5rem;
+        }
+        
+        .contribution-legend .contribution-day {
+          width: 8px;
+          height: 8px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .contribution-weeks {
+          grid-template-columns: repeat(52, minmax(6px, 1fr));
+        }
+        
+        .contribution-day {
+          width: 6px;
+          height: 6px;
+        }
+        
+        .day-label {
+          height: 6px;
+          font-size: 0.6rem;
+        }
+        
+        .month-label {
+          font-size: 0.6rem;
+        }
+        
+        .contribution-months {
+          padding-left: 20px;
+        }
+        
+        .contribution-calendar {
+          grid-template-columns: 20px 1fr;
         }
       }
     `;
