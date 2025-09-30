@@ -90,7 +90,7 @@ Explore my collection of security tools, research projects, and contributions to
 **Languages:** Python, PowerShell, Bash, JavaScript, C/C++, Assembly  
 **Frameworks:** Metasploit, Burp Suite, Nmap, Wireshark, OSINT Tools  
 **Platforms:** Linux, Windows, macOS, Docker, Cloud (AWS/Azure)  
-**Specializations:** Penetration Testing, Network Security, Incident Response, Malware Analysis
+**Specializations:** Penetration Testing, Network Security, AI Security, Cloud Security, Application Security, SOC Operations, DevSecOps, Security Tools Development
 
 ---
 
