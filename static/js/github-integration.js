@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
       } catch (error) {
         console.error('GitHub Calendar initialization error:', error);
-        showFallbackMessage();
+        showCustomContributionGraph();
       }
     } else {
       console.log('GitHubCalendar library not available, waiting...');
@@ -245,10 +245,8 @@ document.addEventListener('DOMContentLoaded', function() {
           document.getElementById('longest-streak').textContent = streaks.longestStreak + ' day longest';
         }
         
-        // Also fetch basic profile data
-        if (typeof window.fetchGitHubStats === 'function') {
-          window.fetchGitHubStats();
-        }
+        // Don't show profile card fallback - keep the contribution graph
+        console.log('Custom contribution graph rendered successfully');
         
       } catch (error) {
         console.error('Custom contribution graph failed:', error);
@@ -299,5 +297,16 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(() => {
     initializeGitHubCalendar();
     addRefreshButton();
+    
+    // Always try to show custom contribution graph after initial load
+    setTimeout(() => {
+      const calendarElement = document.querySelector('.calendar');
+      const hasGitHubCalendar = calendarElement && calendarElement.querySelector('.js-calendar-graph-svg');
+      
+      if (!hasGitHubCalendar && contributionTracker) {
+        console.log('GitHub Calendar not loaded, showing custom graph');
+        showCustomContributionGraph();
+      }
+    }, 2000);
   }, 100);
 });

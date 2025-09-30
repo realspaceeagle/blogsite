@@ -1,1 +1,38 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Code-Review on realspaceeagle</title><link>https://realspaceeagle.github.io/tags/code-review/</link><description>Recent content in Code-Review on realspaceeagle</description><image><title>realspaceeagle</title><url>https://realspaceeagle.github.io/images/og-image.svg</url><link>https://realspaceeagle.github.io/images/og-image.svg</link></image><generator>Hugo -- 0.150.1</generator><language>en-us</language><lastBuildDate>Tue, 30 Sep 2025 19:05:03 +0100</lastBuildDate><atom:link href="https://realspaceeagle.github.io/tags/code-review/index.xml" rel="self" type="application/rss+xml"/><item><title>Pair Programming vs Code Reviews: Why Both Matter</title><link>https://realspaceeagle.github.io/posts/pair-programming-vs-code-reviews/</link><pubDate>Tue, 30 Sep 2025 19:05:03 +0100</pubDate><guid>https://realspaceeagle.github.io/posts/pair-programming-vs-code-reviews/</guid><description>Exploring why pair programming and code reviews are complementary practices, not mutually exclusive alternatives.</description></item><item><title>AI-Powered Code Reviews: Comprehensive Prompts for Better Code Quality</title><link>https://realspaceeagle.github.io/posts/ai-powered-code-review-prompts/</link><pubDate>Tue, 30 Sep 2025 19:04:25 +0100</pubDate><guid>https://realspaceeagle.github.io/posts/ai-powered-code-review-prompts/</guid><description>Structured AI prompts for comprehensive code reviews that evaluate efficiency, readability, maintainability, and security.</description></item><item><title>The Psychology of Code Reviews: Why Line Count Matters</title><link>https://realspaceeagle.github.io/posts/code-review-psychology-lines-matter/</link><pubDate>Tue, 30 Sep 2025 19:03:52 +0100</pubDate><guid>https://realspaceeagle.github.io/posts/code-review-psychology-lines-matter/</guid><description>A humorous yet insightful look at how the number of lines in a code review affects thoroughness and attention to detail.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Code-Review on realspaceeagle</title>
+    <link>https://realspaceeagle.github.io/tags/code-review/</link>
+    <description>Recent content in Code-Review on realspaceeagle</description>
+    <image>
+      <title>realspaceeagle</title>
+      <url>https://realspaceeagle.github.io/images/og-image.svg</url>
+      <link>https://realspaceeagle.github.io/images/og-image.svg</link>
+    </image>
+    <generator>Hugo -- 0.150.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Sep 2025 19:05:03 +0100</lastBuildDate>
+    <atom:link href="https://realspaceeagle.github.io/tags/code-review/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pair Programming vs Code Reviews: Why Both Matter</title>
+      <link>https://realspaceeagle.github.io/posts/pair-programming-vs-code-reviews/</link>
+      <pubDate>Tue, 30 Sep 2025 19:05:03 +0100</pubDate>
+      <guid>https://realspaceeagle.github.io/posts/pair-programming-vs-code-reviews/</guid>
+      <description>Exploring why pair programming and code reviews are complementary practices, not mutually exclusive alternatives.</description>
+    </item>
+    <item>
+      <title>AI-Powered Code Reviews: Comprehensive Prompts for Better Code Quality</title>
+      <link>https://realspaceeagle.github.io/posts/ai-powered-code-review-prompts/</link>
+      <pubDate>Tue, 30 Sep 2025 19:04:25 +0100</pubDate>
+      <guid>https://realspaceeagle.github.io/posts/ai-powered-code-review-prompts/</guid>
+      <description>Structured AI prompts for comprehensive code reviews that evaluate efficiency, readability, maintainability, and security.</description>
+    </item>
+    <item>
+      <title>The Psychology of Code Reviews: Why Line Count Matters</title>
+      <link>https://realspaceeagle.github.io/posts/code-review-psychology-lines-matter/</link>
+      <pubDate>Tue, 30 Sep 2025 19:03:52 +0100</pubDate>
+      <guid>https://realspaceeagle.github.io/posts/code-review-psychology-lines-matter/</guid>
+      <description>A humorous yet insightful look at how the number of lines in a code review affects thoroughness and attention to detail.</description>
+    </item>
+  </channel>
+</rss>
