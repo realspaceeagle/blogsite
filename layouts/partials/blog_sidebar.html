@@ -2,6 +2,9 @@
 <aside class="blog-sidebar" id="blogSidebar">
   <div class="sidebar-content">
     <h3 class="sidebar-title">Contents</h3>
+    <div class="reading-progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
     <nav class="sidebar-nav">
       <ul class="toc-list" id="tocList">
         <!-- TOC will be populated by JavaScript -->
@@ -96,6 +99,52 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
+  // Progress tracking
+  const progressBar = document.getElementById('progressBar');
+  
+  function updateProgress() {
+    const article = document.querySelector('.post-content');
+    if (!article) return;
+    
+    const articleTop = article.offsetTop;
+    const articleHeight = article.offsetHeight;
+    const windowHeight = window.innerHeight;
+    const scrollTop = window.scrollY;
+    
+    const progress = Math.max(0, Math.min(100, 
+      ((scrollTop - articleTop + windowHeight * 0.2) / articleHeight) * 100
+    ));
+    
+    if (progressBar) {
+      progressBar.style.width = progress + '%';
+    }
+  }
+  
+  // Auto-scroll TOC to active item
+  function scrollToActiveItem(activeLink) {
+    if (!activeLink) return;
+    
+    const tocContainer = document.querySelector('.toc-list');
+    if (!tocContainer) return;
+    
+    const containerRect = tocContainer.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+    
+    const isVisible = linkRect.top >= containerRect.top && 
+                     linkRect.bottom <= containerRect.bottom;
+    
+    if (!isVisible) {
+      const scrollTop = tocContainer.scrollTop;
+      const targetScrollTop = scrollTop + linkRect.top - containerRect.top - 
+                             (containerRect.height / 2) + (linkRect.height / 2);
+      
+      tocContainer.scrollTo({
+        top: targetScrollTop,
+        behavior: 'smooth'
+      });
+    }
+  }
+  
   // Intersection Observer for automatic highlighting
   const observerOptions = {
     root: null,
@@ -112,8 +161,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Remove active class from all links
         tocLinks.forEach(link => link.classList.remove('active'));
         
-        // Add active class to current link
+        // Add active class to current link with animation
         tocLink.classList.add('active');
+        
+        // Auto-scroll to active item in TOC
+        scrollToActiveItem(tocLink);
       }
     });
   }, observerOptions);
@@ -125,11 +177,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  // Handle scroll to top case
-  window.addEventListener('scroll', function() {
-    if (window.scrollY === 0) {
-      tocLinks.forEach(link => link.classList.remove('active'));
+  // Handle scroll events for progress and special cases
+  let ticking = false;
+  
+  function handleScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateProgress();
+        
+        // Handle scroll to top case
+        if (window.scrollY === 0) {
+          tocLinks.forEach(link => link.classList.remove('active'));
+          if (progressBar) {
+            progressBar.style.width = '0%';
+          }
+        }
+        
+        ticking = false;
+      });
+      ticking = true;
     }
-  });
+  }
+  
+  window.addEventListener('scroll', handleScroll);
+  
+  // Initial progress update
+  updateProgress();
 });
 </script>

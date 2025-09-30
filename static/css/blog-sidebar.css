@@ -1,5 +1,16 @@
 /* Blog Post Sidebar - Only affects pages with .has-blog-sidebar class */
 
+/* CSS Variables for better theming */
+:root {
+  --primary-rgb: 30, 144, 255; /* Default primary color RGB */
+  --sidebar-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark theme adjustments */
+.dark {
+  --primary-rgb: 74, 144, 226;
+}
+
 /* Sidebar container */
 .blog-sidebar {
   position: fixed;
@@ -35,6 +46,77 @@
   margin: 0 0 1rem 0;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid var(--border);
+  position: relative;
+  animation: titleFadeIn 0.6s ease-out;
+}
+
+.sidebar-title::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), rgba(var(--primary-rgb), 0.5));
+  animation: titleUnderline 1s ease-out 0.5s forwards;
+}
+
+@keyframes titleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes titleUnderline {
+  to {
+    width: 100%;
+  }
+}
+
+/* Reading progress indicator */
+.reading-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(var(--primary-rgb), 0.1);
+  border-radius: 2px;
+  margin: 0.75rem 0 1rem 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), rgba(var(--primary-rgb), 0.7));
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--primary));
+  transform: translateX(10px);
+  animation: progressGlow 2s ease-in-out infinite;
+}
+
+@keyframes progressGlow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 /* TOC list container */
@@ -77,6 +159,29 @@
 /* TOC items */
 .toc-item {
   margin: 0.2rem 0;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: tocItemSlideIn 0.4s ease-out forwards;
+}
+
+/* Staggered animation for TOC items */
+.toc-item:nth-child(1) { animation-delay: 0.1s; }
+.toc-item:nth-child(2) { animation-delay: 0.15s; }
+.toc-item:nth-child(3) { animation-delay: 0.2s; }
+.toc-item:nth-child(4) { animation-delay: 0.25s; }
+.toc-item:nth-child(5) { animation-delay: 0.3s; }
+.toc-item:nth-child(6) { animation-delay: 0.35s; }
+.toc-item:nth-child(7) { animation-delay: 0.4s; }
+.toc-item:nth-child(8) { animation-delay: 0.45s; }
+.toc-item:nth-child(9) { animation-delay: 0.5s; }
+.toc-item:nth-child(10) { animation-delay: 0.55s; }
+.toc-item:nth-child(n+11) { animation-delay: 0.6s; }
+
+@keyframes tocItemSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* TOC links */
@@ -89,21 +194,52 @@
   line-height: 1.4;
   border-radius: 4px;
   border-left: 3px solid transparent;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   word-wrap: break-word;
+  position: relative;
+  overflow: hidden;
+}
+
+.toc-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(var(--primary-rgb), 0.1), transparent);
+  transition: left 0.5s ease;
 }
 
 .toc-link:hover {
   color: var(--primary);
   background: var(--code-bg);
   border-left-color: var(--primary);
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.toc-link:hover::before {
+  left: 100%;
 }
 
 .toc-link.active {
   color: var(--primary);
-  background: var(--code-bg);
+  background: linear-gradient(135deg, var(--code-bg), rgba(var(--primary-rgb), 0.05));
   border-left-color: var(--primary);
   font-weight: 500;
+  transform: translateX(6px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  animation: activeGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes activeGlow {
+  0% {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2), 0 0 8px rgba(var(--primary-rgb), 0.3);
+  }
+  100% {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2), 0 0 16px rgba(var(--primary-rgb), 0.5);
+  }
 }
 
 /* Different levels styling */
