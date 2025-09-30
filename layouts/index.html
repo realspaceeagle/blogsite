@@ -1,119 +1,172 @@
 {{ define "main" }}
-<main class="main homepage">
-  <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero-content">
-      <h1 class="hero-title">Cybersecurity Knowledge & Hands-On Learning</h1>
-      <p class="hero-subtitle">Practical tutorials on penetration testing, network security, and defensive techniques. Building cybersecurity skills through real-world scenarios and tool demonstrations.</p>
-      <div class="hero-buttons">
-        <a href="/posts/" class="btn btn-primary">Read Articles</a>
-        <a href="/projects/" class="btn btn-secondary">View Projects</a>
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-number">{{ len (where .Site.RegularPages "Section" "posts") }}</span>
-        <span class="stat-label">Articles</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">{{ if .Site.Taxonomies.tags }}{{ len .Site.Taxonomies.tags }}{{ else }}0{{ end }}</span>
-        <span class="stat-label">Topics</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">Learning</span>
-        <span class="stat-label">Journey</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Posts -->
-  <section class="featured-posts compact">
-    <h2>Latest Security Insights</h2>
-    <div class="posts-list">
-      {{ range first 8 .Site.RegularPages }}
-      <article class="post-item">
-        <div class="post-meta">
-          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
-          <span class="reading-time">{{ .ReadingTime }}min</span>
+<div class="homepage-container">
+  <main class="main homepage">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Cybersecurity Knowledge & Hands-On Learning</h1>
+        <p class="hero-subtitle">Practical tutorials on penetration testing, network security, and defensive techniques. Building cybersecurity skills through real-world scenarios and tool demonstrations.</p>
+        <div class="hero-buttons">
+          <a href="/posts/" class="btn btn-primary">Read Articles</a>
+          <a href="/projects/" class="btn btn-secondary">View Projects</a>
         </div>
-        <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-        {{ if .Params.tags }}
-        <div class="post-tags">
-          {{ range first 2 .Params.tags }}
-          <span class="tag">{{ . }}</span>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">{{ len (where .Site.RegularPages "Section" "posts") }}</span>
+          <span class="stat-label">Articles</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">{{ if .Site.Taxonomies.tags }}{{ len .Site.Taxonomies.tags }}{{ else }}0{{ end }}</span>
+          <span class="stat-label">Topics</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">Learning</span>
+          <span class="stat-label">Journey</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Posts -->
+    <section class="featured-posts compact">
+      <h2>Latest Security Insights</h2>
+      <div class="posts-list">
+        {{ range first 8 .Site.RegularPages }}
+        <article class="post-item">
+          <div class="post-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
+            <span class="reading-time">{{ .ReadingTime }}min</span>
+          </div>
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          {{ if .Params.tags }}
+          <div class="post-tags">
+            {{ range first 2 .Params.tags }}
+            <span class="tag">{{ . }}</span>
+            {{ end }}
+          </div>
           {{ end }}
-        </div>
+        </article>
         {{ end }}
-      </article>
-      {{ end }}
-    </div>
-    <div class="view-all">
-      <a href="/posts/" class="btn btn-outline">View All Articles</a>
-    </div>
-  </section>
+      </div>
+      <div class="view-all">
+        <a href="/posts/" class="btn btn-outline">View All Articles</a>
+      </div>
+    </section>
 
-  <!-- Tag Cloud Section -->
-  <section class="homepage-tags">
-    {{ partial "tag_cloud.html" . }}
-  </section>
+    <!-- Tag Cloud Section -->
+    <section class="homepage-tags">
+      {{ partial "tag_cloud.html" . }}
+    </section>
 
-  <!-- Newsletter Signup -->
-  <section class="homepage-newsletter">
-    {{ partial "newsletter.html" . }}
-  </section>
+    <!-- Newsletter Signup -->
+    <section class="homepage-newsletter">
+      {{ partial "newsletter.html" . }}
+    </section>
 
-  <!-- Skills & Expertise -->
-  <section class="expertise-section">
-    <h2>Areas of Expertise</h2>
-    <div class="expertise-grid">
-      <div class="expertise-item">
-        <div class="expertise-icon">🔒</div>
-        <h3>Penetration Testing</h3>
-        <p>Comprehensive security assessments, vulnerability discovery, and ethical hacking techniques.</p>
+    <!-- Skills & Expertise -->
+    <section class="expertise-section">
+      <h2>Areas of Expertise</h2>
+      <div class="expertise-grid">
+        <div class="expertise-item">
+          <div class="expertise-icon">🔒</div>
+          <h3>Penetration Testing</h3>
+          <p>Comprehensive security assessments, vulnerability discovery, and ethical hacking techniques.</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">🌐</div>
+          <h3>Network Security</h3>
+          <p>Network enumeration, traffic analysis, and infrastructure security hardening.</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">🤖</div>
+          <h3>AI Security</h3>
+          <p>Machine learning security, AI model protection, and artificial intelligence threat analysis.</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">☁️</div>
+          <h3>Cloud Security</h3>
+          <p>AWS/Azure security, container protection, and cloud infrastructure hardening.</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">📱</div>
+          <h3>Application Security</h3>
+          <p>Web application testing, secure code review, and application vulnerability assessment.</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">🚨</div>
+          <h3>SOC Operations</h3>
+          <p>Security monitoring, threat detection, incident response, and security analytics.</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">⚙️</div>
+          <h3>DevSecOps</h3>
+          <p>Security automation, CI/CD pipeline protection, and secure development practices.</p>
+        </div>
+        <div class="expertise-item">
+          <div class="expertise-icon">🔧</div>
+          <h3>Security Tools</h3>
+          <p>Custom tool development, automation scripts, and security framework expertise.</p>
+        </div>
       </div>
-      <div class="expertise-item">
-        <div class="expertise-icon">🌐</div>
-        <h3>Network Security</h3>
-        <p>Network enumeration, traffic analysis, and infrastructure security hardening.</p>
-      </div>
-      <div class="expertise-item">
-        <div class="expertise-icon">🤖</div>
-        <h3>AI Security</h3>
-        <p>Machine learning security, AI model protection, and artificial intelligence threat analysis.</p>
-      </div>
-      <div class="expertise-item">
-        <div class="expertise-icon">☁️</div>
-        <h3>Cloud Security</h3>
-        <p>AWS/Azure security, container protection, and cloud infrastructure hardening.</p>
-      </div>
-      <div class="expertise-item">
-        <div class="expertise-icon">📱</div>
-        <h3>Application Security</h3>
-        <p>Web application testing, secure code review, and application vulnerability assessment.</p>
-      </div>
-      <div class="expertise-item">
-        <div class="expertise-icon">🚨</div>
-        <h3>SOC Operations</h3>
-        <p>Security monitoring, threat detection, incident response, and security analytics.</p>
-      </div>
-      <div class="expertise-item">
-        <div class="expertise-icon">⚙️</div>
-        <h3>DevSecOps</h3>
-        <p>Security automation, CI/CD pipeline protection, and secure development practices.</p>
-      </div>
-      <div class="expertise-item">
-        <div class="expertise-icon">🔧</div>
-        <h3>Security Tools</h3>
-        <p>Custom tool development, automation scripts, and security framework expertise.</p>
-      </div>
+    </section>
+  </main>
+
+  <!-- Twitter Feed Sidebar -->
+  <aside class="twitter-sidebar">
+    <div class="twitter-widget-container">
+      <h3>Latest Updates</h3>
+      <a class="twitter-timeline" 
+         data-height="600" 
+         data-theme="dark" 
+         data-tweet-limit="5"
+         data-chrome="nofooter noborders transparent"
+         href="https://twitter.com/haran_loga?ref_src=twsrc%5Etfw">
+        Tweets by @haran_loga
+      </a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
-  </section>
-</main>
+  </aside>
+</div>
 
 <style>
-/* Homepage Styles */
+/* Homepage Container */
+.homepage-container {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 30px;
+  padding: 0 20px;
+}
+
+/* Main Content */
 .homepage {
-  max-width: 1200px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Twitter Sidebar */
+.twitter-sidebar {
+  width: 350px;
+  flex-shrink: 0;
+}
+
+.twitter-widget-container {
+  position: sticky;
+  top: 20px;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.twitter-widget-container h3 {
+  margin: 0 0 15px 0;
+  color: var(--primary);
+  font-size: 20px;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
 }
 
 .hero-section {
@@ -340,7 +393,29 @@
   line-height: 1.6;
 }
 
+@media screen and (max-width: 1024px) {
+  .homepage-container {
+    flex-direction: column;
+    max-width: 100%;
+    gap: 20px;
+  }
+  
+  .twitter-sidebar {
+    width: 100%;
+    order: -1;
+  }
+  
+  .twitter-widget-container {
+    position: relative;
+    top: auto;
+  }
+}
+
 @media screen and (max-width: 768px) {
+  .homepage-container {
+    padding: 0 15px;
+  }
+  
   .hero-title {
     font-size: 36px;
   }
@@ -374,6 +449,10 @@
   
   .expertise-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .twitter-widget-container {
+    padding: 15px;
   }
 }
 </style>
