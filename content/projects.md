@@ -314,19 +314,6 @@ Explore my collection of security tools, research projects, and contributions to
   </div>
 </div>
 
-## Featured Repositories
-
-**Security-Tools-Collection** ⭐ 15 🍴 8  
-*Comprehensive collection of cybersecurity tools and scripts for penetration testing and security research.*  
-**Language:** Python | [View Repository →](https://github.com/realspaceeagle)
-
-**Network-Scanner** ⭐ 23 🍴 12  
-*Advanced network reconnaissance tool with stealth capabilities and comprehensive reporting features.*  
-**Language:** Python | [View Repository →](https://github.com/realspaceeagle)
-
-**Vulnerability-Scanner** ⭐ 31 🍴 18  
-*Automated vulnerability assessment tool with integration for popular security frameworks and custom reporting.*  
-**Language:** Bash | [View Repository →](https://github.com/realspaceeagle)
 
 <div class="github-profile-link">
   <a href="https://github.com/realspaceeagle" class="github-profile-btn">
