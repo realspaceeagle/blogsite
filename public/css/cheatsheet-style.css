@@ -74,7 +74,8 @@
 }
 
 /* Code blocks */
-.cheatsheet-page pre {
+.cheatsheet-page pre,
+.cheatsheet-page pre.chroma {
   background: #050505;
   color: #f5f5f5;
   border-radius: 0.75rem;
@@ -84,7 +85,8 @@
   border: 1px solid rgba(148, 163, 184, 0.25);
 }
 
-.dark .cheatsheet-page pre {
+.dark .cheatsheet-page pre,
+.dark .cheatsheet-page pre.chroma {
   background: #020202;
   border-color: rgba(148, 163, 184, 0.35);
   color: #f8fafc;
@@ -92,11 +94,17 @@
 
 .cheatsheet-page pre code {
   background: transparent;
-  color: inherit;
+  color: #f8fafc;
   padding: 0;
+  display: block;
   font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', monospace;
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+.cheatsheet-page pre code * {
+  color: inherit;
 }
 
 .cheatsheet-highlight {
@@ -108,6 +116,30 @@
 
 .dark .cheatsheet-highlight {
   background: rgba(245, 158, 11, 0.5);
+}
+
+.cheatsheet-highlight.is-focus {
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.35);
+}
+
+.dark .cheatsheet-highlight.is-focus {
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.45);
+}
+
+/* Minimal syntax accents */
+.cheatsheet-page pre.chroma .k,
+.cheatsheet-page pre code .hljs-keyword {
+  color: #60a5fa;
+}
+
+.cheatsheet-page pre.chroma .nf,
+.cheatsheet-page pre code .hljs-built_in {
+  color: #fbbf24;
+}
+
+.cheatsheet-page pre.chroma .s,
+.cheatsheet-page pre code .hljs-string {
+  color: #34d399;
 }
 
 /* Inline code */
@@ -295,30 +327,3 @@
     background: #f5f5f5 !important;
     color: black !important;
   }
-}.cheatsheet-highlight.is-focus {
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.35);
-}
-
-.dark .cheatsheet-highlight.is-focus {
-  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.45);
-}
-
-.cheatsheet-page pre code,
-.cheatsheet-page pre .chroma {
-  color: #f8fafc;
-}
-
-.cheatsheet-page pre .chroma .k,
-.cheatsheet-page pre .language-bash .hljs-keyword {
-  color: #60a5fa;
-}
-
-.cheatsheet-page pre .chroma .nf,
-.cheatsheet-page pre .language-bash .hljs-built_in {
-  color: #fbbf24;
-}
-
-.cheatsheet-page pre .chroma .s,
-.cheatsheet-page pre .language-bash .hljs-string {
-  color: #34d399;
-}
