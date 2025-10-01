@@ -25,54 +25,34 @@ document.addEventListener('DOMContentLoaded', function() {
       contributionTracker = new window.GitHubContributionTracker('realspaceeagle');
     }
     
-    // Check if GitHub Calendar library is available
+    // Force using our custom contribution graph for better reliability
+    console.log('Using custom contribution graph');
+    showCustomContributionGraph();
+    
+    // Also try GitHub Calendar library as backup
     if (typeof GitHubCalendar !== 'undefined') {
-      console.log('GitHubCalendar library available, initializing...');
+      console.log('GitHubCalendar library available, trying as enhancement...');
       try {
-        // Remove loading indicator
-        const loadingElement = calendarElement.querySelector('.calendar-loading');
-        if (loadingElement) {
-          loadingElement.remove();
-        }
-        
         // Initialize the GitHub calendar
-        GitHubCalendar(".calendar", "realspaceeagle", {
-          responsive: true,
-          tooltips: true,
-          summary_text: "realspaceeagle's contributions",
-          cache: 300000 // Cache for 5 minutes
-        });
-        
-        console.log('GitHub calendar initialized successfully');
-        
-        // Update basic stats after calendar loads
         setTimeout(() => {
-          updateGitHubStats();
-        }, 3000);
+          GitHubCalendar(".calendar", "realspaceeagle", {
+            responsive: true,
+            tooltips: true,
+            summary_text: "realspaceeagle's contributions",
+            cache: 300000 // Cache for 5 minutes
+          });
+          
+          console.log('GitHub calendar initialized successfully');
+          
+          // Update basic stats after calendar loads
+          setTimeout(() => {
+            updateGitHubStats();
+          }, 3000);
+        }, 1000);
         
       } catch (error) {
         console.error('GitHub Calendar initialization error:', error);
-        showCustomContributionGraph();
       }
-    } else {
-      console.log('GitHubCalendar library not available, waiting...');
-      // GitHub Calendar library not loaded, wait and retry
-      let retryCount = 0;
-      const maxRetries = 5;
-      
-      const retryInterval = setInterval(() => {
-        retryCount++;
-        console.log(`Retry attempt ${retryCount}/${maxRetries}`);
-        
-        if (typeof GitHubCalendar !== 'undefined') {
-          clearInterval(retryInterval);
-          initializeGitHubCalendar();
-        } else if (retryCount >= maxRetries) {
-          clearInterval(retryInterval);
-          console.log('Max retries reached, showing custom fallback');
-          showCustomContributionGraph();
-        }
-      }, 1000);
     }
   }
   
@@ -263,14 +243,53 @@ document.addEventListener('DOMContentLoaded', function() {
   async function showCustomContributionGraph() {
     console.log('Showing custom contribution graph');
     
+    const calendarElement = document.querySelector('.calendar');
+    
+    if (!calendarElement) {
+      console.error('Calendar element not found');
+      return;
+    }
+    
+    // Remove loading indicator
+    const loadingElement = calendarElement.querySelector('.calendar-loading');
+    if (loadingElement) {
+      loadingElement.remove();
+    }
+    
+    // Create a simple contribution graph as fallback
+    const fallbackHTML = `
+      <div class="github-calendar-fallback">
+        <h3>GitHub Activity</h3>
+        <p>Activity data from <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener">@realspaceeagle</a></p>
+        <div class="fallback-stats">
+          <div class="fallback-stat">
+            <div class="stat-number">194</div>
+            <div class="stat-label">Contributions (12mo)</div>
+          </div>
+          <div class="fallback-stat">
+            <div class="stat-number">7</div>
+            <div class="stat-label">Current Streak</div>
+          </div>
+          <div class="fallback-stat">
+            <div class="stat-number">25</div>
+            <div class="stat-label">Longest Streak</div>
+          </div>
+        </div>
+        <div class="fallback-meta">
+          <span><strong>Most active:</strong> JavaScript, Python, HTML</span>
+          <span><strong>Latest activity:</strong> Updated repositories</span>
+        </div>
+      </div>
+    `;
+    
+    calendarElement.innerHTML = fallbackHTML;
+    
+    // Try contribution tracker if available
     if (contributionTracker) {
       try {
         const contributionData = await contributionTracker.getContributions();
-        const calendarElement = document.querySelector('.calendar');
         
-        if (calendarElement) {
-          contributionTracker.renderContributionGraph(calendarElement, contributionData);
-          
+        if (contributionData) {
           // Update stats based on contribution data
           const streaks = contributionTracker.calculateStreaks(contributionData.contributions);
           const totalContribElement = document.getElementById('total-contributions');
@@ -281,6 +300,10 @@ document.addEventListener('DOMContentLoaded', function() {
           if (currentStreakElement) currentStreakElement.textContent = streaks.currentStreak;
           if (longestStreakElement) longestStreakElement.textContent = streaks.longestStreak;
         }
+      } catch (error) {
+        console.log('Contribution tracker failed, using static fallback');
+      }
+    }
         
         // Don't show profile card fallback - keep the contribution graph
         console.log('Custom contribution graph rendered successfully');

@@ -861,6 +861,8 @@
 .github-calendar-fallback h3 {
   margin: 0.5rem 0;
   color: var(--content);
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .github-calendar-fallback p {
@@ -868,6 +870,61 @@
   margin-bottom: 1.25rem;
   font-size: 0.95rem;
   line-height: 1.5;
+}
+
+.fallback-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.fallback-stat {
+  text-align: center;
+  min-width: 100px;
+}
+
+.fallback-stat .stat-number {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--toggle-highlight);
+  margin-bottom: 0.25rem;
+}
+
+.fallback-stat .stat-label {
+  font-size: 0.8rem;
+  color: var(--secondary);
+  font-weight: 500;
+}
+
+.fallback-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--secondary);
+}
+
+.fallback-meta strong {
+  color: var(--content);
+}
+
+@media (max-width: 768px) {
+  .fallback-stats {
+    gap: 1rem;
+  }
+  
+  .fallback-stat .stat-number {
+    font-size: 1.5rem;
+  }
+  
+  .fallback-meta {
+    font-size: 0.85rem;
+  }
 }
 
 .fallback-avatar {
