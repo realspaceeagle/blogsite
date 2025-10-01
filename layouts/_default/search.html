@@ -350,18 +350,41 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // The actual search functionality is handled by enhanced-search.js
     
+    // Direct search input handler that bypasses original search completely
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        const query = e.target.value.trim();
+        
+        // Stop propagation to prevent original search from running
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
+        console.log('Direct input handler - Mode:', searchMode, 'Query:', query);
+        
+        if (searchMode === 'enhanced' && query) {
+            console.log('Calling enhanced search directly');
+            if (window.performEnhancedSearchDirect) {
+                window.performEnhancedSearchDirect(query);
+            }
+        } else if (searchMode === 'normal' && query) {
+            // For normal mode, let original search handle it
+            console.log('Normal search mode');
+        } else if (!query) {
+            document.getElementById('searchResults').innerHTML = '';
+        }
+    }, true); // Use capture phase to run before other handlers
+    
     // Filter change handlers - these trigger re-search in enhanced mode
     document.getElementById('categoryFilter').addEventListener('change', function() {
         const query = document.getElementById('searchInput').value;
-        if (query && searchMode === 'enhanced' && window.enhancedSearch) {
-            window.enhancedSearch.performSearch(query);
+        if (query && searchMode === 'enhanced' && window.performEnhancedSearchDirect) {
+            window.performEnhancedSearchDirect(query);
         }
     });
     
     document.getElementById('sortFilter').addEventListener('change', function() {
         const query = document.getElementById('searchInput').value;
-        if (query && searchMode === 'enhanced' && window.enhancedSearch) {
-            window.enhancedSearch.performSearch(query);
+        if (query && searchMode === 'enhanced' && window.performEnhancedSearchDirect) {
+            window.performEnhancedSearchDirect(query);
         }
     });
 });

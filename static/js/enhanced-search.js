@@ -724,4 +724,44 @@
         hideStats: hideSearchStats
     };
     
+    // Direct enhanced search function that can be called from search page
+    window.performEnhancedSearchDirect = function(query) {
+        console.log('performEnhancedSearchDirect called with:', query);
+        
+        // Ensure we have the data and fuse instance
+        if (!window.fuse || !fuseData) {
+            console.log('Fuse not ready, waiting...');
+            setTimeout(() => window.performEnhancedSearchDirect(query), 100);
+            return;
+        }
+        
+        // Configure fuse for enhanced search
+        const enhancedConfig = {
+            threshold: 0.3,
+            distance: 200,
+            includeMatches: true,
+            includeScore: true,
+            minMatchCharLength: 2,
+            keys: [
+                { name: 'title', weight: 3 },
+                { name: 'summary', weight: 2 },
+                { name: 'content', weight: 1 },
+                { name: 'tags', weight: 2 }
+            ]
+        };
+        
+        // Create new fuse instance with enhanced config
+        const enhancedFuse = new Fuse(fuseData, enhancedConfig);
+        
+        // Perform search
+        const results = enhancedFuse.search(query, { limit: 20 });
+        console.log(`Direct enhanced search found ${results.length} results`);
+        
+        // Render results using enhanced format
+        renderEnhancedResults(results, query);
+        
+        // Update stats
+        updateSearchStats(results.length, query, 0);
+    };
+    
 })();
