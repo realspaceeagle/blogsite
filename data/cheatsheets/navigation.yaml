@@ -1,0 +1,41 @@
+categories:
+  - id: web-security
+    title: Web Application Security
+    items:
+      - slug: sql-injection
+        title: SQL Injection
+        summary: Detection fingerprints, exploitation patterns, and defensive checks.
+      - slug: cors
+        title: CORS
+        summary: Misconfiguration hunting checklist and secure defaults.
+      - slug: xss
+        title: Cross-Site Scripting
+        summary: Persistent and reflected payload library with mitigation tips.
+      - slug: csrf
+        title: Cross-Site Request Forgery
+        summary: Token validation tests and framework hardening guidelines.
+  - id: network-security
+    title: Network Security & Recon
+    items:
+      - slug: nmap
+        title: Nmap
+        summary: Fast lookup for discovery, enumeration, and NSE usage.
+      - slug: netcat
+        title: Netcat
+        summary: Reverse shells, port relays, and banner grabbing essentials.
+      - slug: wireshark
+        title: Wireshark
+        summary: Capture filters, display filters, and quick triage techniques.
+  - id: system-exploitation
+    title: System Exploitation
+    items:
+      - slug: linux-privesc
+        title: Linux Privilege Escalation
+        summary: Local enumeration flow and escalation primitives.
+      - slug: windows-privesc
+        title: Windows Privilege Escalation
+        summary: Token abuse and service misconfiguration cheats.
+      - slug: reverse-shells
+        title: Reverse Shells
+        summary: Shell payload recipes across interpreters and platforms.
+

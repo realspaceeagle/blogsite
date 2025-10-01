@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>realspaceeagle</title>
-    <link>http://localhost:1313/</link>
+    <link>https://realspaceeagle.github.io/</link>
     <description>Recent content on realspaceeagle</description>
     <image>
       <title>realspaceeagle</title>
-      <url>http://localhost:1313/images/og-image.svg</url>
-      <link>http://localhost:1313/images/og-image.svg</link>
+      <url>https://realspaceeagle.github.io/images/og-image.svg</url>
+      <link>https://realspaceeagle.github.io/images/og-image.svg</link>
     </image>
     <generator>Hugo -- 0.150.1</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 01 Oct 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://realspaceeagle.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
-      <link>http://localhost:1313/about/</link>
+      <link>https://realspaceeagle.github.io/about/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/about/</guid>
+      <guid>https://realspaceeagle.github.io/about/</guid>
       <description>&lt;h1 id=&#34;araharan-loganayagam&#34;&gt;ARAHARAN LOGANAYAGAM&lt;/h1&gt;
 &lt;div style=&#34;display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; margin: 30px 0;&#34;&gt;
 &lt;!-- Professional Profile Card --&gt;
@@ -57,51 +57,51 @@
     </item>
     <item>
       <title>HackTheBox: Poison Walkthrough</title>
-      <link>http://localhost:1313/posts/hackthebox-poison-walkthrough/</link>
+      <link>https://realspaceeagle.github.io/posts/hackthebox-poison-walkthrough/</link>
       <pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/hackthebox-poison-walkthrough/</guid>
+      <guid>https://realspaceeagle.github.io/posts/hackthebox-poison-walkthrough/</guid>
       <description>Detailed walkthrough of the Poison machine (10.10.10.84) covering LFI log poisoning, PHP RFI exploitation, credential recovery and a VNC pivot to root.</description>
     </item>
     <item>
       <title>Pair Programming vs Code Reviews: Why Both Matter</title>
-      <link>http://localhost:1313/posts/pair-programming-vs-code-reviews/</link>
+      <link>https://realspaceeagle.github.io/posts/pair-programming-vs-code-reviews/</link>
       <pubDate>Tue, 30 Sep 2025 19:05:03 +0100</pubDate>
-      <guid>http://localhost:1313/posts/pair-programming-vs-code-reviews/</guid>
+      <guid>https://realspaceeagle.github.io/posts/pair-programming-vs-code-reviews/</guid>
       <description>Exploring why pair programming and code reviews are complementary practices, not mutually exclusive alternatives.</description>
     </item>
     <item>
       <title>AI-Powered Code Reviews: Comprehensive Prompts for Better Code Quality</title>
-      <link>http://localhost:1313/posts/ai-powered-code-review-prompts/</link>
+      <link>https://realspaceeagle.github.io/posts/ai-powered-code-review-prompts/</link>
       <pubDate>Tue, 30 Sep 2025 19:04:25 +0100</pubDate>
-      <guid>http://localhost:1313/posts/ai-powered-code-review-prompts/</guid>
+      <guid>https://realspaceeagle.github.io/posts/ai-powered-code-review-prompts/</guid>
       <description>Structured AI prompts for comprehensive code reviews that evaluate efficiency, readability, maintainability, and security.</description>
     </item>
     <item>
       <title>The Psychology of Code Reviews: Why Line Count Matters</title>
-      <link>http://localhost:1313/posts/code-review-psychology-lines-matter/</link>
+      <link>https://realspaceeagle.github.io/posts/code-review-psychology-lines-matter/</link>
       <pubDate>Tue, 30 Sep 2025 19:03:52 +0100</pubDate>
-      <guid>http://localhost:1313/posts/code-review-psychology-lines-matter/</guid>
+      <guid>https://realspaceeagle.github.io/posts/code-review-psychology-lines-matter/</guid>
       <description>A humorous yet insightful look at how the number of lines in a code review affects thoroughness and attention to detail.</description>
     </item>
     <item>
       <title>Ultimate GitHub Profile README Generator Guide</title>
-      <link>http://localhost:1313/posts/github-profile-readme-generator/</link>
+      <link>https://realspaceeagle.github.io/posts/github-profile-readme-generator/</link>
       <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/github-profile-readme-generator/</guid>
+      <guid>https://realspaceeagle.github.io/posts/github-profile-readme-generator/</guid>
       <description>Complete guide to creating stunning GitHub profile READMEs with stats cards, animations, and automated workflows</description>
     </item>
     <item>
       <title>HackTheBox: Mentor Walkthrough</title>
-      <link>http://localhost:1313/posts/hackthebox-mentor-walkthrough/</link>
+      <link>https://realspaceeagle.github.io/posts/hackthebox-mentor-walkthrough/</link>
       <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/hackthebox-mentor-walkthrough/</guid>
+      <guid>https://realspaceeagle.github.io/posts/hackthebox-mentor-walkthrough/</guid>
       <description>Detailed step-by-step walkthrough of HackTheBox Mentor machine (10.10.11.193). Learn reconnaissance, SNMP enumeration, web exploitation, and privilege escalation techniques with practical examples.</description>
     </item>
     <item>
       <title>Linux System Administration Essentials</title>
-      <link>http://localhost:1313/posts/linux-system-administration/</link>
+      <link>https://realspaceeagle.github.io/posts/linux-system-administration/</link>
       <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/linux-system-administration/</guid>
+      <guid>https://realspaceeagle.github.io/posts/linux-system-administration/</guid>
       <description>&lt;h1 id=&#34;linux-system-administration-essentials&#34;&gt;Linux System Administration Essentials&lt;/h1&gt;
 &lt;p&gt;Essential commands and techniques for Linux system administration, covering everything from basic operations to advanced automation.&lt;/p&gt;
 &lt;h2 id=&#34;system-information&#34;&gt;System Information&lt;/h2&gt;
@@ -430,9 +430,9 @@
     </item>
     <item>
       <title>Network Enumeration Techniques</title>
-      <link>http://localhost:1313/posts/network-enumeration-techniques/</link>
+      <link>https://realspaceeagle.github.io/posts/network-enumeration-techniques/</link>
       <pubDate>Tue, 30 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/network-enumeration-techniques/</guid>
+      <guid>https://realspaceeagle.github.io/posts/network-enumeration-techniques/</guid>
       <description>&lt;h1 id=&#34;network-enumeration-techniques&#34;&gt;Network Enumeration Techniques&lt;/h1&gt;
 &lt;p&gt;A comprehensive guide to network enumeration using various tools and techniques. This post covers the essential methods for discovering and mapping network infrastructure.&lt;/p&gt;
 &lt;h2 id=&#34;basic-network-discovery&#34;&gt;Basic Network Discovery&lt;/h2&gt;
@@ -664,9 +664,9 @@
     </item>
     <item>
       <title>Contact</title>
-      <link>http://localhost:1313/contact/</link>
+      <link>https://realspaceeagle.github.io/contact/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/contact/</guid>
+      <guid>https://realspaceeagle.github.io/contact/</guid>
       <description>&lt;h1 id=&#34;get-in-touch&#34;&gt;Get in Touch&lt;/h1&gt;
 &lt;p&gt;I&amp;rsquo;d love to connect with fellow cybersecurity professionals, enthusiasts, and anyone interested in security research! Whether you have questions about techniques, want to discuss security topics, or collaborate on projects, feel free to reach out.&lt;/p&gt;
 &lt;hr&gt;
@@ -680,17 +680,24 @@
 &lt;p style=&#34;color: #cccccc; font-size: 14px; margin-bottom: 8px;&#34;&gt;&lt;strong&gt;Get exclusive cybersecurity content:&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Nmap Cheatsheet - Complete Port Scanning Reference</title>
-      <link>http://localhost:1313/cheatsheets/nmap/</link>
+      <title>CORS Cheatsheet</title>
+      <link>https://realspaceeagle.github.io/cheatsheets/cors/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cheatsheets/nmap/</guid>
+      <guid>https://realspaceeagle.github.io/cheatsheets/cors/</guid>
+      <description>Typical CORS misconfigurations, exploitation paths, and secure configuration patterns.</description>
+    </item>
+    <item>
+      <title>Nmap Cheatsheet - Complete Port Scanning Reference</title>
+      <link>https://realspaceeagle.github.io/cheatsheets/nmap/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://realspaceeagle.github.io/cheatsheets/nmap/</guid>
       <description>Comprehensive Nmap cheatsheet covering port scanning, network discovery, service enumeration, and advanced scanning techniques for penetration testing</description>
     </item>
     <item>
       <title>Projects &amp; Tools</title>
-      <link>http://localhost:1313/projects/</link>
+      <link>https://realspaceeagle.github.io/projects/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/projects/</guid>
+      <guid>https://realspaceeagle.github.io/projects/</guid>
       <description>&lt;h1 id=&#34;cybersecurity-projects--tools&#34;&gt;Cybersecurity Projects &amp;amp; Tools&lt;/h1&gt;
 &lt;p&gt;Explore my collection of security tools, research projects, and contributions to the cybersecurity community.&lt;/p&gt;
 &lt;div class=&#34;project-toggle-container&#34;&gt;
@@ -745,7 +752,7 @@
     &lt;/ul&gt;
     &lt;div class=&#34;project-actions&#34;&gt;
       &lt;a href=&#34;https://github.com/realspaceeagle&#34; class=&#34;btn-primary&#34;&gt;GitHub&lt;/a&gt;
-      &lt;a href=&#34;http://localhost:1313/tags/penetration-testing&#34; class=&#34;btn-secondary&#34;&gt;Blog Posts&lt;/a&gt;
+      &lt;a href=&#34;https://realspaceeagle.github.io/tags/penetration-testing&#34; class=&#34;btn-secondary&#34;&gt;Blog Posts&lt;/a&gt;
     &lt;/div&gt;
   &lt;/div&gt;
   &lt;div class=&#34;project-card featured&#34;&gt;
@@ -755,6 +762,13 @@
     &lt;/div&gt;
     &lt;h3 class=&#34;project-title&#34;&gt;Security Monitoring Dashboard&lt;/h3&gt;
     &lt;p class=&#34;project-description&#34;&gt;Real-time security monitoring dashboard with threat intelligence integration.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>SQL Injection Cheatsheet</title>
+      <link>https://realspaceeagle.github.io/cheatsheets/sql-injection/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://realspaceeagle.github.io/cheatsheets/sql-injection/</guid>
+      <description>Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.</description>
     </item>
   </channel>
 </rss>

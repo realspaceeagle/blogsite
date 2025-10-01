@@ -1,213 +1,107 @@
 {{ define "main" }}
 <link rel="stylesheet" href="/css/cheatsheet-style.css">
+<link rel="stylesheet" href="/css/cheatsheet-sidebar.css">
 
-<header class="page-header cheatsheet-page">
-  <h1>{{ .Title }}</h1>
-  {{- if .Params.description }}
-  <div class="post-description">
-    {{ .Params.description }}
-  </div>
-  {{- end }}
-</header>
+{{ $nav := site.Data.cheatsheets.navigation }}
+<div class="cheatsheet-shell">
+  <aside class="cheatsheet-sidebar" aria-label="Cheatsheet navigation">
+    <div class="sidebar-heading">
+      <p class="sidebar-eyebrow">Cheatsheet Library</p>
+      <h1 class="sidebar-title">{{ .Title }}</h1>
+      {{ with .Params.description }}
+      <p class="sidebar-description">{{ . }}</p>
+      {{ end }}
+    </div>
 
-<main class="main cheatsheet-page">
-  {{- if .Content }}
-  <div class="page-content">
-    {{ .Content }}
-  </div>
-  {{- end }}
+    {{ with $nav.categories }}
+    <div class="sidebar-groups">
+      {{ range . }}
+      {{ $categoryTitle := .title }}
+      <section class="sidebar-group" data-category="{{ .id }}">
+        <button class="sidebar-group-toggle" type="button" aria-expanded="true">
+          <span class="toggle-label">{{ $categoryTitle }}</span>
+          <span class="toggle-indicator" aria-hidden="true">v</span>
+        </button>
+        <ul class="sidebar-items">
+          {{ range .items }}
+          {{ $slug := .slug }}
+          {{ $page := $.Site.GetPage (printf "/cheatsheets/%s" $slug) }}
+          {{ $title := or .title (and $page $page.Title) (title $slug) }}
+          {{ $summary := or .summary (and $page $page.Params.description) "" }}
+          <li class="sidebar-item-wrapper">
+            <button
+              class="sidebar-item"
+              type="button"
+              data-cheatsheet-target="{{ $slug }}"
+              data-cheatsheet-title="{{ $title }}"
+              data-cheatsheet-category="{{ $categoryTitle }}"
+              data-cheatsheet-url="{{ with $page }}{{ .RelPermalink }}{{ end }}">
+              <span class="item-title">{{ $title }}</span>
+              {{ with $summary }}
+              <span class="item-summary">{{ . }}</span>
+              {{ end }}
+            </button>
+          </li>
+          {{ end }}
+        </ul>
+      </section>
+      {{ end }}
+    </div>
+    {{ end }}
+  </aside>
 
-  {{- if .Paginator.Pages }}
-  <div class="cheatsheet-grid">
-    {{- range .Paginator.Pages }}
-    <article class="cheatsheet-card">
-      <div class="card-header">
-        <h2 class="card-title">
-          <a href="{{ .Permalink }}">{{ .Title }}</a>
-        </h2>
-        <div class="card-meta">
-          <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
-            {{ .Date.Format "Jan 2, 2006" }}
-          </time>
-          {{- if .Params.tags }}
-          <div class="card-tags">
-            {{- range first 3 .Params.tags }}
-            <span class="tag">#{{ . }}</span>
-            {{- end }}
-          </div>
-          {{- end }}
+  <section class="cheatsheet-body">
+    <header class="cheatsheet-header">
+      <nav class="cheatsheet-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/cheatsheets/">Cheatsheets</a>
+        <span aria-hidden="true">/</span>
+        <span data-cheatsheet-breadcrumb>Loading...</span>
+      </nav>
+      <div class="cheatsheet-actions">
+        <button type="button" class="cheatsheet-action" data-cheatsheet-copy>Copy link</button>
+        <button type="button" class="cheatsheet-action" data-cheatsheet-print>Print</button>
+      </div>
+    </header>
+
+    <div class="cheatsheet-content" data-cheatsheet-content>
+      {{ range $category := $nav.categories }}
+      {{ $categoryTitle := $category.title }}
+      {{ range $item := $category.items }}
+      {{ $slug := $item.slug }}
+      {{ $page := $.Site.GetPage (printf "/cheatsheets/%s" $slug) }}
+      {{ $title := or $item.title (and $page $page.Title) (title $slug) }}
+      <article class="cheatsheet-entry" data-cheatsheet="{{ $slug }}" hidden>
+        {{ if $page }}
+        <div class="cheatsheet-entry-inner">
+          {{ $page.Content }}
         </div>
-      </div>
-      {{- if .Params.description }}
-      <div class="card-description">
-        {{ .Params.description }}
-      </div>
-      {{- else if .Summary }}
-      <div class="card-description">
-        {{ .Summary | truncate 150 }}
-      </div>
-      {{- end }}
-      <div class="card-footer">
-        <a href="{{ .Permalink }}" class="read-more">
-          View Cheatsheet →
-        </a>
-      </div>
-    </article>
-    {{- end }}
-  </div>
-  {{- end }}
+        {{ else }}
+        <div class="cheatsheet-entry-inner cheatsheet-entry-placeholder">
+          <h1>{{ $title }} Cheatsheet</h1>
+          {{ with $item.summary }}
+          <p>{{ . }}</p>
+          {{ else }}
+          <p>This reference is being prepared. Check back soon for a detailed walkthrough and quick reference commands.</p>
+          {{ end }}
+          <ul class="placeholder-list">
+            <li>Attack surface overview</li>
+            <li>Detection and enumeration steps</li>
+            <li>Exploitation playbook</li>
+            <li>Remediation and defensive guidance</li>
+          </ul>
+        </div>
+        {{ end }}
+      </article>
+      {{ end }}
+      {{ end }}
+    </div>
+  </section>
+</div>
 
-  {{- template "_internal/pagination.html" . }}
-</main>
-
-<style>
-.cheatsheet-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.cheatsheet-card {
-  background: var(--entry);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.cheatsheet-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #2563eb, #7c3aed, #dc2626);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.cheatsheet-card:hover::before {
-  transform: scaleX(1);
-}
-
-.cheatsheet-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  border-color: rgba(37, 99, 235, 0.3);
-}
-
-.card-header {
-  margin-bottom: 1rem;
-}
-
-.card-title {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.card-title a {
-  color: var(--primary);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.card-title a:hover {
-  color: #2563eb;
-}
-
-.dark .card-title a:hover {
-  color: #60a5fa;
-}
-
-.card-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.875rem;
-  color: var(--secondary);
-  margin-bottom: 1rem;
-}
-
-.card-tags {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.card-tags .tag {
-  background: var(--tertiary);
-  color: var(--primary);
-  padding: 0.25rem 0.5rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.card-description {
-  color: var(--secondary);
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.card-footer {
-  margin-top: auto;
-}
-
-.read-more {
-  color: #2563eb;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.875rem;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.read-more:hover {
-  color: #1d4ed8;
-  transform: translateX(5px);
-}
-
-.dark .read-more {
-  color: #60a5fa;
-}
-
-.dark .read-more:hover {
-  color: #93c5fd;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .cheatsheet-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .cheatsheet-card {
-    padding: 1rem;
-  }
-  
-  .card-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-}
-
-/* Empty state */
-.cheatsheet-grid:empty::after {
-  content: "No cheatsheets available yet. Check back soon!";
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 3rem;
-  color: var(--secondary);
-  font-style: italic;
-}
-</style>
+<script src="/js/cheatsheet-sidebar.js" defer></script>
 {{ end }}
+
+
+

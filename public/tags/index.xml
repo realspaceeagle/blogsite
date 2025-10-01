@@ -2,267 +2,295 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on realspaceeagle</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://realspaceeagle.github.io/tags/</link>
     <description>Recent content in Tags on realspaceeagle</description>
     <image>
       <title>realspaceeagle</title>
-      <url>http://localhost:1313/images/og-image.svg</url>
-      <link>http://localhost:1313/images/og-image.svg</link>
+      <url>https://realspaceeagle.github.io/images/og-image.svg</url>
+      <link>https://realspaceeagle.github.io/images/og-image.svg</link>
     </image>
     <generator>Hugo -- 0.150.1</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 01 Oct 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://realspaceeagle.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hackthebox</title>
-      <link>http://localhost:1313/tags/hackthebox/</link>
+      <link>https://realspaceeagle.github.io/tags/hackthebox/</link>
       <pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/hackthebox/</guid>
+      <guid>https://realspaceeagle.github.io/tags/hackthebox/</guid>
       <description></description>
     </item>
     <item>
       <title>Lfi</title>
-      <link>http://localhost:1313/tags/lfi/</link>
+      <link>https://realspaceeagle.github.io/tags/lfi/</link>
       <pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/lfi/</guid>
+      <guid>https://realspaceeagle.github.io/tags/lfi/</guid>
       <description></description>
     </item>
     <item>
       <title>Privilege-Escalation</title>
-      <link>http://localhost:1313/tags/privilege-escalation/</link>
+      <link>https://realspaceeagle.github.io/tags/privilege-escalation/</link>
       <pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/privilege-escalation/</guid>
+      <guid>https://realspaceeagle.github.io/tags/privilege-escalation/</guid>
       <description></description>
     </item>
     <item>
       <title>Reverse-Shell</title>
-      <link>http://localhost:1313/tags/reverse-shell/</link>
+      <link>https://realspaceeagle.github.io/tags/reverse-shell/</link>
       <pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/reverse-shell/</guid>
+      <guid>https://realspaceeagle.github.io/tags/reverse-shell/</guid>
       <description></description>
     </item>
     <item>
       <title>Web-Exploitation</title>
-      <link>http://localhost:1313/tags/web-exploitation/</link>
+      <link>https://realspaceeagle.github.io/tags/web-exploitation/</link>
       <pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/web-exploitation/</guid>
+      <guid>https://realspaceeagle.github.io/tags/web-exploitation/</guid>
       <description></description>
     </item>
     <item>
       <title>Code-Review</title>
-      <link>http://localhost:1313/tags/code-review/</link>
+      <link>https://realspaceeagle.github.io/tags/code-review/</link>
       <pubDate>Tue, 30 Sep 2025 19:05:03 +0100</pubDate>
-      <guid>http://localhost:1313/tags/code-review/</guid>
+      <guid>https://realspaceeagle.github.io/tags/code-review/</guid>
       <description></description>
     </item>
     <item>
       <title>Collaboration</title>
-      <link>http://localhost:1313/tags/collaboration/</link>
+      <link>https://realspaceeagle.github.io/tags/collaboration/</link>
       <pubDate>Tue, 30 Sep 2025 19:05:03 +0100</pubDate>
-      <guid>http://localhost:1313/tags/collaboration/</guid>
+      <guid>https://realspaceeagle.github.io/tags/collaboration/</guid>
       <description></description>
     </item>
     <item>
       <title>Pair-Programming</title>
-      <link>http://localhost:1313/tags/pair-programming/</link>
+      <link>https://realspaceeagle.github.io/tags/pair-programming/</link>
       <pubDate>Tue, 30 Sep 2025 19:05:03 +0100</pubDate>
-      <guid>http://localhost:1313/tags/pair-programming/</guid>
+      <guid>https://realspaceeagle.github.io/tags/pair-programming/</guid>
       <description></description>
     </item>
     <item>
       <title>Quality-Assurance</title>
-      <link>http://localhost:1313/tags/quality-assurance/</link>
+      <link>https://realspaceeagle.github.io/tags/quality-assurance/</link>
       <pubDate>Tue, 30 Sep 2025 19:05:03 +0100</pubDate>
-      <guid>http://localhost:1313/tags/quality-assurance/</guid>
+      <guid>https://realspaceeagle.github.io/tags/quality-assurance/</guid>
       <description></description>
     </item>
     <item>
       <title>Software-Development</title>
-      <link>http://localhost:1313/tags/software-development/</link>
+      <link>https://realspaceeagle.github.io/tags/software-development/</link>
       <pubDate>Tue, 30 Sep 2025 19:05:03 +0100</pubDate>
-      <guid>http://localhost:1313/tags/software-development/</guid>
+      <guid>https://realspaceeagle.github.io/tags/software-development/</guid>
       <description></description>
     </item>
     <item>
       <title>Ai</title>
-      <link>http://localhost:1313/tags/ai/</link>
+      <link>https://realspaceeagle.github.io/tags/ai/</link>
       <pubDate>Tue, 30 Sep 2025 19:04:25 +0100</pubDate>
-      <guid>http://localhost:1313/tags/ai/</guid>
+      <guid>https://realspaceeagle.github.io/tags/ai/</guid>
       <description></description>
     </item>
     <item>
       <title>Automation</title>
-      <link>http://localhost:1313/tags/automation/</link>
+      <link>https://realspaceeagle.github.io/tags/automation/</link>
       <pubDate>Tue, 30 Sep 2025 19:04:25 +0100</pubDate>
-      <guid>http://localhost:1313/tags/automation/</guid>
+      <guid>https://realspaceeagle.github.io/tags/automation/</guid>
       <description></description>
     </item>
     <item>
       <title>Claude</title>
-      <link>http://localhost:1313/tags/claude/</link>
+      <link>https://realspaceeagle.github.io/tags/claude/</link>
       <pubDate>Tue, 30 Sep 2025 19:04:25 +0100</pubDate>
-      <guid>http://localhost:1313/tags/claude/</guid>
+      <guid>https://realspaceeagle.github.io/tags/claude/</guid>
       <description></description>
     </item>
     <item>
       <title>Prompts</title>
-      <link>http://localhost:1313/tags/prompts/</link>
+      <link>https://realspaceeagle.github.io/tags/prompts/</link>
       <pubDate>Tue, 30 Sep 2025 19:04:25 +0100</pubDate>
-      <guid>http://localhost:1313/tags/prompts/</guid>
+      <guid>https://realspaceeagle.github.io/tags/prompts/</guid>
       <description></description>
     </item>
     <item>
       <title>Best-Practices</title>
-      <link>http://localhost:1313/tags/best-practices/</link>
+      <link>https://realspaceeagle.github.io/tags/best-practices/</link>
       <pubDate>Tue, 30 Sep 2025 19:03:52 +0100</pubDate>
-      <guid>http://localhost:1313/tags/best-practices/</guid>
+      <guid>https://realspaceeagle.github.io/tags/best-practices/</guid>
       <description></description>
     </item>
     <item>
       <title>Programming</title>
-      <link>http://localhost:1313/tags/programming/</link>
+      <link>https://realspaceeagle.github.io/tags/programming/</link>
       <pubDate>Tue, 30 Sep 2025 19:03:52 +0100</pubDate>
-      <guid>http://localhost:1313/tags/programming/</guid>
+      <guid>https://realspaceeagle.github.io/tags/programming/</guid>
       <description></description>
     </item>
     <item>
       <title>Psychology</title>
-      <link>http://localhost:1313/tags/psychology/</link>
+      <link>https://realspaceeagle.github.io/tags/psychology/</link>
       <pubDate>Tue, 30 Sep 2025 19:03:52 +0100</pubDate>
-      <guid>http://localhost:1313/tags/psychology/</guid>
+      <guid>https://realspaceeagle.github.io/tags/psychology/</guid>
       <description></description>
     </item>
     <item>
       <title>Customization</title>
-      <link>http://localhost:1313/tags/customization/</link>
+      <link>https://realspaceeagle.github.io/tags/customization/</link>
       <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/customization/</guid>
+      <guid>https://realspaceeagle.github.io/tags/customization/</guid>
       <description></description>
     </item>
     <item>
       <title>Generator</title>
-      <link>http://localhost:1313/tags/generator/</link>
+      <link>https://realspaceeagle.github.io/tags/generator/</link>
       <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/generator/</guid>
+      <guid>https://realspaceeagle.github.io/tags/generator/</guid>
       <description></description>
     </item>
     <item>
       <title>Github</title>
-      <link>http://localhost:1313/tags/github/</link>
+      <link>https://realspaceeagle.github.io/tags/github/</link>
       <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/github/</guid>
+      <guid>https://realspaceeagle.github.io/tags/github/</guid>
       <description></description>
     </item>
     <item>
       <title>Markdown</title>
-      <link>http://localhost:1313/tags/markdown/</link>
+      <link>https://realspaceeagle.github.io/tags/markdown/</link>
       <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/markdown/</guid>
+      <guid>https://realspaceeagle.github.io/tags/markdown/</guid>
       <description></description>
     </item>
     <item>
       <title>Profile</title>
-      <link>http://localhost:1313/tags/profile/</link>
+      <link>https://realspaceeagle.github.io/tags/profile/</link>
       <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/profile/</guid>
+      <guid>https://realspaceeagle.github.io/tags/profile/</guid>
       <description></description>
     </item>
     <item>
       <title>Readme</title>
-      <link>http://localhost:1313/tags/readme/</link>
+      <link>https://realspaceeagle.github.io/tags/readme/</link>
       <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/readme/</guid>
+      <guid>https://realspaceeagle.github.io/tags/readme/</guid>
       <description></description>
     </item>
     <item>
       <title>Stats</title>
-      <link>http://localhost:1313/tags/stats/</link>
+      <link>https://realspaceeagle.github.io/tags/stats/</link>
       <pubDate>Tue, 30 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/stats/</guid>
+      <guid>https://realspaceeagle.github.io/tags/stats/</guid>
       <description></description>
     </item>
     <item>
       <title>Penetration-Testing</title>
-      <link>http://localhost:1313/tags/penetration-testing/</link>
+      <link>https://realspaceeagle.github.io/tags/penetration-testing/</link>
       <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/penetration-testing/</guid>
+      <guid>https://realspaceeagle.github.io/tags/penetration-testing/</guid>
       <description></description>
     </item>
     <item>
       <title>Snmp</title>
-      <link>http://localhost:1313/tags/snmp/</link>
+      <link>https://realspaceeagle.github.io/tags/snmp/</link>
       <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/snmp/</guid>
+      <guid>https://realspaceeagle.github.io/tags/snmp/</guid>
       <description></description>
     </item>
     <item>
       <title>Bash</title>
-      <link>http://localhost:1313/tags/bash/</link>
+      <link>https://realspaceeagle.github.io/tags/bash/</link>
       <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/bash/</guid>
+      <guid>https://realspaceeagle.github.io/tags/bash/</guid>
       <description></description>
     </item>
     <item>
       <title>Linux</title>
-      <link>http://localhost:1313/tags/linux/</link>
+      <link>https://realspaceeagle.github.io/tags/linux/</link>
       <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/linux/</guid>
+      <guid>https://realspaceeagle.github.io/tags/linux/</guid>
       <description></description>
     </item>
     <item>
       <title>Sysadmin</title>
-      <link>http://localhost:1313/tags/sysadmin/</link>
+      <link>https://realspaceeagle.github.io/tags/sysadmin/</link>
       <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/sysadmin/</guid>
+      <guid>https://realspaceeagle.github.io/tags/sysadmin/</guid>
       <description></description>
     </item>
     <item>
       <title>Enumeration</title>
-      <link>http://localhost:1313/tags/enumeration/</link>
+      <link>https://realspaceeagle.github.io/tags/enumeration/</link>
       <pubDate>Tue, 30 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/enumeration/</guid>
+      <guid>https://realspaceeagle.github.io/tags/enumeration/</guid>
       <description></description>
     </item>
     <item>
       <title>Networking</title>
-      <link>http://localhost:1313/tags/networking/</link>
+      <link>https://realspaceeagle.github.io/tags/networking/</link>
       <pubDate>Tue, 30 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/networking/</guid>
+      <guid>https://realspaceeagle.github.io/tags/networking/</guid>
       <description></description>
     </item>
     <item>
       <title>Nmap</title>
-      <link>http://localhost:1313/tags/nmap/</link>
+      <link>https://realspaceeagle.github.io/tags/nmap/</link>
       <pubDate>Tue, 30 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/nmap/</guid>
+      <guid>https://realspaceeagle.github.io/tags/nmap/</guid>
       <description></description>
     </item>
     <item>
       <title>Security</title>
-      <link>http://localhost:1313/tags/security/</link>
+      <link>https://realspaceeagle.github.io/tags/security/</link>
       <pubDate>Tue, 30 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/security/</guid>
+      <guid>https://realspaceeagle.github.io/tags/security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cheatsheet</title>
+      <link>https://realspaceeagle.github.io/tags/cheatsheet/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://realspaceeagle.github.io/tags/cheatsheet/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cors</title>
+      <link>https://realspaceeagle.github.io/tags/cors/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://realspaceeagle.github.io/tags/cors/</guid>
       <description></description>
     </item>
     <item>
       <title>Network-Security</title>
-      <link>http://localhost:1313/tags/network-security/</link>
+      <link>https://realspaceeagle.github.io/tags/network-security/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/network-security/</guid>
+      <guid>https://realspaceeagle.github.io/tags/network-security/</guid>
       <description></description>
     </item>
     <item>
       <title>Reconnaissance</title>
-      <link>http://localhost:1313/tags/reconnaissance/</link>
+      <link>https://realspaceeagle.github.io/tags/reconnaissance/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/reconnaissance/</guid>
+      <guid>https://realspaceeagle.github.io/tags/reconnaissance/</guid>
       <description></description>
     </item>
     <item>
       <title>Scanning</title>
-      <link>http://localhost:1313/tags/scanning/</link>
+      <link>https://realspaceeagle.github.io/tags/scanning/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/scanning/</guid>
+      <guid>https://realspaceeagle.github.io/tags/scanning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Sql-Injection</title>
+      <link>https://realspaceeagle.github.io/tags/sql-injection/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://realspaceeagle.github.io/tags/sql-injection/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web-Security</title>
+      <link>https://realspaceeagle.github.io/tags/web-security/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://realspaceeagle.github.io/tags/web-security/</guid>
       <description></description>
     </item>
   </channel>

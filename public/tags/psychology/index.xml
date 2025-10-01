@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Psychology on realspaceeagle</title>
-    <link>http://localhost:1313/tags/psychology/</link>
+    <link>https://realspaceeagle.github.io/tags/psychology/</link>
     <description>Recent content in Psychology on realspaceeagle</description>
     <image>
       <title>realspaceeagle</title>
-      <url>http://localhost:1313/images/og-image.svg</url>
-      <link>http://localhost:1313/images/og-image.svg</link>
+      <url>https://realspaceeagle.github.io/images/og-image.svg</url>
+      <link>https://realspaceeagle.github.io/images/og-image.svg</link>
     </image>
     <generator>Hugo -- 0.150.1</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 30 Sep 2025 19:03:52 +0100</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/psychology/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://realspaceeagle.github.io/tags/psychology/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Psychology of Code Reviews: Why Line Count Matters</title>
-      <link>http://localhost:1313/posts/code-review-psychology-lines-matter/</link>
+      <link>https://realspaceeagle.github.io/posts/code-review-psychology-lines-matter/</link>
       <pubDate>Tue, 30 Sep 2025 19:03:52 +0100</pubDate>
-      <guid>http://localhost:1313/posts/code-review-psychology-lines-matter/</guid>
+      <guid>https://realspaceeagle.github.io/posts/code-review-psychology-lines-matter/</guid>
       <description>A humorous yet insightful look at how the number of lines in a code review affects thoroughness and attention to detail.</description>
     </item>
   </channel>
