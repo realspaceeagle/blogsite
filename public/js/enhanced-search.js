@@ -206,8 +206,8 @@
             const item = result.item;
             const score = result.score ? Math.round((1 - result.score) * 100) : 100;
             
-            // Generate multiple snippets from different content matches
-            const snippets = generateContentSnippets(result, query);
+            // Generate content snippet with location info
+            const snippet = generateSimpleSnippet(result, query);
             
             // Format date
             const date = item.date ? new Date(item.date).toLocaleDateString() : '';
@@ -221,16 +221,115 @@
                         <a href="${item.permalink || item.url}">${highlightMatches(item.title, query)}</a>
                     </div>
                     <div class="search-result-meta">
-                        ${date} • ${categories} • Relevance: ${score}%
+                        ${date} • ${categories} • Match: ${score}%
                     </div>
-                    <div class="search-result-snippets">
-                        ${snippets.join('')}
+                    <div class="search-result-snippet">
+                        ${snippet}
                     </div>
                 </li>
             `;
         }).join('');
         
         searchResults.innerHTML = html;
+    }
+    
+    function generateSimpleSnippet(result, query) {
+        const item = result.item;
+        const matches = result.matches || [];
+        
+        // Try to find content match first
+        const contentMatch = matches.find(m => m.key === 'content');
+        if (contentMatch && contentMatch.value) {
+            return createLocationSnippet(contentMatch.value, query);
+        }
+        
+        // Fallback to summary or title
+        if (item.summary) {
+            return `<div class="snippet-text">${highlightMatches(item.summary, query)}</div>`;
+        }
+        
+        if (item.content) {
+            const shortContent = item.content.substring(0, 200);
+            return `<div class="snippet-text">${highlightMatches(shortContent, query)}...</div>`;
+        }
+        
+        return `<div class="snippet-text">Found in: ${item.title}</div>`;
+    }
+    
+    function createLocationSnippet(content, query) {
+        const words = query.toLowerCase().split(/\s+/).filter(w => w.length > 1);
+        const lines = content.split('\n');
+        
+        // Find the best match line
+        let bestMatch = null;
+        let bestScore = 0;
+        
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (line.length < 10) continue; // Skip very short lines
+            
+            const lineLower = line.toLowerCase();
+            let lineScore = 0;
+            
+            words.forEach(word => {
+                if (lineLower.includes(word)) {
+                    lineScore += word.length;
+                }
+            });
+            
+            if (lineScore > bestScore) {
+                bestScore = lineScore;
+                bestMatch = {
+                    line: line,
+                    lineNumber: i + 1,
+                    section: findSectionName(lines, i)
+                };
+            }
+        }
+        
+        if (!bestMatch) {
+            return `<div class="snippet-text">${highlightMatches(content.substring(0, 150), query)}...</div>`;
+        }
+        
+        let locationInfo = '';
+        if (bestMatch.section) {
+            locationInfo = `<div class="snippet-location">Found in section: <strong>${bestMatch.section}</strong></div>`;
+        } else {
+            locationInfo = `<div class="snippet-location">Found at line ${bestMatch.lineNumber}</div>`;
+        }
+        
+        const snippetText = `<div class="snippet-text">${highlightMatches(bestMatch.line, query)}</div>`;
+        
+        return locationInfo + snippetText;
+    }
+    
+    function findSectionName(lines, lineIndex) {
+        // Look backwards for a heading
+        for (let i = lineIndex; i >= 0 && i > lineIndex - 20; i--) {
+            const line = lines[i].trim();
+            
+            // Check for markdown headings
+            if (line.match(/^#{1,6}\s+(.+)/)) {
+                return line.replace(/^#+\s*/, '').trim();
+            }
+            
+            // Check for common section patterns
+            if (line.match(/^(Reconnaissance|Enumeration|Exploitation|Privilege Escalation|Post-Exploitation|Initial Access|Lateral Movement|Persistence|Defense Evasion|Credential Access|Discovery|Collection|Command and Control|Exfiltration|Impact)/i)) {
+                return line.trim();
+            }
+            
+            // Check for step patterns
+            if (line.match(/^(Step \d+|Phase \d+|\d+\.|[A-Z][a-z]+ \d+:)/)) {
+                return line.trim();
+            }
+            
+            // Check for bold headings
+            if (line.match(/^\*\*([^*]+)\*\*$/)) {
+                return line.replace(/\*\*/g, '').trim();
+            }
+        }
+        
+        return null;
     }
     
     function generateContentSnippets(result, query) {
@@ -501,9 +600,12 @@
         const words = query.split(/\s+/).filter(word => word.length > 1);
         let highlightedText = text;
         
+        // Sort words by length (longest first) to avoid partial matches
+        words.sort((a, b) => b.length - a.length);
+        
         words.forEach(word => {
             const regex = new RegExp(`(${escapeRegex(word)})`, 'gi');
-            highlightedText = highlightedText.replace(regex, '<span class="search-highlight">$1</span>');
+            highlightedText = highlightedText.replace(regex, '<mark class="search-highlight">$1</mark>');
         });
         
         return highlightedText;

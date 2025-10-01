@@ -646,42 +646,47 @@ document.addEventListener('DOMContentLoaded', function() {
     margin-bottom: 10px;
 }
 
-.enhanced-search .search-result-snippets {
+.enhanced-search .search-result-snippet {
     margin-top: 12px;
-}
-
-.enhanced-search .content-snippet {
-    margin-bottom: 12px;
     padding: 12px;
-    background: var(--theme);
+    background: var(--entry);
     border: 1px solid var(--border);
     border-radius: 6px;
     border-left: 3px solid var(--primary);
 }
 
-.enhanced-search .content-snippet:last-child {
-    margin-bottom: 0;
+.enhanced-search .snippet-location {
+    font-size: 12px;
+    color: var(--secondary);
+    margin-bottom: 8px;
+    font-style: italic;
 }
 
-.enhanced-search .snippet-content {
+.enhanced-search .snippet-location strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.enhanced-search .snippet-text {
     font-size: 14px;
     line-height: 1.6;
     color: var(--content);
 }
 
-.enhanced-search .snippet-content strong {
+.enhanced-search .search-highlight,
+.enhanced-search mark.search-highlight {
+    background: rgba(255, 193, 7, 0.4);
     color: var(--primary);
-    font-weight: 600;
-    display: block;
-    margin-bottom: 6px;
-    font-size: 13px;
-}
-
-.enhanced-search .search-highlight {
-    background: rgba(255, 255, 0, 0.3);
     padding: 2px 4px;
     border-radius: 3px;
     font-weight: 600;
+    border: none;
+}
+
+.dark .enhanced-search .search-highlight,
+.dark .enhanced-search mark.search-highlight {
+    background: rgba(255, 193, 7, 0.6);
+    color: var(--theme);
 }
 
  
