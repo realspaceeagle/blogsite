@@ -9,17 +9,7 @@ categories = ['cheatsheets']
 
 # Nmap Cheatsheet - Complete Reference Guide
 
-## Table of Contents
-- [Basic Scanning](#basic-scanning)
-- [Host Discovery](#host-discovery) 
-- [Port Scanning Techniques](#port-scanning-techniques)
-- [Service & Version Detection](#service--version-detection)
-- [Script Engine (NSE)](#script-engine-nse)
-- [Stealth & Evasion](#stealth--evasion)
-- [Output Formats](#output-formats)
-- [Advanced Techniques](#advanced-techniques)
 
----
 
 ## Basic Scanning
 

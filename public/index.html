@@ -472,6 +472,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <span class="stat-label">Learning Journey</span>
         </div>
       </div>
+      <div class="hero-wave" aria-hidden="true"></div>
     </section>
 
     
@@ -665,67 +666,6 @@ document.addEventListener('DOMContentLoaded', function() {
           
           <div class="post-footer">
             <a href="https://realspaceeagle.github.io/posts/github-profile-readme-generator/" class="read-more">Read More →</a>
-          </div>
-        </article>
-        
-        <article class="post-item" data-aos="fade-up" data-aos-delay="700">
-          <div class="post-header">
-            <div class="post-meta">
-              <time datetime="2024-12-01">Dec 1</time>
-              <span class="reading-time">7min read</span>
-            </div>
-            
-              <span class="post-category">HackTheBox</span>
-            
-          </div>
-          <h3><a href="https://realspaceeagle.github.io/posts/hackthebox-mentor-walkthrough/">HackTheBox: Mentor Walkthrough</a></h3>
-          
-          <p class="post-excerpt">Complete penetration testing walkthrough of HackTheBox Mentor machine covering reconnaissance, enumeration, …</p>
-          
-          
-          <div class="post-tags">
-            
-            <span class="tag">hackthebox</span>
-            
-            <span class="tag">penetration-testing</span>
-            
-            <span class="tag">web-exploitation</span>
-            
-          </div>
-          
-          <div class="post-footer">
-            <a href="https://realspaceeagle.github.io/posts/hackthebox-mentor-walkthrough/" class="read-more">Read More →</a>
-          </div>
-        </article>
-        
-        <article class="post-item" data-aos="fade-up" data-aos-delay="800">
-          <div class="post-header">
-            <div class="post-meta">
-              <time datetime="2024-02-05">Feb 5</time>
-              <span class="reading-time">8min read</span>
-            </div>
-            
-              <span class="post-category">system-administration</span>
-            
-          </div>
-          <h3><a href="https://realspaceeagle.github.io/posts/linux-system-administration/">Linux System Administration Essentials</a></h3>
-          
-          <p class="post-excerpt"><h1 id="linux-system-administration-essentials">Linux System Administration Essentials</h1>
-<p>Essential commands and techniques for Linux system administration, covering …</p></p>
-          
-          
-          <div class="post-tags">
-            
-            <span class="tag">linux</span>
-            
-            <span class="tag">sysadmin</span>
-            
-            <span class="tag">automation</span>
-            
-          </div>
-          
-          <div class="post-footer">
-            <a href="https://realspaceeagle.github.io/posts/linux-system-administration/" class="read-more">Read More →</a>
           </div>
         </article>
         
@@ -1464,7 +1404,7 @@ document.addEventListener('DOMContentLoaded', function() {
 .hero-section {
   position: relative;
   text-align: center;
-  padding: 80px 0;
+  padding: 80px 0 120px;
   background: linear-gradient(135deg, var(--entry) 0%, var(--theme) 100%);
   border-radius: var(--radius);
   margin-bottom: 50px;
@@ -1503,6 +1443,18 @@ document.addEventListener('DOMContentLoaded', function() {
   background-size: 50px 50px;
   animation: grid-flow 15s ease-in-out infinite;
 }
+  .hero-wave {
+    position: absolute;
+    left: -5%;
+    right: -5%;
+    bottom: -1px;
+    height: 140px;
+    background: url("data:image/svg+xml,%3Csvg%20width%3D%221440%22%20height%3D%22140%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M0%2090l48-7c48-7%20144-21%20240-17s192%2030%20288%2027%20192-34%20288-37%20192%2020%20288%2025%20192-7%20240-15v76H0z%22%20fill%3D%220b1220%22%20opacity%3D%220.65%22/%3E%3C/svg%3E") no-repeat center / cover;
+    opacity: 0.45;
+    z-index: 1;
+    pointer-events: none;
+  }
+
 
 .hero-content {
   position: relative;
@@ -1651,9 +1603,13 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .hero-stats {
+  position: relative;
+  z-index: 2;
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 32px;
+  margin-top: 45px;
+  flex-wrap: wrap;
 }
 
 .stat-item {
@@ -1709,83 +1665,116 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .featured-posts {
-  margin-bottom: 60px;
+  margin: 0 auto 48px;
+  padding: 0;
+}
+
+.featured-posts.compact {
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  background: var(--entry);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 24px;
+  padding: 32px 36px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.14);
+}
+
+.featured-posts .section-header {
+  margin-bottom: 28px;
+}
+
+.featured-posts .section-header h2 {
+  font-size: 32px;
+}
+
+.featured-posts .section-subtitle {
+  font-size: 16px;
+  max-width: 540px;
+  margin: 0 auto;
 }
 
 .posts-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 25px;
-  margin-bottom: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 30px;
+  align-items: stretch;
 }
 
 .post-item {
-  background: var(--entry);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 25px;
-  transition: all 0.3s ease;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 22px;
+  background: var(--theme);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 18px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   overflow: hidden;
 }
 
 .post-item::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(45deg, #00ff41, #00a832, #667eea);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.18), rgba(0, 255, 65, 0.18));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
 }
 
-.post-item:hover::before {
-  transform: scaleX(1);
+.post-item > * {
+  position: relative;
+  z-index: 1;
 }
 
 .post-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  border-color: rgba(0, 255, 65, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+  border-color: rgba(0, 255, 65, 0.35);
+}
+
+.post-item:hover::before {
+  opacity: 1;
 }
 
 .post-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-}
-
-.post-category {
-  background: linear-gradient(45deg, #667eea, #764ba2);
-  color: white;
-  padding: 4px 12px;
-  border-radius: 15px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  gap: 12px;
 }
 
 .post-item .post-meta {
   display: flex;
-  gap: 15px;
-  font-size: 13px;
+  gap: 12px;
+  font-size: 12px;
   color: var(--secondary);
 }
 
+.post-category {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
 .post-item h3 {
-  margin: 0 0 12px 0;
-  font-size: 20px;
-  line-height: 1.4;
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.35;
 }
 
 .post-item h3 a {
   color: var(--primary);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 .post-item h3 a:hover {
@@ -1793,33 +1782,35 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .post-excerpt {
+  margin: 0;
   color: var(--secondary);
-  font-size: 14px;
-  line-height: 1.6;
-  margin: 0 0 15px 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .post-item .post-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 15px;
 }
 
 .post-item .tag {
-  background: var(--tertiary);
+  background: rgba(102, 126, 234, 0.12);
   color: var(--primary);
   padding: 4px 10px;
-  border-radius: 15px;
+  border-radius: 12px;
   font-size: 11px;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .post-item .tag:hover {
-  background: #00ff41;
+  background: rgba(0, 255, 65, 0.25);
   color: #000;
-  transform: scale(1.05);
 }
 
 .post-footer {
@@ -1830,18 +1821,23 @@ document.addEventListener('DOMContentLoaded', function() {
   color: #00ff41;
   text-decoration: none;
   font-weight: 600;
-  font-size: 14px;
-  transition: all 0.3s ease;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .read-more:hover {
   color: #00a832;
-  transform: translateX(5px);
+  transform: translateX(4px);
 }
 
 .view-all {
   text-align: center;
 }
+
 
 .homepage-tags,
 .homepage-newsletter,
@@ -2401,7 +2397,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   .hero-section {
-    padding: 60px 20px;
+    padding: 50px 20px 90px;
     margin-bottom: 30px;
   }
   
@@ -2457,13 +2453,18 @@ document.addEventListener('DOMContentLoaded', function() {
     padding: 0 10px;
   }
   
+  .featured-posts.compact {
+    padding: 26px 22px;
+    border-radius: 20px;
+  }
+
   .posts-list {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
   }
   
   .post-item {
-    padding: 20px 15px;
+    padding: 18px 16px;
   }
   
   .post-header {
@@ -2567,11 +2568,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   .hero-section {
-    padding: 40px 15px;
+    padding: 36px 15px 80px;
   }
   
   .hero-title {
     font-size: 28px;
+  }
+
+  .hero-wave {
+    height: 80px;
   }
   
   .hero-subtitle {
@@ -2591,8 +2596,12 @@ document.addEventListener('DOMContentLoaded', function() {
     font-size: 24px;
   }
   
+  .featured-posts.compact {
+    padding: 20px 16px;
+  }
+
   .post-item {
-    padding: 15px 12px;
+    padding: 16px 14px;
   }
   
   .post-item h3 {
@@ -2637,6 +2646,10 @@ document.addEventListener('DOMContentLoaded', function() {
 @media screen and (max-width: 360px) {
   .hero-title {
     font-size: 24px;
+  }
+
+  .hero-wave {
+    height: 70px;
   }
   
   .hero-subtitle {
