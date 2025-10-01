@@ -411,50 +411,94 @@ document.addEventListener('DOMContentLoaded', function() {
 <main class="main homepage">
     
     <section class="hero-section">
+      <div class="hero-background">
+        <div class="hero-particles"></div>
+        <div class="hero-grid-overlay"></div>
+      </div>
       <div class="hero-content">
-        <h1 class="hero-title">Cybersecurity Knowledge & Hands-On Learning</h1>
+        <div class="hero-badge">
+          <span class="badge-text">🛡️ Cybersecurity Professional</span>
+        </div>
+        <h1 class="hero-title">
+          <span class="title-line">Cybersecurity Knowledge</span>
+          <span class="title-line highlight">& Hands-On Learning</span>
+        </h1>
         <p class="hero-subtitle">Practical tutorials on penetration testing, network security, and defensive techniques. Building cybersecurity skills through real-world scenarios and tool demonstrations.</p>
         <div class="hero-buttons">
-          <a href="/posts/" class="btn btn-primary">Read Articles</a>
-          <a href="/projects/" class="btn btn-secondary">View Projects</a>
+          <a href="/posts/" class="btn btn-primary">
+            <span class="btn-icon">📚</span>
+            Read Articles
+          </a>
+          <a href="/projects/" class="btn btn-secondary">
+            <span class="btn-icon">🚀</span>
+            View Projects
+          </a>
+          <a href="/contact/" class="btn btn-tertiary">
+            <span class="btn-icon">💬</span>
+            Get In Touch
+          </a>
         </div>
       </div>
       <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-number">8</span>
-          <span class="stat-label">Articles</span>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+          <span class="stat-number" data-count="8">0</span>
+          <span class="stat-label">Articles Published</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-number">33</span>
-          <span class="stat-label">Topics</span>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+          <span class="stat-number" data-count="33">0</span>
+          <span class="stat-label">Topics Covered</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-number">Learning</span>
-          <span class="stat-label">Journey</span>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+          <span class="stat-number">∞</span>
+          <span class="stat-label">Learning Journey</span>
         </div>
       </div>
     </section>
 
     
-    <section class="featured-posts compact">
-      <h2>Latest Security Insights</h2>
+    <section class="featured-posts compact" data-aos="fade-up">
+      <div class="section-header">
+        <h2>Latest Security Insights</h2>
+        <p class="section-subtitle">Explore my latest cybersecurity research, tutorials, and practical guides</p>
+      </div>
       <div class="posts-list">
         
-        <article class="post-item">
-          <div class="post-meta">
-            <time datetime="2024-01-01">Jan 1</time>
-            <span class="reading-time">9min</span>
+        <article class="post-item" data-aos="fade-up" data-aos-delay="100">
+          <div class="post-header">
+            <div class="post-meta">
+              <time datetime="2024-01-01">Jan 1</time>
+              <span class="reading-time">10min read</span>
+            </div>
+            
           </div>
           <h3><a href="http://localhost:1313/about/">About</a></h3>
           
+          <p class="post-excerpt"><h1 id="araharan-loganayagam">ARAHARAN LOGANAYAGAM</h1>
+<p><strong>Cybersecurity Engineer</strong></p>
+<p>📍 London, United Kingdom<br>
+📧 <a href="mailto:araharan.x.loganayagam@hotmail.com">araharan.x.loganayagam@hotmail.com</a></p>
+<h3 id="connect-with-me">Connect With …</h3></p>
+          
+          
+          <div class="post-footer">
+            <a href="http://localhost:1313/about/" class="read-more">Read More →</a>
+          </div>
         </article>
         
-        <article class="post-item">
-          <div class="post-meta">
-            <time datetime="2025-10-01">Oct 1</time>
-            <span class="reading-time">11min</span>
+        <article class="post-item" data-aos="fade-up" data-aos-delay="200">
+          <div class="post-header">
+            <div class="post-meta">
+              <time datetime="2025-10-01">Oct 1</time>
+              <span class="reading-time">11min read</span>
+            </div>
+            
+              <span class="post-category">HackTheBox</span>
+            
           </div>
           <h3><a href="http://localhost:1313/posts/hackthebox-poison-walkthrough/">HackTheBox: Poison Walkthrough</a></h3>
+          
+          <p class="post-excerpt">Defeat HackTheBox Poison by chaining PHP log poisoning, reverse shelling, Base64 credential digging and an SSH/VNC pivot …</p>
+          
           
           <div class="post-tags">
             
@@ -462,16 +506,30 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <span class="tag">web-exploitation</span>
             
+            <span class="tag">lfi</span>
+            
           </div>
           
+          <div class="post-footer">
+            <a href="http://localhost:1313/posts/hackthebox-poison-walkthrough/" class="read-more">Read More →</a>
+          </div>
         </article>
         
-        <article class="post-item">
-          <div class="post-meta">
-            <time datetime="2025-09-30">Sep 30</time>
-            <span class="reading-time">3min</span>
+        <article class="post-item" data-aos="fade-up" data-aos-delay="300">
+          <div class="post-header">
+            <div class="post-meta">
+              <time datetime="2025-09-30">Sep 30</time>
+              <span class="reading-time">3min read</span>
+            </div>
+            
+              <span class="post-category">code-review</span>
+            
           </div>
           <h3><a href="http://localhost:1313/posts/pair-programming-vs-code-reviews/">Pair Programming vs Code Reviews: Why Both Matter</a></h3>
+          
+          <p class="post-excerpt"><h2 id="the-false-dichotomy">The False Dichotomy</h2>
+<p>A common misconception in software development is that pair programming eliminates the need for code …</p></p>
+          
           
           <div class="post-tags">
             
@@ -479,16 +537,30 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <span class="tag">code-review</span>
             
+            <span class="tag">collaboration</span>
+            
           </div>
           
+          <div class="post-footer">
+            <a href="http://localhost:1313/posts/pair-programming-vs-code-reviews/" class="read-more">Read More →</a>
+          </div>
         </article>
         
-        <article class="post-item">
-          <div class="post-meta">
-            <time datetime="2025-09-30">Sep 30</time>
-            <span class="reading-time">4min</span>
+        <article class="post-item" data-aos="fade-up" data-aos-delay="400">
+          <div class="post-header">
+            <div class="post-meta">
+              <time datetime="2025-09-30">Sep 30</time>
+              <span class="reading-time">4min read</span>
+            </div>
+            
+              <span class="post-category">code-review</span>
+            
           </div>
           <h3><a href="http://localhost:1313/posts/ai-powered-code-review-prompts/">AI-Powered Code Reviews: Comprehensive Prompts for Better Code Quality</a></h3>
+          
+          <p class="post-excerpt"><h2 id="the-future-of-code-reviews-ai-assisted-analysis">The Future of Code Reviews: AI-Assisted Analysis</h2>
+<p>Modern AI tools like Claude, GPT-4, and specialized code analysis …</p></p>
+          
           
           <div class="post-tags">
             
@@ -496,16 +568,30 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <span class="tag">code-review</span>
             
+            <span class="tag">automation</span>
+            
           </div>
           
+          <div class="post-footer">
+            <a href="http://localhost:1313/posts/ai-powered-code-review-prompts/" class="read-more">Read More →</a>
+          </div>
         </article>
         
-        <article class="post-item">
-          <div class="post-meta">
-            <time datetime="2025-09-30">Sep 30</time>
-            <span class="reading-time">2min</span>
+        <article class="post-item" data-aos="fade-up" data-aos-delay="500">
+          <div class="post-header">
+            <div class="post-meta">
+              <time datetime="2025-09-30">Sep 30</time>
+              <span class="reading-time">2min read</span>
+            </div>
+            
+              <span class="post-category">code-review</span>
+            
           </div>
           <h3><a href="http://localhost:1313/posts/code-review-psychology-lines-matter/">The Psychology of Code Reviews: Why Line Count Matters</a></h3>
+          
+          <p class="post-excerpt"><h2 id="the-code-review-paradox">The Code Review Paradox</h2>
+<p>There&rsquo;s a well-known observation in the programming world that perfectly captures the …</p></p>
+          
           
           <div class="post-tags">
             
@@ -513,16 +599,30 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <span class="tag">code-review</span>
             
+            <span class="tag">psychology</span>
+            
           </div>
           
+          <div class="post-footer">
+            <a href="http://localhost:1313/posts/code-review-psychology-lines-matter/" class="read-more">Read More →</a>
+          </div>
         </article>
         
-        <article class="post-item">
-          <div class="post-meta">
-            <time datetime="2025-09-30">Sep 30</time>
-            <span class="reading-time">4min</span>
+        <article class="post-item" data-aos="fade-up" data-aos-delay="600">
+          <div class="post-header">
+            <div class="post-meta">
+              <time datetime="2025-09-30">Sep 30</time>
+              <span class="reading-time">4min read</span>
+            </div>
+            
+              <span class="post-category">development</span>
+            
           </div>
           <h3><a href="http://localhost:1313/posts/github-profile-readme-generator/">Ultimate GitHub Profile README Generator Guide</a></h3>
+          
+          <p class="post-excerpt"><h1 id="-ultimate-github-profile-readme-generator">🚀 Ultimate GitHub Profile README Generator</h1>
+<p>Transform your GitHub profile into a stunning showcase with this …</p></p>
+          
           
           <div class="post-tags">
             
@@ -530,16 +630,29 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <span class="tag">profile</span>
             
+            <span class="tag">readme</span>
+            
           </div>
           
+          <div class="post-footer">
+            <a href="http://localhost:1313/posts/github-profile-readme-generator/" class="read-more">Read More →</a>
+          </div>
         </article>
         
-        <article class="post-item">
-          <div class="post-meta">
-            <time datetime="2024-12-01">Dec 1</time>
-            <span class="reading-time">7min</span>
+        <article class="post-item" data-aos="fade-up" data-aos-delay="700">
+          <div class="post-header">
+            <div class="post-meta">
+              <time datetime="2024-12-01">Dec 1</time>
+              <span class="reading-time">7min read</span>
+            </div>
+            
+              <span class="post-category">HackTheBox</span>
+            
           </div>
           <h3><a href="http://localhost:1313/posts/hackthebox-mentor-walkthrough/">HackTheBox: Mentor Walkthrough</a></h3>
+          
+          <p class="post-excerpt">Complete penetration testing walkthrough of HackTheBox Mentor machine covering reconnaissance, enumeration, …</p>
+          
           
           <div class="post-tags">
             
@@ -547,16 +660,30 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <span class="tag">penetration-testing</span>
             
+            <span class="tag">web-exploitation</span>
+            
           </div>
           
+          <div class="post-footer">
+            <a href="http://localhost:1313/posts/hackthebox-mentor-walkthrough/" class="read-more">Read More →</a>
+          </div>
         </article>
         
-        <article class="post-item">
-          <div class="post-meta">
-            <time datetime="2024-02-05">Feb 5</time>
-            <span class="reading-time">8min</span>
+        <article class="post-item" data-aos="fade-up" data-aos-delay="800">
+          <div class="post-header">
+            <div class="post-meta">
+              <time datetime="2024-02-05">Feb 5</time>
+              <span class="reading-time">8min read</span>
+            </div>
+            
+              <span class="post-category">system-administration</span>
+            
           </div>
           <h3><a href="http://localhost:1313/posts/linux-system-administration/">Linux System Administration Essentials</a></h3>
+          
+          <p class="post-excerpt"><h1 id="linux-system-administration-essentials">Linux System Administration Essentials</h1>
+<p>Essential commands and techniques for Linux system administration, covering …</p></p>
+          
           
           <div class="post-tags">
             
@@ -564,13 +691,21 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <span class="tag">sysadmin</span>
             
+            <span class="tag">automation</span>
+            
           </div>
           
+          <div class="post-footer">
+            <a href="http://localhost:1313/posts/linux-system-administration/" class="read-more">Read More →</a>
+          </div>
         </article>
         
       </div>
       <div class="view-all">
-        <a href="/posts/" class="btn btn-outline">View All Articles</a>
+        <a href="/posts/" class="btn btn-outline">
+          <span class="btn-icon">📖</span>
+          View All Articles
+        </a>
       </div>
     </section>
 
@@ -1134,48 +1269,75 @@ document.addEventListener('DOMContentLoaded', function() {
     </section>
 
     
-    <section class="expertise-section">
-      <h2>Areas of Expertise</h2>
+    <section class="expertise-section" data-aos="fade-up">
+      <div class="section-header">
+        <h2>Areas of Expertise</h2>
+        <p class="section-subtitle">Specialized cybersecurity domains where I share knowledge and practical experience</p>
+      </div>
       <div class="expertise-grid">
-        <div class="expertise-item">
+        <div class="expertise-item" data-aos="zoom-in" data-aos-delay="100">
           <div class="expertise-icon">🔒</div>
           <h3>Penetration Testing</h3>
           <p>Comprehensive security assessments, vulnerability discovery, and ethical hacking techniques.</p>
+          <div class="expertise-level">
+            <div class="level-bar" data-level="95"></div>
+          </div>
         </div>
-        <div class="expertise-item">
+        <div class="expertise-item" data-aos="zoom-in" data-aos-delay="200">
           <div class="expertise-icon">🌐</div>
           <h3>Network Security</h3>
           <p>Network enumeration, traffic analysis, and infrastructure security hardening.</p>
+          <div class="expertise-level">
+            <div class="level-bar" data-level="90"></div>
+          </div>
         </div>
-        <div class="expertise-item">
+        <div class="expertise-item" data-aos="zoom-in" data-aos-delay="300">
           <div class="expertise-icon">🤖</div>
           <h3>AI Security</h3>
           <p>Machine learning security, AI model protection, and artificial intelligence threat analysis.</p>
+          <div class="expertise-level">
+            <div class="level-bar" data-level="85"></div>
+          </div>
         </div>
-        <div class="expertise-item">
+        <div class="expertise-item" data-aos="zoom-in" data-aos-delay="400">
           <div class="expertise-icon">☁️</div>
           <h3>Cloud Security</h3>
           <p>AWS/Azure security, container protection, and cloud infrastructure hardening.</p>
+          <div class="expertise-level">
+            <div class="level-bar" data-level="88"></div>
+          </div>
         </div>
-        <div class="expertise-item">
+        <div class="expertise-item" data-aos="zoom-in" data-aos-delay="500">
           <div class="expertise-icon">📱</div>
           <h3>Application Security</h3>
           <p>Web application testing, secure code review, and application vulnerability assessment.</p>
+          <div class="expertise-level">
+            <div class="level-bar" data-level="92"></div>
+          </div>
         </div>
-        <div class="expertise-item">
+        <div class="expertise-item" data-aos="zoom-in" data-aos-delay="600">
           <div class="expertise-icon">🚨</div>
           <h3>SOC Operations</h3>
           <p>Security monitoring, threat detection, incident response, and security analytics.</p>
+          <div class="expertise-level">
+            <div class="level-bar" data-level="87"></div>
+          </div>
         </div>
-        <div class="expertise-item">
+        <div class="expertise-item" data-aos="zoom-in" data-aos-delay="700">
           <div class="expertise-icon">⚙️</div>
           <h3>DevSecOps</h3>
           <p>Security automation, CI/CD pipeline protection, and secure development practices.</p>
+          <div class="expertise-level">
+            <div class="level-bar" data-level="90"></div>
+          </div>
         </div>
-        <div class="expertise-item">
+        <div class="expertise-item" data-aos="zoom-in" data-aos-delay="800">
           <div class="expertise-icon">🔧</div>
           <h3>Security Tools</h3>
           <p>Custom tool development, automation scripts, and security framework expertise.</p>
+          <div class="expertise-level">
+            <div class="level-bar" data-level="93"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -1187,12 +1349,70 @@ document.addEventListener('DOMContentLoaded', function() {
   max-width: 1200px;
 }
 
+ 
 .hero-section {
+  position: relative;
   text-align: center;
-  padding: 60px 0;
+  padding: 80px 0;
   background: linear-gradient(135deg, var(--entry) 0%, var(--theme) 100%);
   border-radius: var(--radius);
   margin-bottom: 50px;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.hero-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: particle-float 20s linear infinite;
+}
+
+.hero-grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-flow 15s ease-in-out infinite;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  display: inline-block;
+  margin-bottom: 20px;
+  animation: badge-glow 2s ease-in-out infinite;
+}
+
+.badge-text {
+  background: linear-gradient(45deg, #00ff41, #00a832);
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .hero-title {
@@ -1200,6 +1420,24 @@ document.addEventListener('DOMContentLoaded', function() {
   font-weight: 700;
   margin: 0 0 20px 0;
   color: var(--primary);
+  line-height: 1.2;
+}
+
+.title-line {
+  display: block;
+  opacity: 0;
+  animation: title-slide-in 1s ease-out forwards;
+}
+
+.title-line:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.title-line.highlight {
+  background: linear-gradient(45deg, #00ff41, #00a832);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hero-subtitle {
@@ -1216,24 +1454,55 @@ document.addEventListener('DOMContentLoaded', function() {
   gap: 20px;
   justify-content: center;
   margin-bottom: 40px;
+  flex-wrap: wrap;
 }
 
 .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 15px 30px;
   border-radius: var(--radius);
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-icon {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.btn:hover .btn-icon {
+  transform: scale(1.2);
 }
 
 .btn-primary {
-  background: var(--primary);
-  color: var(--theme);
+  background: linear-gradient(45deg, #00ff41, #00a832);
+  color: #000;
+  box-shadow: 0 4px 15px rgba(0, 255, 65, 0.3);
 }
 
 .btn-primary:hover {
-  background: var(--secondary);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 255, 65, 0.4);
 }
 
 .btn-secondary {
@@ -1245,6 +1514,18 @@ document.addEventListener('DOMContentLoaded', function() {
 .btn-secondary:hover {
   background: var(--primary);
   color: var(--theme);
+  transform: translateY(-3px);
+}
+
+.btn-tertiary {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-tertiary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
 .btn-outline {
@@ -1282,78 +1563,169 @@ document.addEventListener('DOMContentLoaded', function() {
   letter-spacing: 1px;
 }
 
-.featured-posts {
+ 
+.section-header {
+  text-align: center;
   margin-bottom: 40px;
 }
 
-.featured-posts h2 {
-  text-align: center;
-  margin: 0 0 25px 0;
-  font-size: 28px;
+.section-header h2 {
+  font-size: 36px;
+  font-weight: 700;
   color: var(--primary);
+  margin: 0 0 15px 0;
+  position: relative;
 }
 
-.featured-posts.compact h2 {
-  font-size: 24px;
-  margin: 0 0 20px 0;
+.section-header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(45deg, #00ff41, #00a832);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: var(--secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.featured-posts {
+  margin-bottom: 60px;
 }
 
 .posts-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 15px;
-  margin-bottom: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
 }
 
 .post-item {
   background: var(--entry);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 12px;
+  padding: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.post-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(45deg, #00ff41, #00a832, #667eea);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.post-item:hover::before {
+  transform: scaleX(1);
 }
 
 .post-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 255, 65, 0.3);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.post-category {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .post-item .post-meta {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  gap: 15px;
   font-size: 13px;
   color: var(--secondary);
 }
 
 .post-item h3 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
+  margin: 0 0 12px 0;
+  font-size: 20px;
   line-height: 1.4;
 }
 
 .post-item h3 a {
   color: var(--primary);
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .post-item h3 a:hover {
+  color: #00ff41;
+}
+
+.post-excerpt {
   color: var(--secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 15px 0;
 }
 
 .post-item .post-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
+  margin-bottom: 15px;
 }
 
 .post-item .tag {
   background: var(--tertiary);
   color: var(--primary);
-  padding: 3px 8px;
-  border-radius: 3px;
+  padding: 4px 10px;
+  border-radius: 15px;
   font-size: 11px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.post-item .tag:hover {
+  background: #00ff41;
+  color: #000;
+  transform: scale(1.05);
+}
+
+.post-footer {
+  margin-top: auto;
+}
+
+.read-more {
+  color: #00ff41;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.read-more:hover {
+  color: #00a832;
+  transform: translateX(5px);
 }
 
 .view-all {
@@ -1492,49 +1864,129 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .expertise-section {
-  margin-bottom: 50px;
-}
-
-.expertise-section h2 {
-  text-align: center;
-  margin: 0 0 40px 0;
-  font-size: 36px;
-  color: var(--primary);
+  margin-bottom: 60px;
 }
 
 .expertise-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
 }
 
 .expertise-item {
   text-align: center;
-  padding: 30px 20px;
+  padding: 35px 25px;
   background: var(--entry);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.expertise-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(45deg, #00ff41, #00a832);
+  transform: scaleX(0);
   transition: transform 0.3s ease;
 }
 
+.expertise-item:hover::before {
+  transform: scaleX(1);
+}
+
 .expertise-item:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 255, 65, 0.3);
 }
 
 .expertise-icon {
-  font-size: 48px;
-  margin-bottom: 20px;
+  font-size: 60px;
+  margin-bottom: 25px;
+  transition: transform 0.3s ease;
+}
+
+.expertise-item:hover .expertise-icon {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .expertise-item h3 {
   margin: 0 0 15px 0;
   color: var(--primary);
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 .expertise-item p {
   color: var(--secondary);
-  line-height: 1.6;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.expertise-level {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.level-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.level-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(45deg, #00ff41, #00a832);
+  width: 0;
+  transition: width 2s ease-in-out;
+  border-radius: 3px;
+}
+
+ 
+@keyframes particle-float {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-10px) translateX(5px); }
+  50% { transform: translateY(-5px) translateX(-5px); }
+  75% { transform: translateY(-15px) translateX(3px); }
+}
+
+@keyframes grid-flow {
+  0%, 100% { opacity: 0.3; transform: translateY(0px); }
+  50% { opacity: 0.1; transform: translateY(-10px); }
+}
+
+@keyframes badge-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(0, 255, 65, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(0, 255, 65, 0.6); }
+}
+
+@keyframes title-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes count-up {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 @media screen and (max-width: 768px) {
@@ -1588,6 +2040,121 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 }
 </style>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+  function animateCounters() {
+    const counters = document.querySelectorAll('[data-count]');
+    
+    counters.forEach(counter => {
+      const target = parseInt(counter.getAttribute('data-count'));
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        counter.textContent = Math.floor(current);
+      }, 16);
+    });
+  }
+
+  
+  function animateSkillBars() {
+    const skillBars = document.querySelectorAll('.level-bar');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bar = entry.target;
+          const level = bar.getAttribute('data-level');
+          bar.style.setProperty('--level', level + '%');
+          bar.querySelector('::after') || bar.addEventListener('animationend', () => {
+            bar.style.setProperty('width', level + '%');
+          });
+          setTimeout(() => {
+            bar.style.setProperty('--fill-width', level + '%');
+            if (bar.querySelector) {
+              const afterElement = getComputedStyle(bar, '::after');
+              bar.style.setProperty('--after-width', level + '%');
+            }
+          }, 500);
+        }
+      });
+    });
+
+    skillBars.forEach(bar => {
+      observer.observe(bar);
+      const level = bar.getAttribute('data-level');
+      
+      setTimeout(() => {
+        bar.style.setProperty('--level', level + '%');
+      }, 500);
+    });
+  }
+
+  
+  function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('[data-aos]');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          const animation = element.getAttribute('data-aos');
+          const delay = element.getAttribute('data-aos-delay') || 0;
+          
+          setTimeout(() => {
+            element.style.opacity = '1';
+            element.style.transform = 'translateY(0)';
+            element.classList.add('aos-animate');
+          }, delay);
+        }
+      });
+    });
+
+    animatedElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s ease';
+      observer.observe(el);
+    });
+  }
+
+  
+  setTimeout(animateCounters, 1000);
+  setTimeout(animateSkillBars, 2000);
+  initScrollAnimations();
+
+  
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = `
+    .level-bar[data-level="95"]::after { width: 95%; }
+    .level-bar[data-level="90"]::after { width: 90%; }
+    .level-bar[data-level="85"]::after { width: 85%; }
+    .level-bar[data-level="88"]::after { width: 88%; }
+    .level-bar[data-level="92"]::after { width: 92%; }
+    .level-bar[data-level="87"]::after { width: 87%; }
+    .level-bar[data-level="93"]::after { width: 93%; }
+    
+    .expertise-item:hover .level-bar::after {
+      animation: level-fill 1s ease-in-out;
+    }
+    
+    @keyframes level-fill {
+      0% { width: 0; }
+      100% { width: var(--level, 0%); }
+    }
+  `;
+  document.head.appendChild(styleSheet);
+});
+</script>
 
     </main>
     <footer class="footer">

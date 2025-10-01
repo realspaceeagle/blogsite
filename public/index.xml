@@ -649,11 +649,11 @@
 &lt;h2 id=&#34;-email-subscription&#34;&gt;📧 Email Subscription&lt;/h2&gt;
 &lt;p&gt;Stay updated with the latest cybersecurity insights, tutorials, and security research directly in your inbox!&lt;/p&gt;
 &lt;h3 id=&#34;subscribe-to-my-newsletter&#34;&gt;Subscribe to My Newsletter&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Join the cybersecurity community&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Get weekly security insights and tutorials&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Latest vulnerability research and defensive techniques&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Exclusive content and early access to new posts&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Subscribe on Substack:&lt;/strong&gt; &lt;a href=&#34;https://substack.com/@araharanloganayagam&#34;&gt;@araharanloganayagam&lt;/a&gt;&lt;/p&gt;</description>
+&lt;div style=&#34;display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;&#34;&gt;
+&lt;div style=&#34;border: 2px solid #40c057; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(64, 192, 87, 0.2); transition: transform 0.3s ease;&#34;&gt;
+&lt;div style=&#34;font-size: 24px; margin-bottom: 10px;&#34;&gt;📝&lt;/div&gt;
+&lt;h4 style=&#34;color: #40c057; margin-bottom: 15px;&#34;&gt;Weekly Security Insights&lt;/h4&gt;
+&lt;p style=&#34;color: #cccccc; font-size: 14px; margin-bottom: 8px;&#34;&gt;&lt;strong&gt;Get exclusive cybersecurity content:&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Projects &amp; Tools</title>
