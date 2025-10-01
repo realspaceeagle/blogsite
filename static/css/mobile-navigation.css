@@ -157,6 +157,7 @@ body.mobile-menu-open {
     /* Adjust header layout for mobile */
     .nav {
         padding: 0 1rem;
+        flex-wrap: nowrap;
     }
     
     .logo {
@@ -164,6 +165,15 @@ body.mobile-menu-open {
         align-items: center;
         justify-content: space-between;
         width: 100%;
+        flex-wrap: nowrap;
+    }
+    
+    .logo a {
+        font-size: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
     }
     
     .logo-switches {
@@ -171,6 +181,7 @@ body.mobile-menu-open {
         align-items: center;
         gap: 8px;
         order: 2;
+        flex-shrink: 0;
     }
     
     /* Hide social icons on mobile */
@@ -191,6 +202,51 @@ body.mobile-menu-open {
     .mobile-menu-list a {
         padding: 0.875rem 1.5rem;
         font-size: 1rem;
+    }
+    
+    /* Content spacing adjustments */
+    .main {
+        padding: var(--gap) 1rem;
+    }
+    
+    .page-header h1 {
+        font-size: 28px;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Better content container */
+    .post-content,
+    .entry-content {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Images responsive */
+    .post-content img,
+    .entry-content img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 1rem auto;
+    }
+    
+    /* Tables responsive */
+    .post-content table,
+    .entry-content table {
+        font-size: 14px;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    /* Code blocks responsive */
+    .post-content pre,
+    .entry-content pre {
+        overflow-x: auto;
+        font-size: 13px;
+        padding: 1rem;
     }
 }
 

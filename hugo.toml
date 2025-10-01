@@ -134,6 +134,12 @@ ignoreLogs = ['warning-goldmark-raw-html']
   weight = 30
 
   [[menu.main]]
+  identifier = "cheatsheets"
+  name = "Cheatsheets"
+  url = "/cheatsheets/"
+  weight = 35
+
+  [[menu.main]]
   identifier = "search"
   name = "Search"
   url = "/search/"

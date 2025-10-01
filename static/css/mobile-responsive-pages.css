@@ -1,0 +1,464 @@
+/* Mobile Responsive Enhancements for About & Contact Pages */
+
+/* Base responsive grid fixes */
+@media screen and (max-width: 768px) {
+  /* About page mobile fixes */
+  .about-page div[style*="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))"],
+  .about-page div[style*="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr))"],
+  .about-page div[style*="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))"],
+  .about-page div[style*="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))"],
+  .about-page div[style*="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+    margin: 15px 0 !important;
+  }
+  
+  /* Contact page mobile fixes */
+  .contact-page div[style*="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))"],
+  .contact-page div[style*="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))"] {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+    margin: 15px 0 !important;
+  }
+  
+  /* Generic grid fixes for inline styles */
+  [style*="display: grid"][style*="grid-template-columns: repeat(auto-fit, minmax("] {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+  
+  /* Card padding fixes */
+  [style*="padding: 30px"] {
+    padding: 20px 15px !important;
+  }
+  
+  [style*="padding: 25px"] {
+    padding: 18px 12px !important;
+  }
+  
+  [style*="padding: 20px"] {
+    padding: 15px 12px !important;
+  }
+  
+  /* Font size adjustments */
+  [style*="font-size: 48px"] {
+    font-size: 36px !important;
+  }
+  
+  [style*="font-size: 36px"] {
+    font-size: 28px !important;
+  }
+  
+  [style*="font-size: 28px"] {
+    font-size: 24px !important;
+  }
+  
+  [style*="font-size: 24px"] {
+    font-size: 20px !important;
+  }
+  
+  /* Margin fixes */
+  [style*="margin: 30px 0"] {
+    margin: 20px 0 !important;
+  }
+  
+  [style*="margin: 25px 0"] {
+    margin: 18px 0 !important;
+  }
+  
+  [style*="margin: 20px 0"] {
+    margin: 15px 0 !important;
+  }
+  
+  /* Social links grid adjustments */
+  [style*="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))"] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  
+  /* Button and link improvements */
+  a[style*="padding: 15px"] {
+    padding: 12px !important;
+  }
+  
+  a[style*="padding: 12px 20px"] {
+    padding: 10px 16px !important;
+  }
+  
+  /* Text content improvements */
+  p[style*="font-size: 18px"] {
+    font-size: 16px !important;
+  }
+  
+  p[style*="font-size: 16px"] {
+    font-size: 15px !important;
+  }
+  
+  p[style*="font-size: 14px"] {
+    font-size: 13px !important;
+  }
+  
+  /* Flexbox direction fixes */
+  [style*="display: flex; align-items: center; gap: 10px"] {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+  
+  /* Email and contact info spacing */
+  [style*="max-width: 200px"] {
+    max-width: none !important;
+  }
+  
+  /* Ensure text doesn't get cut off */
+  [style*="white-space: nowrap"] {
+    white-space: normal !important;
+  }
+  
+  /* Typography improvements */
+  h1, h2, h3, h4 {
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Profile card specific fixes */
+  .about-page [style*="text-align: center"] {
+    text-align: center !important;
+  }
+  
+  /* Contact form and subscription fixes */
+  .contact-page [style*="text-align: center"] {
+    text-align: center !important;
+  }
+  
+  /* Code block responsiveness */
+  pre, code {
+    overflow-x: auto;
+    font-size: 12px !important;
+    word-wrap: break-word;
+  }
+  
+  /* Social icon improvements */
+  svg {
+    max-width: 20px !important;
+    max-height: 20px !important;
+  }
+  
+  /* Skills and expertise cards */
+  [style*="border-radius: 15px"] {
+    border-radius: 10px !important;
+  }
+  
+  [style*="border-radius: 12px"] {
+    border-radius: 8px !important;
+  }
+  
+  /* Hover effects - disable transform on mobile */
+  [style*="transition: transform 0.3s ease"]:hover {
+    transform: none !important;
+  }
+  
+  /* Box shadow adjustments */
+  [style*="box-shadow: 0 8px 25px"] {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  [style*="box-shadow: 0 4px 15px"] {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Extra small screens - even more aggressive fixes */
+  [style*="padding: 20px 15px"] {
+    padding: 15px 10px !important;
+  }
+  
+  [style*="padding: 18px 12px"] {
+    padding: 12px 8px !important;
+  }
+  
+  [style*="padding: 15px 12px"] {
+    padding: 12px 8px !important;
+  }
+  
+  /* Font size reductions for very small screens */
+  [style*="font-size: 36px"] {
+    font-size: 28px !important;
+  }
+  
+  [style*="font-size: 28px"] {
+    font-size: 22px !important;
+  }
+  
+  [style*="font-size: 24px"] {
+    font-size: 18px !important;
+  }
+  
+  [style*="font-size: 20px"] {
+    font-size: 16px !important;
+  }
+  
+  /* Gap reductions */
+  [style*="gap: 15px"] {
+    gap: 10px !important;
+  }
+  
+  [style*="gap: 20px"] {
+    gap: 12px !important;
+  }
+  
+  /* Button adjustments */
+  a[style*="display: inline-block"] {
+    display: block !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 10px auto !important;
+  }
+  
+  /* Two-column grid override for very small screens */
+  [style*="grid-column: span 2"] {
+    grid-column: span 1 !important;
+  }
+  
+  /* Ensure all cards stack vertically */
+  [style*="display: grid"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  /* Ultra-small screens - minimal spacing */
+  body {
+    font-size: 14px;
+  }
+  
+  [style*="padding: 15px 10px"] {
+    padding: 10px 8px !important;
+  }
+  
+  [style*="margin: 15px 0"] {
+    margin: 10px 0 !important;
+  }
+  
+  /* Further font size reductions */
+  [style*="font-size: 28px"] {
+    font-size: 20px !important;
+  }
+  
+  [style*="font-size: 22px"] {
+    font-size: 18px !important;
+  }
+  
+  [style*="font-size: 18px"] {
+    font-size: 16px !important;
+  }
+  
+  /* Minimum viable spacing */
+  [style*="gap: 10px"] {
+    gap: 8px !important;
+  }
+  
+  [style*="gap: 12px"] {
+    gap: 8px !important;
+  }
+}
+
+/* Base page improvements */
+.main {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ensure all content respects viewport */
+* {
+  box-sizing: border-box;
+}
+
+/* Handle long URLs and code */
+.post-content a,
+.entry-content a {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Handle tables on mobile */
+table {
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 768px) {
+  table {
+    font-size: 12px;
+  }
+  
+  th, td {
+    padding: 6px !important;
+    min-width: 80px;
+  }
+}
+
+/* Contact form specific improvements */
+@media screen and (max-width: 768px) {
+  /* Newsletter subscription area */
+  .contact-page div[style*="border: 2px solid #40c057"] {
+    margin-bottom: 15px !important;
+  }
+  
+  /* Email contact cards */
+  .contact-page div[style*="border: 2px solid #e03131"] {
+    margin-bottom: 15px !important;
+  }
+  
+  /* Social media cards */
+  .contact-page div[style*="border: 2px solid #0077b5"],
+  .contact-page div[style*="border: 2px solid #333"],
+  .contact-page div[style*="border: 2px solid #00ab6c"],
+  .contact-page div[style*="border: 2px solid #1da1f2"] {
+    margin-bottom: 15px !important;
+  }
+  
+  /* Response time cards */
+  .contact-page div[style*="border: 2px solid #40c057"],
+  .contact-page div[style*="border: 2px solid #fd7e14"],
+  .contact-page div[style*="border: 2px solid #9775fa"],
+  .contact-page div[style*="border: 2px solid #e03131"] {
+    margin-bottom: 15px !important;
+  }
+  
+  /* Technical discussion cards */
+  .contact-page div[style*="border: 2px solid #ff6b35"],
+  .contact-page div[style*="border: 2px solid #4dabf7"],
+  .contact-page div[style*="border: 2px solid #be4bdb"] {
+    margin-bottom: 15px !important;
+  }
+  
+  /* Collaboration cards */
+  .contact-page div[style*="border: 2px solid #37b24d"],
+  .contact-page div[style*="border: 2px solid #f59f00"],
+  .contact-page div[style*="border: 2px solid #1c7ed6"] {
+    margin-bottom: 15px !important;
+  }
+  
+  /* Security communication cards */
+  .contact-page div[style*="border: 2px solid #51cf66"],
+  .contact-page div[style*="border: 2px solid #4dabf7"],
+  .contact-page div[style*="border: 2px solid #9775fa"] {
+    margin-bottom: 15px !important;
+  }
+}
+
+/* Force responsive behavior for specific inline styled elements */
+@media screen and (max-width: 768px) {
+  /* About page professional profile section */
+  article div[style*="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))"] {
+    display: block !important;
+  }
+  
+  article div[style*="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))"] > div {
+    display: block !important;
+    margin-bottom: 20px !important;
+    width: 100% !important;
+  }
+  
+  /* About page grid sections */
+  article div[style*="display: grid"] > div[style*="border: 2px solid"] {
+    margin-bottom: 15px !important;
+    width: 100% !important;
+  }
+  
+  /* Contact page grid sections */
+  article div[style*="display: grid"] > div[style*="border: 2px solid"] {
+    margin-bottom: 15px !important;
+  }
+  
+  /* Force all grid containers to be single column */
+  article div[style*="display: grid"] {
+    display: block !important;
+  }
+  
+  /* Email display improvements */
+  a[href^="mailto:"] {
+    word-break: break-all;
+    font-size: 13px !important;
+  }
+  
+  /* Terminal/code block improvements */
+  div[style*="font-family: monospace"] {
+    font-size: 11px !important;
+    padding: 8px !important;
+    overflow-x: auto;
+    word-wrap: break-word;
+  }
+  
+  /* Ensure SVG icons scale properly */
+  div[style*="margin: 0 auto"] svg {
+    max-width: 18px !important;
+    max-height: 18px !important;
+  }
+  
+  /* Link styling improvements for mobile */
+  article a[style*="display: block"] {
+    padding: 10px !important;
+    font-size: 13px !important;
+  }
+  
+  /* Professional network links */
+  article a[target="_blank"] {
+    display: block !important;
+    margin-bottom: 10px !important;
+    text-align: center !important;
+  }
+  
+  /* Force flexbox containers to stack vertically */
+  div[style*="display: flex; align-items: center"] {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  
+  /* Certification and badge sections */
+  div[style*="scroll-behavior: smooth"] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Skills box improvements */
+  div[style*="border: 1px solid #444"] {
+    margin-bottom: 10px !important;
+    padding: 10px !important;
+  }
+}
+
+/* Additional utility classes for mobile */
+@media screen and (max-width: 768px) {
+  /* Utility: Force block layout */
+  .force-block,
+  [style*="display: grid"] {
+    display: block !important;
+  }
+  
+  /* Utility: Reduce spacing */
+  .reduce-spacing {
+    margin: 10px 0 !important;
+    padding: 10px !important;
+  }
+  
+  /* Utility: Mobile typography */
+  .mobile-text {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+  }
+  
+  /* Utility: Center content */
+  .mobile-center {
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+}
