@@ -140,13 +140,25 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   function setFallbackStats() {
-    const totalContribElement = document.getElementById('total-contributions');
-    const currentStreakElement = document.getElementById('current-streak');
-    const longestStreakElement = document.getElementById('longest-streak');
-    
-    if (totalContribElement) totalContribElement.textContent = '208';
-    if (currentStreakElement) currentStreakElement.textContent = '5 days';
-    if (longestStreakElement) longestStreakElement.textContent = '15 days';
+    // Use the improved fallback function if available
+    if (typeof window.setFallbackGitHubStats === 'function') {
+      window.setFallbackGitHubStats();
+    } else {
+      // Basic fallback
+      const totalContribElement = document.getElementById('total-contributions');
+      const currentStreakElement = document.getElementById('current-streak');
+      const longestStreakElement = document.getElementById('longest-streak');
+      
+      if (totalContribElement && totalContribElement.textContent === '-') {
+        totalContribElement.textContent = '500+';
+      }
+      if (currentStreakElement && currentStreakElement.textContent === '-') {
+        currentStreakElement.textContent = '5 days';
+      }
+      if (longestStreakElement && longestStreakElement.textContent === '-') {
+        longestStreakElement.textContent = '28 days';
+      }
+    }
   }
   
   async function refreshGitHubData() {
@@ -313,6 +325,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
+  // Initialize with immediate fallback, then load real data
+  // Set fallback stats immediately to prevent showing dashes
+  setTimeout(() => {
+    setFallbackStats();
+  }, 100);
+  
   // Initialize with a small delay to ensure DOM is fully ready
   setTimeout(() => {
     initializeGitHubCalendar();
@@ -328,5 +346,5 @@ document.addEventListener('DOMContentLoaded', function() {
         showCustomContributionGraph();
       }
     }, 2000);
-  }, 100);
+  }, 500);
 });

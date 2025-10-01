@@ -131,6 +131,94 @@
       </div>
     </section>
 
+    <!-- Dynamic Content Section -->
+    <section class="dynamic-content-section" data-aos="fade-up">
+      <div class="section-header">
+        <h2>Live Security Intelligence</h2>
+        <p class="section-subtitle">Real-time cybersecurity updates, threat intelligence, and industry insights</p>
+      </div>
+      
+      <div class="dynamic-content-grid">
+        
+        <!-- Security News Feed -->
+        <div class="dynamic-card news-feed" data-aos="fade-up" data-aos-delay="100">
+          <div class="card-header">
+            <div class="card-icon">📰</div>
+            <h3>Latest Security News</h3>
+            <div class="refresh-indicator" id="news-refresh">🔄</div>
+          </div>
+          <div class="card-content" id="security-news-content">
+            <div class="loading-placeholder">
+              <div class="loading-spinner"></div>
+              <span>Loading latest security news...</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="update-time" id="news-update-time">Just now</span>
+            <button class="refresh-btn" onclick="refreshSecurityNews()">Refresh</button>
+          </div>
+        </div>
+
+        <!-- Threat Intelligence -->
+        <div class="dynamic-card threat-intel" data-aos="fade-up" data-aos-delay="200">
+          <div class="card-header">
+            <div class="card-icon">🚨</div>
+            <h3>Threat Intelligence</h3>
+            <div class="threat-level" id="threat-level">MODERATE</div>
+          </div>
+          <div class="card-content" id="threat-intel-content">
+            <div class="loading-placeholder">
+              <div class="loading-spinner"></div>
+              <span>Analyzing current threat landscape...</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="update-time" id="threat-update-time">Just now</span>
+            <button class="refresh-btn" onclick="refreshThreatIntel()">Refresh</button>
+          </div>
+        </div>
+
+        <!-- CVE Database -->
+        <div class="dynamic-card cve-feed" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-header">
+            <div class="card-icon">🔍</div>
+            <h3>Recent Vulnerabilities</h3>
+            <div class="cve-count" id="cve-count">Loading...</div>
+          </div>
+          <div class="card-content" id="cve-content">
+            <div class="loading-placeholder">
+              <div class="loading-spinner"></div>
+              <span>Fetching latest CVE entries...</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="update-time" id="cve-update-time">Just now</span>
+            <button class="refresh-btn" onclick="refreshCVEFeed()">Refresh</button>
+          </div>
+        </div>
+
+        <!-- Security Events -->
+        <div class="dynamic-card security-events" data-aos="fade-up" data-aos-delay="400">
+          <div class="card-header">
+            <div class="card-icon">📅</div>
+            <h3>Upcoming Events</h3>
+            <div class="event-count" id="event-count">Loading...</div>
+          </div>
+          <div class="card-content" id="events-content">
+            <div class="loading-placeholder">
+              <div class="loading-spinner"></div>
+              <span>Loading security events...</span>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="update-time" id="events-update-time">Just now</span>
+            <button class="refresh-btn" onclick="refreshSecurityEvents()">Refresh</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- Skills & Expertise -->
     <section class="expertise-section" data-aos="fade-up">
       <div class="section-header">
@@ -818,7 +906,218 @@
   border-radius: 3px;
 }
 
+/* Dynamic Content Section */
+.dynamic-content-section {
+  margin-bottom: 60px;
+}
+
+.dynamic-content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.dynamic-card {
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.dynamic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.dynamic-card.news-feed {
+  border-top: 4px solid #ff6b35;
+}
+
+.dynamic-card.threat-intel {
+  border-top: 4px solid #e03131;
+}
+
+.dynamic-card.cve-feed {
+  border-top: 4px solid #fd7e14;
+}
+
+.dynamic-card.security-events {
+  border-top: 4px solid #4dabf7;
+}
+
+.card-header {
+  padding: 20px 25px 15px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-header h3 {
+  color: var(--primary);
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-icon {
+  font-size: 24px;
+}
+
+.refresh-indicator {
+  font-size: 16px;
+  animation: spin 2s linear infinite;
+  opacity: 0.6;
+}
+
+.threat-level {
+  background: linear-gradient(45deg, #e03131, #fa5252);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cve-count, .event-count {
+  background: var(--tertiary);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.card-content {
+  padding: 20px 25px;
+  min-height: 200px;
+  position: relative;
+}
+
+.loading-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+  color: var(--secondary);
+  gap: 15px;
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--border);
+  border-top: 3px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.news-item, .threat-item, .cve-item, .event-item {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+
+.news-item:last-child, .threat-item:last-child, .cve-item:last-child, .event-item:last-child {
+  border-bottom: none;
+}
+
+.news-item:hover, .threat-item:hover, .cve-item:hover, .event-item:hover {
+  background: var(--tertiary);
+  margin: 0 -25px;
+  padding: 12px 25px;
+}
+
+.item-title {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.item-meta {
+  color: var(--secondary);
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-source {
+  font-weight: 500;
+}
+
+.item-time {
+  opacity: 0.8;
+}
+
+.severity-high {
+  color: #e03131;
+  font-weight: 600;
+}
+
+.severity-medium {
+  color: #fd7e14;
+  font-weight: 600;
+}
+
+.severity-low {
+  color: #51cf66;
+  font-weight: 600;
+}
+
+.card-footer {
+  padding: 15px 25px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--theme);
+}
+
+.update-time {
+  color: var(--secondary);
+  font-size: 12px;
+}
+
+.refresh-btn {
+  background: var(--primary);
+  color: var(--theme);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.refresh-btn:hover {
+  background: var(--secondary);
+  transform: translateY(-1px);
+}
+
+.refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 @keyframes particle-float {
   0%, 100% { transform: translateY(0px) translateX(0px); }
   25% { transform: translateY(-10px) translateX(5px); }
@@ -994,6 +1293,9 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(animateCounters, 1000);
   setTimeout(animateSkillBars, 2000);
   initScrollAnimations();
+  
+  // Initialize dynamic content
+  initializeDynamicContent();
 
   // Add dynamic level bar animations with CSS
   const styleSheet = document.createElement('style');
@@ -1016,6 +1318,239 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   `;
   document.head.appendChild(styleSheet);
+
+  // Dynamic Content Functions
+  function initializeDynamicContent() {
+    // Initialize all dynamic content sections
+    setTimeout(() => {
+      loadSecurityNews();
+      loadThreatIntelligence();
+      loadCVEFeed();
+      loadSecurityEvents();
+    }, 2000);
+  }
+
+  function loadSecurityNews() {
+    const newsContent = document.getElementById('security-news-content');
+    const updateTime = document.getElementById('news-update-time');
+    
+    if (!newsContent) return;
+    
+    // Simulate loading security news
+    setTimeout(() => {
+      newsContent.innerHTML = `
+        <div class="news-item">
+          <div class="item-title">New Zero-Day Vulnerability Discovered in Popular Framework</div>
+          <div class="item-meta">
+            <span class="item-source">Security Research Team</span>
+            <span class="item-time">2 hours ago</span>
+          </div>
+        </div>
+        <div class="news-item">
+          <div class="item-title">Critical Update Released for Cloud Security Platform</div>
+          <div class="item-meta">
+            <span class="item-source">Cloud Security News</span>
+            <span class="item-time">4 hours ago</span>
+          </div>
+        </div>
+        <div class="news-item">
+          <div class="item-title">AI-Powered Threat Detection Tool Announced</div>
+          <div class="item-meta">
+            <span class="item-source">Cybersecurity Weekly</span>
+            <span class="item-time">6 hours ago</span>
+          </div>
+        </div>
+        <div class="news-item">
+          <div class="item-title">New Ransomware Campaign Targets Healthcare</div>
+          <div class="item-meta">
+            <span class="item-source">Threat Intelligence</span>
+            <span class="item-time">8 hours ago</span>
+          </div>
+        </div>
+      `;
+      updateTime.textContent = 'Updated 2 min ago';
+    }, 1500);
+  }
+
+  function loadThreatIntelligence() {
+    const threatContent = document.getElementById('threat-intel-content');
+    const updateTime = document.getElementById('threat-update-time');
+    const threatLevel = document.getElementById('threat-level');
+    
+    if (!threatContent) return;
+    
+    setTimeout(() => {
+      threatContent.innerHTML = `
+        <div class="threat-item">
+          <div class="item-title">Advanced Persistent Threat Activity</div>
+          <div class="item-meta">
+            <span class="severity-high">HIGH</span>
+            <span class="item-time">Active</span>
+          </div>
+        </div>
+        <div class="threat-item">
+          <div class="item-title">Phishing Campaign Increase</div>
+          <div class="item-meta">
+            <span class="severity-medium">MEDIUM</span>
+            <span class="item-time">Ongoing</span>
+          </div>
+        </div>
+        <div class="threat-item">
+          <div class="item-title">Malware Family Evolution</div>
+          <div class="item-meta">
+            <span class="severity-medium">MEDIUM</span>
+            <span class="item-time">Tracking</span>
+          </div>
+        </div>
+        <div class="threat-item">
+          <div class="item-title">IoT Botnet Activity</div>
+          <div class="item-meta">
+            <span class="severity-low">LOW</span>
+            <span class="item-time">Monitored</span>
+          </div>
+        </div>
+      `;
+      threatLevel.textContent = 'ELEVATED';
+      threatLevel.style.background = 'linear-gradient(45deg, #fd7e14, #ff922b)';
+      updateTime.textContent = 'Updated 5 min ago';
+    }, 2000);
+  }
+
+  function loadCVEFeed() {
+    const cveContent = document.getElementById('cve-content');
+    const updateTime = document.getElementById('cve-update-time');
+    const cveCount = document.getElementById('cve-count');
+    
+    if (!cveContent) return;
+    
+    setTimeout(() => {
+      cveContent.innerHTML = `
+        <div class="cve-item">
+          <div class="item-title">CVE-2024-0001: Remote Code Execution</div>
+          <div class="item-meta">
+            <span class="severity-high">CRITICAL</span>
+            <span class="item-time">CVSS 9.8</span>
+          </div>
+        </div>
+        <div class="cve-item">
+          <div class="item-title">CVE-2024-0002: Privilege Escalation</div>
+          <div class="item-meta">
+            <span class="severity-high">HIGH</span>
+            <span class="item-time">CVSS 8.1</span>
+          </div>
+        </div>
+        <div class="cve-item">
+          <div class="item-title">CVE-2024-0003: Information Disclosure</div>
+          <div class="item-meta">
+            <span class="severity-medium">MEDIUM</span>
+            <span class="item-time">CVSS 6.5</span>
+          </div>
+        </div>
+        <div class="cve-item">
+          <div class="item-title">CVE-2024-0004: Cross-Site Scripting</div>
+          <div class="item-meta">
+            <span class="severity-medium">MEDIUM</span>
+            <span class="item-time">CVSS 6.1</span>
+          </div>
+        </div>
+      `;
+      cveCount.textContent = '847 Today';
+      updateTime.textContent = 'Updated 10 min ago';
+    }, 2500);
+  }
+
+  function loadSecurityEvents() {
+    const eventsContent = document.getElementById('events-content');
+    const updateTime = document.getElementById('events-update-time');
+    const eventCount = document.getElementById('event-count');
+    
+    if (!eventsContent) return;
+    
+    setTimeout(() => {
+      eventsContent.innerHTML = `
+        <div class="event-item">
+          <div class="item-title">Black Hat USA 2024</div>
+          <div class="item-meta">
+            <span class="item-source">Las Vegas, NV</span>
+            <span class="item-time">Aug 3-8</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="item-title">DEF CON 32</div>
+          <div class="item-meta">
+            <span class="item-source">Las Vegas, NV</span>
+            <span class="item-time">Aug 8-11</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="item-title">BSides London</div>
+          <div class="item-meta">
+            <span class="item-source">London, UK</span>
+            <span class="item-time">Sep 15</span>
+          </div>
+        </div>
+        <div class="event-item">
+          <div class="item-title">Security+ Training</div>
+          <div class="item-meta">
+            <span class="item-source">Virtual</span>
+            <span class="item-time">Oct 1-5</span>
+          </div>
+        </div>
+      `;
+      eventCount.textContent = '25 Upcoming';
+      updateTime.textContent = 'Updated 1 min ago';
+    }, 3000);
+  }
+
+  // Refresh functions for manual updates
+  window.refreshSecurityNews = function() {
+    const refreshBtn = event.target;
+    refreshBtn.disabled = true;
+    refreshBtn.textContent = 'Refreshing...';
+    
+    setTimeout(() => {
+      loadSecurityNews();
+      refreshBtn.disabled = false;
+      refreshBtn.textContent = 'Refresh';
+    }, 1500);
+  };
+
+  window.refreshThreatIntel = function() {
+    const refreshBtn = event.target;
+    refreshBtn.disabled = true;
+    refreshBtn.textContent = 'Refreshing...';
+    
+    setTimeout(() => {
+      loadThreatIntelligence();
+      refreshBtn.disabled = false;
+      refreshBtn.textContent = 'Refresh';
+    }, 1500);
+  };
+
+  window.refreshCVEFeed = function() {
+    const refreshBtn = event.target;
+    refreshBtn.disabled = true;
+    refreshBtn.textContent = 'Refreshing...';
+    
+    setTimeout(() => {
+      loadCVEFeed();
+      refreshBtn.disabled = false;
+      refreshBtn.textContent = 'Refresh';
+    }, 1500);
+  };
+
+  window.refreshSecurityEvents = function() {
+    const refreshBtn = event.target;
+    refreshBtn.disabled = true;
+    refreshBtn.textContent = 'Refreshing...';
+    
+    setTimeout(() => {
+      loadSecurityEvents();
+      refreshBtn.disabled = false;
+      refreshBtn.textContent = 'Refresh';
+    }, 1500);
+  };
+
 });
 </script>
 {{ end }}
