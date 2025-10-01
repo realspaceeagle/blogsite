@@ -1,0 +1,125 @@
+/* Content Search Styles */
+.enhanced-result {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--entry);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.enhanced-result:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.search-result-title a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.search-result-title a:hover {
+    text-decoration: underline;
+}
+
+.search-result-meta {
+    font-size: 0.85rem;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+}
+
+.search-result-content {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+}
+
+.content-match {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: var(--theme);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    border-left: 3px solid var(--primary);
+}
+
+.content-match:last-child {
+    margin-bottom: 0;
+}
+
+.match-location {
+    font-size: 0.8rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.match-location strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.match-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--content);
+}
+
+.search-highlight,
+mark.search-highlight {
+    background: rgba(255, 193, 7, 0.4);
+    color: var(--primary);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+    border: none;
+}
+
+.dark .search-highlight,
+.dark mark.search-highlight {
+    background: rgba(255, 193, 7, 0.6);
+    color: var(--theme);
+}
+
+/* Enhanced search container adjustments */
+.enhanced-search .search-result-item {
+    list-style: none;
+}
+
+.enhanced-search #searchResults {
+    padding: 0;
+}
+
+/* No results styling */
+.no-results {
+    text-align: center;
+    padding: 2rem;
+    color: var(--secondary);
+    font-style: italic;
+    list-style: none;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    .enhanced-result {
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+    }
+    
+    .search-result-title {
+        font-size: 1.1rem;
+    }
+    
+    .content-match {
+        padding: 0.5rem;
+    }
+    
+    .match-text {
+        font-size: 0.85rem;
+    }
+}

@@ -54,5 +54,15 @@
 <!-- Enhanced Code Copy Script -->
 <script src="{{ "js/code-copy-enhanced.js" | relURL }}" defer></script>
 
+<!-- Content Search CSS (only for search page) -->
+{{- if eq .Page.Type "search" }}
+<link rel="stylesheet" href="{{ "css/content-search.css" | relURL }}">
+{{- end }}
+
 <!-- Enhanced Search Script -->
 <script src="{{ "js/enhanced-search.js" | relURL }}" defer></script>
+
+<!-- Content Search Script (only for search page) -->
+{{- if eq .Page.Type "search" }}
+<script src="{{ "js/content-search.js" | relURL }}" defer></script>
+{{- end }}
