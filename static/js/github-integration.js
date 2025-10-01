@@ -2,15 +2,15 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log('GitHub integration script loaded');
   
-  // Initialize enhanced calendar
-  let githubCalendar = null;
+  // Initialize contribution tracker
+  let contributionTracker = null;
   
   // Initialize GitHub Calendar when the page loads
   function initializeGitHubCalendar() {
-    console.log('Initializing enhanced GitHub calendar...');
+    console.log('Initializing GitHub calendar...');
     
-    // Check if we're on the projects page and GitHub section exists
-    const githubSection = document.getElementById('github-section');
+    // Check if we're on the homepage and GitHub section exists
+    const githubSection = document.querySelector('.github-activity-section');
     const calendarElement = document.querySelector('.calendar');
     
     if (!githubSection || !calendarElement) {
@@ -20,49 +20,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('GitHub section and calendar element found');
     
-    // Initialize enhanced GitHub calendar
-    if (window.EnhancedGitHubCalendar) {
+    // Initialize custom contribution tracker
+    if (window.GitHubContributionTracker) {
+      contributionTracker = new window.GitHubContributionTracker('realspaceeagle');
+    }
+    
+    // Check if GitHub Calendar library is available
+    if (typeof GitHubCalendar !== 'undefined') {
+      console.log('GitHubCalendar library available, initializing...');
       try {
         // Remove loading indicator
         const loadingElement = calendarElement.querySelector('.calendar-loading');
         if (loadingElement) {
           loadingElement.remove();
         }
-        
-        // Create a unique container ID for the enhanced calendar
-        calendarElement.id = 'enhanced-github-calendar';
-        
-        // Initialize the enhanced calendar
-        githubCalendar = new window.EnhancedGitHubCalendar('realspaceeagle', 'enhanced-github-calendar');
-        
-        // Make it globally accessible for controls
-        window.githubCalendar = githubCalendar;
-        
-        console.log('Enhanced GitHub calendar initialized successfully');
-        
-        // Update stats after calendar loads
-        setTimeout(() => {
-          updateEnhancedGitHubStats();
-        }, 2000);
-        
-      } catch (error) {
-        console.error('Enhanced GitHub Calendar initialization error:', error);
-        fallbackToLegacyCalendar();
-      }
-    } else {
-      console.log('EnhancedGitHubCalendar not available, falling back to legacy');
-      fallbackToLegacyCalendar();
-    }
-  }
-  
-  function fallbackToLegacyCalendar() {
-    console.log('Falling back to legacy calendar implementation');
-    
-    // Check if GitHub Calendar library is available
-    if (typeof GitHubCalendar !== 'undefined') {
-      console.log('GitHubCalendar library available, initializing...');
-      try {
-        const calendarElement = document.querySelector('.calendar');
         
         // Initialize the GitHub calendar
         GitHubCalendar(".calendar", "realspaceeagle", {
@@ -72,22 +43,22 @@ document.addEventListener('DOMContentLoaded', function() {
           cache: 300000 // Cache for 5 minutes
         });
         
-        console.log('Legacy GitHub calendar initialized successfully');
+        console.log('GitHub calendar initialized successfully');
         
         // Update basic stats after calendar loads
         setTimeout(() => {
-          updateLegacyGitHubStats();
+          updateGitHubStats();
         }, 3000);
         
       } catch (error) {
-        console.error('Legacy GitHub Calendar initialization error:', error);
+        console.error('GitHub Calendar initialization error:', error);
         showCustomContributionGraph();
       }
     } else {
       console.log('GitHubCalendar library not available, waiting...');
       // GitHub Calendar library not loaded, wait and retry
       let retryCount = 0;
-      const maxRetries = 3;
+      const maxRetries = 5;
       
       const retryInterval = setInterval(() => {
         retryCount++;
@@ -95,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (typeof GitHubCalendar !== 'undefined') {
           clearInterval(retryInterval);
-          fallbackToLegacyCalendar();
+          initializeGitHubCalendar();
         } else if (retryCount >= maxRetries) {
           clearInterval(retryInterval);
           console.log('Max retries reached, showing custom fallback');
@@ -105,39 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  function updateEnhancedGitHubStats() {
-    try {
-      if (githubCalendar && githubCalendar.contributionData) {
-        const data = githubCalendar.contributionData;
-        
-        // Update main stats from enhanced calendar
-        const totalContribElement = document.getElementById('total-contributions');
-        if (totalContribElement) {
-          totalContribElement.textContent = (data.total.lastYear || 0).toLocaleString();
-        }
-        
-        // Calculate streaks from enhanced calendar data
-        if (data.contributions) {
-          const streaks = githubCalendar.calculateStreaks(data.contributions);
-          const currentStreakElement = document.getElementById('current-streak');
-          const longestStreakElement = document.getElementById('longest-streak');
-          
-          if (currentStreakElement) currentStreakElement.textContent = streaks.currentStreak + ' days';
-          if (longestStreakElement) longestStreakElement.textContent = streaks.longestStreak + ' days';
-        }
-        
-        console.log('Enhanced GitHub stats updated successfully');
-      } else {
-        console.log('Enhanced calendar data not available, using fallback');
-        setFallbackStats();
-      }
-    } catch (error) {
-      console.error('Error updating enhanced GitHub stats:', error);
-      setFallbackStats();
-    }
-  }
-
-  function updateLegacyGitHubStats() {
+  function updateGitHubStats() {
     try {
       // Try to extract contribution count from the generated calendar
       const contributionCells = document.querySelectorAll('.calendar .js-calendar-graph-svg rect[data-count]');
@@ -160,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setFallbackStats();
       }
     } catch (error) {
-      console.error('Error updating legacy GitHub stats:', error);
+      console.error('Error updating GitHub stats:', error);
       setFallbackStats();
     }
   }
@@ -201,25 +140,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   function setFallbackStats() {
-    // Use the improved fallback function if available
-    if (typeof window.setFallbackGitHubStats === 'function') {
-      window.setFallbackGitHubStats();
-    } else {
-      // Basic fallback
-      const totalContribElement = document.getElementById('total-contributions');
-      const currentStreakElement = document.getElementById('current-streak');
-      const longestStreakElement = document.getElementById('longest-streak');
-      
-      if (totalContribElement && totalContribElement.textContent === '-') {
-        totalContribElement.textContent = '500+';
-      }
-      if (currentStreakElement && currentStreakElement.textContent === '-') {
-        currentStreakElement.textContent = '5 days';
-      }
-      if (longestStreakElement && longestStreakElement.textContent === '-') {
-        longestStreakElement.textContent = '28 days';
-      }
-    }
+    const totalContribElement = document.getElementById('total-contributions');
+    const currentStreakElement = document.getElementById('current-streak');
+    const longestStreakElement = document.getElementById('longest-streak');
+    
+    if (totalContribElement) totalContribElement.textContent = '27';
+    if (currentStreakElement) currentStreakElement.textContent = '10';
+    if (longestStreakElement) longestStreakElement.textContent = '57';
   }
   
   async function refreshGitHubData() {
@@ -260,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   function addRefreshButton() {
-    const githubSection = document.getElementById('github-section');
+    const githubSection = document.querySelector('.github-activity-section');
     if (!githubSection) return;
     
     // Check if refresh button already exists
@@ -287,11 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
       
       refreshButton.innerHTML = '⏳ Refreshing...';
       refreshButton.disabled = true;
-      
-      // Ensure we stay on the GitHub tab
-      if (!window.location.hash.includes('github')) {
-        history.pushState(null, null, '#github');
-      }
       
       // Force refresh GitHub data
       refreshGitHubData().then(() => {
@@ -386,12 +308,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  // Initialize with immediate fallback, then load real data
-  // Set fallback stats immediately to prevent showing dashes
-  setTimeout(() => {
-    setFallbackStats();
-  }, 100);
-  
   // Initialize with a small delay to ensure DOM is fully ready
   setTimeout(() => {
     initializeGitHubCalendar();
@@ -407,5 +323,5 @@ document.addEventListener('DOMContentLoaded', function() {
         showCustomContributionGraph();
       }
     }, 2000);
-  }, 500);
+  }, 100);
 });
