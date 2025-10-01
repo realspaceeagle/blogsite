@@ -1058,6 +1058,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .item-source {
@@ -1066,27 +1068,33 @@
 
 .item-time {
   opacity: 0.8;
+  flex-shrink: 0;
+  min-width: fit-content;
 }
 
 .severity-high {
   color: #e03131;
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 .severity-medium {
   color: #fd7e14;
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 .severity-low {
   color: #51cf66;
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 .severity-critical {
   color: #e03131;
   font-weight: 700;
   text-shadow: 0 0 3px rgba(224, 49, 49, 0.3);
+  flex-shrink: 0;
 }
 
 .loading-spinner {
