@@ -58,15 +58,8 @@
         
         console.log('Enhanced search initialized with', fuseData ? fuseData.length : 0, 'documents');
         
-        // Override the original search function for enhanced mode
-        const originalSearchInput = document.getElementById('searchInput');
-        if (originalSearchInput) {
-            // Store original event listeners
-            const originalEvents = originalSearchInput.cloneNode(true);
-            
-            // Add enhanced search capability
-            setupEnhancedSearchBehavior();
-        }
+        // Override the original search input behavior completely
+        setupEnhancedSearchBehavior();
     });
     
     function setupEnhancedSearchBehavior() {
@@ -74,6 +67,10 @@
         const searchResults = document.getElementById('searchResults');
         
         if (!searchInput || !searchResults) return;
+        
+        // Remove original event listeners by cloning and replacing the element
+        const newSearchInput = searchInput.cloneNode(true);
+        searchInput.parentNode.replaceChild(newSearchInput, searchInput);
         
         // Track current search mode
         let currentMode = 'normal';
@@ -92,20 +89,20 @@
             }
             
             // Trigger search if there's a query
-            const query = searchInput.value.trim();
+            const currentInput = document.getElementById('searchInput');
+            const query = currentInput ? currentInput.value.trim() : '';
             if (query) {
                 if (currentMode === 'enhanced') {
                     performEnhancedSearch(query);
                 } else {
-                    // Let the original search handle normal mode
-                    searchInput.dispatchEvent(new Event('input'));
+                    performNormalSearch(query);
                 }
             }
         });
         
-        // Enhanced input handler
+        // Enhanced input handler for both modes
         let searchTimeout;
-        searchInput.addEventListener('input', function(e) {
+        newSearchInput.addEventListener('input', function(e) {
             const query = e.target.value.trim();
             
             // Clear previous timeout
@@ -113,14 +110,51 @@
             
             // Debounce search
             searchTimeout = setTimeout(() => {
-                if (currentMode === 'enhanced' && query) {
-                    performEnhancedSearch(query);
-                } else if (!query) {
+                if (query) {
+                    if (currentMode === 'enhanced') {
+                        performEnhancedSearch(query);
+                    } else {
+                        performNormalSearch(query);
+                    }
+                } else {
                     searchResults.innerHTML = '';
                     hideSearchStats();
                 }
             }, 300);
         });
+    }
+    
+    function performNormalSearch(query) {
+        if (!window.fuse || !query) {
+            document.getElementById('searchResults').innerHTML = '';
+            hideSearchStats();
+            return;
+        }
+        
+        const results = window.fuse.search(query, { limit: 10 });
+        renderNormalResults(results, query);
+    }
+    
+    function renderNormalResults(results, query) {
+        const searchResults = document.getElementById('searchResults');
+        if (!searchResults) return;
+        
+        if (results.length === 0) {
+            searchResults.innerHTML = '<li class="no-results">No results found for your search</li>';
+            return;
+        }
+        
+        const html = results.map(result => {
+            const item = result.item;
+            return `
+                <li class="post-entry">
+                    <header class="entry-header">${highlightMatches(item.title, query)}&nbsp;»</header>
+                    <a href="${item.permalink}" aria-label="${item.title}"></a>
+                </li>
+            `;
+        }).join('');
+        
+        searchResults.innerHTML = html;
     }
     
     function performEnhancedSearch(query) {
@@ -237,10 +271,20 @@
         const item = result.item;
         const matches = result.matches || [];
         
+        // Debug: log matches to console for troubleshooting
+        if (matches.length > 0) {
+            console.log(`Snippet for "${item.title}": found matches in [${matches.map(m => m.key).join(', ')}]`);
+        }
+        
         // Try to find content match first
         const contentMatch = matches.find(m => m.key === 'content');
         if (contentMatch && contentMatch.value) {
             return createLocationSnippet(contentMatch.value, query);
+        }
+        
+        // If no content match but we have content, search manually
+        if (item.content && item.content.toLowerCase().includes(query.toLowerCase())) {
+            return createLocationSnippet(item.content, query);
         }
         
         // Fallback to summary or title
