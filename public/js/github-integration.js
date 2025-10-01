@@ -23,36 +23,46 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize custom contribution tracker
     if (window.GitHubContributionTracker) {
       contributionTracker = new window.GitHubContributionTracker('realspaceeagle');
+      
+      // Load and display contributions
+      contributionTracker.fetchContributions().then(data => {
+        if (data) {
+          contributionTracker.renderContributionGraph(calendarElement, data);
+          console.log('Contribution graph rendered successfully');
+          
+          // Update stats with the data
+          updateContributionStats(data);
+        }
+      }).catch(error => {
+        console.error('Failed to load contribution data:', error);
+        showCustomContributionGraph();
+      });
+    } else {
+      console.log('GitHubContributionTracker not available, using fallback');
+      showCustomContributionGraph();
     }
-    
-    // Force using our custom contribution graph for better reliability
-    console.log('Using custom contribution graph');
-    showCustomContributionGraph();
-    
-    // Also try GitHub Calendar library as backup
-    if (typeof GitHubCalendar !== 'undefined') {
-      console.log('GitHubCalendar library available, trying as enhancement...');
-      try {
-        // Initialize the GitHub calendar
-        setTimeout(() => {
-          GitHubCalendar(".calendar", "realspaceeagle", {
-            responsive: true,
-            tooltips: true,
-            summary_text: "realspaceeagle's contributions",
-            cache: 300000 // Cache for 5 minutes
-          });
-          
-          console.log('GitHub calendar initialized successfully');
-          
-          // Update basic stats after calendar loads
-          setTimeout(() => {
-            updateGitHubStats();
-          }, 3000);
-        }, 1000);
-        
-      } catch (error) {
-        console.error('GitHub Calendar initialization error:', error);
+  }
+  
+  function updateContributionStats(data) {
+    try {
+      // Update total contributions
+      if (data.total && data.total.lastYear !== undefined) {
+        document.getElementById('total-contributions').textContent = data.total.lastYear.toLocaleString();
       }
+      
+      // Calculate and update streaks
+      if (data.contributions && Array.isArray(data.contributions)) {
+        const tracker = new window.GitHubContributionTracker('realspaceeagle');
+        const streaks = tracker.calculateStreaks(data.contributions);
+        
+        document.getElementById('current-streak').textContent = streaks.currentStreak + ' days';
+        document.getElementById('longest-streak').textContent = streaks.longestStreak + ' days';
+        
+        console.log('Stats updated from contribution data');
+      }
+    } catch (error) {
+      console.error('Error updating contribution stats:', error);
+      setFallbackStats();
     }
   }
   
