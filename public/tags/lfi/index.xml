@@ -1,1 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Lfi on realspaceeagle</title><link>http://example.org/tags/lfi/</link><description>Recent content in Lfi on realspaceeagle</description><image><title>realspaceeagle</title><url>http://example.org/images/og-image.svg</url><link>http://example.org/images/og-image.svg</link></image><generator>Hugo -- 0.150.1</generator><language>en-us</language><lastBuildDate>Wed, 01 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://example.org/tags/lfi/index.xml" rel="self" type="application/rss+xml"/><item><title>HackTheBox: Poison Walkthrough</title><link>http://example.org/posts/hackthebox-poison-walkthrough/</link><pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate><guid>http://example.org/posts/hackthebox-poison-walkthrough/</guid><description>Detailed walkthrough of the Poison machine (10.10.10.84) covering LFI log poisoning, PHP RFI exploitation, credential recovery and a VNC pivot to root.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Lfi on realspaceeagle</title>
+    <link>http://localhost:1313/tags/lfi/</link>
+    <description>Recent content in Lfi on realspaceeagle</description>
+    <image>
+      <title>realspaceeagle</title>
+      <url>http://localhost:1313/images/og-image.svg</url>
+      <link>http://localhost:1313/images/og-image.svg</link>
+    </image>
+    <generator>Hugo -- 0.150.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/lfi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox: Poison Walkthrough</title>
+      <link>http://localhost:1313/posts/hackthebox-poison-walkthrough/</link>
+      <pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/hackthebox-poison-walkthrough/</guid>
+      <description>Detailed walkthrough of the Poison machine (10.10.10.84) covering LFI log poisoning, PHP RFI exploitation, credential recovery and a VNC pivot to root.</description>
+    </item>
+  </channel>
+</rss>

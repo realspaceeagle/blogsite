@@ -652,109 +652,190 @@ This platform serves as your comprehensive cybersecurity knowledge repository, f
 
 ### 🎯 **Core Content Areas**
 
-#### **🔍 Advanced Reconnaissance & OSINT**
-```bash
-# Intelligence gathering and target enumeration
-reconnaissance_techniques = [
-    "Subdomain Discovery & DNS Enumeration",
-    "Social Media Intelligence (SOCMINT)",
-    "Infrastructure Mapping & Technology Fingerprinting",
-    "Dark Web Monitoring & Threat Intelligence"
-]
-```
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin: 20px 0;">
 
-#### **🐧 Linux Security & System Hardening**
-```yaml
-linux_security_focus:
-  system_hardening: ["SELinux", "AppArmor", "Kernel Hardening"]
-  container_security: ["Docker Security", "Kubernetes Hardening"]
-  monitoring: ["Auditd", "AIDE", "Log Analysis"]
-  automation: ["Security Automation Scripts", "Compliance Checking"]
-```
+<div style="border: 2px solid #20c997; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(32, 201, 151, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🔍</div>
+<h4 style="color: #20c997; margin-bottom: 15px;">Advanced Reconnaissance & OSINT</h4>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 12px;"><strong>Intelligence Gathering Techniques:</strong></p>
+<p style="color: #999999; font-size: 12px;">• Subdomain Discovery & DNS Enumeration<br>• Social Media Intelligence (SOCMINT)<br>• Infrastructure Mapping & Tech Fingerprinting<br>• Dark Web Monitoring & Threat Intelligence</p>
+</div>
 
-#### **☁️ Cloud Security Architecture**
-```python
-# Modern cloud security challenges
-class CloudSecurityTopics:
-    def __init__(self):
-        self.aws_security = ["IAM Deep Dives", "GuardDuty Analysis", "Config Rules"]
-        self.azure_security = ["Sentinel Playbooks", "Security Center", "Key Vault"]
-        self.kubernetes = ["Pod Security Policies", "RBAC", "Network Policies"]
-        self.devsecops = ["Pipeline Security", "Infrastructure as Code"]
-```
+<div style="border: 2px solid #37b24d; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(55, 178, 77, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🐧</div>
+<h4 style="color: #37b24d; margin-bottom: 15px;">Linux Security & System Hardening</h4>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 8px;"><strong>🛡️ System Hardening:</strong> SELinux • AppArmor • Kernel Hardening</p>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 8px;"><strong>🐳 Container Security:</strong> Docker • Kubernetes Hardening</p>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 8px;"><strong>📊 Monitoring:</strong> Auditd • AIDE • Log Analysis</p>
+<p style="color: #cccccc; font-size: 13px;"><strong>⚙️ Automation:</strong> Security Scripts • Compliance Checking</p>
+</div>
 
-#### **🤖 AI/ML Security Research**
-```yaml
-ai_security_content:
-  emerging_threats: 🚨
-    - "Adversarial Machine Learning Attacks"
-    - "Model Poisoning Detection Techniques"
-    - "Privacy-Preserving ML Security"
-  
-  defensive_strategies: 🛡️
-    - "MLOps Security Pipeline Implementation"
-    - "Model Validation & Testing Frameworks"
-    - "AI Red Team Methodologies"
-```
+<div style="border: 2px solid #4dabf7; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(77, 171, 247, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">☁️</div>
+<h4 style="color: #4dabf7; margin-bottom: 15px;">Cloud Security Architecture</h4>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 8px;"><strong>🟧 AWS Security:</strong> IAM Deep Dives • GuardDuty Analysis</p>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 8px;"><strong>🔷 Azure Security:</strong> Sentinel Playbooks • Security Center</p>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 8px;"><strong>⚓ Kubernetes:</strong> Pod Security • RBAC • Network Policies</p>
+<p style="color: #cccccc; font-size: 13px;"><strong>🔧 DevSecOps:</strong> Pipeline Security • Infrastructure as Code</p>
+</div>
 
-#### **📱 Application Security Deep Dives**
-```bash
-# Modern application security topics
-🌐 API_SECURITY="GraphQL Testing | REST API Pentesting | OAuth Attacks"
-🔧 DEVSECOPS="SAST/DAST Integration | Security as Code | Policy Enforcement"
-📦 CONTAINER_SEC="Image Scanning | Runtime Protection | Supply Chain Security"
-⚡ SERVERLESS="Lambda Security | Function-as-a-Service Threats"
-```
+<div style="border: 2px solid #ff8cc8; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(255, 140, 200, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🤖</div>
+<h4 style="color: #ff8cc8; margin-bottom: 15px;">AI/ML Security Research</h4>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 8px;"><strong>🚨 Emerging Threats:</strong></p>
+<p style="color: #999999; font-size: 12px; margin-bottom: 10px;">• Adversarial ML Attacks • Model Poisoning<br>• Privacy-Preserving ML Security</p>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 8px;"><strong>🛡️ Defensive Strategies:</strong></p>
+<p style="color: #999999; font-size: 12px;">• MLOps Security Pipelines • Model Validation<br>• AI Red Team Methodologies</p>
+</div>
+
+<div style="border: 2px solid #fd7e14; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(253, 126, 20, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">📱</div>
+<h4 style="color: #fd7e14; margin-bottom: 15px;">Application Security Deep Dives</h4>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 8px;"><strong>🌐 API Security:</strong> GraphQL • REST API • OAuth Attacks</p>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 8px;"><strong>🔧 DevSecOps:</strong> SAST/DAST • Security as Code</p>
+<p style="color: #cccccc; font-size: 13px; margin-bottom: 8px;"><strong>📦 Container Security:</strong> Image Scanning • Runtime Protection</p>
+<p style="color: #cccccc; font-size: 13px;"><strong>⚡ Serverless:</strong> Lambda Security • FaaS Threats</p>
+</div>
+
+</div>
 
 ### 🎓 **Learning Formats**
 
-- 📝 **In-Depth Tutorials** - Step-by-step practical guides with real-world scenarios
-- 🔬 **Security Research** - Original vulnerability research and proof-of-concepts
-- 🛠️ **Tool Development** - Custom security tools and automation scripts
-- 📊 **Threat Analysis** - Current threat landscape and defensive strategies
-- 🎯 **CTF Writeups** - Capture the Flag solutions and methodologies
-- 🚀 **Project Showcases** - End-to-end security implementation projects
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0;">
+
+<div style="border: 2px solid #7c3aed; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">📝</div>
+<h4 style="color: #7c3aed; margin-bottom: 10px;">In-Depth Tutorials</h4>
+<p style="color: #999999; font-size: 12px;">Step-by-step practical guides with real-world scenarios and hands-on implementation.</p>
+</div>
+
+<div style="border: 2px solid #e03131; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(224, 49, 49, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🔬</div>
+<h4 style="color: #e03131; margin-bottom: 10px;">Security Research</h4>
+<p style="color: #999999; font-size: 12px;">Original vulnerability research and proof-of-concepts with detailed analysis.</p>
+</div>
+
+<div style="border: 2px solid #1c7ed6; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(28, 126, 214, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🛠️</div>
+<h4 style="color: #1c7ed6; margin-bottom: 10px;">Tool Development</h4>
+<p style="color: #999999; font-size: 12px;">Custom security tools and automation scripts for enhanced productivity.</p>
+</div>
+
+<div style="border: 2px solid #f59f00; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(245, 159, 0, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">📊</div>
+<h4 style="color: #f59f00; margin-bottom: 10px;">Threat Analysis</h4>
+<p style="color: #999999; font-size: 12px;">Current threat landscape analysis and defensive strategies.</p>
+</div>
+
+<div style="border: 2px solid #37b24d; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(55, 178, 77, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🎯</div>
+<h4 style="color: #37b24d; margin-bottom: 10px;">CTF Writeups</h4>
+<p style="color: #999999; font-size: 12px;">Capture the Flag solutions and advanced penetration testing methodologies.</p>
+</div>
+
+<div style="border: 2px solid #9775fa; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(151, 117, 250, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🚀</div>
+<h4 style="color: #9775fa; margin-bottom: 10px;">Project Showcases</h4>
+<p style="color: #999999; font-size: 12px;">End-to-end security implementation projects with complete documentation.</p>
+</div>
+
+</div>
 
 ---
 
 ## 🏆 Achievements & Recognition
 
 ### 🎖️ **Professional Milestones**
-```yaml
-career_highlights:
-  security_expertise: 🔒
-    - achievement: "MSc Cybersecurity with Distinction"
-      institution: "University of West London"
-      year: 2023
-    
-  research_contributions: 🔬
-    - project: "Blockchain-based Malware Detection System"
-      innovation: "Decentralized threat intelligence sharing"
-      impact: "Enhanced collaborative security defense"
-  
-  community_impact: 🌐
-    - platform: "Technical Blog & Knowledge Sharing"
-      reach: "Global cybersecurity community"
-      focus: "Practical security implementations"
-```
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
+
+<div style="border: 2px solid #845ef7; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(132, 94, 247, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🔒</div>
+<h4 style="color: #845ef7; margin-bottom: 15px;">Security Expertise</h4>
+<p style="color: #cccccc; font-size: 14px; margin-bottom: 10px;"><strong>MSc Cybersecurity with Distinction</strong></p>
+<p style="color: #999999; font-size: 12px; margin-bottom: 8px;">University of West London • 2023</p>
+<p style="color: #999999; font-size: 12px;">Advanced cybersecurity education with focus on modern threats and defensive strategies.</p>
+</div>
+
+<div style="border: 2px solid #51cf66; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(81, 207, 102, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🔬</div>
+<h4 style="color: #51cf66; margin-bottom: 15px;">Research Contributions</h4>
+<p style="color: #cccccc; font-size: 14px; margin-bottom: 10px;"><strong>Blockchain-based Malware Detection System</strong></p>
+<p style="color: #999999; font-size: 12px; margin-bottom: 8px;">Innovation: Decentralized threat intelligence sharing</p>
+<p style="color: #999999; font-size: 12px;">Impact: Enhanced collaborative security defense mechanisms for the community.</p>
+</div>
+
+<div style="border: 2px solid #4dabf7; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(77, 171, 247, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🌐</div>
+<h4 style="color: #4dabf7; margin-bottom: 15px;">Community Impact</h4>
+<p style="color: #cccccc; font-size: 14px; margin-bottom: 10px;"><strong>Technical Blog & Knowledge Sharing</strong></p>
+<p style="color: #999999; font-size: 12px; margin-bottom: 8px;">Reach: Global cybersecurity community</p>
+<p style="color: #999999; font-size: 12px;">Focus: Practical security implementations and educational content for professionals.</p>
+</div>
+
+</div>
 
 ### 🎯 **Technical Achievements**
-- 🏅 **Hack The Box Active Member** - Continuous skill development and CTF participation
-- 🔍 **Security Research** - Original vulnerability research and responsible disclosure
-- 🛠️ **Open Source Contributor** - Security tools and defensive technologies
-- 📚 **Knowledge Sharing** - Technical writing and community education
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0;">
+
+<div style="border: 2px solid #20c997; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(32, 201, 151, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🏅</div>
+<h4 style="color: #20c997; margin-bottom: 10px;">Hack The Box Active Member</h4>
+<p style="color: #999999; font-size: 12px;">Continuous skill development and CTF participation in the global cybersecurity community.</p>
+</div>
+
+<div style="border: 2px solid #e03131; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(224, 49, 49, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🔍</div>
+<h4 style="color: #e03131; margin-bottom: 10px;">Security Research</h4>
+<p style="color: #999999; font-size: 12px;">Original vulnerability research and responsible disclosure practices for enhanced security.</p>
+</div>
+
+<div style="border: 2px solid #1c7ed6; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(28, 126, 214, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🛠️</div>
+<h4 style="color: #1c7ed6; margin-bottom: 10px;">Open Source Contributor</h4>
+<p style="color: #999999; font-size: 12px;">Development of security tools and defensive technologies for the community.</p>
+</div>
+
+<div style="border: 2px solid #f59f00; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(245, 159, 0, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">📚</div>
+<h4 style="color: #f59f00; margin-bottom: 10px;">Knowledge Sharing</h4>
+<p style="color: #999999; font-size: 12px;">Technical writing and community education through practical security content.</p>
+</div>
+
+</div>
 
 ---
 
 ### 🌟 **Join the Security Journey**
 
-```bash
-# Connect with the cybersecurity community
-$ echo "🚀 Ready to elevate your security skills?"
-$ echo "🔒 Explore cutting-edge techniques and methodologies"
-$ echo "🌐 Join a community of passionate security professionals"
-$ echo "💡 Transform complex concepts into actionable intelligence"
-```
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0;">
+
+<div style="border: 2px solid #ff6b35; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🚀</div>
+<h4 style="color: #ff6b35; margin-bottom: 10px;">Elevate Your Security Skills</h4>
+<p style="color: #999999; font-size: 12px;">Ready to take your cybersecurity expertise to the next level with advanced techniques and methodologies?</p>
+</div>
+
+<div style="border: 2px solid #4dabf7; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(77, 171, 247, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🔒</div>
+<h4 style="color: #4dabf7; margin-bottom: 10px;">Cutting-Edge Techniques</h4>
+<p style="color: #999999; font-size: 12px;">Explore the latest security methodologies and defensive strategies used by industry professionals.</p>
+</div>
+
+<div style="border: 2px solid #be4bdb; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(190, 75, 219, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">🌐</div>
+<h4 style="color: #be4bdb; margin-bottom: 10px;">Community of Professionals</h4>
+<p style="color: #999999; font-size: 12px;">Join a vibrant community of passionate security professionals sharing knowledge and experiences.</p>
+</div>
+
+<div style="border: 2px solid #37b24d; border-radius: 12px; padding: 20px; background: linear-gradient(135deg, #0a0a0a, #1a1a1a); box-shadow: 0 4px 15px rgba(55, 178, 77, 0.2); transition: transform 0.3s ease;">
+<div style="font-size: 24px; margin-bottom: 10px;">💡</div>
+<h4 style="color: #37b24d; margin-bottom: 10px;">Actionable Intelligence</h4>
+<p style="color: #999999; font-size: 12px;">Transform complex security concepts into practical, actionable intelligence for real-world applications.</p>
+</div>
+
+</div>
 
 ---
 
