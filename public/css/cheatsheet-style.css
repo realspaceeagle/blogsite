@@ -302,3 +302,23 @@
 .dark .cheatsheet-highlight.is-focus {
   box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.45);
 }
+
+.cheatsheet-page pre code,
+.cheatsheet-page pre .chroma {
+  color: #f8fafc;
+}
+
+.cheatsheet-page pre .chroma .k,
+.cheatsheet-page pre .language-bash .hljs-keyword {
+  color: #60a5fa;
+}
+
+.cheatsheet-page pre .chroma .nf,
+.cheatsheet-page pre .language-bash .hljs-built_in {
+  color: #fbbf24;
+}
+
+.cheatsheet-page pre .chroma .s,
+.cheatsheet-page pre .language-bash .hljs-string {
+  color: #34d399;
+}
