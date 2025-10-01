@@ -1087,10 +1087,122 @@
   display: none;
 }
 
-/* Ensure calendar container is properly styled */
+/* GitHub Contribution Calendar Styling */
 .calendar {
   min-height: 200px;
   width: 100%;
+}
+
+/* Style the contribution graph like GitHub */
+.js-calendar-graph {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.js-calendar-graph .ContributionCalendar-day {
+  rx: 2px !important;
+  ry: 2px !important;
+  width: 11px !important;
+  height: 11px !important;
+}
+
+.js-calendar-graph .ContributionCalendar-label {
+  font-size: 9px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif !important;
+  fill: var(--secondary) !important;
+}
+
+/* Improve day labels visibility */
+.js-calendar-graph text {
+  font-size: 9px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif !important;
+  fill: var(--secondary) !important;
+  font-weight: 400 !important;
+}
+
+/* Month labels */
+.js-calendar-graph .month {
+  font-size: 10px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif !important;
+  fill: var(--content) !important;
+  font-weight: 500 !important;
+}
+
+/* Weekday labels (Mon, Wed, Fri) */
+.js-calendar-graph .wday {
+  font-size: 9px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif !important;
+  fill: var(--secondary) !important;
+  font-weight: 400 !important;
+}
+
+/* Contribution squares colors - GitHub style */
+.js-calendar-graph .color-calendar-graph-day-bg {
+  fill: var(--code-bg) !important;
+  stroke: rgba(27, 31, 36, 0.06) !important;
+  stroke-width: 1px !important;
+}
+
+.js-calendar-graph .color-calendar-graph-day-L1-bg {
+  fill: #0e4429 !important;
+}
+
+.js-calendar-graph .color-calendar-graph-day-L2-bg {
+  fill: #006d32 !important;
+}
+
+.js-calendar-graph .color-calendar-graph-day-L3-bg {
+  fill: #26a641 !important;
+}
+
+.js-calendar-graph .color-calendar-graph-day-L4-bg {
+  fill: #39d353 !important;
+}
+
+/* Dark mode colors */
+.dark .js-calendar-graph .color-calendar-graph-day-bg {
+  fill: #161b22 !important;
+  stroke: rgba(240, 246, 252, 0.1) !important;
+}
+
+.dark .js-calendar-graph .color-calendar-graph-day-L1-bg {
+  fill: #0e4429 !important;
+}
+
+.dark .js-calendar-graph .color-calendar-graph-day-L2-bg {
+  fill: #006d32 !important;
+}
+
+.dark .js-calendar-graph .color-calendar-graph-day-L3-bg {
+  fill: #26a641 !important;
+}
+
+.dark .js-calendar-graph .color-calendar-graph-day-L4-bg {
+  fill: #39d353 !important;
+}
+
+/* Calendar responsive design */
+@media (max-width: 768px) {
+  .js-calendar-graph {
+    font-size: 8px !important;
+  }
+  
+  .js-calendar-graph .ContributionCalendar-day {
+    width: 10px !important;
+    height: 10px !important;
+  }
+  
+  .js-calendar-graph text {
+    font-size: 8px !important;
+  }
+  
+  .js-calendar-graph .month {
+    font-size: 9px !important;
+  }
+  
+  .js-calendar-graph .wday {
+    font-size: 8px !important;
+  }
 }
 
 /* Hide any text content that might leak outside containers */
