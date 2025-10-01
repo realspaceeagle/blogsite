@@ -646,10 +646,35 @@ document.addEventListener('DOMContentLoaded', function() {
     margin-bottom: 10px;
 }
 
-.enhanced-search .search-result-snippet {
+.enhanced-search .search-result-snippets {
+    margin-top: 12px;
+}
+
+.enhanced-search .content-snippet {
+    margin-bottom: 12px;
+    padding: 12px;
+    background: var(--theme);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    border-left: 3px solid var(--primary);
+}
+
+.enhanced-search .content-snippet:last-child {
+    margin-bottom: 0;
+}
+
+.enhanced-search .snippet-content {
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.6;
     color: var(--content);
+}
+
+.enhanced-search .snippet-content strong {
+    color: var(--primary);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    font-size: 13px;
 }
 
 .enhanced-search .search-highlight {
