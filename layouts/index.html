@@ -136,21 +136,6 @@
       <div class="section-header">
         <h2>Live Security Intelligence</h2>
         <p class="section-subtitle">Real-time cybersecurity updates, threat intelligence, and industry insights</p>
-        <div class="api-info-banner" style="
-          background: linear-gradient(45deg, rgba(0, 255, 65, 0.1), rgba(0, 168, 50, 0.1));
-          border: 1px solid rgba(0, 255, 65, 0.3);
-          border-radius: 8px;
-          padding: 15px;
-          margin: 20px auto;
-          max-width: 600px;
-          text-align: center;
-          font-size: 14px;
-          color: var(--secondary);
-        ">
-          🔴 <strong>Live Data:</strong> Connects to NIST NVD API for real CVE data. 
-          <a href="#" onclick="window.toggleAPIConfig(); return false;" style="color: #00ff41; text-decoration: none;">Configure API Key</a> 
-          for enhanced rate limits (50 vs 5 requests/30s).
-        </div>
       </div>
       
       <div class="dynamic-content-grid">
@@ -969,6 +954,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .card-header h3 {
@@ -979,6 +966,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .card-icon {
@@ -1000,6 +988,8 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .cve-count, .event-count {
@@ -1009,6 +999,8 @@
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .card-content {
@@ -1114,6 +1106,8 @@
   justify-content: space-between;
   align-items: center;
   background: var(--theme);
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .update-time {
