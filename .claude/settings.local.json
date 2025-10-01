@@ -15,7 +15,8 @@
       "WebFetch(domain:twitter.com)",
       "WebFetch(domain:x.com)",
       "Bash(git config:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   }
