@@ -11,8 +11,15 @@
     </image>
     <generator>Hugo -- 0.150.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Oct 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://realspaceeagle.github.io/tags/hackthebox/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox: Poison Walkthrough</title>
+      <link>https://realspaceeagle.github.io/posts/hackthebox-poison-walkthrough/</link>
+      <pubDate>Wed, 01 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://realspaceeagle.github.io/posts/hackthebox-poison-walkthrough/</guid>
+      <description>Detailed walkthrough of the Poison machine (10.10.10.84) covering LFI log poisoning, PHP RFI exploitation, credential recovery and a VNC pivot to root.</description>
+    </item>
     <item>
       <title>HackTheBox: Mentor Walkthrough</title>
       <link>https://realspaceeagle.github.io/posts/hackthebox-mentor-walkthrough/</link>

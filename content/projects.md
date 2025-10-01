@@ -354,15 +354,19 @@ Explore my collection of security tools, research projects, and contributions to
 {{< /rawhtml >}}
 
 <div class="github-activity-section">
-  <h2>Development Activity</h2>
-  <p>My coding activity and contributions over the past year:</p>
-  
-  <div class="github-calendar-container">
-    <div class="calendar">
-      <!-- Loading the contribution data... -->
-      <div class="calendar-loading">
-        <div class="loading-spinner"></div>
-        <span>Loading GitHub contributions...</span>
+  <div class="github-calendar-wrapper">
+    <div class="github-calendar-header">
+      <h2>Development Activity</h2>
+      <p>My coding activity and contributions over the past year</p>
+    </div>
+    
+    <div class="github-calendar-container">
+      <div class="calendar">
+        <!-- Loading the contribution data... -->
+        <div class="calendar-loading">
+          <div class="loading-spinner"></div>
+          <span>Loading GitHub contributions...</span>
+        </div>
       </div>
     </div>
   </div>

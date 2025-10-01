@@ -8,7 +8,57 @@
     <priority>0.5</priority>
   </url><url>
     <loc>https://realspaceeagle.github.io/categories/</loc>
-    <lastmod>2025-09-30T19:05:03+01:00</lastmod>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://realspaceeagle.github.io/tags/hackthebox/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://realspaceeagle.github.io/categories/hackthebox/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://realspaceeagle.github.io/posts/hackthebox-poison-walkthrough/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://realspaceeagle.github.io/tags/lfi/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://realspaceeagle.github.io/posts/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://realspaceeagle.github.io/tags/privilege-escalation/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://realspaceeagle.github.io/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://realspaceeagle.github.io/tags/reverse-shell/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://realspaceeagle.github.io/tags/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://realspaceeagle.github.io/tags/web-exploitation/</loc>
+    <lastmod>2025-10-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
@@ -37,27 +87,12 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://realspaceeagle.github.io/posts/</loc>
-    <lastmod>2025-09-30T19:05:03+01:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://realspaceeagle.github.io/tags/quality-assurance/</loc>
     <lastmod>2025-09-30T19:05:03+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://realspaceeagle.github.io/</loc>
-    <lastmod>2025-09-30T19:05:03+01:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://realspaceeagle.github.io/tags/software-development/</loc>
-    <lastmod>2025-09-30T19:05:03+01:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://realspaceeagle.github.io/tags/</loc>
     <lastmod>2025-09-30T19:05:03+01:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -157,16 +192,6 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://realspaceeagle.github.io/tags/hackthebox/</loc>
-    <lastmod>2024-12-01T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://realspaceeagle.github.io/categories/hackthebox/</loc>
-    <lastmod>2024-12-01T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://realspaceeagle.github.io/posts/hackthebox-mentor-walkthrough/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -177,17 +202,7 @@
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://realspaceeagle.github.io/tags/privilege-escalation/</loc>
-    <lastmod>2024-12-01T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://realspaceeagle.github.io/tags/snmp/</loc>
-    <lastmod>2024-12-01T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://realspaceeagle.github.io/tags/web-exploitation/</loc>
     <lastmod>2024-12-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

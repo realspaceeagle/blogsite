@@ -1,64 +1,118 @@
 // GitHub API Fallback Integration
 // This provides basic GitHub stats when the calendar library fails
 
+const DEFAULT_GITHUB_BIO = 'Security-focused engineer building offensive tooling and defensive automations.';
+
+function setTextContent(id, value) {
+  const element = document.getElementById(id);
+  if (!element || value === undefined || value === null) {
+    return;
+  }
+  element.textContent = value;
+}
+
+function setMetaValue(id, value, fallback) {
+  const container = document.getElementById(id);
+  if (!container) {
+    return;
+  }
+
+  const valueTarget = container.querySelector('.meta-value');
+  if (!valueTarget) {
+    return;
+  }
+
+  const resolved = value && String(value).trim().length > 0 ? value : fallback;
+  valueTarget.textContent = resolved;
+}
+
 async function fetchGitHubStats() {
   try {
     console.log('Fetching GitHub stats via API...');
-    
-    // Fetch user info from GitHub API with cache busting
+
     const userResponse = await fetch(`https://api.github.com/users/realspaceeagle?_=${Date.now()}`);
     const userData = await userResponse.json();
-    
+
     if (userData.message === 'Not Found') {
       throw new Error('User not found');
     }
-    
-    // Only update stats, don't replace the calendar content if custom graph exists
+
     const calendarElement = document.querySelector('.calendar');
     const hasCustomGraph = calendarElement && calendarElement.querySelector('.contribution-graph');
-    
+
     if (userData) {
-      // Always update the stats with just the numbers
+      const avatar = document.getElementById('github-avatar');
+      if (avatar && userData.avatar_url) {
+        avatar.setAttribute('src', `${userData.avatar_url}&s=200`);
+        avatar.setAttribute('alt', `GitHub avatar for ${userData.login}`);
+      }
+
+      const nameElement = document.getElementById('github-name');
+      if (nameElement) {
+        nameElement.textContent = userData.name || userData.login || 'realspaceeagle';
+      }
+
+      const handleElement = document.getElementById('github-handle');
+      if (handleElement && userData.login) {
+        handleElement.textContent = `@${userData.login}`;
+      }
+
+      const bioElement = document.getElementById('github-bio');
+      if (bioElement) {
+        const resolvedBio = userData.bio && userData.bio.trim().length > 0 ? userData.bio : DEFAULT_GITHUB_BIO;
+        bioElement.textContent = resolvedBio;
+      }
+
+      setMetaValue('github-location', userData.location, 'Global');
+      setMetaValue('github-company', userData.company, 'Independent');
+      const joinedValue = userData.created_at ? new Date(userData.created_at).getFullYear() : 'N/A';
+      setMetaValue('github-joined', joinedValue, 'N/A');
+
+      setTextContent('github-public-repos', Number(userData.public_repos || 0).toLocaleString());
+      setTextContent('github-followers', Number(userData.followers || 0).toLocaleString());
+      setTextContent('github-following', Number(userData.following || 0).toLocaleString());
+
       const totalContribElement = document.getElementById('total-contributions');
+      if (totalContribElement && (totalContribElement.textContent === '-' || totalContribElement.textContent.trim().length === 0)) {
+        totalContribElement.textContent = 'N/A';
+      }
+
       const currentStreakElement = document.getElementById('current-streak');
+      if (currentStreakElement && (currentStreakElement.textContent === '-' || currentStreakElement.textContent.trim().length === 0)) {
+        currentStreakElement.textContent = 'N/A';
+      }
+
       const longestStreakElement = document.getElementById('longest-streak');
-      
-      if (totalContribElement) totalContribElement.textContent = userData.public_repos;
-      if (currentStreakElement) currentStreakElement.textContent = userData.followers;
-      if (longestStreakElement) longestStreakElement.textContent = userData.following;
-      
-      // Only show profile card if no custom graph exists
+      if (longestStreakElement && (longestStreakElement.textContent === '-' || longestStreakElement.textContent.trim().length === 0)) {
+        longestStreakElement.textContent = 'N/A';
+      }
+
       if (calendarElement && !hasCustomGraph) {
+        const summaryItems = [
+          `${Number(userData.public_repos || 0).toLocaleString()} public repositories`,
+          `${Number(userData.followers || 0).toLocaleString()} followers`,
+          `Joined ${joinedValue}`
+        ];
+
         calendarElement.innerHTML = `
-          <div style="text-align: center; padding: 2rem; background: var(--entry, #f8f9fa); border: 1px solid var(--border, #e9ecef); border-radius: 8px;">
-            <div style="margin-bottom: 1rem;">
-              <img src="${userData.avatar_url}" alt="GitHub Profile" style="width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--border, #e9ecef);">
+          <div class="github-calendar-fallback">
+            <div class="fallback-avatar">
+              <img src="${userData.avatar_url}&s=128" alt="GitHub avatar for ${userData.login}">
             </div>
-            <h3 style="margin: 0.5rem 0; color: var(--primary, #212529);">@${userData.login}</h3>
-            <p style="color: var(--secondary, #6c757d); margin-bottom: 1rem; font-size: 0.9rem;">
-              ${userData.bio || `${userData.company || 'Software Developer'} • ${userData.location || 'GitHub Developer'}`}
-            </p>
-            <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem; font-size: 0.85rem; flex-wrap: wrap;">
-              <span>📁 ${userData.public_repos} repos</span>
-              <span>👥 ${userData.followers} followers</span>
-              <span>📅 Since ${new Date(userData.created_at).getFullYear()}</span>
+            <h3>@${userData.login}</h3>
+            <p>${userData.bio && userData.bio.trim().length > 0 ? userData.bio : DEFAULT_GITHUB_BIO}</p>
+            <div class="fallback-meta">
+              ${summaryItems.map(item => `<span>${item}</span>`).join('')}
             </div>
-            <a href="${userData.html_url}" 
-               target="_blank"
-               rel="noopener noreferrer"
-               style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--toggle-highlight, #0d6efd); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: opacity 0.2s;">
-              View Full GitHub Profile →
-            </a>
+            <a href="${userData.html_url}" target="_blank" rel="noopener noreferrer" class="github-profile-btn">View Full GitHub Profile</a>
           </div>
         `;
       }
     }
-    
+
     console.log('GitHub stats updated successfully');
-    
   } catch (error) {
     console.error('Failed to fetch GitHub stats:', error);
-    // Keep the existing fallback message
   }
 }
 
