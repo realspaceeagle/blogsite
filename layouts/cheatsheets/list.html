@@ -11,6 +11,10 @@
       {{ with .Params.description }}
       <p class="sidebar-description">{{ . }}</p>
       {{ end }}
+      <div class="sidebar-search">
+        <input type="search" class="sidebar-search-input" data-cheatsheet-search placeholder="Search cheatsheets..." aria-label="Search cheatsheets">
+        <button type="button" class="sidebar-search-clear" data-cheatsheet-clear aria-label="Clear search">&times;</button>
+      </div>
     </div>
 
     {{ with $nav.categories }}
@@ -46,6 +50,9 @@
         </ul>
       </section>
       {{ end }}
+    </div>
+    <div class="sidebar-empty" data-cheatsheet-empty hidden>
+      <p>No cheatsheets match your search.</p>
     </div>
     {{ end }}
   </aside>
@@ -102,6 +109,9 @@
 
 <script src="/js/cheatsheet-sidebar.js" defer></script>
 {{ end }}
+
+
+
 
 
 

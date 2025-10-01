@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   function ready(callback) {
     if (document.readyState !== 'loading') {
       callback();
@@ -22,6 +22,9 @@
     var breadcrumb = document.querySelector('[data-cheatsheet-breadcrumb]');
     var copyButton = document.querySelector('[data-cheatsheet-copy]');
     var printButton = document.querySelector('[data-cheatsheet-print]');
+    var searchInput = sidebar.querySelector('[data-cheatsheet-search]');
+    var clearButton = sidebar.querySelector('[data-cheatsheet-clear]');
+    var emptyState = sidebar.querySelector('[data-cheatsheet-empty]');
 
     function updateBreadcrumb(button) {
       if (!breadcrumb || !button) {
@@ -63,6 +66,62 @@
       return matched;
     }
 
+    function filterCheatsheets(query) {
+      var term = (query || '').trim().toLowerCase();
+      var hasMatches = false;
+      var groups = sidebar.querySelectorAll('.sidebar-group');
+
+      groups.forEach(function (group) {
+        var list = group.querySelector('.sidebar-items');
+        var toggle = group.querySelector('.sidebar-group-toggle');
+        var wrappers = group.querySelectorAll('.sidebar-item-wrapper');
+        var groupHasMatch = false;
+
+        wrappers.forEach(function (wrapper) {
+          var button = wrapper.querySelector('.sidebar-item');
+          var summaryNode = button ? button.querySelector('.item-summary') : null;
+          var title = button ? (button.getAttribute('data-cheatsheet-title') || button.textContent || '') : '';
+          var summary = summaryNode ? summaryNode.textContent : '';
+          var haystack = (title + ' ' + summary).toLowerCase();
+          var match = !term || haystack.indexOf(term) !== -1;
+
+          wrapper.style.display = match ? '' : 'none';
+          if (match) {
+            groupHasMatch = true;
+          }
+        });
+
+        if (term) {
+          group.style.display = groupHasMatch ? '' : 'none';
+          if (groupHasMatch && list && toggle) {
+            toggle.setAttribute('aria-expanded', 'true');
+            list.hidden = false;
+          }
+        } else {
+          group.style.display = '';
+          if (list && toggle.getAttribute('aria-expanded') === 'false') {
+            list.hidden = true;
+          }
+        }
+
+        if (groupHasMatch) {
+          hasMatches = true;
+        }
+      });
+
+      if (emptyState) {
+        emptyState.hidden = hasMatches;
+      }
+
+      if (clearButton) {
+        if (term) {
+          clearButton.classList.add('is-visible');
+        } else {
+          clearButton.classList.remove('is-visible');
+        }
+      }
+    }
+
     function getInitialSlug() {
       if (window.location.hash) {
         return window.location.hash.substring(1);
@@ -92,6 +151,32 @@
         showEntry(event.state.cheatsheet, { updateHistory: false });
       }
     });
+
+    if (searchInput) {
+      filterCheatsheets(searchInput.value);
+      searchInput.addEventListener('input', function () {
+        filterCheatsheets(searchInput.value);
+      });
+      searchInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          searchInput.value = '';
+          filterCheatsheets('');
+          searchInput.blur();
+        }
+      });
+    } else {
+      filterCheatsheets('');
+    }
+
+    if (clearButton) {
+      clearButton.addEventListener('click', function () {
+        if (searchInput) {
+          searchInput.value = '';
+          searchInput.focus();
+        }
+        filterCheatsheets('');
+      });
+    }
 
     if (copyButton) {
       copyButton.addEventListener('click', function () {
@@ -127,4 +212,3 @@
     });
   });
 })();
-

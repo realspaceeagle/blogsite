@@ -1,4 +1,4 @@
-﻿.cheatsheet-shell {
+.cheatsheet-shell {
   display: flex;
   gap: 2rem;
   align-items: flex-start;
@@ -41,6 +41,71 @@
   margin: 0.5rem 0 0 0;
   font-size: 0.95rem;
   color: var(--secondary);
+}
+
+.sidebar-search {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.sidebar-search-input {
+  flex: 1;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--theme);
+  color: var(--primary);
+  font-size: 0.9rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sidebar-search-input:focus {
+  outline: none;
+  border-color: rgba(37, 99, 235, 0.6);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.sidebar-search-clear {
+  border: none;
+  background: transparent;
+  color: var(--secondary);
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-search-clear:hover,
+.sidebar-search-clear:focus {
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--primary);
+  outline: none;
+}
+
+.sidebar-search-clear.is-visible {
+  display: inline-flex;
+}
+
+.sidebar-empty {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border: 1px dashed var(--border);
+  border-radius: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--secondary);
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.sidebar-empty p {
+  margin: 0;
 }
 
 .sidebar-group + .sidebar-group {
@@ -262,3 +327,4 @@
     text-align: center;
   }
 }
+

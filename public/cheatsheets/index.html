@@ -449,6 +449,10 @@ document.addEventListener('DOMContentLoaded', function() {
       
       <p class="sidebar-description">Comprehensive security reference guides and cheatsheets for penetration testing, network security, and defensive techniques</p>
       
+      <div class="sidebar-search">
+        <input type="search" class="sidebar-search-input" data-cheatsheet-search placeholder="Search cheatsheets..." aria-label="Search cheatsheets">
+        <button type="button" class="sidebar-search-clear" data-cheatsheet-clear aria-label="Clear search">&times;</button>
+      </div>
     </div>
 
     
@@ -678,6 +682,9 @@ document.addEventListener('DOMContentLoaded', function() {
       </section>
       
     </div>
+    <div class="sidebar-empty" data-cheatsheet-empty hidden>
+      <p>No cheatsheets match your search.</p>
+    </div>
     
   </aside>
 
@@ -688,7 +695,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <span aria-hidden="true">/</span>
         <a href="/cheatsheets/">Cheatsheets</a>
         <span aria-hidden="true">/</span>
-        <span data-cheatsheet-breadcrumb>Loading…</span>
+        <span data-cheatsheet-breadcrumb>Loading...</span>
       </nav>
       <div class="cheatsheet-actions">
         <button type="button" class="cheatsheet-action" data-cheatsheet-copy>Copy link</button>

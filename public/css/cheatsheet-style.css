@@ -75,23 +75,19 @@
 
 /* Code blocks */
 .cheatsheet-page pre {
-  background: #0f172a;
-  color: #e2e8f0;
-  border-radius: 8px;
-  padding: 1.5rem;
+  background: var(--code-bg);
+  color: inherit;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
   margin: 1.5rem 0;
   overflow-x: auto;
-  border-left: 4px solid #2563eb;
-  position: relative;
+  border: 1px solid var(--border);
 }
 
-.cheatsheet-page pre::before {
-  content: "$";
-  position: absolute;
-  left: 1rem;
-  top: 1rem;
-  color: #10b981;
-  font-weight: bold;
+.dark .cheatsheet-page pre {
+  background: rgba(55, 65, 81, 0.35);
+  border-color: rgba(148, 163, 184, 0.35);
+  color: inherit;
 }
 
 .cheatsheet-page pre code {
