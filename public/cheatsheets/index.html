@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Cybersecurity Cheatsheets | realspaceeagle</title>
+<meta name="keywords" content="cheatsheets, cybersecurity, commands, reference, penetration testing, security tools">
+<meta name="description" content="Quick reference guides, command cheatsheets, and handy security resources for cybersecurity professionals and ethical hackers.">
+<meta name="author" content="realspaceeagle">
+<link rel="canonical" href="http://localhost:1313/cheatsheets/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon.svg">
+<link rel="apple-touch-icon" href="http://localhost:1313/favicon.svg">
+<link rel="mask-icon" href="http://localhost:1313/favicon.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/cheatsheets/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/cheatsheets/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<meta name="description" content="Quick reference guides, command cheatsheets, and handy security resources for cybersecurity professionals and ethical hackers.">
+<meta name="keywords" content="cheatsheets, cybersecurity, commands, reference, penetration testing, security tools">
+<meta name="author" content="realspaceeagle">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="canonical" href="http://localhost:1313/cheatsheets/">
+
+
+<meta property="og:title" content="Cybersecurity Cheatsheets - realspaceeagle">
+<meta property="og:description" content="Quick reference guides, command cheatsheets, and handy security resources for cybersecurity professionals and ethical hackers.">
+<meta property="og:url" content="http://localhost:1313/cheatsheets/">
+<meta property="og:site_name" content="realspaceeagle">
+<meta property="og:locale" content="en_US"><meta property="og:type" content="website"><meta property="og:image" content="http://localhost:1313/images/og-image.svg">
+  <meta property="og:image:alt" content="realspaceeagle">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@haran_loga">
+<meta name="twitter:creator" content="@haran_loga">
+<meta name="twitter:title" content="Cybersecurity Cheatsheets - realspaceeagle">
+<meta name="twitter:description" content="Quick reference guides, command cheatsheets, and handy security resources for cybersecurity professionals and ethical hackers."><meta name="twitter:image" content="http://localhost:1313/images/og-image.svg">
+  <meta name="twitter:image:alt" content="realspaceeagle">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "WebPage",
+  "name": "Cybersecurity Cheatsheets",
+  "description": "Quick reference guides, command cheatsheets, and handy security resources for cybersecurity professionals and ethical hackers.",
+  "url": "http:\/\/localhost:1313\/cheatsheets\/",
+  "publisher": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "url": "http:\/\/localhost:1313\/"
+  }}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "http:\/\/localhost:1313\/"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Cybersecurity Cheatsheets",
+      "item": "http:\/\/localhost:1313\/cheatsheets\/"
+    }]
+}
+</script>
+
+
+<link rel="stylesheet" href="/css/terminal-style.css">
+
+
+<link rel="stylesheet" href="/css/scroll-enhancement.css">
+
+
+<link rel="stylesheet" href="/css/mobile-navigation.css">
+
+
+<link rel="stylesheet" href="/css/mobile-responsive-pages.css">
+
+
+<link rel="stylesheet" href="/css/header-width-fix.css">
+
+
+<link rel="stylesheet" href="/css/share-buttons.css">
+
+
+<link rel="stylesheet" href="/css/comments.css">
+
+
+<link rel="stylesheet" href="/css/blog-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/blog-sidebar.css">
+
+
+<link rel="stylesheet" href="/css/project-toggle.css">
+
+
+<link rel="stylesheet" href="/css/code-copy-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/ctf-writeup.css">
+
+
+<link rel="stylesheet" href="/css/github-stats.css">
+
+
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar-responsive.css" onerror="this.remove();" />
+<script src="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar.min.js" onerror="this.remove();"></script>
+
+
+<script src="/js/github-calendar-enhanced.js" defer></script>
+
+
+<script src="/js/github-contribution-tracker.js" defer></script>
+
+
+<script src="/js/github-api-fallback.js" defer></script>
+
+
+<script src="/js/github-integration.js" defer></script>
+
+
+<script src="/js/twitter-timeline.js" defer></script>
+<script src="/js/twitter-manual.js" defer></script>
+
+
+<script src="/js/code-copy-enhanced.js" defer></script>
+
+
+
+
+<script src="/js/enhanced-search.js" defer></script>
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPTRZ14YZS"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-GPTRZ14YZS');
+        }
+      </script><meta property="og:url" content="http://localhost:1313/cheatsheets/">
+  <meta property="og:site_name" content="realspaceeagle">
+  <meta property="og:title" content="Cybersecurity Cheatsheets">
+  <meta property="og:description" content="Quick reference guides, command cheatsheets, and handy security resources for cybersecurity professionals and ethical hackers.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+      <meta property="og:image" content="http://localhost:1313/images/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/images/og-image.svg">
+<meta name="twitter:title" content="Cybersecurity Cheatsheets">
+<meta name="twitter:description" content="Quick reference guides, command cheatsheets, and handy security resources for cybersecurity professionals and ethical hackers.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Cybersecurity Cheatsheets",
+      "item": "http://localhost:1313/cheatsheets/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
+            
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="logo-switches">
+                
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/dream4ip/" target="_blank" rel="noopener noreferrer" 
+                       title="Connect on LinkedIn" aria-label="LinkedIn Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/haran_loga" target="_blank" rel="noopener noreferrer" 
+                       title="Follow on X/Twitter" aria-label="Twitter Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener noreferrer" 
+                       title="View Code on GitHub" aria-label="GitHub Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <ul id="menu" class="desktop-menu">
+            <li>
+                <a href="http://localhost:1313/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/cheatsheets/" title="Cheatsheets">
+                    <span class="active">Cheatsheets</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+        
+        
+        <div id="mobile-menu" class="mobile-menu">
+            <ul class="mobile-menu-list">
+                <li>
+                    <a href="http://localhost:1313/" title="Home">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/about/" title="About">
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/archives/" title="Archives">
+                        <span>Archives</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/cheatsheets/" title="Cheatsheets">
+                        <span class="active">Cheatsheets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/search/" title="Search" accesskey=/>
+                        <span>Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/categories/" title="Categories">
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/projects/" title="Projects">
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/contact/" title="Contact">
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+    
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.contains('active');
+            
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            } else {
+                mobileMenu.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+                body.classList.add('mobile-menu-open');
+            }
+        });
+        
+        
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            });
+        });
+        
+        
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            }
+        });
+    }
+});
+</script><main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/">Home</a></div>
+  <h1>
+    Cybersecurity Cheatsheets
+  </h1>
+  <div class="post-description">
+    Quick reference guides, command cheatsheets, and handy security resources for cybersecurity professionals and ethical hackers.
+  </div>
+</header>
+<div class="post-content"><h1 id="-cybersecurity-cheatsheets">🛡️ Cybersecurity Cheatsheets<a hidden class="anchor" aria-hidden="true" href="#-cybersecurity-cheatsheets">#</a></h1>
+<p>Quick reference guides and command cheatsheets for cybersecurity professionals, penetration testers, and security enthusiasts. These resources are designed to provide instant access to commonly used commands, techniques, and methodologies.</p>
+<hr>
+<h2 id="-available-cheatsheets">📋 Available Cheatsheets<a hidden class="anchor" aria-hidden="true" href="#-available-cheatsheets">#</a></h2>
+<h3 id="-reconnaissance--enumeration">🔍 <strong>Reconnaissance &amp; Enumeration</strong><a hidden class="anchor" aria-hidden="true" href="#-reconnaissance--enumeration">#</a></h3>
+<ul>
+<li>Network Discovery Commands</li>
+<li>Port Scanning Techniques</li>
+<li>DNS Enumeration Methods</li>
+<li>OSINT Collection Tools</li>
+</ul>
+<h3 id="-web-application-testing">🌐 <strong>Web Application Testing</strong><a hidden class="anchor" aria-hidden="true" href="#-web-application-testing">#</a></h3>
+<ul>
+<li>Burp Suite Quick Commands</li>
+<li>OWASP ZAP Techniques</li>
+<li>SQL Injection Payloads</li>
+<li>XSS Detection Methods</li>
+</ul>
+<h3 id="-linux-security">🐧 <strong>Linux Security</strong><a hidden class="anchor" aria-hidden="true" href="#-linux-security">#</a></h3>
+<ul>
+<li>System Hardening Commands</li>
+<li>Log Analysis Techniques</li>
+<li>File Permission Management</li>
+<li>Process Monitoring Tools</li>
+</ul>
+<h3 id="-cloud-security">☁️ <strong>Cloud Security</strong><a hidden class="anchor" aria-hidden="true" href="#-cloud-security">#</a></h3>
+<ul>
+<li>AWS Security Commands</li>
+<li>Azure Security Tools</li>
+<li>Container Security Checks</li>
+<li>Kubernetes Security Policies</li>
+</ul>
+<h3 id="-tool-commands">🔧 <strong>Tool Commands</strong><a hidden class="anchor" aria-hidden="true" href="#-tool-commands">#</a></h3>
+<ul>
+<li>Nmap Command Reference</li>
+<li>Metasploit Quick Guide</li>
+<li>Wireshark Filters</li>
+<li>PowerShell Security Commands</li>
+</ul>
+<hr>
+<h2 id="-how-to-use-these-cheatsheets">🎯 How to Use These Cheatsheets<a hidden class="anchor" aria-hidden="true" href="#-how-to-use-these-cheatsheets">#</a></h2>
+<p>Each cheatsheet is designed for:</p>
+<ul>
+<li><strong>Quick Reference</strong>: Fast lookup during security assessments</li>
+<li><strong>Learning Aid</strong>: Educational resource for security concepts</li>
+<li><strong>Practical Application</strong>: Real-world command examples</li>
+<li><strong>Best Practices</strong>: Security-focused implementations</li>
+</ul>
+<hr>
+<h2 id="-coming-soon">📚 Coming Soon<a hidden class="anchor" aria-hidden="true" href="#-coming-soon">#</a></h2>
+<p>More cheatsheets are being developed covering:</p>
+<ul>
+<li>Advanced Persistent Threat (APT) Detection</li>
+<li>Incident Response Procedures</li>
+<li>Malware Analysis Techniques</li>
+<li>Digital Forensics Commands</li>
+<li>DevSecOps Pipeline Security</li>
+</ul>
+<hr>
+<p><em>💡 <strong>Tip</strong>: Bookmark this page for quick access to all cybersecurity reference materials during your security assessments and research.</em></p>
+<hr>
+<p><strong>⚠️ Disclaimer</strong>: These cheatsheets are intended for educational purposes and authorized security testing only. Always ensure you have proper authorization before conducting any security assessments.</p>
+
+
+</div>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Nmap Command Cheatsheet
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>🔍 Nmap Command Cheatsheet Nmap (Network Mapper) is a powerful network discovery and security auditing tool. This cheatsheet covers the most commonly used Nmap commands for penetration testing and network reconnaissance.
+🎯 Basic Scanning Host Discovery # Ping scan - discover live hosts nmap -sn 192.168.1.0/24 # No ping scan - treat all hosts as online nmap -Pn target.com # List scan - just list targets to scan nmap -sL 192.168.1.0/24 Port Scanning # TCP SYN scan (default) nmap -sS target.com # TCP connect scan nmap -sT target.com # UDP scan nmap -sU target.com # Scan specific ports nmap -p 80,443,22 target.com # Scan port ranges nmap -p 1-1000 target.com # Scan all ports nmap -p- target.com 🚀 Advanced Scanning Service Detection # Service version detection nmap -sV target.com # Aggressive service detection nmap -sV --version-intensity 9 target.com # Operating system detection nmap -O target.com # Combined OS and service detection nmap -A target.com Script Scanning # Default NSE scripts nmap -sC target.com # Specific script categories nmap --script vuln target.com nmap --script auth target.com nmap --script discovery target.com # Run specific scripts nmap --script http-enum target.com nmap --script ssl-cert target.com 🎛️ Timing and Performance Timing Templates # Paranoid (0) - Very slow, IDS evasion nmap -T0 target.com # Sneaky (1) - Slow, IDS evasion nmap -T1 target.com # Polite (2) - Slow, less bandwidth nmap -T2 target.com # Normal (3) - Default timing nmap -T3 target.com # Aggressive (4) - Fast, assume good network nmap -T4 target.com # Insane (5) - Very fast, assume excellent network nmap -T5 target.com Custom Timing # Custom timing options nmap --min-rate 1000 target.com nmap --max-rate 5000 target.com nmap --min-parallelism 100 target.com 🥷 Stealth and Evasion Stealth Techniques # SYN stealth scan nmap -sS target.com # FIN scan nmap -sF target.com # NULL scan nmap -sN target.com # Xmas scan nmap -sX target.com # ACK scan nmap -sA target.com Evasion Options # Fragment packets nmap -f target.com # Decoy scanning nmap -D RND:10 target.com nmap -D decoy1,decoy2,ME target.com # Source port manipulation nmap --source-port 53 target.com # Spoof MAC address nmap --spoof-mac 0 target.com 📊 Output and Reporting Output Formats # Normal output nmap -oN scan.txt target.com # XML output nmap -oX scan.xml target.com # Grepable output nmap -oG scan.gnmap target.com # All formats nmap -oA scan target.com Verbose Output # Verbose level 1 nmap -v target.com # Verbose level 2 nmap -vv target.com # Debug output nmap -d target.com nmap -dd target.com 🎯 Target Specification Single Targets # Scan single host nmap 192.168.1.1 nmap target.com # Scan multiple hosts nmap 192.168.1.1 192.168.1.2 nmap target1.com target2.com Range Scanning # CIDR notation nmap 192.168.1.0/24 # Range notation nmap 192.168.1.1-254 # Wildcard notation nmap 192.168.1.* # Multiple ranges nmap 192.168.1-2.1-254 Input from File # Read targets from file nmap -iL targets.txt # Exclude targets nmap 192.168.1.0/24 --exclude 192.168.1.1 nmap 192.168.1.0/24 --excludefile exclude.txt 🔐 Common Use Cases Web Server Assessment # Quick web server scan nmap -p 80,443 -sV --script http-* target.com # SSL/TLS assessment nmap -p 443 --script ssl-* target.com # Web vulnerability scan nmap -p 80,443 --script vuln target.com Network Discovery # Quick network overview nmap -sn -PE -PA21,23,80,3389 192.168.1.0/24 # Comprehensive network scan nmap -sS -A -T4 192.168.1.0/24 # Fast top ports scan nmap --top-ports 1000 -T4 192.168.1.0/24 Database Scanning # MySQL scanning nmap -p 3306 --script mysql-* target.com # MSSQL scanning nmap -p 1433 --script ms-sql-* target.com # Oracle scanning nmap -p 1521 --script oracle-* target.com 📡 Firewall and IDS Evasion Bypass Techniques # Fragment packets nmap -f -f target.com # Use decoys nmap -D RND:10 192.168.1.1 # Zombie scan (idle scan) nmap -sI zombie_host target.com # Source routing nmap --ip-options &#34;L 192.168.1.1&#34; target.com Timing Evasion # Very slow scan nmap -T0 -sS target.com # Random delay nmap --scan-delay 5s target.com # Custom timing nmap --min-rate 1 --max-rate 5 target.com 🛠️ Useful Scripts Vulnerability Detection # CVE detection nmap --script vuln target.com # SMB vulnerabilities nmap --script smb-vuln-* target.com # Web vulnerabilities nmap --script http-vuln-* target.com Information Gathering # DNS information nmap --script dns-* target.com # SNMP information nmap -sU -p 161 --script snmp-* target.com # Banner grabbing nmap --script banner target.com ⚡ One-Liner Commands Quick Scans # Fast TCP scan nmap -sS -T4 --top-ports 1000 target.com # UDP service discovery nmap -sU -T4 --top-ports 100 target.com # Comprehensive scan nmap -sS -sU -T4 -A --top-ports 1000 target.com Specific Services # Web services nmap -p 80,443,8080,8443 -sV --script http-title,http-headers target.com # Mail services nmap -p 25,110,143,993,995 -sV target.com # FTP services nmap -p 21 --script ftp-* target.com 📋 Best Practices Ethical Scanning Always obtain proper authorization Use appropriate timing to avoid DoS Document all scanning activities Respect rate limits and firewalls Performance Tips Use -T4 for faster scans on good networks Scan top ports first with --top-ports Use UDP scanning sparingly (it’s slow) Combine multiple scan types efficiently Stealth Considerations Use -T1 or -T2 for stealth Fragment packets with -f Use decoys with -D Scan from multiple source IPs 🔗 Additional Resources Official Nmap Documentation: https://nmap.org/docs.html NSE Script Database: https://nmap.org/nsedoc/ Nmap Network Scanning Book: https://nmap.org/book/ ⚠️ Legal Notice: This cheatsheet is for educational and authorized testing purposes only. Always ensure you have explicit permission before scanning any network or system.
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-01-15 00:00:00 +0000 GMT'>January 15, 2024</span>&nbsp;·&nbsp;<span>5 min</span>&nbsp;·&nbsp;<span>realspaceeagle</span></footer>
+  <a class="entry-link" aria-label="post link to Nmap Command Cheatsheet" href="http://localhost:1313/cheatsheets/nmap-cheatsheet/"></a>
+</article>
+    </main>
+    <footer class="footer">
+  <div class="footer_inner wrap">
+    <div class="footer_text">
+      © 2025 realspaceeagle
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

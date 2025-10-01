@@ -140,10 +140,10 @@ body.mobile-menu-open {
 }
 
 /* Responsive Breakpoints */
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
     /* Show mobile menu toggle */
     .mobile-menu-toggle {
-        display: flex;
+        display: flex !important;
         order: 1;
         margin-left: auto;
         margin-right: 1rem;
@@ -151,7 +151,7 @@ body.mobile-menu-open {
     
     /* Hide desktop menu */
     .desktop-menu {
-        display: none;
+        display: none !important;
     }
     
     /* Adjust header layout for mobile */

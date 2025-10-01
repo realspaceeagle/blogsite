@@ -182,20 +182,6 @@
       <description></description>
     </item>
     <item>
-      <title>Template</title>
-      <link>http://localhost:1313/tags/template/</link>
-      <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/template/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Writeup-Guide</title>
-      <link>http://localhost:1313/tags/writeup-guide/</link>
-      <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/writeup-guide/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Penetration-Testing</title>
       <link>http://localhost:1313/tags/penetration-testing/</link>
       <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
@@ -256,6 +242,27 @@
       <link>http://localhost:1313/tags/security/</link>
       <pubDate>Tue, 30 Jan 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Network-Security</title>
+      <link>http://localhost:1313/tags/network-security/</link>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/network-security/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Reconnaissance</title>
+      <link>http://localhost:1313/tags/reconnaissance/</link>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/reconnaissance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Scanning</title>
+      <link>http://localhost:1313/tags/scanning/</link>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/scanning/</guid>
       <description></description>
     </item>
   </channel>

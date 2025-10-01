@@ -120,6 +120,12 @@
 <link rel="stylesheet" href="/css/mobile-navigation.css">
 
 
+<link rel="stylesheet" href="/css/mobile-responsive-pages.css">
+
+
+<link rel="stylesheet" href="/css/header-width-fix.css">
+
+
 <link rel="stylesheet" href="/css/share-buttons.css">
 
 
@@ -146,6 +152,9 @@
 
 <link rel="stylesheet" href="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar-responsive.css" onerror="this.remove();" />
 <script src="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar.min.js" onerror="this.remove();"></script>
+
+
+<script src="/js/github-calendar-enhanced.js" defer></script>
 
 
 <script src="/js/github-contribution-tracker.js" defer></script>
@@ -282,6 +291,11 @@
                 </a>
             </li>
             <li>
+                <a href="http://localhost:1313/cheatsheets/" title="Cheatsheets">
+                    <span>Cheatsheets</span>
+                </a>
+            </li>
+            <li>
                 <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
@@ -324,6 +338,11 @@
                 <li>
                     <a href="http://localhost:1313/archives/" title="Archives">
                         <span>Archives</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/cheatsheets/" title="Cheatsheets">
+                        <span>Cheatsheets</span>
                     </a>
                 </li>
                 <li>
@@ -437,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <a href="http://localhost:1313/tags/github/">github <sup><strong><sup>1</sup></strong></sup> </a>
     </li>
     <li>
-        <a href="http://localhost:1313/tags/hackthebox/">hackthebox <sup><strong><sup>3</sup></strong></sup> </a>
+        <a href="http://localhost:1313/tags/hackthebox/">hackthebox <sup><strong><sup>2</sup></strong></sup> </a>
     </li>
     <li>
         <a href="http://localhost:1313/tags/lfi/">lfi <sup><strong><sup>1</sup></strong></sup> </a>
@@ -449,16 +468,19 @@ document.addEventListener('DOMContentLoaded', function() {
         <a href="http://localhost:1313/tags/markdown/">markdown <sup><strong><sup>1</sup></strong></sup> </a>
     </li>
     <li>
+        <a href="http://localhost:1313/tags/network-security/">network-security <sup><strong><sup>1</sup></strong></sup> </a>
+    </li>
+    <li>
         <a href="http://localhost:1313/tags/networking/">networking <sup><strong><sup>1</sup></strong></sup> </a>
     </li>
     <li>
-        <a href="http://localhost:1313/tags/nmap/">nmap <sup><strong><sup>1</sup></strong></sup> </a>
+        <a href="http://localhost:1313/tags/nmap/">nmap <sup><strong><sup>2</sup></strong></sup> </a>
     </li>
     <li>
         <a href="http://localhost:1313/tags/pair-programming/">pair-programming <sup><strong><sup>1</sup></strong></sup> </a>
     </li>
     <li>
-        <a href="http://localhost:1313/tags/penetration-testing/">penetration-testing <sup><strong><sup>1</sup></strong></sup> </a>
+        <a href="http://localhost:1313/tags/penetration-testing/">penetration-testing <sup><strong><sup>2</sup></strong></sup> </a>
     </li>
     <li>
         <a href="http://localhost:1313/tags/privilege-escalation/">privilege-escalation <sup><strong><sup>2</sup></strong></sup> </a>
@@ -482,7 +504,13 @@ document.addEventListener('DOMContentLoaded', function() {
         <a href="http://localhost:1313/tags/readme/">readme <sup><strong><sup>1</sup></strong></sup> </a>
     </li>
     <li>
+        <a href="http://localhost:1313/tags/reconnaissance/">reconnaissance <sup><strong><sup>1</sup></strong></sup> </a>
+    </li>
+    <li>
         <a href="http://localhost:1313/tags/reverse-shell/">reverse-shell <sup><strong><sup>1</sup></strong></sup> </a>
+    </li>
+    <li>
+        <a href="http://localhost:1313/tags/scanning/">scanning <sup><strong><sup>1</sup></strong></sup> </a>
     </li>
     <li>
         <a href="http://localhost:1313/tags/security/">security <sup><strong><sup>1</sup></strong></sup> </a>
@@ -500,13 +528,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <a href="http://localhost:1313/tags/sysadmin/">sysadmin <sup><strong><sup>1</sup></strong></sup> </a>
     </li>
     <li>
-        <a href="http://localhost:1313/tags/template/">template <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
         <a href="http://localhost:1313/tags/web-exploitation/">web-exploitation <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="http://localhost:1313/tags/writeup-guide/">writeup-guide <sup><strong><sup>1</sup></strong></sup> </a>
     </li>
 </ul>
     </main>
