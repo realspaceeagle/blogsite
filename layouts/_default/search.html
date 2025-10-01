@@ -332,6 +332,17 @@ document.addEventListener('DOMContentLoaded', function() {
         document.dispatchEvent(new CustomEvent('searchModeChanged', { 
             detail: { mode: 'enhanced' } 
         }));
+        
+        // Force re-search if there's a query
+        const query = document.getElementById('searchInput').value.trim();
+        if (query && window.enhancedSearchEnabled) {
+            console.log('Forcing enhanced search for query:', query);
+            setTimeout(() => {
+                if (window.search) {
+                    window.search(query, 'enhanced');
+                }
+            }, 100);
+        }
     });
     
     // Initialize

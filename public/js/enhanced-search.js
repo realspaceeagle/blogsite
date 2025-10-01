@@ -60,7 +60,37 @@
         
         // Override the original search input behavior completely
         setupEnhancedSearchBehavior();
+        
+        // Force override of any existing search handlers
+        setTimeout(() => {
+            forceOverrideSearch();
+        }, 1000);
     });
+    
+    function forceOverrideSearch() {
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        
+        if (!searchInput || !searchResults) return;
+        
+        // Store reference to our enhanced search functions
+        window.enhancedSearchEnabled = true;
+        
+        // Override any existing search behavior
+        const originalSearch = window.search || function() {};
+        
+        window.search = function(query, mode = 'normal') {
+            console.log('Custom search called:', query, mode);
+            
+            if (mode === 'enhanced') {
+                performEnhancedSearch(query);
+            } else {
+                performNormalSearch(query);
+            }
+        };
+        
+        console.log('Search override complete');
+    }
     
     function setupEnhancedSearchBehavior() {
         const searchInput = document.getElementById('searchInput');
@@ -78,6 +108,7 @@
         // Listen for mode changes
         document.addEventListener('searchModeChanged', function(e) {
             currentMode = e.detail.mode;
+            console.log('Search mode changed to:', currentMode);
             
             // Clear results when switching modes
             searchResults.innerHTML = '';
@@ -85,16 +116,20 @@
             // Reconfigure fuse for the new mode
             if (fuseData) {
                 const config = enhancedSearchConfig[currentMode];
+                console.log('Updating fuse config for mode:', currentMode, config);
                 window.fuse = new Fuse(fuseData, config);
             }
             
             // Trigger search if there's a query
             const currentInput = document.getElementById('searchInput');
             const query = currentInput ? currentInput.value.trim() : '';
+            console.log('Current query:', query);
             if (query) {
                 if (currentMode === 'enhanced') {
+                    console.log('Performing enhanced search');
                     performEnhancedSearch(query);
                 } else {
+                    console.log('Performing normal search');
                     performNormalSearch(query);
                 }
             }
@@ -111,7 +146,13 @@
             // Debounce search
             searchTimeout = setTimeout(() => {
                 if (query) {
-                    if (currentMode === 'enhanced') {
+                    // Check if container has enhanced-search class to determine mode
+                    const container = document.querySelector('.enhanced-search-container');
+                    const isEnhanced = container && container.classList.contains('enhanced-search');
+                    
+                    console.log('Input search - Mode:', isEnhanced ? 'enhanced' : 'normal', 'Query:', query);
+                    
+                    if (isEnhanced || currentMode === 'enhanced') {
                         performEnhancedSearch(query);
                     } else {
                         performNormalSearch(query);
@@ -158,7 +199,12 @@
     }
     
     function performEnhancedSearch(query) {
+        console.log('performEnhancedSearch called with query:', query);
+        console.log('window.fuse exists:', !!window.fuse);
+        console.log('fuseData exists:', !!fuseData);
+        
         if (!window.fuse || !query) {
+            console.log('No fuse or query, clearing results');
             document.getElementById('searchResults').innerHTML = '';
             hideSearchStats();
             return;
@@ -167,6 +213,11 @@
         const startTime = performance.now();
         const results = window.fuse.search(query, { limit: 20 });
         const endTime = performance.now();
+        
+        console.log(`Found ${results.length} results in enhanced search`);
+        if (results.length > 0) {
+            console.log('First result:', results[0]);
+        }
         
         // Apply filters
         const filteredResults = applyFilters(results);
@@ -228,8 +279,15 @@
     }
     
     function renderEnhancedResults(results, query) {
+        console.log('renderEnhancedResults called with', results.length, 'results');
         const searchResults = document.getElementById('searchResults');
-        if (!searchResults) return;
+        if (!searchResults) {
+            console.log('No searchResults element found');
+            return;
+        }
+        
+        const container = document.querySelector('.enhanced-search-container');
+        console.log('Container classes:', container ? container.className : 'No container found');
         
         if (results.length === 0) {
             searchResults.innerHTML = '<li class="no-results">No results found for your search</li>';
