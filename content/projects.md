@@ -299,16 +299,31 @@ Explore my collection of security tools, research projects, and contributions to
   </div>
   
   <div class="github-stats-container">
-    <div class="github-stat-item repos">
+    <div class="github-stat-item contributions">
       <div class="github-stat-number" id="total-contributions">-</div>
+      <div class="github-stat-label">Contributions</div>
+    </div>
+    <div class="github-stat-item streak">
+      <div class="github-stat-number" id="current-streak">-</div>
+      <div class="github-stat-label">Current Streak</div>
+    </div>
+    <div class="github-stat-item longest">
+      <div class="github-stat-number" id="longest-streak">-</div>
+      <div class="github-stat-label">Longest Streak</div>
+    </div>
+  </div>
+  
+  <div class="github-stats-container">
+    <div class="github-stat-item repos">
+      <div class="github-stat-number" id="github-public-repos">-</div>
       <div class="github-stat-label">Repositories</div>
     </div>
     <div class="github-stat-item followers">
-      <div class="github-stat-number" id="current-streak">-</div>
+      <div class="github-stat-number" id="github-followers">-</div>
       <div class="github-stat-label">Followers</div>
     </div>
     <div class="github-stat-item following">
-      <div class="github-stat-number" id="longest-streak">-</div>
+      <div class="github-stat-number" id="github-following">-</div>
       <div class="github-stat-label">Following</div>
     </div>
   </div>

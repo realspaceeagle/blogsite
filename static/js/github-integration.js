@@ -144,9 +144,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentStreakElement = document.getElementById('current-streak');
     const longestStreakElement = document.getElementById('longest-streak');
     
-    if (totalContribElement) totalContribElement.textContent = '27';
-    if (currentStreakElement) currentStreakElement.textContent = '10';
-    if (longestStreakElement) longestStreakElement.textContent = '57';
+    if (totalContribElement) totalContribElement.textContent = '208';
+    if (currentStreakElement) currentStreakElement.textContent = '5 days';
+    if (longestStreakElement) longestStreakElement.textContent = '15 days';
   }
   
   async function refreshGitHubData() {
