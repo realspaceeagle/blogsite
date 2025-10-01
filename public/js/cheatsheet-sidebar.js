@@ -21,7 +21,10 @@
     var entries = Array.prototype.slice.call(document.querySelectorAll('.cheatsheet-entry'));
     var entryLookup = {};
     entries.forEach(function (entry) {
-      entryLookup[entry.getAttribute('data-cheatsheet')] = entry;
+      var key = entry.getAttribute('data-cheatsheet');
+      if (key) {
+        entryLookup[key] = entry;
+      }
     });
 
     var breadcrumb = document.querySelector('[data-cheatsheet-breadcrumb]');
@@ -30,6 +33,10 @@
     var searchInput = sidebar.querySelector('[data-cheatsheet-search]');
     var clearButton = sidebar.querySelector('[data-cheatsheet-clear]');
     var emptyState = sidebar.querySelector('[data-cheatsheet-empty]');
+    var resultsOverlay = document.querySelector('[data-cheatsheet-results]');
+    var resultsTerm = resultsOverlay ? resultsOverlay.querySelector('[data-cheatsheet-results-term]') : null;
+    var resultsList = resultsOverlay ? resultsOverlay.querySelector('[data-cheatsheet-results-list]') : null;
+    var resultsClose = resultsOverlay ? resultsOverlay.querySelector('[data-cheatsheet-results-close]') : null;
 
     var currentSearchTerm = '';
 
@@ -39,7 +46,11 @@
       }
       var category = button.getAttribute('data-cheatsheet-category');
       var title = button.getAttribute('data-cheatsheet-title') || button.textContent.trim();
-      breadcrumb.textContent = category ? category + ' / ' + title : title;
+      if (category) {
+        breadcrumb.textContent = category + ' / ' + title;
+      } else {
+        breadcrumb.textContent = title;
+      }
     }
 
     function getActiveButton() {
@@ -78,10 +89,11 @@
             if (parentTag && /SCRIPT|STYLE|NOSCRIPT/.test(parentTag)) {
               return NodeFilter.FILTER_REJECT;
             }
-            if (!node.textContent || !node.textContent.trim()) {
+            var value = node.textContent;
+            if (!value || !value.trim()) {
               return NodeFilter.FILTER_SKIP;
             }
-            return node.textContent.toLowerCase().indexOf(lowerTerm) === -1
+            return value.toLowerCase().indexOf(lowerTerm) === -1
               ? NodeFilter.FILTER_SKIP
               : NodeFilter.FILTER_ACCEPT;
           }
@@ -148,14 +160,143 @@
       if (!inner) {
         inner = entry;
       }
+
       highlightTerm(inner, term);
 
-      if (opts.scroll !== false) {
-        var firstMark = entry.querySelector('.cheatsheet-highlight');
-        if (firstMark) {
-          firstMark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var marks = entry.querySelectorAll('.cheatsheet-highlight');
+      marks.forEach(function (mark) {
+        mark.classList.remove('is-focus');
+      });
+
+      if (!marks.length) {
+        return;
+      }
+
+      var focusIndex = opts.hasOwnProperty('focusIndex') ? opts.focusIndex : 0;
+      if (focusIndex === null || focusIndex === undefined || isNaN(focusIndex)) {
+        focusIndex = 0;
+      }
+      focusIndex = Math.max(0, Math.min(marks.length - 1, parseInt(focusIndex, 10)));
+      var focusMark = marks[focusIndex];
+      if (focusMark) {
+        focusMark.classList.add('is-focus');
+        if (opts.scroll !== false) {
+          focusMark.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>"]/g, function (char) {
+        switch (char) {
+          case '&':
+            return '&amp;';
+          case '<':
+            return '&lt;';
+          case '>':
+            return '&gt;';
+          case '"':
+            return '&quot;';
+          default:
+            return char;
+        }
+      });
+    }
+
+    function escapeRegExp(value) {
+      return value.replace(/[.*+?^${}()|[\]\\]/g, '\$&');
+    }
+
+    function createSnippet(text, matchIndex, termLength, term) {
+      var start = Math.max(0, matchIndex - 80);
+      var end = Math.min(text.length, matchIndex + termLength + 80);
+      var raw = text.slice(start, end).replace(/\s+/g, ' ').trim();
+      var escaped = escapeHtml(raw);
+      if (!term) {
+        return escaped;
+      }
+      var regex = new RegExp('(' + escapeRegExp(term) + ')', 'ig');
+      return escaped.replace(regex, '<mark class="cheatsheet-highlight">$1</mark>');
+    }
+
+    function highlightText(text, term) {
+      var escaped = escapeHtml(text || '');
+      if (!term) {
+        return escaped;
+      }
+      var regex = new RegExp('(' + escapeRegExp(term) + ')', 'ig');
+      return escaped.replace(regex, '<mark class="cheatsheet-highlight">$1</mark>');
+    }
+
+    function findSnippets(slug, term, limit) {
+      var entry = entryLookup[slug];
+      if (!entry) {
+        return [];
+      }
+      var inner = entry.querySelector('.cheatsheet-entry-inner');
+      var text = (inner || entry).textContent || '';
+      var lowerText = text.toLowerCase();
+      var lowerTerm = term.toLowerCase();
+      var max = typeof limit === 'number' ? limit : 5;
+      var matches = [];
+      var searchIndex = 0;
+      var occurrence = 0;
+
+      while (matches.length < max) {
+        var found = lowerText.indexOf(lowerTerm, searchIndex);
+        if (found === -1) {
+          break;
+        }
+        matches.push({
+          occurrence: occurrence,
+          snippet: createSnippet(text, found, term.length, term)
+        });
+        occurrence += 1;
+        searchIndex = found + term.length;
+      }
+
+      return matches;
+    }
+
+    function renderResults(term, results) {
+      if (!resultsOverlay || !resultsTerm || !resultsList) {
+        return;
+      }
+
+      if (!term) {
+        hideResults();
+        return;
+      }
+
+      resultsTerm.textContent = term;
+
+      if (!results.length) {
+        resultsList.innerHTML = '<p class="search-overlay-empty">No matches found in cheatsheets.</p>';
+      } else {
+        var items = results.map(function (item) {
+          var category = item.category ? '<span class="search-overlay-item-category">' + escapeHtml(item.category) + '</span>' : '';
+          var indexAttr = item.occurrence === null || item.occurrence === undefined ? '' : String(item.occurrence);
+          return '<article class="search-overlay-item" data-cheatsheet-result data-cheatsheet-result-slug="' + item.slug + '" data-cheatsheet-result-index="' + indexAttr + '">' +
+            '<header class="search-overlay-item-header">' +
+            '<p class="search-overlay-item-title">' + escapeHtml(item.title) + '</p>' +
+            category +
+            '</header>' +
+            '<p class="search-overlay-snippet">' + item.snippet + '</p>' +
+            '</article>';
+        });
+        resultsList.innerHTML = items.join('');
+      }
+
+      resultsOverlay.hidden = false;
+      resultsOverlay.classList.add('is-visible');
+    }
+
+    function hideResults() {
+      if (!resultsOverlay) {
+        return;
+      }
+      resultsOverlay.hidden = true;
+      resultsOverlay.classList.remove('is-visible');
     }
 
     function showEntry(slug, options) {
@@ -187,7 +328,7 @@
       });
 
       if (matched) {
-        applyHighlight(slug, currentSearchTerm, { scroll: opts.scroll !== false });
+        applyHighlight(slug, currentSearchTerm, { scroll: opts.scroll !== false, focusIndex: opts.focusIndex });
       } else {
         entries.forEach(function (entry) {
           clearHighlights(entry);
@@ -202,7 +343,10 @@
       var term = currentSearchTerm.toLowerCase();
       var hasMatches = false;
       var firstMatchButton = null;
+      var aggregatedResults = [];
       var groups = Array.prototype.slice.call(sidebar.querySelectorAll('.sidebar-group'));
+      var maxResultsTotal = 30;
+      var maxResultsPerCheat = 4;
 
       groups.forEach(function (group) {
         var list = group.querySelector('.sidebar-items');
@@ -215,10 +359,12 @@
           if (!button) {
             return;
           }
+
           var slug = button.getAttribute('data-cheatsheet-target');
           var summaryNode = button.querySelector('.item-summary');
           var title = button.getAttribute('data-cheatsheet-title') || button.textContent || '';
           var summary = summaryNode ? summaryNode.textContent : '';
+          var category = button.getAttribute('data-cheatsheet-category') || '';
           var haystack = (title + ' ' + summary).toLowerCase();
           var match = !term || haystack.indexOf(term) !== -1;
 
@@ -234,6 +380,27 @@
             groupHasMatch = true;
             if (!firstMatchButton) {
               firstMatchButton = button;
+            }
+
+            if (term && aggregatedResults.length < maxResultsTotal) {
+              var snippets = findSnippets(slug, currentSearchTerm, maxResultsPerCheat);
+              if (!snippets.length) {
+                if (summary && summary.toLowerCase().indexOf(term) !== -1) {
+                  snippets.push({ occurrence: null, snippet: highlightText(summary, currentSearchTerm) });
+                } else if (title && title.toLowerCase().indexOf(term) !== -1) {
+                  snippets.push({ occurrence: null, snippet: highlightText(title, currentSearchTerm) });
+                }
+              }
+
+              for (var i = 0; i < snippets.length && aggregatedResults.length < maxResultsTotal; i += 1) {
+                aggregatedResults.push({
+                  slug: slug,
+                  title: title,
+                  category: category,
+                  snippet: snippets[i].snippet,
+                  occurrence: snippets[i].occurrence
+                });
+              }
             }
           }
         });
@@ -277,26 +444,24 @@
             if (firstMatchButton) {
               showEntry(firstMatchButton.getAttribute('data-cheatsheet-target'), {
                 updateHistory: false,
-                scroll: true
+                scroll: true,
+                focusIndex: 0
               });
             }
           } else if (activeSlug) {
-            applyHighlight(activeSlug, currentSearchTerm, { scroll: false });
+            applyHighlight(activeSlug, currentSearchTerm, { scroll: false, focusIndex: 0 });
           }
         } else {
           entries.forEach(function (entry) {
             clearHighlights(entry);
           });
         }
+        renderResults(currentSearchTerm, aggregatedResults);
       } else {
         if (activeSlug) {
-          applyHighlight(activeSlug, '', { scroll: false });
-        } else if (firstMatchButton) {
-          showEntry(firstMatchButton.getAttribute('data-cheatsheet-target'), {
-            updateHistory: false,
-            scroll: false
-          });
+          applyHighlight(activeSlug, '', { scroll: false, focusIndex: 0 });
         }
+        hideResults();
       }
 
       if (clearButton) {
@@ -318,23 +483,23 @@
 
     var initialSlug = getInitialSlug();
     if (initialSlug) {
-      var found = showEntry(initialSlug, { updateHistory: false, scroll: false });
+      var found = showEntry(initialSlug, { updateHistory: false, scroll: false, focusIndex: 0 });
       if (!found) {
         var fallback = itemButtons[0].getAttribute('data-cheatsheet-target');
-        showEntry(fallback, { updateHistory: false, scroll: false });
+        showEntry(fallback, { updateHistory: false, scroll: false, focusIndex: 0 });
       }
     }
 
     itemButtons.forEach(function (button) {
       button.addEventListener('click', function () {
         var slug = button.getAttribute('data-cheatsheet-target');
-        showEntry(slug, { updateHistory: true, scroll: true });
+        showEntry(slug, { updateHistory: true, scroll: true, focusIndex: 0 });
       });
     });
 
     window.addEventListener('popstate', function (event) {
       if (event.state && event.state.cheatsheet) {
-        showEntry(event.state.cheatsheet, { updateHistory: false, scroll: true });
+        showEntry(event.state.cheatsheet, { updateHistory: false, scroll: true, focusIndex: 0 });
       }
     });
 
@@ -384,6 +549,38 @@
         window.print();
       });
     }
+
+    if (resultsOverlay) {
+      resultsOverlay.addEventListener('click', function (event) {
+        if (event.target === resultsOverlay) {
+          hideResults();
+        }
+      });
+    }
+
+    if (resultsClose) {
+      resultsClose.addEventListener('click', hideResults);
+    }
+
+    if (resultsList) {
+      resultsList.addEventListener('click', function (event) {
+        var target = event.target.closest('[data-cheatsheet-result]');
+        if (!target) {
+          return;
+        }
+        var slug = target.getAttribute('data-cheatsheet-result-slug');
+        var indexAttr = target.getAttribute('data-cheatsheet-result-index');
+        var focusIndex = indexAttr ? parseInt(indexAttr, 10) : null;
+        showEntry(slug, { updateHistory: true, scroll: true, focusIndex: focusIndex });
+        hideResults();
+      });
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && resultsOverlay && !resultsOverlay.hidden) {
+        hideResults();
+      }
+    });
 
     var groupToggles = sidebar.querySelectorAll('.sidebar-group-toggle');
     groupToggles.forEach(function (toggle) {

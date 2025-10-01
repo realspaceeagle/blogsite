@@ -104,6 +104,17 @@
       {{ end }}
       {{ end }}
     </div>
+    <div class="cheatsheet-search-overlay" data-cheatsheet-results hidden>
+      <div class="search-overlay-panel">
+        <div class="search-overlay-header">
+          <h2>Matches for "<span data-cheatsheet-results-term></span>"</h2>
+          <button type="button" class="search-overlay-close" data-cheatsheet-results-close aria-label="Close results">&times;</button>
+        </div>
+        <div class="search-overlay-body" data-cheatsheet-results-list>
+          <p class="search-overlay-empty">Start typing to search cheatsheets.</p>
+        </div>
+      </div>
+    </div>
   </section>
 </div>
 
