@@ -358,54 +358,68 @@
         return `<div class="snippet-text">Found in: ${item.title}</div>`;
     }
     
-    function createLocationSnippet(content, query) {
-        const words = query.toLowerCase().split(/\s+/).filter(w => w.length > 1);
-        const lines = content.split('\n');
-        
-        // Find the best match line
-        let bestMatch = null;
-        let bestScore = 0;
-        
-        for (let i = 0; i < lines.length; i++) {
-            const line = lines[i].trim();
-            if (line.length < 10) continue; // Skip very short lines
-            
-            const lineLower = line.toLowerCase();
-            let lineScore = 0;
-            
-            words.forEach(word => {
-                if (lineLower.includes(word)) {
-                    lineScore += word.length;
-                }
-            });
-            
-            if (lineScore > bestScore) {
-                bestScore = lineScore;
-                bestMatch = {
-                    line: line,
-                    lineNumber: i + 1,
-                    section: findSectionName(lines, i)
-                };
-            }
-        }
-        
-        if (!bestMatch) {
-            return `<div class="snippet-text">${highlightMatches(content.substring(0, 150), query)}...</div>`;
-        }
-        
-        let locationInfo = '';
-        if (bestMatch.section) {
-            locationInfo = `<div class="snippet-location">Found in section: <strong>${bestMatch.section}</strong></div>`;
-        } else {
-            locationInfo = `<div class="snippet-location">Found at line ${bestMatch.lineNumber}</div>`;
-        }
-        
-        const snippetText = `<div class="snippet-text">${highlightMatches(bestMatch.line, query)}</div>`;
-        
-        return locationInfo + snippetText;
-    }
-    
-    function findSectionName(lines, lineIndex) {
+    function createLocationSnippet(content, query) {
+    const words = query.toLowerCase().split(/\s+/).filter(w => w.length > 1);
+    const lines = content.split(/\r?\n/);
+
+    // Find the best match line
+    let bestMatch = null;
+    let bestScore = 0;
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (line.length < 10) continue; // Skip very short lines
+
+        const lineLower = line.toLowerCase();
+        let lineScore = 0;
+
+        words.forEach(word => {
+            if (lineLower.includes(word)) {
+                lineScore += word.length;
+            }
+        });
+
+        if (lineScore > bestScore) {
+            bestScore = lineScore;
+            bestMatch = {
+                line: line,
+                lineNumber: i + 1,
+                section: findSectionName(lines, i)
+            };
+        }
+    }
+
+    if (!bestMatch) {
+        return <div class="snippet-text">...</div>;
+    }
+
+    const matchIndex = bestMatch.lineNumber - 1;
+    const headingInfo = findNearestHeading(lines, matchIndex);
+    const headingText = headingInfo && headingInfo.text
+        ? headingInfo.text.replace(/^#+\s*/, '').trim()
+        : (bestMatch.section ? bestMatch.section.replace(/^#+\s*/, '').trim() : null);
+
+    const snippetHeading = headingText && headingText.length
+        ? <div class="snippet-heading"></div>
+        : <div class="snippet-heading">Line </div>;
+
+    const contextHeading = headingInfo
+        ? headingInfo
+        : (bestMatch.section ? { text: bestMatch.section, line: matchIndex } : { line: -1 });
+
+    const contextLines = getContextLines(lines, matchIndex, contextHeading, 240);
+    let contextText = contextLines.join(' ').trim();
+
+    if (!contextText) {
+        contextText = bestMatch.line;
+    }
+
+    const snippetText = <div class="snippet-text"></div>;
+
+    return snippetHeading + snippetText;
+}
+
+function findSectionName(lines, lineIndex) {
         // Look backwards for a heading
         for (let i = lineIndex; i >= 0 && i > lineIndex - 20; i--) {
             const line = lines[i].trim();
