@@ -17,7 +17,9 @@
       "Bash(git config:*)",
       "Bash(curl:*)",
       "Bash(git checkout:*)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(start test-search.html)",
+      "Bash(node:*)"
     ],
     "deny": []
   }

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Search Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin-bottom: 30px; padding: 15px; border: 1px solid #ccc; }
+        .result { background: #f5f5f5; padding: 10px; margin: 10px 0; }
+        .snippet-location { font-size: 12px; color: #666; margin-bottom: 8px; font-style: italic; }
+        .snippet-location strong { color: #333; font-weight: 600; }
+        .snippet-text { font-size: 14px; line-height: 1.6; }
+        .search-highlight, mark.search-highlight {
+            background: rgba(255, 193, 7, 0.4);
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
+</head>
+<body>
+    <h1>Enhanced Search Function Test</h1>
+    
+    <div class="test-section">
+        <h2>Test Data</h2>
+        <div id="testData"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Search: "nmap"</h2>
+        <div id="nmapResults"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Search: "reconnaissance"</h2>
+        <div id="reconResults"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Search: "exploitation"</h2>
+        <div id="exploitResults"></div>
+    </div>
+
+    <script>
+        // Sample test data that mimics your blog content
+        const testData = [
+            {
+                title: "HackTheBox: Poison Walkthrough",
+                content: `# HackTheBox: Poison Walkthrough
+
+This is a detailed walkthrough of the Poison machine.
+
+## Reconnaissance
+
+First, we start with reconnaissance to gather information about the target.
+
+### Nmap Scanning
+
+We can use nmap to scan for open ports and services on the target machine:
+
+\`\`\`bash
+nmap -sC -sV -oA poison 10.10.10.84
+\`\`\`
+
+The nmap scan reveals several open ports including SSH and HTTP.
+
+## Exploitation
+
+After gathering information, we move to the exploitation phase.
+
+### LFI Vulnerability
+
+We discovered a Local File Inclusion vulnerability in the web application.
+
+## Privilege Escalation
+
+Once we have initial access, we need to escalate privileges to root.`,
+                permalink: "/posts/hackthebox-poison-walkthrough/",
+                summary: "Detailed walkthrough of the Poison machine covering LFI log poisoning, PHP RFI exploitation.",
+                categories: ["HackTheBox", "Security"]
+            },
+            {
+                title: "Network Enumeration Techniques",
+                content: `# Network Enumeration Techniques
+
+## Introduction
+
+This guide covers various network enumeration techniques.
+
+## Port Scanning
+
+### Using Nmap
+
+Nmap is the most popular network discovery tool:
+
+\`\`\`bash
+nmap -sS -O 192.168.1.0/24
+\`\`\`
+
+## Service Enumeration
+
+After discovering open ports, we need to enumerate services.`,
+                permalink: "/posts/network-enumeration-techniques/",
+                summary: "Comprehensive guide to network enumeration using various tools and techniques.",
+                categories: ["Security", "Networking"]
+            }
+        ];
+
+        // Enhanced search configuration
+        const enhancedSearchConfig = {
+            threshold: 0.3,
+            distance: 200,
+            includeMatches: true,
+            includeScore: true,
+            minMatchCharLength: 2,
+            keys: [
+                { name: 'title', weight: 3 },
+                { name: 'summary', weight: 2 },
+                { name: 'content', weight: 1 }
+            ]
+        };
+
+        // Initialize Fuse with test data
+        const fuse = new Fuse(testData, enhancedSearchConfig);
+
+        // Copy the search functions from your enhanced-search.js
+        function generateSimpleSnippet(result, query) {
+            const item = result.item;
+            const matches = result.matches || [];
+            
+            console.log(`Snippet for "${item.title}": found matches in [${matches.map(m => m.key).join(', ')}]`);
+            
+            // Try to find content match first
+            const contentMatch = matches.find(m => m.key === 'content');
+            if (contentMatch && contentMatch.value) {
+                return createLocationSnippet(contentMatch.value, query);
+            }
+            
+            // If no content match but we have content, search manually
+            if (item.content && item.content.toLowerCase().includes(query.toLowerCase())) {
+                return createLocationSnippet(item.content, query);
+            }
+            
+            // Fallback to summary or title
+            if (item.summary) {
+                return `<div class="snippet-text">${highlightMatches(item.summary, query)}</div>`;
+            }
+            
+            return `<div class="snippet-text">Found in: ${item.title}</div>`;
+        }
+
+        function createLocationSnippet(content, query) {
+            const words = query.toLowerCase().split(/\s+/).filter(w => w.length > 1);
+            const lines = content.split('\n');
+            
+            // Find the best match line
+            let bestMatch = null;
+            let bestScore = 0;
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line.length < 10) continue; // Skip very short lines
+                
+                const lineLower = line.toLowerCase();
+                let lineScore = 0;
+                
+                words.forEach(word => {
+                    if (lineLower.includes(word)) {
+                        lineScore += word.length;
+                    }
+                });
+                
+                if (lineScore > bestScore) {
+                    bestScore = lineScore;
+                    bestMatch = {
+                        line: line,
+                        lineNumber: i + 1,
+                        section: findSectionName(lines, i)
+                    };
+                }
+            }
+            
+            if (!bestMatch) {
+                return `<div class="snippet-text">${highlightMatches(content.substring(0, 150), query)}...</div>`;
+            }
+            
+            let locationInfo = '';
+            if (bestMatch.section) {
+                locationInfo = `<div class="snippet-location">Found in section: <strong>${bestMatch.section}</strong></div>`;
+            } else {
+                locationInfo = `<div class="snippet-location">Found at line ${bestMatch.lineNumber}</div>`;
+            }
+            
+            const snippetText = `<div class="snippet-text">${highlightMatches(bestMatch.line, query)}</div>`;
+            
+            return locationInfo + snippetText;
+        }
+
+        function findSectionName(lines, lineIndex) {
+            // Look backwards for a heading
+            for (let i = lineIndex; i >= 0 && i > lineIndex - 20; i--) {
+                const line = lines[i].trim();
+                
+                // Check for markdown headings
+                if (line.match(/^#{1,6}\s+(.+)/)) {
+                    return line.replace(/^#+\s*/, '').trim();
+                }
+                
+                // Check for common section patterns
+                if (line.match(/^(Reconnaissance|Enumeration|Exploitation|Privilege Escalation|Post-Exploitation|Initial Access|Lateral Movement|Persistence|Defense Evasion|Credential Access|Discovery|Collection|Command and Control|Exfiltration|Impact)/i)) {
+                    return line.trim();
+                }
+            }
+            
+            return null;
+        }
+
+        function highlightMatches(text, query) {
+            if (!query || !text) return text;
+            
+            const words = query.split(/\s+/).filter(word => word.length > 1);
+            let highlightedText = text;
+            
+            // Sort words by length (longest first) to avoid partial matches
+            words.sort((a, b) => b.length - a.length);
+            
+            words.forEach(word => {
+                const regex = new RegExp(`(${escapeRegex(word)})`, 'gi');
+                highlightedText = highlightedText.replace(regex, '<mark class="search-highlight">$1</mark>');
+            });
+            
+            return highlightedText;
+        }
+
+        function escapeRegex(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        // Test function
+        function testSearch(query, containerId) {
+            console.log(`\n=== Testing search for: "${query}" ===`);
+            
+            const results = fuse.search(query, { limit: 5 });
+            console.log(`Found ${results.length} results`);
+            
+            const container = document.getElementById(containerId);
+            
+            if (results.length === 0) {
+                container.innerHTML = '<p>No results found</p>';
+                return;
+            }
+            
+            const html = results.map(result => {
+                const item = result.item;
+                const score = result.score ? Math.round((1 - result.score) * 100) : 100;
+                const snippet = generateSimpleSnippet(result, query);
+                
+                console.log(`Result: ${item.title}, Score: ${score}%`);
+                console.log(`Snippet HTML:`, snippet);
+                
+                return `
+                    <div class="result">
+                        <h3>${highlightMatches(item.title, query)}</h3>
+                        <p><strong>Score:</strong> ${score}%</p>
+                        <div class="snippet">${snippet}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = html;
+        }
+
+        // Run tests when page loads
+        window.onload = function() {
+            // Display test data
+            document.getElementById('testData').innerHTML = `
+                <p><strong>Test articles:</strong></p>
+                <ul>
+                    ${testData.map(item => `<li>${item.title}</li>`).join('')}
+                </ul>
+            `;
+            
+            // Run search tests
+            testSearch('nmap', 'nmapResults');
+            testSearch('reconnaissance', 'reconResults');
+            testSearch('exploitation', 'exploitResults');
+        };
+    </script>
+</body>
+</html>
