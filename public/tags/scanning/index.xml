@@ -11,14 +11,14 @@
     </image>
     <generator>Hugo -- 0.150.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/scanning/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Nmap Command Cheatsheet</title>
-      <link>http://localhost:1313/cheatsheets/nmap-cheatsheet/</link>
-      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cheatsheets/nmap-cheatsheet/</guid>
-      <description>Comprehensive Nmap command reference for network discovery, port scanning, and security assessment tasks.</description>
+      <title>Nmap Cheatsheet - Complete Port Scanning Reference</title>
+      <link>http://localhost:1313/cheatsheets/nmap/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cheatsheets/nmap/</guid>
+      <description>Comprehensive Nmap cheatsheet covering port scanning, network discovery, service enumeration, and advanced scanning techniques for penetration testing</description>
     </item>
   </channel>
 </rss>

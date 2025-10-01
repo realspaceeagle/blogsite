@@ -663,13 +663,6 @@
 &lt;p&gt;Network enumeration is a crucial phase in penetration testing and security assessments. These techniques provide a solid foundation for discovering and mapping network infrastructure.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Nmap Command Cheatsheet</title>
-      <link>http://localhost:1313/cheatsheets/nmap-cheatsheet/</link>
-      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cheatsheets/nmap-cheatsheet/</guid>
-      <description>Comprehensive Nmap command reference for network discovery, port scanning, and security assessment tasks.</description>
-    </item>
-    <item>
       <title>Contact</title>
       <link>http://localhost:1313/contact/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
@@ -685,6 +678,13 @@
 &lt;div style=&#34;font-size: 24px; margin-bottom: 10px;&#34;&gt;📝&lt;/div&gt;
 &lt;h4 style=&#34;color: #40c057; margin-bottom: 15px;&#34;&gt;Weekly Security Insights&lt;/h4&gt;
 &lt;p style=&#34;color: #cccccc; font-size: 14px; margin-bottom: 8px;&#34;&gt;&lt;strong&gt;Get exclusive cybersecurity content:&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nmap Cheatsheet - Complete Port Scanning Reference</title>
+      <link>http://localhost:1313/cheatsheets/nmap/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cheatsheets/nmap/</guid>
+      <description>Comprehensive Nmap cheatsheet covering port scanning, network discovery, service enumeration, and advanced scanning techniques for penetration testing</description>
     </item>
     <item>
       <title>Projects &amp; Tools</title>
