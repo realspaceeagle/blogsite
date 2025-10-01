@@ -1,4 +1,4 @@
-﻿+++
++++
 title = 'Projects & Tools'
 date = '2024-01-01'
 draft = false
@@ -282,172 +282,50 @@ Explore my collection of security tools, research projects, and contributions to
 
 </div>
 
-<div id="github-section" class="project-section">{{< rawhtml >}}
-<div class="github-overview">
-  <div class="github-overview-card">
-    <div class="github-overview-header">
-      <div class="github-avatar-frame">
-        <img id="github-avatar" src="https://avatars.githubusercontent.com/u/23475900?v=4" alt="GitHub avatar for realspaceeagle">
-      </div>
-      <div class="github-overview-details">
-        <h3 id="github-name">HaranLoga</h3>
-        <span class="github-handle" id="github-handle">@realspaceeagle</span>
-        <p class="github-bio" id="github-bio">Security-focused engineer building offensive tooling and defensive automations.</p>
-        <div class="github-meta">
-          <span class="github-meta-item" id="github-location">
-            <span class="meta-label">Location</span>
-            <span class="meta-value">Srilanka</span>
-          </span>
-          <span class="github-meta-item" id="github-company">
-            <span class="meta-label">Organization</span>
-            <span class="meta-value">Revolution</span>
-          </span>
-          <span class="github-meta-item" id="github-joined">
-            <span class="meta-label">Joined</span>
-            <span class="meta-value">2016</span>
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="github-metrics-grid">
-      <div class="github-metric highlight">
-        <div class="metric-label">Contributions (12 mo)</div>
-        <div class="metric-value" id="total-contributions">-</div>
-        <div class="metric-subtext">Activity pulled from the contribution graph</div>
-      </div>
-      <div class="github-metric">
-        <div class="metric-label">Current Streak</div>
-        <div class="metric-value" id="current-streak">-</div>
-        <div class="metric-subtext">Consecutive active days</div>
-      </div>
-      <div class="github-metric">
-        <div class="metric-label">Longest Streak</div>
-        <div class="metric-value" id="longest-streak">-</div>
-        <div class="metric-subtext">All-time best run</div>
-      </div>
-      <div class="github-metric secondary">
-        <div class="metric-label">Public Repos</div>
-        <div class="metric-value" id="github-public-repos">27</div>
-      </div>
-      <div class="github-metric secondary">
-        <div class="metric-label">Followers</div>
-        <div class="metric-value" id="github-followers">10</div>
-      </div>
-      <div class="github-metric secondary">
-        <div class="metric-label">Following</div>
-        <div class="metric-value" id="github-following">57</div>
-      </div>
-    </div>
-
-    <div class="github-overview-actions">
-      <a href="https://github.com/realspaceeagle" class="github-profile-btn">
-        <svg class="github-icon" viewBox="0 0 16 16" width="20" height="20">
-          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-        </svg>
-        View Full GitHub Profile
-      </a>
-      <p class="github-overview-note">Live metrics refresh automatically from GitHub. Use the refresh control if numbers look stale.</p>
-    </div>
-  </div>
-</div>
-{{< /rawhtml >}}
+<div id="github-section" class="project-section">
 
 <div class="github-activity-section">
-  <div class="github-calendar-wrapper">
-    <div class="github-calendar-header">
-      <h2>Development Activity</h2>
-      <p>My coding activity and contributions over the past year</p>
-    </div>
-    
-    <div class="github-calendar-container">
-      <div class="calendar">
-        <!-- Loading the contribution data... -->
-        <div class="calendar-loading">
-          <div class="loading-spinner"></div>
-          <span>Loading GitHub contributions...</span>
-        </div>
+  <h2>Development Activity</h2>
+  <p>My coding activity and contributions over the past year:</p>
+  
+  <div class="github-calendar-container">
+    <div class="calendar">
+      <!-- Loading the contribution data... -->
+      <div class="calendar-loading">
+        <div class="loading-spinner"></div>
+        <span>Loading GitHub contributions...</span>
       </div>
+    </div>
+  </div>
+  
+  <div class="github-stats-container">
+    <div class="github-stat-item repos">
+      <div class="github-stat-number" id="total-contributions">-</div>
+      <div class="github-stat-label">Repositories</div>
+    </div>
+    <div class="github-stat-item followers">
+      <div class="github-stat-number" id="current-streak">-</div>
+      <div class="github-stat-label">Followers</div>
+    </div>
+    <div class="github-stat-item following">
+      <div class="github-stat-number" id="longest-streak">-</div>
+      <div class="github-stat-label">Following</div>
     </div>
   </div>
 </div>
 
-<div class="github-repositories">
-  <h2>Featured Repositories</h2>
-  <div class="repos-grid">
-    <div class="repo-card">
-      <div class="repo-header">
-        <h3 class="repo-name">realspaceeagle.github.io</h3>
-        <span class="repo-visibility">Public</span>
-      </div>
-      <p class="repo-description">This Hugo-powered site showcases research notes, HackTheBox walkthroughs, and tooling updates in one central hub.</p>
-      <div class="repo-stats">
-        <span class="repo-stat">
-          <svg class="star-icon" viewBox="0 0 16 16" width="14" height="14">
-            <path d="M8 0l2.39 4.85 5.34.78-3.86 3.76.91 5.31L8 12.79l-4.78 2.51.91-5.31L.27 5.63l5.34-.78L8 0z"></path>
-          </svg>
-          <span>0</span>
-        </span>
-        <span class="repo-stat">
-          <svg class="fork-icon" viewBox="0 0 16 16" width="14" height="14">
-            <path d="M5 2.5a2.5 2.5 0 113 2.45V6c0 .83.67 1.5 1.5 1.5H11v-.55a2.5 2.5 0 113 0V8a2 2 0 01-2 2h-1.5A2.5 2.5 0 018 7.5V4.95A2.5 2.5 0 015 2.5zM4 2.5a4 4 0 104 3.9V7.5a4 4 0 004 4H13a3.5 3.5 0 000-7h-.5a4 4 0 00-4-4A4 4 0 004 2.5z"></path>
-          </svg>
-          <span>0</span>
-        </span>
-        <span class="repo-language">HTML</span>
-      </div>
-      <a class="repo-link" href="https://github.com/realspaceeagle/realspaceeagle.github.io" target="_blank" rel="noopener noreferrer">Explore repository &rarr;</a>
-    </div>
-    <div class="repo-card">
-      <div class="repo-header">
-        <h3 class="repo-name">Awesome-Hacking-Resources</h3>
-        <span class="repo-visibility">Public</span>
-      </div>
-      <p class="repo-description">Curated offensive security references that underpin my red-team methodologies and lab work.</p>
-      <div class="repo-stats">
-        <span class="repo-stat">
-          <svg class="star-icon" viewBox="0 0 16 16" width="14" height="14">
-            <path d="M8 0l2.39 4.85 5.34.78-3.86 3.76.91 5.31L8 12.79l-4.78 2.51.91-5.31L.27 5.63l5.34-.78L8 0z"></path>
-          </svg>
-          <span>1</span>
-        </span>
-        <span class="repo-stat">
-          <svg class="fork-icon" viewBox="0 0 16 16" width="14" height="14">
-            <path d="M5 2.5a2.5 2.5 0 113 2.45V6c0 .83.67 1.5 1.5 1.5H11v-.55a2.5 2.5 0 113 0V8a2 2 0 01-2 2h-1.5A2.5 2.5 0 018 7.5V4.95A2.5 2.5 0 015 2.5zM4 2.5a4 4 0 104 3.9V7.5a4 4 0 004 4H13a3.5 3.5 0 000-7h-.5a4 4 0 00-4-4A4 4 0 004 2.5z"></path>
-          </svg>
-          <span>0</span>
-        </span>
-        <span class="repo-language">Security</span>
-      </div>
-      <a class="repo-link" href="https://github.com/realspaceeagle/Awesome-Hacking-Resources" target="_blank" rel="noopener noreferrer">Explore repository &rarr;</a>
-    </div>
-    <div class="repo-card">
-      <div class="repo-header">
-        <h3 class="repo-name">90DaysOfDevOps</h3>
-        <span class="repo-visibility">Public</span>
-      </div>
-      <p class="repo-description">Daily automation and infrastructure exercises captured while sharpening cloud, CI/CD, and observability workflows.</p>
-      <div class="repo-stats">
-        <span class="repo-stat">
-          <svg class="star-icon" viewBox="0 0 16 16" width="14" height="14">
-            <path d="M8 0l2.39 4.85 5.34.78-3.86 3.76.91 5.31L8 12.79l-4.78 2.51.91-5.31L.27 5.63l5.34-.78L8 0z"></path>
-          </svg>
-          <span>0</span>
-        </span>
-        <span class="repo-stat">
-          <svg class="fork-icon" viewBox="0 0 16 16" width="14" height="14">
-            <path d="M5 2.5a2.5 2.5 0 113 2.45V6c0 .83.67 1.5 1.5 1.5H11v-.55a2.5 2.5 0 113 0V8a2 2 0 01-2 2h-1.5A2.5 2.5 0 018 7.5V4.95A2.5 2.5 0 015 2.5zM4 2.5a4 4 0 104 3.9V7.5a4 4 0 004 4H13a3.5 3.5 0 000-7h-.5a4 4 0 00-4-4A4 4 0 004 2.5z"></path>
-          </svg>
-          <span>0</span>
-        </span>
-        <span class="repo-language">Learning</span>
-      </div>
-      <a class="repo-link" href="https://github.com/realspaceeagle/90DaysOfDevOps" target="_blank" rel="noopener noreferrer">Explore repository &rarr;</a>
-    </div>
-  </div>
+
+<div class="github-profile-link">
+  <a href="https://github.com/realspaceeagle" class="github-profile-btn">
+    <svg class="github-icon" viewBox="0 0 16 16" width="20" height="20">
+      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+    </svg>
+    View Full GitHub Profile
+  </a>
 </div>
 
-</div>`n`n{{< rawhtml >}}
+</div>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const toggleButtons = document.querySelectorAll('.toggle-btn');
@@ -500,9 +378,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // GitHub calendar initialization is handled by github-integration.js
 </script>
-{{< /rawhtml >}}
 
 
 *Want to collaborate on a project or need security consulting? [Get in touch](/contact/) - I'm always interested in working on challenging security problems.*
-
-

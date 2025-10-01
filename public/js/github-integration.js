@@ -23,46 +23,56 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize custom contribution tracker
     if (window.GitHubContributionTracker) {
       contributionTracker = new window.GitHubContributionTracker('realspaceeagle');
-      
-      // Load and display contributions
-      contributionTracker.fetchContributions().then(data => {
-        if (data) {
-          contributionTracker.renderContributionGraph(calendarElement, data);
-          console.log('Contribution graph rendered successfully');
-          
-          // Update stats with the data
-          updateContributionStats(data);
-        }
-      }).catch(error => {
-        console.error('Failed to load contribution data:', error);
-        showCustomContributionGraph();
-      });
-    } else {
-      console.log('GitHubContributionTracker not available, using fallback');
-      showCustomContributionGraph();
     }
-  }
-  
-  function updateContributionStats(data) {
-    try {
-      // Update total contributions
-      if (data.total && data.total.lastYear !== undefined) {
-        document.getElementById('total-contributions').textContent = data.total.lastYear.toLocaleString();
+    
+    // Check if GitHub Calendar library is available
+    if (typeof GitHubCalendar !== 'undefined') {
+      console.log('GitHubCalendar library available, initializing...');
+      try {
+        // Remove loading indicator
+        const loadingElement = calendarElement.querySelector('.calendar-loading');
+        if (loadingElement) {
+          loadingElement.remove();
+        }
+        
+        // Initialize the GitHub calendar
+        GitHubCalendar(".calendar", "realspaceeagle", {
+          responsive: true,
+          tooltips: true,
+          summary_text: "realspaceeagle's contributions",
+          cache: 300000 // Cache for 5 minutes
+        });
+        
+        console.log('GitHub calendar initialized successfully');
+        
+        // Update basic stats after calendar loads
+        setTimeout(() => {
+          updateGitHubStats();
+        }, 3000);
+        
+      } catch (error) {
+        console.error('GitHub Calendar initialization error:', error);
+        showCustomContributionGraph();
       }
+    } else {
+      console.log('GitHubCalendar library not available, waiting...');
+      // GitHub Calendar library not loaded, wait and retry
+      let retryCount = 0;
+      const maxRetries = 5;
       
-      // Calculate and update streaks
-      if (data.contributions && Array.isArray(data.contributions)) {
-        const tracker = new window.GitHubContributionTracker('realspaceeagle');
-        const streaks = tracker.calculateStreaks(data.contributions);
+      const retryInterval = setInterval(() => {
+        retryCount++;
+        console.log(`Retry attempt ${retryCount}/${maxRetries}`);
         
-        document.getElementById('current-streak').textContent = streaks.currentStreak + ' days';
-        document.getElementById('longest-streak').textContent = streaks.longestStreak + ' days';
-        
-        console.log('Stats updated from contribution data');
-      }
-    } catch (error) {
-      console.error('Error updating contribution stats:', error);
-      setFallbackStats();
+        if (typeof GitHubCalendar !== 'undefined') {
+          clearInterval(retryInterval);
+          initializeGitHubCalendar();
+        } else if (retryCount >= maxRetries) {
+          clearInterval(retryInterval);
+          console.log('Max retries reached, showing custom fallback');
+          showCustomContributionGraph();
+        }
+      }, 1000);
     }
   }
   
@@ -133,27 +143,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalContribElement = document.getElementById('total-contributions');
     const currentStreakElement = document.getElementById('current-streak');
     const longestStreakElement = document.getElementById('longest-streak');
-
-    if (totalContribElement) {
-      const existing = totalContribElement.textContent.trim();
-      if (!existing || existing === '-') {
-        totalContribElement.textContent = 'N/A';
-      }
-    }
-
-    if (currentStreakElement) {
-      const existing = currentStreakElement.textContent.trim();
-      if (!existing || existing === '-') {
-        currentStreakElement.textContent = 'N/A';
-      }
-    }
-
-    if (longestStreakElement) {
-      const existing = longestStreakElement.textContent.trim();
-      if (!existing || existing === '-') {
-        longestStreakElement.textContent = 'N/A';
-      }
-    }
+    
+    if (totalContribElement) totalContribElement.textContent = '27';
+    if (currentStreakElement) currentStreakElement.textContent = '10';
+    if (longestStreakElement) longestStreakElement.textContent = '57';
   }
   
   async function refreshGitHubData() {
@@ -202,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const refreshButton = document.createElement('button');
     refreshButton.id = 'github-refresh-btn';
-    refreshButton.innerHTML = 'Refresh GitHub Stats';
+    refreshButton.innerHTML = '🔄 Refresh GitHub Stats';
     refreshButton.style.cssText = `
       margin-bottom: 1rem;
       padding: 0.5rem 1rem;
@@ -219,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
       e.preventDefault(); // Prevent any default behavior
       e.stopPropagation(); // Stop event bubbling
       
-      refreshButton.innerHTML = 'Refreshing...';
+      refreshButton.innerHTML = '⏳ Refreshing...';
       refreshButton.disabled = true;
       
       // Ensure we stay on the GitHub tab
@@ -229,15 +222,15 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Force refresh GitHub data
       refreshGitHubData().then(() => {
-        refreshButton.innerHTML = 'Updated!';
+        refreshButton.innerHTML = '✅ Updated!';
         setTimeout(() => {
-          refreshButton.innerHTML = 'Refresh GitHub Stats';
+          refreshButton.innerHTML = '🔄 Refresh GitHub Stats';
           refreshButton.disabled = false;
         }, 2000);
       }).catch(() => {
-        refreshButton.innerHTML = 'Update failed';
+        refreshButton.innerHTML = '❌ Failed';
         setTimeout(() => {
-          refreshButton.innerHTML = 'Refresh GitHub Stats';
+          refreshButton.innerHTML = '🔄 Refresh GitHub Stats';
           refreshButton.disabled = false;
         }, 2000);
       });
@@ -253,53 +246,14 @@ document.addEventListener('DOMContentLoaded', function() {
   async function showCustomContributionGraph() {
     console.log('Showing custom contribution graph');
     
-    const calendarElement = document.querySelector('.calendar');
-    
-    if (!calendarElement) {
-      console.error('Calendar element not found');
-      return;
-    }
-    
-    // Remove loading indicator
-    const loadingElement = calendarElement.querySelector('.calendar-loading');
-    if (loadingElement) {
-      loadingElement.remove();
-    }
-    
-    // Create a simple contribution graph as fallback
-    const fallbackHTML = `
-      <div class="github-calendar-fallback">
-        <h3>GitHub Activity</h3>
-        <p>Activity data from <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener">@realspaceeagle</a></p>
-        <div class="fallback-stats">
-          <div class="fallback-stat">
-            <div class="stat-number">194</div>
-            <div class="stat-label">Contributions (12mo)</div>
-          </div>
-          <div class="fallback-stat">
-            <div class="stat-number">7</div>
-            <div class="stat-label">Current Streak</div>
-          </div>
-          <div class="fallback-stat">
-            <div class="stat-number">25</div>
-            <div class="stat-label">Longest Streak</div>
-          </div>
-        </div>
-        <div class="fallback-meta">
-          <span><strong>Most active:</strong> JavaScript, Python, HTML</span>
-          <span><strong>Latest activity:</strong> Updated repositories</span>
-        </div>
-      </div>
-    `;
-    
-    calendarElement.innerHTML = fallbackHTML;
-    
-    // Try contribution tracker if available
     if (contributionTracker) {
       try {
         const contributionData = await contributionTracker.getContributions();
+        const calendarElement = document.querySelector('.calendar');
         
-        if (contributionData) {
+        if (calendarElement) {
+          contributionTracker.renderContributionGraph(calendarElement, contributionData);
+          
           // Update stats based on contribution data
           const streaks = contributionTracker.calculateStreaks(contributionData.contributions);
           const totalContribElement = document.getElementById('total-contributions');
@@ -310,10 +264,6 @@ document.addEventListener('DOMContentLoaded', function() {
           if (currentStreakElement) currentStreakElement.textContent = streaks.currentStreak;
           if (longestStreakElement) longestStreakElement.textContent = streaks.longestStreak;
         }
-      } catch (error) {
-        console.log('Contribution tracker failed, using static fallback');
-      }
-    }
         
         // Don't show profile card fallback - keep the contribution graph
         console.log('Custom contribution graph rendered successfully');
@@ -339,17 +289,21 @@ document.addEventListener('DOMContentLoaded', function() {
       const calendarElement = document.querySelector('.calendar');
       if (calendarElement) {
         calendarElement.innerHTML = `
-          <div class="github-calendar-fallback">
-            <div class="fallback-avatar">
-              <img src="https://avatars.githubusercontent.com/u/23475900?v=4&s=128" alt="GitHub avatar for realspaceeagle">
+          <div style="text-align: center; padding: 2rem; background: var(--entry, #f8f9fa); border: 1px solid var(--border, #e9ecef); border-radius: 8px;">
+            <div style="margin-bottom: 1rem;">
+              <svg width="64" height="64" viewBox="0 0 16 16" style="opacity: 0.5;">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" fill="currentColor"/>
+              </svg>
             </div>
-            <h3>@realspaceeagle</h3>
-            <p>Live contribution data is unavailable right now. Refresh to try again or view activity on GitHub.</p>
-            <div class="fallback-meta">
-              <span>Calendar temporarily unavailable</span>
-              <span>Stats fall back to cached values</span>
-            </div>
-            <a href="https://github.com/realspaceeagle" class="github-profile-btn" target="_blank" rel="noopener noreferrer">View Full GitHub Profile</a>
+            <p style="color: var(--secondary, #6c757d); margin-bottom: 1rem; font-size: 0.9rem;">
+              GitHub contribution calendar is temporarily unavailable
+            </p>
+            <a href="https://github.com/realspaceeagle" 
+               target="_blank"
+               rel="noopener noreferrer"
+               style="display: inline-block; padding: 0.75rem 1.5rem; background: var(--toggle-highlight, #0d6efd); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: opacity 0.2s;">
+              View Full GitHub Profile →
+            </a>
           </div>
         `;
       }
@@ -363,16 +317,6 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(() => {
     initializeGitHubCalendar();
     addRefreshButton();
-    if (typeof window.fetchGitHubStats === 'function') {
-      try {
-        const statsPromise = window.fetchGitHubStats();
-        if (statsPromise && typeof statsPromise.catch === 'function') {
-          statsPromise.catch(error => console.warn('GitHub stats fetch failed:', error));
-        }
-      } catch (error) {
-        console.warn('GitHub stats fetch threw synchronously:', error);
-      }
-    }
     
     // Always try to show custom contribution graph after initial load
     setTimeout(() => {
