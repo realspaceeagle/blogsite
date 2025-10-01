@@ -190,6 +190,9 @@
 
 <script src="/js/code-copy-enhanced.js" defer></script>
 
+
+<script src="/js/enhanced-search.js" defer></script>
+
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPTRZ14YZS"></script>
       <script>
         var doNotTrack = false;
@@ -479,11 +482,311 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="post-meta"></div>
 </header>
 
-<div id="searchbox">
-    <input id="searchInput" autofocus placeholder="Type to search..."
-        aria-label="search" type="search" autocomplete="off" maxlength="64">
-    <ul id="searchResults" aria-label="search results"></ul>
+
+<div class="enhanced-search-container">
+    
+    <div class="search-mode-toggle">
+        <button id="normalSearchBtn" class="search-mode-btn active" data-mode="normal">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Quick Search
+        </button>
+        <button id="enhancedSearchBtn" class="search-mode-btn" data-mode="enhanced">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <search x="18" y="18" r="3"></search>
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="M21 21l-4.35-4.35"></path>
+            </svg>
+            Enhanced Search
+        </button>
+    </div>
+
+    
+    <div class="search-description">
+        <p id="searchDescription">Quick search through titles and summaries</p>
+    </div>
+
+    
+    <div id="searchbox">
+        <input id="searchInput" autofocus placeholder="Type to search..."
+            aria-label="search" type="search" autocomplete="off" maxlength="64">
+        <div class="search-filters" id="searchFilters" style="display: none;">
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="security">Security</option>
+                <option value="hackthebox">HackTheBox</option>
+                <option value="development">Development</option>
+                <option value="code-review">Code Review</option>
+                <option value="system-administration">System Administration</option>
+            </select>
+            <select id="sortFilter">
+                <option value="relevance">Sort by Relevance</option>
+                <option value="date">Sort by Date</option>
+                <option value="title">Sort by Title</option>
+            </select>
+        </div>
+        <ul id="searchResults" aria-label="search results"></ul>
+    </div>
+
+    
+    <div class="search-stats" id="searchStats" style="display: none;">
+        <span id="searchCount">0</span> results found for "<span id="searchQuery"></span>"
+        <span id="searchTime"></span>
+    </div>
 </div>
+
+<style>
+ 
+.enhanced-search-container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.search-mode-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.search-mode-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 2px solid var(--border);
+    background: var(--theme);
+    color: var(--primary);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.search-mode-btn:hover {
+    border-color: var(--primary);
+    background: var(--entry);
+}
+
+.search-mode-btn.active {
+    background: var(--primary);
+    color: var(--theme);
+    border-color: var(--primary);
+}
+
+.search-description {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-description p {
+    color: var(--secondary);
+    font-size: 14px;
+    margin: 0;
+}
+
+.search-filters {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.search-filters select {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--theme);
+    color: var(--primary);
+    font-size: 14px;
+}
+
+.search-stats {
+    margin-top: 15px;
+    padding: 10px;
+    background: var(--entry);
+    border-radius: var(--radius);
+    font-size: 14px;
+    color: var(--secondary);
+    text-align: center;
+}
+
+#searchQuery {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+ 
+.enhanced-search .search-result-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+}
+
+.enhanced-search .search-result-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.enhanced-search .search-result-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.enhanced-search .search-result-meta {
+    font-size: 12px;
+    color: var(--secondary);
+    margin-bottom: 10px;
+}
+
+.enhanced-search .search-result-snippet {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--content);
+}
+
+.enhanced-search .search-highlight {
+    background: rgba(255, 255, 0, 0.3);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+ 
+@media screen and (max-width: 768px) {
+    .search-mode-toggle {
+        flex-direction: column;
+    }
+    
+    .search-filters {
+        flex-direction: column;
+    }
+    
+    .search-mode-btn {
+        justify-content: center;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const normalSearchBtn = document.getElementById('normalSearchBtn');
+    const enhancedSearchBtn = document.getElementById('enhancedSearchBtn');
+    const searchDescription = document.getElementById('searchDescription');
+    const searchFilters = document.getElementById('searchFilters');
+    const searchStats = document.getElementById('searchStats');
+    const searchResults = document.getElementById('searchResults');
+    
+    let searchMode = 'normal';
+    let originalFuseOptions = null;
+    
+    
+    const descriptions = {
+        normal: 'Quick search through titles and summaries',
+        enhanced: 'Deep search through full content with advanced filters and snippets'
+    };
+    
+    
+    function switchSearchMode(mode) {
+        searchMode = mode;
+        
+        
+        normalSearchBtn.classList.toggle('active', mode === 'normal');
+        enhancedSearchBtn.classList.toggle('active', mode === 'enhanced');
+        
+        
+        searchDescription.textContent = descriptions[mode];
+        
+        
+        searchFilters.style.display = mode === 'enhanced' ? 'flex' : 'none';
+        
+        
+        document.querySelector('.enhanced-search-container').className = 
+            'enhanced-search-container' + (mode === 'enhanced' ? ' enhanced-search' : '');
+        
+        
+        searchResults.innerHTML = '';
+        searchStats.style.display = 'none';
+        
+        
+        if (window.fuse && mode === 'enhanced') {
+            setupEnhancedSearch();
+        }
+    }
+    
+    function setupEnhancedSearch() {
+        
+        if (!originalFuseOptions && window.fuse) {
+            originalFuseOptions = window.fuse.options;
+        }
+        
+        
+        const enhancedOptions = {
+            ...originalFuseOptions,
+            includeMatches: true,
+            includeScore: true,
+            threshold: 0.3, 
+            distance: 200,
+            minMatchCharLength: 2,
+            keys: [
+                { name: 'title', weight: 3 },
+                { name: 'summary', weight: 2 },
+                { name: 'content', weight: 1 },
+                { name: 'tags', weight: 2 }
+            ]
+        };
+        
+        
+        if (window.fuseData) {
+            window.fuse = new Fuse(window.fuseData, enhancedOptions);
+        }
+    }
+    
+    
+    normalSearchBtn.addEventListener('click', () => {
+        switchSearchMode('normal');
+        
+        document.dispatchEvent(new CustomEvent('searchModeChanged', { 
+            detail: { mode: 'normal' } 
+        }));
+    });
+    
+    enhancedSearchBtn.addEventListener('click', () => {
+        switchSearchMode('enhanced');
+        
+        document.dispatchEvent(new CustomEvent('searchModeChanged', { 
+            detail: { mode: 'enhanced' } 
+        }));
+    });
+    
+    
+    switchSearchMode('normal');
+    
+    
+    
+    
+    document.getElementById('categoryFilter').addEventListener('change', function() {
+        const query = document.getElementById('searchInput').value;
+        if (query && searchMode === 'enhanced' && window.enhancedSearch) {
+            window.enhancedSearch.performSearch(query);
+        }
+    });
+    
+    document.getElementById('sortFilter').addEventListener('change', function() {
+        const query = document.getElementById('searchInput').value;
+        if (query && searchMode === 'enhanced' && window.enhancedSearch) {
+            window.enhancedSearch.performSearch(query);
+        }
+    });
+});
+</script>
     </main>
     <footer class="footer">
   <div class="footer_inner wrap">
