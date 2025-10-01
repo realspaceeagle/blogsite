@@ -21,6 +21,13 @@
       <description>Detailed walkthrough of the Poison machine (10.10.10.84) covering LFI log poisoning, PHP RFI exploitation, credential recovery and a VNC pivot to root.</description>
     </item>
     <item>
+      <title>CTF Writeup Template - Example Usage</title>
+      <link>http://localhost:1313/posts/ctf-template-example/</link>
+      <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ctf-template-example/</guid>
+      <description>Learn how to use the new CTF writeup template system with practical examples and shortcode demonstrations.</description>
+    </item>
+    <item>
       <title>HackTheBox: Mentor Walkthrough</title>
       <link>http://localhost:1313/posts/hackthebox-mentor-walkthrough/</link>
       <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>

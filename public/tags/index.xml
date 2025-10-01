@@ -182,6 +182,20 @@
       <description></description>
     </item>
     <item>
+      <title>Template</title>
+      <link>http://localhost:1313/tags/template/</link>
+      <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/template/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Writeup-Guide</title>
+      <link>http://localhost:1313/tags/writeup-guide/</link>
+      <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/writeup-guide/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Penetration-Testing</title>
       <link>http://localhost:1313/tags/penetration-testing/</link>
       <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>

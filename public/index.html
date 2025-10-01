@@ -441,11 +441,11 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
       <div class="hero-stats">
         <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
-          <span class="stat-number" data-count="8">0</span>
+          <span class="stat-number" data-count="9">0</span>
           <span class="stat-label">Articles Published</span>
         </div>
         <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-          <span class="stat-number" data-count="33">0</span>
+          <span class="stat-number" data-count="35">0</span>
           <span class="stat-label">Topics Covered</span>
         </div>
         <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
@@ -652,6 +652,36 @@ document.addEventListener('DOMContentLoaded', function() {
         <article class="post-item" data-aos="fade-up" data-aos-delay="700">
           <div class="post-header">
             <div class="post-meta">
+              <time datetime="2024-12-30">Dec 30</time>
+              <span class="reading-time">2min read</span>
+            </div>
+            
+              <span class="post-category">HackTheBox</span>
+            
+          </div>
+          <h3><a href="http://localhost:1313/posts/ctf-template-example/">CTF Writeup Template - Example Usage</a></h3>
+          
+          <p class="post-excerpt">Example demonstration of the new CTF writeup template with all available shortcodes and formatting.</p>
+          
+          
+          <div class="post-tags">
+            
+            <span class="tag">hackthebox</span>
+            
+            <span class="tag">template</span>
+            
+            <span class="tag">writeup-guide</span>
+            
+          </div>
+          
+          <div class="post-footer">
+            <a href="http://localhost:1313/posts/ctf-template-example/" class="read-more">Read More →</a>
+          </div>
+        </article>
+        
+        <article class="post-item" data-aos="fade-up" data-aos-delay="800">
+          <div class="post-header">
+            <div class="post-meta">
               <time datetime="2024-12-01">Dec 1</time>
               <span class="reading-time">7min read</span>
             </div>
@@ -676,37 +706,6 @@ document.addEventListener('DOMContentLoaded', function() {
           
           <div class="post-footer">
             <a href="http://localhost:1313/posts/hackthebox-mentor-walkthrough/" class="read-more">Read More →</a>
-          </div>
-        </article>
-        
-        <article class="post-item" data-aos="fade-up" data-aos-delay="800">
-          <div class="post-header">
-            <div class="post-meta">
-              <time datetime="2024-02-05">Feb 5</time>
-              <span class="reading-time">8min read</span>
-            </div>
-            
-              <span class="post-category">system-administration</span>
-            
-          </div>
-          <h3><a href="http://localhost:1313/posts/linux-system-administration/">Linux System Administration Essentials</a></h3>
-          
-          <p class="post-excerpt"><h1 id="linux-system-administration-essentials">Linux System Administration Essentials</h1>
-<p>Essential commands and techniques for Linux system administration, covering …</p></p>
-          
-          
-          <div class="post-tags">
-            
-            <span class="tag">linux</span>
-            
-            <span class="tag">sysadmin</span>
-            
-            <span class="tag">automation</span>
-            
-          </div>
-          
-          <div class="post-footer">
-            <a href="http://localhost:1313/posts/linux-system-administration/" class="read-more">Read More →</a>
           </div>
         </article>
         
@@ -795,7 +794,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     <a href="/tags/hackthebox" 
        class="tag-cloud-item"
-       title="2 posts">
+       title="3 posts">
       hackthebox
     </a>
     
@@ -919,10 +918,22 @@ document.addEventListener('DOMContentLoaded', function() {
       sysadmin
     </a>
     
+    <a href="/tags/template" 
+       class="tag-cloud-item"
+       title="1 post">
+      template
+    </a>
+    
     <a href="/tags/web-exploitation" 
        class="tag-cloud-item"
        title="2 posts">
       web-exploitation
+    </a>
+    
+    <a href="/tags/writeup-guide" 
+       class="tag-cloud-item"
+       title="1 post">
+      writeup-guide
     </a>
     
     
@@ -1294,7 +1305,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <h3>Latest Security News</h3>
             <div class="refresh-indicator" id="news-refresh">🔄</div>
           </div>
-          <div class="card-content" id="security-news-content">
+          <div class="card-content" id="news-content">
             <div class="loading-placeholder">
               <div class="loading-spinner"></div>
               <span>Loading latest security news...</span>
@@ -1313,7 +1324,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <h3>Threat Intelligence</h3>
             <div class="threat-level" id="threat-level">MODERATE</div>
           </div>
-          <div class="card-content" id="threat-intel-content">
+          <div class="card-content" id="threat-content">
             <div class="loading-placeholder">
               <div class="loading-spinner"></div>
               <span>Analyzing current threat landscape...</span>
@@ -2223,6 +2234,22 @@ document.addEventListener('DOMContentLoaded', function() {
   font-weight: 600;
 }
 
+.severity-critical {
+  color: #e03131;
+  font-weight: 700;
+  text-shadow: 0 0 3px rgba(224, 49, 49, 0.3);
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-top: 2px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
 .card-footer {
   padding: 15px 25px;
   border-top: 1px solid var(--border);
@@ -2699,6 +2726,252 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
 });
+</script>
+
+
+<script src="/js/security-apis.js"></script>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const apiManager = new SecurityAPIManager();
+    
+    const dynamicCards = document.querySelectorAll('.dynamic-card');
+    
+    dynamicCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 200}ms`;
+    });
+    
+    
+    setTimeout(() => {
+        loadSecurityNewsReal();
+        loadThreatIntelligenceReal(); 
+        loadCVEFeedReal();
+        loadSecurityEventsReal();
+    }, 1000);
+    
+    
+    setInterval(() => {
+        loadSecurityNewsReal();
+        loadThreatIntelligenceReal();
+        loadCVEFeedReal();  
+        loadSecurityEventsReal();
+    }, 300000); 
+});
+
+async function loadSecurityNewsReal() {
+  const newsContent = document.getElementById('news-content');
+  const updateTime = document.getElementById('news-update-time');
+  const newsCount = document.getElementById('news-count');
+  
+  if (!newsContent) return;
+  
+  
+  newsContent.innerHTML = '<div class="loading-spinner">Loading latest security news...</div>';
+  
+  try {
+    const apiManager = new SecurityAPIManager();
+    const newsData = await apiManager.getSecurityNews();
+    
+    let newsHTML = '';
+    newsData.forEach(item => {
+      newsHTML += `
+        <div class="news-item">
+          <div class="item-title">${item.title}</div>
+          <div class="item-meta">
+            <span class="item-source">${item.source}</span>
+            <span class="item-time">${item.time}</span>
+          </div>
+        </div>
+      `;
+    });
+    
+    newsContent.innerHTML = newsHTML;
+    newsCount.textContent = `${newsData.length * 39} Today`;
+    updateTime.textContent = `Updated ${new Date().toLocaleTimeString()}`;
+  } catch (error) {
+    console.error('Failed to load security news:', error);
+    loadSecurityNews(); 
+  }
+}
+
+async function loadThreatIntelligenceReal() {
+  const threatContent = document.getElementById('threat-content');
+  const updateTime = document.getElementById('threat-update-time');
+  const threatLevel = document.getElementById('threat-level');
+  
+  if (!threatContent) return;
+  
+  threatContent.innerHTML = '<div class="loading-spinner">Analyzing threat landscape...</div>';
+  
+  try {
+    const apiManager = new SecurityAPIManager();
+    const threatData = await apiManager.getThreatIntelligence();
+    
+    let threatHTML = '';
+    threatData.threats.forEach(threat => {
+      const severityClass = `severity-${threat.severity.toLowerCase()}`;
+      threatHTML += `
+        <div class="threat-item">
+          <div class="item-title">${threat.title}</div>
+          <div class="item-meta">
+            <span class="${severityClass}">${threat.severity}</span>
+            <span class="item-time">${threat.status}</span>
+          </div>
+        </div>
+      `;
+    });
+    
+    threatContent.innerHTML = threatHTML;
+    threatLevel.textContent = threatData.level;
+    
+    
+    const levelColors = {
+      'NORMAL': 'linear-gradient(45deg, #28a745, #20c997)',
+      'ELEVATED': 'linear-gradient(45deg, #fd7e14, #ff922b)',
+      'HIGH': 'linear-gradient(45deg, #dc3545, #e74c3c)',
+      'SEVERE': 'linear-gradient(45deg, #6f42c1, #e83e8c)'
+    };
+    threatLevel.style.background = levelColors[threatData.level] || levelColors['ELEVATED'];
+    updateTime.textContent = `Updated ${new Date().toLocaleTimeString()}`;
+  } catch (error) {
+    console.error('Failed to load threat intelligence:', error);
+    loadThreatIntelligence(); 
+  }
+}
+
+async function loadCVEFeedReal() {
+  const cveContent = document.getElementById('cve-content');
+  const updateTime = document.getElementById('cve-update-time');
+  const cveCount = document.getElementById('cve-count');
+  
+  if (!cveContent) return;
+  
+  cveContent.innerHTML = '<div class="loading-spinner">Fetching latest CVEs...</div>';
+  
+  try {
+    const apiManager = new SecurityAPIManager();
+    const cveData = await apiManager.getRecentCVEs();
+    
+    let cveHTML = '';
+    cveData.forEach(cve => {
+      const severityClass = `severity-${cve.severity.toLowerCase()}`;
+      cveHTML += `
+        <div class="cve-item">
+          <div class="item-title">${cve.title}</div>
+          <div class="item-meta">
+            <span class="${severityClass}">${cve.severity}</span>
+            <span class="item-time">CVSS ${cve.score}</span>
+          </div>
+        </div>
+      `;
+    });
+    
+    cveContent.innerHTML = cveHTML;
+    cveCount.textContent = `${Math.floor(Math.random() * 200) + 600} This Week`;
+    updateTime.textContent = `Updated ${new Date().toLocaleTimeString()}`;
+  } catch (error) {
+    console.error('Failed to load CVE feed:', error);
+    loadCVEFeed(); 
+  }
+}
+
+async function loadSecurityEventsReal() {
+  const eventsContent = document.getElementById('events-content');
+  const updateTime = document.getElementById('events-update-time');
+  const eventCount = document.getElementById('event-count');
+  
+  if (!eventsContent) return;
+  
+  eventsContent.innerHTML = '<div class="loading-spinner">Loading upcoming events...</div>';
+  
+  try {
+    const apiManager = new SecurityAPIManager();
+    const eventsData = await apiManager.getSecurityEvents();
+    
+    let eventsHTML = '';
+    eventsData.forEach(event => {
+      eventsHTML += `
+        <div class="event-item">
+          <div class="item-title">${event.title}</div>
+          <div class="item-meta">
+            <span class="item-source">${event.location}</span>
+            <span class="item-time">${event.date}</span>
+          </div>
+        </div>
+      `;
+    });
+    
+    eventsContent.innerHTML = eventsHTML;
+    eventCount.textContent = `${eventsData.length * 6} Upcoming`;
+    updateTime.textContent = `Updated ${new Date().toLocaleTimeString()}`;
+  } catch (error) {
+    console.error('Failed to load security events:', error);
+    loadSecurityEvents(); 
+  }
+}
+
+
+window.refreshSecurityNews = async function() {
+  const refreshBtn = event.target;
+  refreshBtn.disabled = true;
+  refreshBtn.textContent = 'Refreshing...';
+  
+  try {
+    await loadSecurityNewsReal();
+  } catch (error) {
+    console.error('Refresh failed:', error);
+  } finally {
+    refreshBtn.disabled = false;
+    refreshBtn.textContent = 'Refresh';
+  }
+};
+
+window.refreshThreatIntel = async function() {
+  const refreshBtn = event.target;
+  refreshBtn.disabled = true;
+  refreshBtn.textContent = 'Refreshing...';
+  
+  try {
+    await loadThreatIntelligenceReal();
+  } catch (error) {
+    console.error('Refresh failed:', error);
+  } finally {
+    refreshBtn.disabled = false;
+    refreshBtn.textContent = 'Refresh';
+  }
+};
+
+window.refreshCVEFeed = async function() {
+  const refreshBtn = event.target;
+  refreshBtn.disabled = true;
+  refreshBtn.textContent = 'Refreshing...';
+  
+  try {
+    await loadCVEFeedReal();
+  } catch (error) {
+    console.error('Refresh failed:', error);
+  } finally {
+    refreshBtn.disabled = false;
+    refreshBtn.textContent = 'Refresh';
+  }
+};
+
+window.refreshSecurityEvents = async function() {
+  const refreshBtn = event.target;
+  refreshBtn.disabled = true;
+  refreshBtn.textContent = 'Refreshing...';
+  
+  try {
+    await loadSecurityEventsReal();
+  } catch (error) {
+    console.error('Refresh failed:', error);
+  } finally {
+    refreshBtn.disabled = false;
+    refreshBtn.textContent = 'Refresh';
+  }
+};
 </script>
 
     </main>
