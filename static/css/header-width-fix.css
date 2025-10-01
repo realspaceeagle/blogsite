@@ -1,0 +1,94 @@
+/* Header Width Fix - Prevent Navigation Wrapping */
+
+/* Increase navigation container width */
+:root {
+  --nav-width: 1200px; /* Increased from 1024px to accommodate Cheatsheets */
+}
+
+/* Enhanced navigation layout */
+.nav {
+  max-width: calc(var(--nav-width) + var(--gap) * 2);
+  min-width: 1000px; /* Minimum width to prevent wrapping */
+}
+
+/* Desktop menu improvements */
+#menu {
+  flex-shrink: 0; /* Prevent menu from shrinking */
+  min-width: fit-content;
+}
+
+#menu li {
+  white-space: nowrap; /* Prevent individual menu items from wrapping */
+}
+
+/* Logo section improvements */
+.logo {
+  flex-shrink: 0; /* Prevent logo from shrinking */
+  min-width: fit-content;
+}
+
+.logo a {
+  white-space: nowrap; /* Prevent logo text from wrapping */
+}
+
+/* Logo switches section */
+.logo-switches {
+  flex-shrink: 0; /* Prevent switches from shrinking */
+  min-width: fit-content;
+}
+
+/* Ensure header has enough space on larger screens */
+@media screen and (min-width: 1240px) {
+  .nav {
+    max-width: calc(var(--nav-width) + var(--gap) * 3);
+  }
+}
+
+/* For very large screens, allow even more space */
+@media screen and (min-width: 1400px) {
+  :root {
+    --nav-width: 1300px;
+  }
+}
+
+/* Tablet landscape adjustments */
+@media screen and (max-width: 1200px) and (min-width: 900px) {
+  .nav {
+    max-width: 95vw; /* Use viewport width on smaller screens */
+    min-width: 850px;
+  }
+  
+  #menu {
+    font-size: 15px; /* Slightly smaller font on medium screens */
+  }
+  
+  #menu a {
+    font-size: 15px;
+  }
+}
+
+/* Prevent wrapping on medium desktop screens */
+@media screen and (max-width: 1100px) and (min-width: 900px) {
+  #menu li + li {
+    margin-inline-start: 16px; /* Reduce spacing slightly on medium screens */
+  }
+  
+  .logo a {
+    font-size: 22px; /* Slightly smaller logo text */
+  }
+}
+
+/* Hide mobile menu toggle on larger screens where we have space */
+@media screen and (min-width: 900px) {
+  .mobile-menu-toggle {
+    display: none !important;
+  }
+  
+  .mobile-menu {
+    display: none !important;
+  }
+  
+  .desktop-menu {
+    display: flex !important;
+  }
+}
