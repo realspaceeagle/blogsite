@@ -623,21 +623,6 @@ I believe cybersecurity is an art form that combines technical excellence with s
 
 </div>
 
-### 🎯 **Certification Roadmap**
-
-```yaml
-2024_goals:
-  offensive_security: 🔴
-    - target: "OSCP (Offensive Security Certified Professional)"
-    - timeline: "Q2 2024"
-    - focus: "Advanced penetration testing methodologies"
-  
-  cloud_security: ☁️
-    - target: "AWS Certified Security - Specialty"
-    - timeline: "Q3 2024"
-    - focus: "Cloud security architecture and implementation"
-  
-```
 
 </div>
 
