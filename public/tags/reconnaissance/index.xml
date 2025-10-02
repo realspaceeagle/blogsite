@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Reconnaissance on realspaceeagle</title>
-    <link>https://realspaceeagle.github.io/tags/reconnaissance/</link>
+    <link>http://localhost:1313/tags/reconnaissance/</link>
     <description>Recent content in Reconnaissance on realspaceeagle</description>
     <image>
       <title>realspaceeagle</title>
-      <url>https://realspaceeagle.github.io/images/og-image.svg</url>
-      <link>https://realspaceeagle.github.io/images/og-image.svg</link>
+      <url>http://localhost:1313/images/og-image.svg</url>
+      <link>http://localhost:1313/images/og-image.svg</link>
     </image>
     <generator>Hugo -- 0.150.1</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://realspaceeagle.github.io/tags/reconnaissance/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/reconnaissance/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nmap Cheatsheet - Complete Port Scanning Reference</title>
-      <link>https://realspaceeagle.github.io/cheatsheets/nmap/</link>
+      <link>http://localhost:1313/cheatsheets/nmap/</link>
       <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
-      <guid>https://realspaceeagle.github.io/cheatsheets/nmap/</guid>
+      <guid>http://localhost:1313/cheatsheets/nmap/</guid>
       <description>Comprehensive Nmap cheatsheet covering port scanning, network discovery, service enumeration, and advanced scanning techniques for penetration testing</description>
     </item>
   </channel>

@@ -22,7 +22,8 @@
       "Bash(node:*)",
       "Bash(git log:*)",
       "Bash(grep:*)",
-      "WebFetch(domain:book.hacktricks.wiki)"
+      "WebFetch(domain:book.hacktricks.wiki)",
+      "WebFetch(domain:haranbn.notion.site)"
     ],
     "deny": []
   }

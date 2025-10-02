@@ -2,22 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Penetration-Testing on realspaceeagle</title>
-    <link>https://realspaceeagle.github.io/tags/penetration-testing/</link>
+    <link>http://localhost:1313/tags/penetration-testing/</link>
     <description>Recent content in Penetration-Testing on realspaceeagle</description>
     <image>
       <title>realspaceeagle</title>
-      <url>https://realspaceeagle.github.io/images/og-image.svg</url>
-      <link>https://realspaceeagle.github.io/images/og-image.svg</link>
+      <url>http://localhost:1313/images/og-image.svg</url>
+      <link>http://localhost:1313/images/og-image.svg</link>
     </image>
     <generator>Hugo -- 0.150.1</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Dec 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://realspaceeagle.github.io/tags/penetration-testing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Jan 2025 10:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/penetration-testing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox Soccer - Linux Machine Walkthrough</title>
+      <link>http://localhost:1313/posts/hackthebox-soccer-walkthrough/</link>
+      <pubDate>Thu, 02 Jan 2025 10:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/hackthebox-soccer-walkthrough/</guid>
+      <description>Complete walkthrough of HackTheBox Soccer machine featuring web exploitation, WebSocket SQL injection, and privilege escalation through doas misconfiguration.</description>
+    </item>
     <item>
       <title>HackTheBox: Mentor Walkthrough</title>
-      <link>https://realspaceeagle.github.io/posts/hackthebox-mentor-walkthrough/</link>
+      <link>http://localhost:1313/posts/hackthebox-mentor-walkthrough/</link>
       <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>https://realspaceeagle.github.io/posts/hackthebox-mentor-walkthrough/</guid>
+      <guid>http://localhost:1313/posts/hackthebox-mentor-walkthrough/</guid>
       <description>Detailed step-by-step walkthrough of HackTheBox Mentor machine (10.10.11.193). Learn reconnaissance, SNMP enumeration, web exploitation, and privilege escalation techniques with practical examples.</description>
     </item>
   </channel>
