@@ -13,19 +13,19 @@ A collection of practical security reference guides, command cheatsheets, and qu
 
 ### Network Reconnaissance
 - [Nmap Cheatsheet](/cheatsheets/nmap/) - Complete port scanning and network discovery reference
-- [Network Enumeration](/cheatsheets/network-enum/) - Advanced network reconnaissance techniques
+- [Web Directory Enumeration](/cheatsheets/web-directory-enumeration/) - Comprehensive guide for directory and file enumeration
 
 ### Web Application Security  
-- [OWASP Testing](/cheatsheets/owasp-testing/) - Web application security testing guide
-- [SQL Injection](/cheatsheets/sqli/) - SQL injection attack vectors and techniques
+- [SQL Injection](/cheatsheets/sql-injection/) - SQL injection attack vectors and techniques
+- [WebSocket SQL Injection](/cheatsheets/websocket-sql-injection/) - Specialized WebSocket SQL injection techniques
+- [CORS Configuration](/cheatsheets/cors/) - Cross-Origin Resource Sharing security reference
 
-### System Exploitation
-- [Linux Privilege Escalation](/cheatsheets/linux-privesc/) - Comprehensive Linux privilege escalation guide
-- [Windows Privilege Escalation](/cheatsheets/windows-privesc/) - Windows privilege escalation techniques
+### System Exploitation & Privilege Escalation
+- [Linux Privilege Escalation](/cheatsheets/linux-privilege-escalation/) - Comprehensive Linux privilege escalation guide including doas/dstat exploitation
+- [Reverse Shells](/cheatsheets/reverse-shells/) - Complete reverse shell command reference for all platforms
 
-### Defensive Security
-- [Incident Response](/cheatsheets/incident-response/) - Incident response procedures and commands
-- [Log Analysis](/cheatsheets/log-analysis/) - Security log analysis and SIEM queries
+### Infrastructure Analysis
+- [Nginx Configuration Analysis](/cheatsheets/nginx-configuration-analysis/) - Guide for analyzing nginx configurations and finding virtual hosts
 
 ---
 
