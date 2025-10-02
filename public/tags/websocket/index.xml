@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Websocket on realspaceeagle</title>
+    <link>https://realspaceeagle.github.io/tags/websocket/</link>
+    <description>Recent content in Websocket on realspaceeagle</description>
+    <image>
+      <title>realspaceeagle</title>
+      <url>https://realspaceeagle.github.io/images/og-image.svg</url>
+      <link>https://realspaceeagle.github.io/images/og-image.svg</link>
+    </image>
+    <generator>Hugo -- 0.150.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://realspaceeagle.github.io/tags/websocket/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HackTheBox: Soccer Walkthrough</title>
+      <link>https://realspaceeagle.github.io/posts/hackthebox-soccer-walkthrough/</link>
+      <pubDate>Thu, 02 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>https://realspaceeagle.github.io/posts/hackthebox-soccer-walkthrough/</guid>
+      <description>Complete walkthrough of HackTheBox Soccer machine (10.10.11.194) covering reconnaissance, WebSocket SQL injection, and privilege escalation via doas/dstat</description>
+    </item>
+    <item>
+      <title>WebSocket SQL Injection Cheatsheet</title>
+      <link>https://realspaceeagle.github.io/cheatsheets/websocket-sql-injection/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://realspaceeagle.github.io/cheatsheets/websocket-sql-injection/</guid>
+      <description>Specialized techniques for testing and exploiting SQL injection vulnerabilities in WebSocket connections</description>
+    </item>
+  </channel>
+</rss>

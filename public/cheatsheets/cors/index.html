@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,16 +9,16 @@
 <meta name="keywords" content="cors, web-security, cheatsheet">
 <meta name="description" content="Typical CORS misconfigurations, exploitation paths, and secure configuration patterns.">
 <meta name="author" content="realspaceeagle">
-<link rel="canonical" href="http://localhost:1313/cheatsheets/cors/">
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/cors/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.svg">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon.svg">
-<link rel="apple-touch-icon" href="http://localhost:1313/favicon.svg">
-<link rel="mask-icon" href="http://localhost:1313/favicon.svg">
+<link rel="icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="mask-icon" href="https://realspaceeagle.github.io/favicon.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/cheatsheets/cors/">
+<link rel="alternate" hreflang="en" href="https://realspaceeagle.github.io/cheatsheets/cors/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,15 +64,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<link rel="canonical" href="http://localhost:1313/cheatsheets/cors/">
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/cors/">
 
 
 <meta property="og:title" content="CORS Cheatsheet - realspaceeagle">
 <meta property="og:description" content="Typical CORS misconfigurations, exploitation paths, and secure configuration patterns.">
-<meta property="og:url" content="http://localhost:1313/cheatsheets/cors/">
+<meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/cors/">
 <meta property="og:site_name" content="realspaceeagle">
 <meta property="og:locale" content="en_US"><meta property="og:type" content="article">
-<meta property="article:author" content="realspaceeagle"><meta property="article:published_time" content="2024-01-01T00:00:00Z"><meta property="article:modified_time" content="2024-01-01T00:00:00Z"><meta property="article:tag" content="cors"><meta property="article:tag" content="web-security"><meta property="article:tag" content="cheatsheet"><meta property="article:section" content="cheatsheets"><meta property="og:image" content="http://localhost:1313/images/og-image.svg">
+<meta property="article:author" content="realspaceeagle"><meta property="article:published_time" content="2024-01-01T00:00:00Z"><meta property="article:modified_time" content="2024-01-01T00:00:00Z"><meta property="article:tag" content="cors"><meta property="article:tag" content="web-security"><meta property="article:tag" content="cheatsheet"><meta property="article:section" content="cheatsheets"><meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
   <meta property="og:image:alt" content="realspaceeagle">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -80,9 +80,9 @@
 <meta name="twitter:site" content="@haran_loga">
 <meta name="twitter:creator" content="@haran_loga">
 <meta name="twitter:title" content="CORS Cheatsheet - realspaceeagle">
-<meta name="twitter:description" content="Typical CORS misconfigurations, exploitation paths, and secure configuration patterns."><meta name="twitter:image" content="http://localhost:1313/images/og-image.svg">
+<meta name="twitter:description" content="Typical CORS misconfigurations, exploitation paths, and secure configuration patterns."><meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
   <meta name="twitter:image:alt" content="realspaceeagle"><meta name="article:author" content="realspaceeagle">
-<meta name="article:publisher" content="http://localhost:1313/"><meta name="news_keywords" content="cors, web-security, cheatsheet">
+<meta name="article:publisher" content="https://realspaceeagle.github.io/"><meta name="news_keywords" content="cors, web-security, cheatsheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org","@type": "BlogPosting",
@@ -93,21 +93,21 @@
     "name": "realspaceeagle",
     "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
     "description": "Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.",
-    "url": "http:\/\/localhost:1313\/"
+    "url": "https:\/\/realspaceeagle.github.io\/"
   },
   "publisher": {
     "@type": "Person",
     "name": "realspaceeagle",
     "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
-    "url": "http:\/\/localhost:1313\/"
+    "url": "https:\/\/realspaceeagle.github.io\/"
   },
-  "datePublished": "2024-01-01T00:00:00Z","dateModified": "2024-01-01T00:00:00Z","url": "http:\/\/localhost:1313\/cheatsheets\/cors\/",
+  "datePublished": "2024-01-01T00:00:00Z","dateModified": "2024-01-01T00:00:00Z","url": "https:\/\/realspaceeagle.github.io\/cheatsheets\/cors\/",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http:\/\/localhost:1313\/cheatsheets\/cors\/"
+    "@id": "https:\/\/realspaceeagle.github.io\/cheatsheets\/cors\/"
   },"image": {
     "@type": "ImageObject",
-    "url": "http:\/\/localhost:1313\/images\/og-image.svg",
+    "url": "https:\/\/realspaceeagle.github.io\/images\/og-image.svg",
     "width": 1200,
     "height": 630
   },"keywords": "cors, web-security, cheatsheet",
@@ -135,17 +135,17 @@
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "http:\/\/localhost:1313\/"
+      "item": "https:\/\/realspaceeagle.github.io\/"
     },{
       "@type": "ListItem",
       "position":  2 ,
       "name": "Cheatsheets",
-      "item": "http:\/\/localhost:1313\/categories\/cheatsheets\/"
+      "item": "https:\/\/realspaceeagle.github.io\/categories\/cheatsheets\/"
     },{
       "@type": "ListItem",
       "position":  3 ,
       "name": "CORS Cheatsheet",
-      "item": "http:\/\/localhost:1313\/cheatsheets\/cors\/"
+      "item": "https:\/\/realspaceeagle.github.io\/cheatsheets\/cors\/"
     }]
 }
 </script>
@@ -229,7 +229,7 @@
           gtag('js', new Date());
           gtag('config', 'G-GPTRZ14YZS');
         }
-      </script><meta property="og:url" content="http://localhost:1313/cheatsheets/cors/">
+      </script><meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/cors/">
   <meta property="og:site_name" content="realspaceeagle">
   <meta property="og:title" content="CORS Cheatsheet">
   <meta property="og:description" content="Typical CORS misconfigurations, exploitation paths, and secure configuration patterns.">
@@ -241,9 +241,9 @@
     <meta property="article:tag" content="Cors">
     <meta property="article:tag" content="Web-Security">
     <meta property="article:tag" content="Cheatsheet">
-      <meta property="og:image" content="http://localhost:1313/images/og-image.svg">
+      <meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://localhost:1313/images/og-image.svg">
+<meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
 <meta name="twitter:title" content="CORS Cheatsheet">
 <meta name="twitter:description" content="Typical CORS misconfigurations, exploitation paths, and secure configuration patterns.">
 
@@ -257,13 +257,13 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Security Cheatsheets",
-      "item": "http://localhost:1313/cheatsheets/"
+      "item": "https://realspaceeagle.github.io/cheatsheets/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "CORS Cheatsheet",
-      "item": "http://localhost:1313/cheatsheets/cors/"
+      "item": "https://realspaceeagle.github.io/cheatsheets/cors/"
     }
   ]
 }
@@ -281,7 +281,7 @@
   "articleBody": "CORS Cheatsheet Evaluation Checklist Inspect all Access-Control-* headers in the response. Map the origin reflection rules (Access-Control-Allow-Origin). Check whether credentials are allowed (Access-Control-Allow-Credentials: true). Test both simple and preflighted requests. Record browser console output for rejected preflights. Common Misconfigurations Pattern Risk Access-Control-Allow-Origin: * with credentials allowed Full privilege leakage Origin reflection using Origin: https://subdomain.attacker.com Arbitrary origin escalation Access-Control-Allow-Headers: * Arbitrary header injection Missing Vary: Origin Cache poisoning Simple Exploit Template fetch('https://target.app/api/profile', { credentials: 'include' }) .then(res =\u003e res.text()) .then(console.log); Preflight Control fetch('https://target.app/api/update', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json', 'X-Api-Version': '2' }, body: JSON.stringify({ plan: 'pro' }) }); Testing Tips For wildcard origins, send Origin: https://evil.test. Validate response headers for each interesting endpoint (REST, GraphQL, legacy). Leverage the browser devtools network inspector to capture preflight failures. Use curl with -H \"Origin:\" to reproduce outside the browser. Secure Defaults Explicitly list allowed origins. Only allow credentials when required and limit to trusted origins. Restrict methods to the minimal set (GET, POST, etc.). Restrict headers to required custom headers only. Ensure sensitive endpoints require server-side authorization beyond CORS. Coordinate findings with application owners: CORS is an access control layer, not a standalone security control.\n",
   "wordCount" : "194",
   "inLanguage": "en",
-  "image": "http://localhost:1313/images/og-image.svg","datePublished": "2024-01-01T00:00:00Z",
+  "image": "https://realspaceeagle.github.io/images/og-image.svg","datePublished": "2024-01-01T00:00:00Z",
   "dateModified": "2024-01-01T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -289,14 +289,14 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/cheatsheets/cors/"
+    "@id": "https://realspaceeagle.github.io/cheatsheets/cors/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "realspaceeagle",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.svg"
+      "url": "https://realspaceeagle.github.io/favicon.svg"
     }
   }
 }
@@ -317,7 +317,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
+            <a href="https://realspaceeagle.github.io/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
             
             
             <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
@@ -373,47 +373,47 @@
         
         <ul id="menu" class="desktop-menu">
             <li>
-                <a href="http://localhost:1313/" title="Home">
+                <a href="https://realspaceeagle.github.io/" title="Home">
                     <span>Home</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/about/" title="About">
+                <a href="https://realspaceeagle.github.io/about/" title="About">
                     <span>About</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives">
+                <a href="https://realspaceeagle.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/cheatsheets/" title="Cheatsheets">
+                <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
                     <span>Cheatsheets</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://realspaceeagle.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://realspaceeagle.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://realspaceeagle.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/projects/" title="Projects">
+                <a href="https://realspaceeagle.github.io/projects/" title="Projects">
                     <span>Projects</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/contact/" title="Contact">
+                <a href="https://realspaceeagle.github.io/contact/" title="Contact">
                     <span>Contact</span>
                 </a>
             </li>
@@ -423,47 +423,47 @@
         <div id="mobile-menu" class="mobile-menu">
             <ul class="mobile-menu-list">
                 <li>
-                    <a href="http://localhost:1313/" title="Home">
+                    <a href="https://realspaceeagle.github.io/" title="Home">
                         <span>Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/about/" title="About">
+                    <a href="https://realspaceeagle.github.io/about/" title="About">
                         <span>About</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/archives/" title="Archives">
+                    <a href="https://realspaceeagle.github.io/archives/" title="Archives">
                         <span>Archives</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/cheatsheets/" title="Cheatsheets">
+                    <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
                         <span>Cheatsheets</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/search/" title="Search" accesskey=/>
+                    <a href="https://realspaceeagle.github.io/search/" title="Search" accesskey=/>
                         <span>Search</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/tags/" title="Tags">
+                    <a href="https://realspaceeagle.github.io/tags/" title="Tags">
                         <span>Tags</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/categories/" title="Categories">
+                    <a href="https://realspaceeagle.github.io/categories/" title="Categories">
                         <span>Categories</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/projects/" title="Projects">
+                    <a href="https://realspaceeagle.github.io/projects/" title="Projects">
                         <span>Projects</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/contact/" title="Contact">
+                    <a href="https://realspaceeagle.github.io/contact/" title="Contact">
                         <span>Contact</span>
                     </a>
                 </li>
@@ -614,9 +614,9 @@ document.addEventListener('DOMContentLoaded', function() {
   <footer class="post-footer">
     <nav class="paginav">
       Tags:
-      <a class="tag" href="http://localhost:1313/tags/cors/"># Cors</a>
-      <a class="tag" href="http://localhost:1313/tags/web-security/"># Web-Security</a>
-      <a class="tag" href="http://localhost:1313/tags/cheatsheet/"># Cheatsheet</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/cors/"># Cors</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/web-security/"># Web-Security</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/cheatsheet/"># Cheatsheet</a>
     </nav>
   </footer>
 </article>

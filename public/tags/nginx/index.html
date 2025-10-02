@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Nginx | realspaceeagle</title>
+<meta name="keywords" content="">
+<meta name="description" content="Expert cybersecurity insights, penetration testing tutorials, and hands-on security demonstrations. Learn ethical hacking, network security, and defensive techniques with real-world scenarios.">
+<meta name="author" content="realspaceeagle">
+<link rel="canonical" href="https://realspaceeagle.github.io/tags/nginx/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="mask-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://realspaceeagle.github.io/tags/nginx/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="https://realspaceeagle.github.io/tags/nginx/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="realspaceeagle">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="canonical" href="https://realspaceeagle.github.io/tags/nginx/">
+
+
+<meta property="og:title" content="Nginx">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://realspaceeagle.github.io/tags/nginx/">
+<meta property="og:site_name" content="realspaceeagle">
+<meta property="og:locale" content="en_US"><meta property="og:type" content="website"><meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta property="og:image:alt" content="realspaceeagle">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@haran_loga">
+<meta name="twitter:creator" content="@haran_loga">
+<meta name="twitter:title" content="Nginx">
+<meta name="twitter:description" content=""><meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta name="twitter:image:alt" content="realspaceeagle">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "WebPage",
+  "name": "Nginx",
+  "description": "",
+  "url": "https:\/\/realspaceeagle.github.io\/tags\/nginx\/",
+  "publisher": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  }}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https:\/\/realspaceeagle.github.io\/"
+    }]
+}
+</script>
+
+
+<link rel="stylesheet" href="/css/terminal-style.css">
+
+
+<link rel="stylesheet" href="/css/scroll-enhancement.css">
+
+
+<link rel="stylesheet" href="/css/mobile-navigation.css">
+
+
+<link rel="stylesheet" href="/css/mobile-responsive-pages.css">
+
+
+<link rel="stylesheet" href="/css/header-width-fix.css">
+
+
+<link rel="stylesheet" href="/css/share-buttons.css">
+
+
+<link rel="stylesheet" href="/css/comments.css">
+
+
+<link rel="stylesheet" href="/css/blog-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/blog-sidebar.css">
+
+
+<link rel="stylesheet" href="/css/project-toggle.css">
+
+
+<link rel="stylesheet" href="/css/code-copy-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/ctf-writeup.css">
+
+
+<link rel="stylesheet" href="/css/github-stats.css">
+
+
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar-responsive.css" onerror="this.remove();" />
+<script src="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar.min.js" onerror="this.remove();"></script>
+
+
+<script src="/js/github-calendar-enhanced.js" defer></script>
+
+
+<script src="/js/github-contribution-tracker.js" defer></script>
+
+
+<script src="/js/github-api-fallback.js" defer></script>
+
+
+<script src="/js/github-integration.js" defer></script>
+
+
+<script src="/js/twitter-timeline.js" defer></script>
+<script src="/js/twitter-manual.js" defer></script>
+
+
+<script src="/js/code-copy-enhanced.js" defer></script>
+
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPTRZ14YZS"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-GPTRZ14YZS');
+        }
+      </script><meta property="og:url" content="https://realspaceeagle.github.io/tags/nginx/">
+  <meta property="og:site_name" content="realspaceeagle">
+  <meta property="og:title" content="Nginx">
+  <meta property="og:description" content="Expert cybersecurity insights, penetration testing tutorials, and hands-on security demonstrations. Learn ethical hacking, network security, and defensive techniques with real-world scenarios.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+      <meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:title" content="Nginx">
+<meta name="twitter:description" content="Expert cybersecurity insights, penetration testing tutorials, and hands-on security demonstrations. Learn ethical hacking, network security, and defensive techniques with real-world scenarios.">
+
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://realspaceeagle.github.io/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
+            
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="logo-switches">
+                
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/dream4ip/" target="_blank" rel="noopener noreferrer" 
+                       title="Connect on LinkedIn" aria-label="LinkedIn Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/haran_loga" target="_blank" rel="noopener noreferrer" 
+                       title="Follow on X/Twitter" aria-label="Twitter Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener noreferrer" 
+                       title="View Code on GitHub" aria-label="GitHub Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <ul id="menu" class="desktop-menu">
+            <li>
+                <a href="https://realspaceeagle.github.io/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                    <span>Cheatsheets</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+        
+        
+        <div id="mobile-menu" class="mobile-menu">
+            <ul class="mobile-menu-list">
+                <li>
+                    <a href="https://realspaceeagle.github.io/" title="Home">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/about/" title="About">
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                        <span>Archives</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                        <span>Cheatsheets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/search/" title="Search" accesskey=/>
+                        <span>Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+    
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.contains('active');
+            
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            } else {
+                mobileMenu.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+                body.classList.add('mobile-menu-open');
+            }
+        });
+        
+        
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            });
+        });
+        
+        
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            }
+        });
+    }
+});
+</script><main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://realspaceeagle.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://realspaceeagle.github.io/tags/">Tags</a></div>
+  <h1>
+    Nginx
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Nginx Configuration Analysis Cheatsheet
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Nginx Configuration Analysis Cheatsheet Finding Nginx Configuration Files Common Configuration Locations # Main nginx configuration /etc/nginx/nginx.conf /usr/local/nginx/conf/nginx.conf /usr/local/etc/nginx/nginx.conf # Site-specific configurations /etc/nginx/sites-available/ /etc/nginx/sites-enabled/ /etc/nginx/conf.d/ # Default site configuration /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default # Additional includes /etc/nginx/snippets/ /etc/nginx/modules-enabled/ Finding Configuration Files # Locate nginx configuration find / -name &#34;nginx.conf&#34; 2&gt;/dev/null find / -name &#34;*.conf&#34; -path &#34;*nginx*&#34; 2&gt;/dev/null # Check nginx process for config location ps aux | grep nginx nginx -t # Test configuration and show file paths nginx -T # Dump configuration # Find all nginx-related files locate nginx.conf locate sites-available locate sites-enabled Main Configuration Analysis nginx.conf Structure # Global context user www-data; worker_processes auto; pid /run/nginx.pid; include /etc/nginx/modules-enabled/*.conf; # Events context events { worker_connections 768; multi_accept on; use epoll; } # HTTP context http { # Basic settings sendfile on; tcp_nopush on; tcp_nodelay on; keepalive_timeout 65; types_hash_max_size 2048; server_tokens off; # Security: Hide nginx version # MIME types include /etc/nginx/mime.types; default_type application/octet-stream; # Logging access_log /var/log/nginx/access.log; error_log /var/log/nginx/error.log; # Gzip compression gzip on; gzip_vary on; gzip_proxied any; gzip_comp_level 6; # Include site configurations include /etc/nginx/conf.d/*.conf; include /etc/nginx/sites-enabled/*; } Security-Relevant Directives # Check for security headers grep -r &#34;server_tokens&#34; /etc/nginx/ grep -r &#34;add_header&#34; /etc/nginx/ # Version disclosure grep -r &#34;server_tokens&#34; /etc/nginx/ # Should be: server_tokens off; # File upload limits grep -r &#34;client_max_body_size&#34; /etc/nginx/ # Request limits grep -r &#34;limit_req&#34; /etc/nginx/ grep -r &#34;limit_conn&#34; /etc/nginx/ Virtual Host Discovery Finding Virtual Hosts # List all site configurations ls -la /etc/nginx/sites-available/ ls -la /etc/nginx/sites-enabled/ # Extract server names from configurations grep -r &#34;server_name&#34; /etc/nginx/sites-available/ grep -r &#34;server_name&#34; /etc/nginx/sites-enabled/ # Check for wildcard or catch-all configurations grep -r &#34;server_name.*\*&#34; /etc/nginx/ grep -r &#34;default_server&#34; /etc/nginx/ Virtual Host Configuration Analysis # Example virtual host configuration server { listen 80; listen [::]:80; # Primary domain and aliases server_name example.com www.example.com; # Document root root /var/www/html; index index.html index.htm index.php; # Locations location / { try_files $uri $uri/ =404; } location ~ \.php$ { include snippets/fastcgi-php.conf; fastcgi_pass unix:/var/run/php/php7.4-fpm.sock; } } # Subdomain configuration server { listen 80; server_name subdomain.example.com; location / { proxy_pass http://localhost:3000; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection &#39;upgrade&#39;; proxy_set_header Host $host; proxy_cache_bypass $http_upgrade; } } Real-World Example: Soccer HTB # From Soccer HTB - Multiple virtual hosts found server { listen 80; listen [::]:80; server_name soccer.htb; root /var/www/html; index index.html index.htm index.nginx-debian.html; location / { try_files $uri $uri/ =404; } } # Additional virtual host discovered server { listen 80; listen [::]:80; server_name soc-player.soccer.htb; root /root/app/views; location / { proxy_pass http://localhost:3000; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection &#39;upgrade&#39;; proxy_set_header Host $host; proxy_cache_bypass $http_upgrade; } } Proxy Configuration Analysis Reverse Proxy Configurations # Basic reverse proxy location / { proxy_pass http://backend_server; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; } # WebSocket proxy configuration location /websocket { proxy_pass http://localhost:9091; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection &#34;upgrade&#34;; proxy_set_header Host $host; } # Load balancing upstream backend { server 192.168.1.10:8080; server 192.168.1.11:8080; server 192.168.1.12:8080; } location / { proxy_pass http://backend; } Proxy Security Issues # Check for missing security headers grep -r &#34;proxy_set_header.*X-Forwarded&#34; /etc/nginx/ grep -r &#34;proxy_set_header.*Host&#34; /etc/nginx/ # Check for proxy_pass misconfigurations grep -r &#34;proxy_pass&#34; /etc/nginx/ # Look for internal service exposure grep -r &#34;proxy_pass.*127.0.0.1\|localhost&#34; /etc/nginx/ # Check for missing trailing slashes (path traversal) grep -r &#34;proxy_pass.*[^/]$&#34; /etc/nginx/ SSL/TLS Configuration Analysis SSL Configuration server { listen 443 ssl http2; listen [::]:443 ssl http2; server_name example.com; # SSL certificates ssl_certificate /path/to/cert.pem; ssl_certificate_key /path/to/private.key; # SSL protocols and ciphers ssl_protocols TLSv1.2 TLSv1.3; ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384; ssl_prefer_server_ciphers off; # SSL security headers add_header Strict-Transport-Security &#34;max-age=63072000&#34; always; add_header X-Frame-Options DENY; add_header X-Content-Type-Options nosniff; } SSL Security Checks # Check SSL configuration grep -r &#34;ssl_&#34; /etc/nginx/ # Check for weak SSL protocols grep -r &#34;ssl_protocols&#34; /etc/nginx/ # Should not include SSLv2, SSLv3, TLSv1, TLSv1.1 # Check SSL certificate paths grep -r &#34;ssl_certificate&#34; /etc/nginx/ # Check for HSTS headers grep -r &#34;Strict-Transport-Security&#34; /etc/nginx/ # Check for security headers grep -r &#34;add_header&#34; /etc/nginx/ Location Block Analysis Location Matching Patterns # Exact match location = /exact-path { return 200 &#34;Exact match&#34;; } # Prefix match location /prefix { # Matches /prefix, /prefix/, /prefix/anything } # Regular expression (case sensitive) location ~ \.php$ { # Matches files ending with .php } # Regular expression (case insensitive) location ~* \.(jpg|jpeg|png|gif)$ { # Matches image files (case insensitive) } # Prefix match with priority location ^~ /priority { # High priority prefix match } Security-Critical Locations # Check for admin/management interfaces grep -r &#34;location.*admin&#34; /etc/nginx/ grep -r &#34;location.*management&#34; /etc/nginx/ grep -r &#34;location.*dashboard&#34; /etc/nginx/ # Check for file upload locations grep -r &#34;location.*upload&#34; /etc/nginx/ grep -r &#34;client_max_body_size&#34; /etc/nginx/ # Check for API endpoints grep -r &#34;location.*api&#34; /etc/nginx/ grep -r &#34;location.*/api&#34; /etc/nginx/ # Check for hidden files/directories grep -r &#34;location.*\\\.&#34; /etc/nginx/ Dangerous Location Configurations # Dangerous: Unrestricted file access location /files/ { alias /var/www/files/; # Can lead to path traversal } # Dangerous: PHP execution in upload directory location /uploads/ { location ~ \.php$ { fastcgi_pass unix:/var/run/php/php7.4-fmp.sock; # Allows execution of uploaded PHP files } } # Dangerous: Proxy without validation location /proxy/ { proxy_pass $arg_url; # Open proxy vulnerability } Access Control Analysis Access Restrictions # IP-based access control location /admin { allow 192.168.1.0/24; allow 127.0.0.1; deny all; } # Authentication required location /protected { auth_basic &#34;Protected Area&#34;; auth_basic_user_file /etc/nginx/.htpasswd; } # Rate limiting limit_req_zone $binary_remote_addr zone=login:10m rate=1r/s; location /login { limit_req zone=login burst=5 nodelay; } Access Control Issues # Check for missing access controls grep -r &#34;allow\|deny&#34; /etc/nginx/ grep -r &#34;auth_basic&#34; /etc/nginx/ # Check for rate limiting grep -r &#34;limit_req&#34; /etc/nginx/ grep -r &#34;limit_conn&#34; /etc/nginx/ # Check for CORS configurations grep -r &#34;add_header.*Access-Control&#34; /etc/nginx/ File and Directory Analysis Document Root Analysis # Find document roots grep -r &#34;root &#34; /etc/nginx/sites-available/ grep -r &#34;alias &#34; /etc/nginx/sites-available/ # Check document root permissions ls -la /var/www/html/ ls -la /root/app/views/ # From Soccer HTB example # Look for sensitive files in document roots find /var/www/ -name &#34;*.conf&#34; -o -name &#34;*.config&#34; -o -name &#34;*.bak&#34; 2&gt;/dev/null find /var/www/ -name &#34;.env&#34; -o -name &#34;*.sql&#34; -o -name &#34;*.log&#34; 2&gt;/dev/null File Serving Configuration # Check autoindex settings grep -r &#34;autoindex&#34; /etc/nginx/ # Check for hidden file access grep -r &#34;location.*\\\.&#34; /etc/nginx/ # Check MIME type configurations grep -r &#34;mime.types&#34; /etc/nginx/ grep -r &#34;default_type&#34; /etc/nginx/ Log Analysis Nginx Log Configuration # Access log format log_format main &#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39; &#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39; &#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;; access_log /var/log/nginx/access.log main; error_log /var/log/nginx/error.log warn; # Custom log for specific location location /api/ { access_log /var/log/nginx/api.log; } Log File Analysis # Find nginx log files find /var/log -name &#34;*nginx*&#34; 2&gt;/dev/null grep -r &#34;access_log\|error_log&#34; /etc/nginx/ # Analyze access logs for reconnaissance tail -f /var/log/nginx/access.log grep &#34;404&#34; /var/log/nginx/access.log | head -20 grep &#34;POST&#34; /var/log/nginx/access.log | head -10 # Look for error patterns tail -f /var/log/nginx/error.log grep -i &#34;error\|fail\|denied&#34; /var/log/nginx/error.log Module and Extension Analysis Loaded Modules # Check compiled modules nginx -V 2&gt;&amp;1 | grep -o with-[a-z_]* nginx -V 2&gt;&amp;1 | grep -o without-[a-z_]* # Check dynamic modules ls -la /etc/nginx/modules-enabled/ ls -la /usr/lib/nginx/modules/ # Check module loading in config grep -r &#34;load_module&#34; /etc/nginx/ Security-Relevant Modules # Check for security modules nginx -V 2&gt;&amp;1 | grep -i &#34;security\|waf\|firewall&#34; # Check for authentication modules nginx -V 2&gt;&amp;1 | grep -i &#34;auth&#34; # Check for rate limiting modules nginx -V 2&gt;&amp;1 | grep -i &#34;limit&#34; # Check for SSL/TLS modules nginx -V 2&gt;&amp;1 | grep -i &#34;ssl\|tls&#34; Configuration Testing and Validation Syntax Testing # Test nginx configuration syntax nginx -t nginx -T # Test and dump configuration # Test specific configuration file nginx -t -c /path/to/nginx.conf # Check configuration hierarchy nginx -T | grep -E &#34;^#|server_name|listen|location&#34; Runtime Analysis # Check running nginx processes ps aux | grep nginx # Check listening ports ss -tlnp | grep nginx netstat -tlnp | grep nginx # Check nginx status (if enabled) curl http://localhost/nginx_status Common Misconfigurations Path Traversal Issues # Vulnerable alias configuration location /files { alias /var/www/files/; # Missing trailing slash can cause path traversal } # Correct configuration location /files/ { alias /var/www/files/; } Information Disclosure # Version disclosure server_tokens on; # Should be off # Autoindex enabled location / { autoindex on; # May expose directory contents } # Error page information disclosure error_page 404 /404.html; # Should use custom error pages Proxy Misconfigurations # Open proxy vulnerability location /proxy { proxy_pass $arg_url; # Dangerous - allows arbitrary URLs } # SSRF via proxy_pass location ~ /proxy/(.&#43;) { proxy_pass http://$1; # Can access internal services } Extraction Commands for Pentesting Quick Configuration Extraction # Extract all server names (virtual hosts) grep -r &#34;server_name&#34; /etc/nginx/ | grep -v &#34;#&#34; | awk &#39;{print $2}&#39; | sort -u # Extract all proxy_pass destinations grep -r &#34;proxy_pass&#34; /etc/nginx/ | grep -v &#34;#&#34; | awk &#39;{print $2}&#39; | sort -u # Extract all document roots grep -r &#34;root &#34; /etc/nginx/ | grep -v &#34;#&#34; | awk &#39;{print $2}&#39; | sort -u # Extract all listening ports grep -r &#34;listen&#34; /etc/nginx/ | grep -v &#34;#&#34; | awk &#39;{print $2}&#39; | sort -u One-liner Configuration Analysis # Complete nginx configuration dump find /etc/nginx -name &#34;*.conf&#34; -exec cat {} \; 2&gt;/dev/null # Extract virtual hosts with their configurations awk &#39;/server_name/ {server=$2} /listen/ {port=$2} /root/ {docroot=$2} /}/ {print server, port, docroot; server=&#34;&#34;; port=&#34;&#34;; docroot=&#34;&#34;}&#39; /etc/nginx/sites-enabled/* # Find potential security issues grep -r -E &#34;(server_tokens on|autoindex on|proxy_pass \$|allow all)&#34; /etc/nginx/ Real-World Example: Soccer HTB Analysis Initial Discovery # Found nginx configuration in compromised system www-data@soccer:/etc/nginx/sites-enabled$ ls -la total 8 drwxr-xr-x 2 root root 4096 Nov 17 2022 . drwxr-xr-x 8 root root 4096 Nov 17 2022 .. lrwxrwxrwx 1 root root 34 Nov 17 2022 default -&gt; /etc/nginx/sites-available/default lrwxrwxrwx 1 root root 41 Nov 17 2022 soc-player.htb -&gt; /etc/nginx/sites-available/soc-player.htb Configuration Analysis # Extract virtual host information $ cat soc-player.htb server { listen 80; listen [::]:80; server_name soc-player.soccer.htb; root /root/app/views; location / { proxy_pass http://localhost:3000; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection &#39;upgrade&#39;; proxy_set_header Host $host; proxy_cache_bypass $http_upgrade; } } Key Findings Additional virtual host discovered: soc-player.soccer.htb Internal service exposed: Application running on localhost:3000 WebSocket support: Configuration for WebSocket upgrades Document root: /root/app/views (unusual location) Automation Scripts Nginx Configuration Parser #!/bin/bash # nginx_analyzer.sh - Extract key information from nginx configs NGINX_PATH=&#34;/etc/nginx&#34; echo &#34;=== Nginx Configuration Analysis ===&#34; echo echo &#34;Virtual Hosts:&#34; grep -r &#34;server_name&#34; $NGINX_PATH/ | grep -v &#34;#&#34; | awk &#39;{print $3}&#39; | sort -u echo echo &#34;Listening Ports:&#34; grep -r &#34;listen&#34; $NGINX_PATH/ | grep -v &#34;#&#34; | awk &#39;{print $2}&#39; | sort -u | head -10 echo echo &#34;Proxy Destinations:&#34; grep -r &#34;proxy_pass&#34; $NGINX_PATH/ | grep -v &#34;#&#34; | awk &#39;{print $2}&#39; | sort -u echo echo &#34;Document Roots:&#34; grep -r &#34;root &#34; $NGINX_PATH/ | grep -v &#34;#&#34; | awk &#39;{print $2}&#39; | sort -u echo echo &#34;Potential Security Issues:&#34; grep -r -E &#34;(server_tokens on|autoindex on|allow all)&#34; $NGINX_PATH/ 2&gt;/dev/null Security Recommendations Hardening Configuration # Security headers add_header X-Frame-Options DENY; add_header X-Content-Type-Options nosniff; add_header X-XSS-Protection &#34;1; mode=block&#34;; add_header Strict-Transport-Security &#34;max-age=31536000; includeSubDomains&#34;; # Hide nginx version server_tokens off; # Rate limiting limit_req_zone $binary_remote_addr zone=global:10m rate=10r/s; limit_req zone=global burst=20 nodelay; # File upload restrictions client_max_body_size 10M; # Disable autoindex autoindex off; Monitoring and Logging # Enhanced logging format log_format detailed &#39;$remote_addr - $remote_user [$time_local] &#39; &#39;&#34;$request&#34; $status $body_bytes_sent &#39; &#39;&#34;$http_referer&#34; &#34;$http_user_agent&#34; &#39; &#39;$request_time $upstream_response_time&#39;; # Log monitoring commands tail -f /var/log/nginx/access.log | grep -E &#34;(4[0-9]{2}|5[0-9]{2})&#34; awk &#39;$9 ~ /^[45]/ {print $0}&#39; /var/log/nginx/access.log | tail -20 Always ensure proper authorization before analyzing nginx configurations on systems you don’t own. This information should be used for legitimate security testing and system administration purposes only.
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-01-01 00:00:00 +0000 UTC'>January 1, 2024</span>&nbsp;·&nbsp;<span>9 min</span>&nbsp;·&nbsp;<span>realspaceeagle</span></footer>
+  <a class="entry-link" aria-label="post link to Nginx Configuration Analysis Cheatsheet" href="https://realspaceeagle.github.io/cheatsheets/nginx-configuration-analysis/"></a>
+</article>
+    </main>
+    <footer class="footer">
+  <div class="footer_inner wrap">
+    <div class="footer_text">
+      © 2025 realspaceeagle
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

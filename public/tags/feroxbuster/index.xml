@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Feroxbuster on realspaceeagle</title>
+    <link>https://realspaceeagle.github.io/tags/feroxbuster/</link>
+    <description>Recent content in Feroxbuster on realspaceeagle</description>
+    <image>
+      <title>realspaceeagle</title>
+      <url>https://realspaceeagle.github.io/images/og-image.svg</url>
+      <link>https://realspaceeagle.github.io/images/og-image.svg</link>
+    </image>
+    <generator>Hugo -- 0.150.1</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 01 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://realspaceeagle.github.io/tags/feroxbuster/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Web Directory Enumeration Cheatsheet</title>
+      <link>https://realspaceeagle.github.io/cheatsheets/web-directory-enumeration/</link>
+      <pubDate>Mon, 01 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>https://realspaceeagle.github.io/cheatsheets/web-directory-enumeration/</guid>
+      <description>Comprehensive guide for web directory and file enumeration using gobuster, feroxbuster, and other tools</description>
+    </item>
+  </channel>
+</rss>

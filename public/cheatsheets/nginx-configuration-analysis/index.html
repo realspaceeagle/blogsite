@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Nginx Configuration Analysis Cheatsheet | realspaceeagle</title>
+<meta name="keywords" content="nginx, web-server, configuration-analysis, virtual-hosts, pentesting">
+<meta name="description" content="Guide for analyzing nginx configurations during penetration testing, including virtual hosts, proxy configurations, and security misconfigurations">
+<meta name="author" content="realspaceeagle">
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/nginx-configuration-analysis/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="mask-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://realspaceeagle.github.io/cheatsheets/nginx-configuration-analysis/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<meta name="description" content="Guide for analyzing nginx configurations during penetration testing, including virtual hosts, proxy configurations, and security misconfigurations">
+<meta name="keywords" content="nginx, web-server, configuration-analysis, virtual-hosts, pentesting">
+<meta name="author" content="realspaceeagle">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/nginx-configuration-analysis/">
+
+
+<meta property="og:title" content="Nginx Configuration Analysis Cheatsheet - realspaceeagle">
+<meta property="og:description" content="Guide for analyzing nginx configurations during penetration testing, including virtual hosts, proxy configurations, and security misconfigurations">
+<meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/nginx-configuration-analysis/">
+<meta property="og:site_name" content="realspaceeagle">
+<meta property="og:locale" content="en_US"><meta property="og:type" content="article">
+<meta property="article:author" content="realspaceeagle"><meta property="article:published_time" content="2024-01-01T00:00:00Z"><meta property="article:modified_time" content="2024-01-01T00:00:00Z"><meta property="article:tag" content="nginx"><meta property="article:tag" content="web-server"><meta property="article:tag" content="configuration-analysis"><meta property="article:tag" content="virtual-hosts"><meta property="article:tag" content="pentesting"><meta property="article:section" content="cheatsheets"><meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta property="og:image:alt" content="realspaceeagle">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@haran_loga">
+<meta name="twitter:creator" content="@haran_loga">
+<meta name="twitter:title" content="Nginx Configuration Analysis Cheatsheet - realspaceeagle">
+<meta name="twitter:description" content="Guide for analyzing nginx configurations during penetration testing, including virtual hosts, proxy configurations, and security misconfigurations"><meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta name="twitter:image:alt" content="realspaceeagle"><meta name="article:author" content="realspaceeagle">
+<meta name="article:publisher" content="https://realspaceeagle.github.io/"><meta name="news_keywords" content="nginx, web-server, configuration-analysis, virtual-hosts, pentesting">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "BlogPosting",
+  "headline": "Nginx Configuration Analysis Cheatsheet",
+  "description": "Guide for analyzing nginx configurations during penetration testing, including virtual hosts, proxy configurations, and security misconfigurations",
+  "author": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "description": "Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  },
+  "datePublished": "2024-01-01T00:00:00Z","dateModified": "2024-01-01T00:00:00Z","url": "https:\/\/realspaceeagle.github.io\/cheatsheets\/nginx-configuration-analysis\/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/realspaceeagle.github.io\/cheatsheets\/nginx-configuration-analysis\/"
+  },"image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/realspaceeagle.github.io\/images\/og-image.svg",
+    "width": 1200,
+    "height": 630
+  },"keywords": "nginx, web-server, configuration-analysis, virtual-hosts, pentesting",
+  "articleSection": "cheatsheets",
+  "wordCount":  1890 ,
+  "genre": ["Cybersecurity", "Technology", "Education"],
+  "about": [{
+      "@type": "Thing",
+      "name": "nginx"
+    },{
+      "@type": "Thing",
+      "name": "web-server"
+    },{
+      "@type": "Thing",
+      "name": "configuration-analysis"
+    },{
+      "@type": "Thing",
+      "name": "virtual-hosts"
+    },{
+      "@type": "Thing",
+      "name": "pentesting"
+    }]}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https:\/\/realspaceeagle.github.io\/"
+    },{
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Cheatsheets",
+      "item": "https:\/\/realspaceeagle.github.io\/categories\/cheatsheets\/"
+    },{
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Nginx Configuration Analysis Cheatsheet",
+      "item": "https:\/\/realspaceeagle.github.io\/cheatsheets\/nginx-configuration-analysis\/"
+    }]
+}
+</script>
+
+
+<link rel="stylesheet" href="/css/terminal-style.css">
+
+
+<link rel="stylesheet" href="/css/scroll-enhancement.css">
+
+
+<link rel="stylesheet" href="/css/mobile-navigation.css">
+
+
+<link rel="stylesheet" href="/css/mobile-responsive-pages.css">
+
+
+<link rel="stylesheet" href="/css/header-width-fix.css">
+
+
+<link rel="stylesheet" href="/css/share-buttons.css">
+
+
+<link rel="stylesheet" href="/css/comments.css">
+
+
+<link rel="stylesheet" href="/css/blog-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/blog-sidebar.css">
+
+
+<link rel="stylesheet" href="/css/project-toggle.css">
+
+
+<link rel="stylesheet" href="/css/code-copy-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/ctf-writeup.css">
+
+
+<link rel="stylesheet" href="/css/github-stats.css">
+
+
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar-responsive.css" onerror="this.remove();" />
+<script src="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar.min.js" onerror="this.remove();"></script>
+
+
+<script src="/js/github-calendar-enhanced.js" defer></script>
+
+
+<script src="/js/github-contribution-tracker.js" defer></script>
+
+
+<script src="/js/github-api-fallback.js" defer></script>
+
+
+<script src="/js/github-integration.js" defer></script>
+
+
+<script src="/js/twitter-timeline.js" defer></script>
+<script src="/js/twitter-manual.js" defer></script>
+
+
+<script src="/js/code-copy-enhanced.js" defer></script>
+
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPTRZ14YZS"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-GPTRZ14YZS');
+        }
+      </script><meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/nginx-configuration-analysis/">
+  <meta property="og:site_name" content="realspaceeagle">
+  <meta property="og:title" content="Nginx Configuration Analysis Cheatsheet">
+  <meta property="og:description" content="Guide for analyzing nginx configurations during penetration testing, including virtual hosts, proxy configurations, and security misconfigurations">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="cheatsheets">
+    <meta property="article:published_time" content="2024-01-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-01-01T00:00:00+00:00">
+    <meta property="article:tag" content="Nginx">
+    <meta property="article:tag" content="Web-Server">
+    <meta property="article:tag" content="Configuration-Analysis">
+    <meta property="article:tag" content="Virtual-Hosts">
+    <meta property="article:tag" content="Pentesting">
+      <meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:title" content="Nginx Configuration Analysis Cheatsheet">
+<meta name="twitter:description" content="Guide for analyzing nginx configurations during penetration testing, including virtual hosts, proxy configurations, and security misconfigurations">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Security Cheatsheets",
+      "item": "https://realspaceeagle.github.io/cheatsheets/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Nginx Configuration Analysis Cheatsheet",
+      "item": "https://realspaceeagle.github.io/cheatsheets/nginx-configuration-analysis/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Nginx Configuration Analysis Cheatsheet",
+  "name": "Nginx Configuration Analysis Cheatsheet",
+  "description": "Guide for analyzing nginx configurations during penetration testing, including virtual hosts, proxy configurations, and security misconfigurations",
+  "keywords": [
+    "nginx", "web-server", "configuration-analysis", "virtual-hosts", "pentesting"
+  ],
+  "articleBody": "Nginx Configuration Analysis Cheatsheet Finding Nginx Configuration Files Common Configuration Locations # Main nginx configuration /etc/nginx/nginx.conf /usr/local/nginx/conf/nginx.conf /usr/local/etc/nginx/nginx.conf # Site-specific configurations /etc/nginx/sites-available/ /etc/nginx/sites-enabled/ /etc/nginx/conf.d/ # Default site configuration /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default # Additional includes /etc/nginx/snippets/ /etc/nginx/modules-enabled/ Finding Configuration Files # Locate nginx configuration find / -name \"nginx.conf\" 2\u003e/dev/null find / -name \"*.conf\" -path \"*nginx*\" 2\u003e/dev/null # Check nginx process for config location ps aux | grep nginx nginx -t # Test configuration and show file paths nginx -T # Dump configuration # Find all nginx-related files locate nginx.conf locate sites-available locate sites-enabled Main Configuration Analysis nginx.conf Structure # Global context user www-data; worker_processes auto; pid /run/nginx.pid; include /etc/nginx/modules-enabled/*.conf; # Events context events { worker_connections 768; multi_accept on; use epoll; } # HTTP context http { # Basic settings sendfile on; tcp_nopush on; tcp_nodelay on; keepalive_timeout 65; types_hash_max_size 2048; server_tokens off; # Security: Hide nginx version # MIME types include /etc/nginx/mime.types; default_type application/octet-stream; # Logging access_log /var/log/nginx/access.log; error_log /var/log/nginx/error.log; # Gzip compression gzip on; gzip_vary on; gzip_proxied any; gzip_comp_level 6; # Include site configurations include /etc/nginx/conf.d/*.conf; include /etc/nginx/sites-enabled/*; } Security-Relevant Directives # Check for security headers grep -r \"server_tokens\" /etc/nginx/ grep -r \"add_header\" /etc/nginx/ # Version disclosure grep -r \"server_tokens\" /etc/nginx/ # Should be: server_tokens off; # File upload limits grep -r \"client_max_body_size\" /etc/nginx/ # Request limits grep -r \"limit_req\" /etc/nginx/ grep -r \"limit_conn\" /etc/nginx/ Virtual Host Discovery Finding Virtual Hosts # List all site configurations ls -la /etc/nginx/sites-available/ ls -la /etc/nginx/sites-enabled/ # Extract server names from configurations grep -r \"server_name\" /etc/nginx/sites-available/ grep -r \"server_name\" /etc/nginx/sites-enabled/ # Check for wildcard or catch-all configurations grep -r \"server_name.*\\*\" /etc/nginx/ grep -r \"default_server\" /etc/nginx/ Virtual Host Configuration Analysis # Example virtual host configuration server { listen 80; listen [::]:80; # Primary domain and aliases server_name example.com www.example.com; # Document root root /var/www/html; index index.html index.htm index.php; # Locations location / { try_files $uri $uri/ =404; } location ~ \\.php$ { include snippets/fastcgi-php.conf; fastcgi_pass unix:/var/run/php/php7.4-fpm.sock; } } # Subdomain configuration server { listen 80; server_name subdomain.example.com; location / { proxy_pass http://localhost:3000; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection 'upgrade'; proxy_set_header Host $host; proxy_cache_bypass $http_upgrade; } } Real-World Example: Soccer HTB # From Soccer HTB - Multiple virtual hosts found server { listen 80; listen [::]:80; server_name soccer.htb; root /var/www/html; index index.html index.htm index.nginx-debian.html; location / { try_files $uri $uri/ =404; } } # Additional virtual host discovered server { listen 80; listen [::]:80; server_name soc-player.soccer.htb; root /root/app/views; location / { proxy_pass http://localhost:3000; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection 'upgrade'; proxy_set_header Host $host; proxy_cache_bypass $http_upgrade; } } Proxy Configuration Analysis Reverse Proxy Configurations # Basic reverse proxy location / { proxy_pass http://backend_server; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; } # WebSocket proxy configuration location /websocket { proxy_pass http://localhost:9091; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection \"upgrade\"; proxy_set_header Host $host; } # Load balancing upstream backend { server 192.168.1.10:8080; server 192.168.1.11:8080; server 192.168.1.12:8080; } location / { proxy_pass http://backend; } Proxy Security Issues # Check for missing security headers grep -r \"proxy_set_header.*X-Forwarded\" /etc/nginx/ grep -r \"proxy_set_header.*Host\" /etc/nginx/ # Check for proxy_pass misconfigurations grep -r \"proxy_pass\" /etc/nginx/ # Look for internal service exposure grep -r \"proxy_pass.*127.0.0.1\\|localhost\" /etc/nginx/ # Check for missing trailing slashes (path traversal) grep -r \"proxy_pass.*[^/]$\" /etc/nginx/ SSL/TLS Configuration Analysis SSL Configuration server { listen 443 ssl http2; listen [::]:443 ssl http2; server_name example.com; # SSL certificates ssl_certificate /path/to/cert.pem; ssl_certificate_key /path/to/private.key; # SSL protocols and ciphers ssl_protocols TLSv1.2 TLSv1.3; ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384; ssl_prefer_server_ciphers off; # SSL security headers add_header Strict-Transport-Security \"max-age=63072000\" always; add_header X-Frame-Options DENY; add_header X-Content-Type-Options nosniff; } SSL Security Checks # Check SSL configuration grep -r \"ssl_\" /etc/nginx/ # Check for weak SSL protocols grep -r \"ssl_protocols\" /etc/nginx/ # Should not include SSLv2, SSLv3, TLSv1, TLSv1.1 # Check SSL certificate paths grep -r \"ssl_certificate\" /etc/nginx/ # Check for HSTS headers grep -r \"Strict-Transport-Security\" /etc/nginx/ # Check for security headers grep -r \"add_header\" /etc/nginx/ Location Block Analysis Location Matching Patterns # Exact match location = /exact-path { return 200 \"Exact match\"; } # Prefix match location /prefix { # Matches /prefix, /prefix/, /prefix/anything } # Regular expression (case sensitive) location ~ \\.php$ { # Matches files ending with .php } # Regular expression (case insensitive) location ~* \\.(jpg|jpeg|png|gif)$ { # Matches image files (case insensitive) } # Prefix match with priority location ^~ /priority { # High priority prefix match } Security-Critical Locations # Check for admin/management interfaces grep -r \"location.*admin\" /etc/nginx/ grep -r \"location.*management\" /etc/nginx/ grep -r \"location.*dashboard\" /etc/nginx/ # Check for file upload locations grep -r \"location.*upload\" /etc/nginx/ grep -r \"client_max_body_size\" /etc/nginx/ # Check for API endpoints grep -r \"location.*api\" /etc/nginx/ grep -r \"location.*/api\" /etc/nginx/ # Check for hidden files/directories grep -r \"location.*\\\\\\.\" /etc/nginx/ Dangerous Location Configurations # Dangerous: Unrestricted file access location /files/ { alias /var/www/files/; # Can lead to path traversal } # Dangerous: PHP execution in upload directory location /uploads/ { location ~ \\.php$ { fastcgi_pass unix:/var/run/php/php7.4-fmp.sock; # Allows execution of uploaded PHP files } } # Dangerous: Proxy without validation location /proxy/ { proxy_pass $arg_url; # Open proxy vulnerability } Access Control Analysis Access Restrictions # IP-based access control location /admin { allow 192.168.1.0/24; allow 127.0.0.1; deny all; } # Authentication required location /protected { auth_basic \"Protected Area\"; auth_basic_user_file /etc/nginx/.htpasswd; } # Rate limiting limit_req_zone $binary_remote_addr zone=login:10m rate=1r/s; location /login { limit_req zone=login burst=5 nodelay; } Access Control Issues # Check for missing access controls grep -r \"allow\\|deny\" /etc/nginx/ grep -r \"auth_basic\" /etc/nginx/ # Check for rate limiting grep -r \"limit_req\" /etc/nginx/ grep -r \"limit_conn\" /etc/nginx/ # Check for CORS configurations grep -r \"add_header.*Access-Control\" /etc/nginx/ File and Directory Analysis Document Root Analysis # Find document roots grep -r \"root \" /etc/nginx/sites-available/ grep -r \"alias \" /etc/nginx/sites-available/ # Check document root permissions ls -la /var/www/html/ ls -la /root/app/views/ # From Soccer HTB example # Look for sensitive files in document roots find /var/www/ -name \"*.conf\" -o -name \"*.config\" -o -name \"*.bak\" 2\u003e/dev/null find /var/www/ -name \".env\" -o -name \"*.sql\" -o -name \"*.log\" 2\u003e/dev/null File Serving Configuration # Check autoindex settings grep -r \"autoindex\" /etc/nginx/ # Check for hidden file access grep -r \"location.*\\\\\\.\" /etc/nginx/ # Check MIME type configurations grep -r \"mime.types\" /etc/nginx/ grep -r \"default_type\" /etc/nginx/ Log Analysis Nginx Log Configuration # Access log format log_format main '$remote_addr - $remote_user [$time_local] \"$request\" ' '$status $body_bytes_sent \"$http_referer\" ' '\"$http_user_agent\" \"$http_x_forwarded_for\"'; access_log /var/log/nginx/access.log main; error_log /var/log/nginx/error.log warn; # Custom log for specific location location /api/ { access_log /var/log/nginx/api.log; } Log File Analysis # Find nginx log files find /var/log -name \"*nginx*\" 2\u003e/dev/null grep -r \"access_log\\|error_log\" /etc/nginx/ # Analyze access logs for reconnaissance tail -f /var/log/nginx/access.log grep \"404\" /var/log/nginx/access.log | head -20 grep \"POST\" /var/log/nginx/access.log | head -10 # Look for error patterns tail -f /var/log/nginx/error.log grep -i \"error\\|fail\\|denied\" /var/log/nginx/error.log Module and Extension Analysis Loaded Modules # Check compiled modules nginx -V 2\u003e\u00261 | grep -o with-[a-z_]* nginx -V 2\u003e\u00261 | grep -o without-[a-z_]* # Check dynamic modules ls -la /etc/nginx/modules-enabled/ ls -la /usr/lib/nginx/modules/ # Check module loading in config grep -r \"load_module\" /etc/nginx/ Security-Relevant Modules # Check for security modules nginx -V 2\u003e\u00261 | grep -i \"security\\|waf\\|firewall\" # Check for authentication modules nginx -V 2\u003e\u00261 | grep -i \"auth\" # Check for rate limiting modules nginx -V 2\u003e\u00261 | grep -i \"limit\" # Check for SSL/TLS modules nginx -V 2\u003e\u00261 | grep -i \"ssl\\|tls\" Configuration Testing and Validation Syntax Testing # Test nginx configuration syntax nginx -t nginx -T # Test and dump configuration # Test specific configuration file nginx -t -c /path/to/nginx.conf # Check configuration hierarchy nginx -T | grep -E \"^#|server_name|listen|location\" Runtime Analysis # Check running nginx processes ps aux | grep nginx # Check listening ports ss -tlnp | grep nginx netstat -tlnp | grep nginx # Check nginx status (if enabled) curl http://localhost/nginx_status Common Misconfigurations Path Traversal Issues # Vulnerable alias configuration location /files { alias /var/www/files/; # Missing trailing slash can cause path traversal } # Correct configuration location /files/ { alias /var/www/files/; } Information Disclosure # Version disclosure server_tokens on; # Should be off # Autoindex enabled location / { autoindex on; # May expose directory contents } # Error page information disclosure error_page 404 /404.html; # Should use custom error pages Proxy Misconfigurations # Open proxy vulnerability location /proxy { proxy_pass $arg_url; # Dangerous - allows arbitrary URLs } # SSRF via proxy_pass location ~ /proxy/(.+) { proxy_pass http://$1; # Can access internal services } Extraction Commands for Pentesting Quick Configuration Extraction # Extract all server names (virtual hosts) grep -r \"server_name\" /etc/nginx/ | grep -v \"#\" | awk '{print $2}' | sort -u # Extract all proxy_pass destinations grep -r \"proxy_pass\" /etc/nginx/ | grep -v \"#\" | awk '{print $2}' | sort -u # Extract all document roots grep -r \"root \" /etc/nginx/ | grep -v \"#\" | awk '{print $2}' | sort -u # Extract all listening ports grep -r \"listen\" /etc/nginx/ | grep -v \"#\" | awk '{print $2}' | sort -u One-liner Configuration Analysis # Complete nginx configuration dump find /etc/nginx -name \"*.conf\" -exec cat {} \\; 2\u003e/dev/null # Extract virtual hosts with their configurations awk '/server_name/ {server=$2} /listen/ {port=$2} /root/ {docroot=$2} /}/ {print server, port, docroot; server=\"\"; port=\"\"; docroot=\"\"}' /etc/nginx/sites-enabled/* # Find potential security issues grep -r -E \"(server_tokens on|autoindex on|proxy_pass \\$|allow all)\" /etc/nginx/ Real-World Example: Soccer HTB Analysis Initial Discovery # Found nginx configuration in compromised system www-data@soccer:/etc/nginx/sites-enabled$ ls -la total 8 drwxr-xr-x 2 root root 4096 Nov 17 2022 . drwxr-xr-x 8 root root 4096 Nov 17 2022 .. lrwxrwxrwx 1 root root 34 Nov 17 2022 default -\u003e /etc/nginx/sites-available/default lrwxrwxrwx 1 root root 41 Nov 17 2022 soc-player.htb -\u003e /etc/nginx/sites-available/soc-player.htb Configuration Analysis # Extract virtual host information $ cat soc-player.htb server { listen 80; listen [::]:80; server_name soc-player.soccer.htb; root /root/app/views; location / { proxy_pass http://localhost:3000; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection 'upgrade'; proxy_set_header Host $host; proxy_cache_bypass $http_upgrade; } } Key Findings Additional virtual host discovered: soc-player.soccer.htb Internal service exposed: Application running on localhost:3000 WebSocket support: Configuration for WebSocket upgrades Document root: /root/app/views (unusual location) Automation Scripts Nginx Configuration Parser #!/bin/bash # nginx_analyzer.sh - Extract key information from nginx configs NGINX_PATH=\"/etc/nginx\" echo \"=== Nginx Configuration Analysis ===\" echo echo \"Virtual Hosts:\" grep -r \"server_name\" $NGINX_PATH/ | grep -v \"#\" | awk '{print $3}' | sort -u echo echo \"Listening Ports:\" grep -r \"listen\" $NGINX_PATH/ | grep -v \"#\" | awk '{print $2}' | sort -u | head -10 echo echo \"Proxy Destinations:\" grep -r \"proxy_pass\" $NGINX_PATH/ | grep -v \"#\" | awk '{print $2}' | sort -u echo echo \"Document Roots:\" grep -r \"root \" $NGINX_PATH/ | grep -v \"#\" | awk '{print $2}' | sort -u echo echo \"Potential Security Issues:\" grep -r -E \"(server_tokens on|autoindex on|allow all)\" $NGINX_PATH/ 2\u003e/dev/null Security Recommendations Hardening Configuration # Security headers add_header X-Frame-Options DENY; add_header X-Content-Type-Options nosniff; add_header X-XSS-Protection \"1; mode=block\"; add_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\"; # Hide nginx version server_tokens off; # Rate limiting limit_req_zone $binary_remote_addr zone=global:10m rate=10r/s; limit_req zone=global burst=20 nodelay; # File upload restrictions client_max_body_size 10M; # Disable autoindex autoindex off; Monitoring and Logging # Enhanced logging format log_format detailed '$remote_addr - $remote_user [$time_local] ' '\"$request\" $status $body_bytes_sent ' '\"$http_referer\" \"$http_user_agent\" ' '$request_time $upstream_response_time'; # Log monitoring commands tail -f /var/log/nginx/access.log | grep -E \"(4[0-9]{2}|5[0-9]{2})\" awk '$9 ~ /^[45]/ {print $0}' /var/log/nginx/access.log | tail -20 Always ensure proper authorization before analyzing nginx configurations on systems you don’t own. This information should be used for legitimate security testing and system administration purposes only.\n",
+  "wordCount" : "1890",
+  "inLanguage": "en",
+  "image": "https://realspaceeagle.github.io/images/og-image.svg","datePublished": "2024-01-01T00:00:00Z",
+  "dateModified": "2024-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"/images/avatar.svg","bio":"Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.","name":"realspaceeagle","title":"Cybersecurity Professional \u0026 Penetration Tester"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://realspaceeagle.github.io/cheatsheets/nginx-configuration-analysis/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "realspaceeagle",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://realspaceeagle.github.io/favicon.svg"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://realspaceeagle.github.io/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
+            
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="logo-switches">
+                
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/dream4ip/" target="_blank" rel="noopener noreferrer" 
+                       title="Connect on LinkedIn" aria-label="LinkedIn Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/haran_loga" target="_blank" rel="noopener noreferrer" 
+                       title="Follow on X/Twitter" aria-label="Twitter Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener noreferrer" 
+                       title="View Code on GitHub" aria-label="GitHub Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <ul id="menu" class="desktop-menu">
+            <li>
+                <a href="https://realspaceeagle.github.io/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                    <span>Cheatsheets</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+        
+        
+        <div id="mobile-menu" class="mobile-menu">
+            <ul class="mobile-menu-list">
+                <li>
+                    <a href="https://realspaceeagle.github.io/" title="Home">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/about/" title="About">
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                        <span>Archives</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                        <span>Cheatsheets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/search/" title="Search" accesskey=/>
+                        <span>Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+    
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.contains('active');
+            
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            } else {
+                mobileMenu.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+                body.classList.add('mobile-menu-open');
+            }
+        });
+        
+        
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            });
+        });
+        
+        
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            }
+        });
+    }
+});
+</script><main class="main">
+<link rel="stylesheet" href="/css/cheatsheet-style.css">
+
+<article class="post-single cheatsheet-page">
+  <header class="post-header">
+    <div class="breadcrumbs">
+      <a href="/">Home</a> &nbsp;/&nbsp; <a href="/cheatsheets/">Cheatsheets</a> &nbsp;/&nbsp; Nginx Configuration Analysis Cheatsheet
+    </div>
+    <h1 class="post-title">
+      Nginx Configuration Analysis Cheatsheet
+    </h1>
+    <div class="post-description">
+      Guide for analyzing nginx configurations during penetration testing, including virtual hosts, proxy configurations, and security misconfigurations
+    </div>
+    <div class="post-meta">
+      <span title='January 1, 2024'>
+        January 1, 2024
+      </span>
+      <span class="post-tags">
+        <a href="/tags/nginx">#nginx</a>
+        <a href="/tags/web-server">#web-server</a>
+        <a href="/tags/configuration-analysis">#configuration-analysis</a>
+        <a href="/tags/virtual-hosts">#virtual-hosts</a>
+        <a href="/tags/pentesting">#pentesting</a>
+      </span>
+    </div>
+  </header>
+
+  <div class="post-content"><h1 id="nginx-configuration-analysis-cheatsheet">Nginx Configuration Analysis Cheatsheet</h1>
+<h2 id="finding-nginx-configuration-files">Finding Nginx Configuration Files</h2>
+<h3 id="common-configuration-locations">Common Configuration Locations</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Main nginx configuration</span>
+</span></span><span class="line"><span class="cl">/etc/nginx/nginx.conf
+</span></span><span class="line"><span class="cl">/usr/local/nginx/conf/nginx.conf
+</span></span><span class="line"><span class="cl">/usr/local/etc/nginx/nginx.conf
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Site-specific configurations</span>
+</span></span><span class="line"><span class="cl">/etc/nginx/sites-available/
+</span></span><span class="line"><span class="cl">/etc/nginx/sites-enabled/
+</span></span><span class="line"><span class="cl">/etc/nginx/conf.d/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Default site configuration</span>
+</span></span><span class="line"><span class="cl">/etc/nginx/sites-available/default
+</span></span><span class="line"><span class="cl">/etc/nginx/sites-enabled/default
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Additional includes</span>
+</span></span><span class="line"><span class="cl">/etc/nginx/snippets/
+</span></span><span class="line"><span class="cl">/etc/nginx/modules-enabled/
+</span></span></code></pre></div><h3 id="finding-configuration-files">Finding Configuration Files</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Locate nginx configuration</span>
+</span></span><span class="line"><span class="cl">find / -name <span class="s2">&#34;nginx.conf&#34;</span> 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">find / -name <span class="s2">&#34;*.conf&#34;</span> -path <span class="s2">&#34;*nginx*&#34;</span> 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check nginx process for config location</span>
+</span></span><span class="line"><span class="cl">ps aux <span class="p">|</span> grep nginx
+</span></span><span class="line"><span class="cl">nginx -t  <span class="c1"># Test configuration and show file paths</span>
+</span></span><span class="line"><span class="cl">nginx -T  <span class="c1"># Dump configuration</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Find all nginx-related files</span>
+</span></span><span class="line"><span class="cl">locate nginx.conf
+</span></span><span class="line"><span class="cl">locate sites-available
+</span></span><span class="line"><span class="cl">locate sites-enabled
+</span></span></code></pre></div><hr>
+<h2 id="main-configuration-analysis">Main Configuration Analysis</h2>
+<h3 id="nginxconf-structure">nginx.conf Structure</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># Global context
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">user</span> <span class="s">www-data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">worker_processes</span> <span class="s">auto</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">pid</span> <span class="s">/run/nginx.pid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">include</span> <span class="n">/etc/nginx/modules-enabled/*.conf</span>;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Events context
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">events</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">worker_connections</span> <span class="mi">768</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">multi_accept</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">use</span> <span class="s">epoll</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># HTTP context
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">http</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Basic settings
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">sendfile</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">tcp_nopush</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">tcp_nodelay</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">keepalive_timeout</span> <span class="mi">65</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">types_hash_max_size</span> <span class="mi">2048</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">server_tokens</span> <span class="no">off</span><span class="p">;</span>  <span class="c1"># Security: Hide nginx version
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="c1"># MIME types
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">include</span> <span class="s">/etc/nginx/mime.types</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">default_type</span> <span class="s">application/octet-stream</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Logging
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">access_log</span> <span class="s">/var/log/nginx/access.log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">error_log</span> <span class="s">/var/log/nginx/error.log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Gzip compression
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">gzip</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">gzip_vary</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">gzip_proxied</span> <span class="s">any</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">gzip_comp_level</span> <span class="mi">6</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Include site configurations
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">include</span> <span class="s">/etc/nginx/conf.d/*.conf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">include</span> <span class="s">/etc/nginx/sites-enabled/*</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="security-relevant-directives">Security-Relevant Directives</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check for security headers</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;server_tokens&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;add_header&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Version disclosure</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;server_tokens&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl"><span class="c1"># Should be: server_tokens off;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># File upload limits</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;client_max_body_size&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Request limits</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;limit_req&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;limit_conn&#34;</span> /etc/nginx/
+</span></span></code></pre></div><hr>
+<h2 id="virtual-host-discovery">Virtual Host Discovery</h2>
+<h3 id="finding-virtual-hosts">Finding Virtual Hosts</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># List all site configurations</span>
+</span></span><span class="line"><span class="cl">ls -la /etc/nginx/sites-available/
+</span></span><span class="line"><span class="cl">ls -la /etc/nginx/sites-enabled/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Extract server names from configurations</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;server_name&#34;</span> /etc/nginx/sites-available/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;server_name&#34;</span> /etc/nginx/sites-enabled/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for wildcard or catch-all configurations</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;server_name.*\*&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;default_server&#34;</span> /etc/nginx/
+</span></span></code></pre></div><h3 id="virtual-host-configuration-analysis">Virtual Host Configuration Analysis</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># Example virtual host configuration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="s">[::]:80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Primary domain and aliases
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">server_name</span> <span class="s">example.com</span> <span class="s">www.example.com</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Document root
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">root</span> <span class="s">/var/www/html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">index</span> <span class="s">index.html</span> <span class="s">index.htm</span> <span class="s">index.php</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># Locations
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri/</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kn">location</span> <span class="p">~</span> <span class="sr">\.php$</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">include</span> <span class="s">snippets/fastcgi-php.conf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">fastcgi_pass</span> <span class="s">unix:/var/run/php/php7.4-fpm.sock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Subdomain configuration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">server_name</span> <span class="s">subdomain.example.com</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_pass</span> <span class="s">http://localhost:3000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_set_header</span> <span class="s">Upgrade</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_set_header</span> <span class="s">Connection</span> <span class="s">&#39;upgrade&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_cache_bypass</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="real-world-example-soccer-htb">Real-World Example: Soccer HTB</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># From Soccer HTB - Multiple virtual hosts found
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="s">[::]:80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">server_name</span> <span class="s">soccer.htb</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">root</span> <span class="s">/var/www/html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">index</span> <span class="s">index.html</span> <span class="s">index.htm</span> <span class="s">index.nginx-debian.html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri/</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Additional virtual host discovered
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="s">[::]:80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">server_name</span> <span class="s">soc-player.soccer.htb</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">root</span> <span class="s">/root/app/views</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_pass</span> <span class="s">http://localhost:3000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_set_header</span> <span class="s">Upgrade</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_set_header</span> <span class="s">Connection</span> <span class="s">&#39;upgrade&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">proxy_cache_bypass</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h2 id="proxy-configuration-analysis">Proxy Configuration Analysis</h2>
+<h3 id="reverse-proxy-configurations">Reverse Proxy Configurations</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># Basic reverse proxy
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_pass</span> <span class="s">http://backend_server</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Proto</span> <span class="nv">$scheme</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># WebSocket proxy configuration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/websocket</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_pass</span> <span class="s">http://localhost:9091</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_set_header</span> <span class="s">Upgrade</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_set_header</span> <span class="s">Connection</span> <span class="s">&#34;upgrade&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Load balancing
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">upstream</span> <span class="s">backend</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">server</span> <span class="n">192.168.1.10</span><span class="p">:</span><span class="mi">8080</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">server</span> <span class="n">192.168.1.11</span><span class="p">:</span><span class="mi">8080</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">server</span> <span class="n">192.168.1.12</span><span class="p">:</span><span class="mi">8080</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_pass</span> <span class="s">http://backend</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="proxy-security-issues">Proxy Security Issues</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check for missing security headers</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;proxy_set_header.*X-Forwarded&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;proxy_set_header.*Host&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for proxy_pass misconfigurations</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;proxy_pass&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Look for internal service exposure</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;proxy_pass.*127.0.0.1\|localhost&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for missing trailing slashes (path traversal)</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;proxy_pass.*[^/]</span>$<span class="s2">&#34;</span> /etc/nginx/
+</span></span></code></pre></div><hr>
+<h2 id="ssltls-configuration-analysis">SSL/TLS Configuration Analysis</h2>
+<h3 id="ssl-configuration">SSL Configuration</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="mi">443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">listen</span> <span class="s">[::]:443</span> <span class="s">ssl</span> <span class="s">http2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kn">server_name</span> <span class="s">example.com</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># SSL certificates
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">ssl_certificate</span> <span class="s">/path/to/cert.pem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">ssl_certificate_key</span> <span class="s">/path/to/private.key</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># SSL protocols and ciphers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">ssl_protocols</span> <span class="s">TLSv1.2</span> <span class="s">TLSv1.3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">ssl_ciphers</span> <span class="s">ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">ssl_prefer_server_ciphers</span> <span class="no">off</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1"># SSL security headers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kn">add_header</span> <span class="s">Strict-Transport-Security</span> <span class="s">&#34;max-age=63072000&#34;</span> <span class="s">always</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">add_header</span> <span class="s">X-Frame-Options</span> <span class="s">DENY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">add_header</span> <span class="s">X-Content-Type-Options</span> <span class="s">nosniff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="ssl-security-checks">SSL Security Checks</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check SSL configuration</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;ssl_&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for weak SSL protocols</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;ssl_protocols&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl"><span class="c1"># Should not include SSLv2, SSLv3, TLSv1, TLSv1.1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check SSL certificate paths</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;ssl_certificate&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for HSTS headers</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;Strict-Transport-Security&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for security headers</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;add_header&#34;</span> /etc/nginx/
+</span></span></code></pre></div><hr>
+<h2 id="location-block-analysis">Location Block Analysis</h2>
+<h3 id="location-matching-patterns">Location Matching Patterns</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># Exact match
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="p">=</span> <span class="s">/exact-path</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">return</span> <span class="mi">200</span> <span class="s">&#34;Exact</span> <span class="s">match&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Prefix match
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/prefix</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Matches /prefix, /prefix/, /prefix/anything
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Regular expression (case sensitive)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="p">~</span> <span class="sr">\.php$</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Matches files ending with .php
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Regular expression (case insensitive)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="p">~</span><span class="sr">*</span> <span class="s">\.(jpg|jpeg|png|gif)</span>$ <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Matches image files (case insensitive)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Prefix match with priority
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">^~</span> <span class="s">/priority</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># High priority prefix match
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><h3 id="security-critical-locations">Security-Critical Locations</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check for admin/management interfaces</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;location.*admin&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;location.*management&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;location.*dashboard&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for file upload locations</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;location.*upload&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;client_max_body_size&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for API endpoints</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;location.*api&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;location.*/api&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for hidden files/directories</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;location.*\\\.&#34;</span> /etc/nginx/
+</span></span></code></pre></div><h3 id="dangerous-location-configurations">Dangerous Location Configurations</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># Dangerous: Unrestricted file access
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/files/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">alias</span> <span class="s">/var/www/files/</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Can lead to path traversal
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Dangerous: PHP execution in upload directory
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/uploads/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">location</span> <span class="p">~</span> <span class="sr">\.php$</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">fastcgi_pass</span> <span class="s">unix:/var/run/php/php7.4-fmp.sock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Allows execution of uploaded PHP files
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Dangerous: Proxy without validation
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/proxy/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_pass</span> <span class="nv">$arg_url</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Open proxy vulnerability
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h2 id="access-control-analysis">Access Control Analysis</h2>
+<h3 id="access-restrictions">Access Restrictions</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># IP-based access control
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/admin</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">allow</span> <span class="n">192.168.1.0</span><span class="s">/24</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">allow</span> <span class="n">127.0.0.1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Authentication required
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/protected</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">auth_basic</span> <span class="s">&#34;Protected</span> <span class="s">Area&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">auth_basic_user_file</span> <span class="s">/etc/nginx/.htpasswd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Rate limiting
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">limit_req_zone</span> <span class="nv">$binary_remote_addr</span> <span class="s">zone=login:10m</span> <span class="s">rate=1r/s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">location</span> <span class="s">/login</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">limit_req</span> <span class="s">zone=login</span> <span class="s">burst=5</span> <span class="s">nodelay</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="access-control-issues">Access Control Issues</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check for missing access controls</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;allow\|deny&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;auth_basic&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for rate limiting</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;limit_req&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;limit_conn&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for CORS configurations</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;add_header.*Access-Control&#34;</span> /etc/nginx/
+</span></span></code></pre></div><hr>
+<h2 id="file-and-directory-analysis">File and Directory Analysis</h2>
+<h3 id="document-root-analysis">Document Root Analysis</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Find document roots</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;root &#34;</span> /etc/nginx/sites-available/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;alias &#34;</span> /etc/nginx/sites-available/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check document root permissions</span>
+</span></span><span class="line"><span class="cl">ls -la /var/www/html/
+</span></span><span class="line"><span class="cl">ls -la /root/app/views/  <span class="c1"># From Soccer HTB example</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Look for sensitive files in document roots</span>
+</span></span><span class="line"><span class="cl">find /var/www/ -name <span class="s2">&#34;*.conf&#34;</span> -o -name <span class="s2">&#34;*.config&#34;</span> -o -name <span class="s2">&#34;*.bak&#34;</span> 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">find /var/www/ -name <span class="s2">&#34;.env&#34;</span> -o -name <span class="s2">&#34;*.sql&#34;</span> -o -name <span class="s2">&#34;*.log&#34;</span> 2&gt;/dev/null
+</span></span></code></pre></div><h3 id="file-serving-configuration">File Serving Configuration</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check autoindex settings</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;autoindex&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for hidden file access</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;location.*\\\.&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check MIME type configurations</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;mime.types&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;default_type&#34;</span> /etc/nginx/
+</span></span></code></pre></div><hr>
+<h2 id="log-analysis">Log Analysis</h2>
+<h3 id="nginx-log-configuration">Nginx Log Configuration</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># Access log format
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">log_format</span> <span class="s">main</span> <span class="s">&#39;</span><span class="nv">$remote_addr</span> <span class="s">-</span> <span class="nv">$remote_user</span> <span class="s">[</span><span class="nv">$time_local]</span> <span class="s">&#34;</span><span class="nv">$request&#34;</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#39;</span><span class="nv">$status</span> <span class="nv">$body_bytes_sent</span> <span class="s">&#34;</span><span class="nv">$http_referer&#34;</span> <span class="s">&#39;</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#39;&#34;</span><span class="nv">$http_user_agent&#34;</span> <span class="s">&#34;</span><span class="nv">$http_x_forwarded_for&#34;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">access_log</span> <span class="s">/var/log/nginx/access.log</span> <span class="s">main</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">error_log</span> <span class="s">/var/log/nginx/error.log</span> <span class="s">warn</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Custom log for specific location
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/api/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">access_log</span> <span class="s">/var/log/nginx/api.log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="log-file-analysis">Log File Analysis</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Find nginx log files</span>
+</span></span><span class="line"><span class="cl">find /var/log -name <span class="s2">&#34;*nginx*&#34;</span> 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;access_log\|error_log&#34;</span> /etc/nginx/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Analyze access logs for reconnaissance</span>
+</span></span><span class="line"><span class="cl">tail -f /var/log/nginx/access.log
+</span></span><span class="line"><span class="cl">grep <span class="s2">&#34;404&#34;</span> /var/log/nginx/access.log <span class="p">|</span> head -20
+</span></span><span class="line"><span class="cl">grep <span class="s2">&#34;POST&#34;</span> /var/log/nginx/access.log <span class="p">|</span> head -10
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Look for error patterns</span>
+</span></span><span class="line"><span class="cl">tail -f /var/log/nginx/error.log
+</span></span><span class="line"><span class="cl">grep -i <span class="s2">&#34;error\|fail\|denied&#34;</span> /var/log/nginx/error.log
+</span></span></code></pre></div><hr>
+<h2 id="module-and-extension-analysis">Module and Extension Analysis</h2>
+<h3 id="loaded-modules">Loaded Modules</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check compiled modules</span>
+</span></span><span class="line"><span class="cl">nginx -V 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep -o with-<span class="o">[</span>a-z_<span class="o">]</span>*
+</span></span><span class="line"><span class="cl">nginx -V 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep -o without-<span class="o">[</span>a-z_<span class="o">]</span>*
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check dynamic modules</span>
+</span></span><span class="line"><span class="cl">ls -la /etc/nginx/modules-enabled/
+</span></span><span class="line"><span class="cl">ls -la /usr/lib/nginx/modules/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check module loading in config</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;load_module&#34;</span> /etc/nginx/
+</span></span></code></pre></div><h3 id="security-relevant-modules">Security-Relevant Modules</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check for security modules</span>
+</span></span><span class="line"><span class="cl">nginx -V 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep -i <span class="s2">&#34;security\|waf\|firewall&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for authentication modules</span>
+</span></span><span class="line"><span class="cl">nginx -V 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep -i <span class="s2">&#34;auth&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for rate limiting modules</span>
+</span></span><span class="line"><span class="cl">nginx -V 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep -i <span class="s2">&#34;limit&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for SSL/TLS modules</span>
+</span></span><span class="line"><span class="cl">nginx -V 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep -i <span class="s2">&#34;ssl\|tls&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="configuration-testing-and-validation">Configuration Testing and Validation</h2>
+<h3 id="syntax-testing">Syntax Testing</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Test nginx configuration syntax</span>
+</span></span><span class="line"><span class="cl">nginx -t
+</span></span><span class="line"><span class="cl">nginx -T  <span class="c1"># Test and dump configuration</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Test specific configuration file</span>
+</span></span><span class="line"><span class="cl">nginx -t -c /path/to/nginx.conf
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check configuration hierarchy</span>
+</span></span><span class="line"><span class="cl">nginx -T <span class="p">|</span> grep -E <span class="s2">&#34;^#|server_name|listen|location&#34;</span>
+</span></span></code></pre></div><h3 id="runtime-analysis">Runtime Analysis</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check running nginx processes</span>
+</span></span><span class="line"><span class="cl">ps aux <span class="p">|</span> grep nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check listening ports</span>
+</span></span><span class="line"><span class="cl">ss -tlnp <span class="p">|</span> grep nginx
+</span></span><span class="line"><span class="cl">netstat -tlnp <span class="p">|</span> grep nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check nginx status (if enabled)</span>
+</span></span><span class="line"><span class="cl">curl http://localhost/nginx_status
+</span></span></code></pre></div><hr>
+<h2 id="common-misconfigurations">Common Misconfigurations</h2>
+<h3 id="path-traversal-issues">Path Traversal Issues</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># Vulnerable alias configuration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/files</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">alias</span> <span class="s">/var/www/files/</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Missing trailing slash can cause path traversal
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Correct configuration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/files/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">alias</span> <span class="s">/var/www/files/</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="information-disclosure">Information Disclosure</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># Version disclosure
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">server_tokens</span> <span class="no">on</span><span class="p">;</span>  <span class="c1"># Should be off
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Autoindex enabled
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">autoindex</span> <span class="no">on</span><span class="p">;</span>  <span class="c1"># May expose directory contents
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Error page information disclosure
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">error_page</span> <span class="mi">404</span> <span class="s">/404.html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Should use custom error pages
+</span></span></span></code></pre></div><h3 id="proxy-misconfigurations">Proxy Misconfigurations</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># Open proxy vulnerability
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="s">/proxy</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_pass</span> <span class="nv">$arg_url</span><span class="p">;</span>  <span class="c1"># Dangerous - allows arbitrary URLs
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># SSRF via proxy_pass
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">location</span> <span class="p">~</span> <span class="sr">/proxy/(.+)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">proxy_pass</span> <span class="s">http://</span><span class="nv">$1</span><span class="p">;</span>  <span class="c1"># Can access internal services
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h2 id="extraction-commands-for-pentesting">Extraction Commands for Pentesting</h2>
+<h3 id="quick-configuration-extraction">Quick Configuration Extraction</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Extract all server names (virtual hosts)</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;server_name&#34;</span> /etc/nginx/ <span class="p">|</span> grep -v <span class="s2">&#34;#&#34;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sort -u
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Extract all proxy_pass destinations</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;proxy_pass&#34;</span> /etc/nginx/ <span class="p">|</span> grep -v <span class="s2">&#34;#&#34;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sort -u
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Extract all document roots</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;root &#34;</span> /etc/nginx/ <span class="p">|</span> grep -v <span class="s2">&#34;#&#34;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sort -u
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Extract all listening ports</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;listen&#34;</span> /etc/nginx/ <span class="p">|</span> grep -v <span class="s2">&#34;#&#34;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sort -u
+</span></span></code></pre></div><h3 id="one-liner-configuration-analysis">One-liner Configuration Analysis</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Complete nginx configuration dump</span>
+</span></span><span class="line"><span class="cl">find /etc/nginx -name <span class="s2">&#34;*.conf&#34;</span> -exec cat <span class="o">{}</span> <span class="se">\;</span> 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Extract virtual hosts with their configurations</span>
+</span></span><span class="line"><span class="cl">awk <span class="s1">&#39;/server_name/ {server=$2} /listen/ {port=$2} /root/ {docroot=$2} /}/ {print server, port, docroot; server=&#34;&#34;; port=&#34;&#34;; docroot=&#34;&#34;}&#39;</span> /etc/nginx/sites-enabled/*
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Find potential security issues</span>
+</span></span><span class="line"><span class="cl">grep -r -E <span class="s2">&#34;(server_tokens on|autoindex on|proxy_pass \$|allow all)&#34;</span> /etc/nginx/
+</span></span></code></pre></div><hr>
+<h2 id="real-world-example-soccer-htb-analysis">Real-World Example: Soccer HTB Analysis</h2>
+<h3 id="initial-discovery">Initial Discovery</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Found nginx configuration in compromised system</span>
+</span></span><span class="line"><span class="cl">www-data@soccer:/etc/nginx/sites-enabled$ ls -la
+</span></span><span class="line"><span class="cl">total <span class="m">8</span>
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> root root <span class="m">4096</span> Nov <span class="m">17</span>  <span class="m">2022</span> .
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">8</span> root root <span class="m">4096</span> Nov <span class="m">17</span>  <span class="m">2022</span> ..
+</span></span><span class="line"><span class="cl">lrwxrwxrwx <span class="m">1</span> root root   <span class="m">34</span> Nov <span class="m">17</span>  <span class="m">2022</span> default -&gt; /etc/nginx/sites-available/default
+</span></span><span class="line"><span class="cl">lrwxrwxrwx <span class="m">1</span> root root   <span class="m">41</span> Nov <span class="m">17</span>  <span class="m">2022</span> soc-player.htb -&gt; /etc/nginx/sites-available/soc-player.htb
+</span></span></code></pre></div><h3 id="configuration-analysis">Configuration Analysis</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Extract virtual host information</span>
+</span></span><span class="line"><span class="cl">$ cat soc-player.htb
+</span></span><span class="line"><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    listen 80<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    listen <span class="o">[</span>::<span class="o">]</span>:80<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    server_name soc-player.soccer.htb<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    root /root/app/views<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        proxy_pass http://localhost:3000<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_http_version 1.1<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header Upgrade <span class="nv">$http_upgrade</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header Connection <span class="s1">&#39;upgrade&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header Host <span class="nv">$host</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_cache_bypass <span class="nv">$http_upgrade</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="key-findings">Key Findings</h3>
+<ol>
+<li><strong>Additional virtual host discovered</strong>: <code>soc-player.soccer.htb</code></li>
+<li><strong>Internal service exposed</strong>: Application running on <code>localhost:3000</code></li>
+<li><strong>WebSocket support</strong>: Configuration for WebSocket upgrades</li>
+<li><strong>Document root</strong>: <code>/root/app/views</code> (unusual location)</li>
+</ol>
+<hr>
+<h2 id="automation-scripts">Automation Scripts</h2>
+<h3 id="nginx-configuration-parser">Nginx Configuration Parser</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># nginx_analyzer.sh - Extract key information from nginx configs</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">NGINX_PATH</span><span class="o">=</span><span class="s2">&#34;/etc/nginx&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;=== Nginx Configuration Analysis ===&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Virtual Hosts:&#34;</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;server_name&#34;</span> <span class="nv">$NGINX_PATH</span>/ <span class="p">|</span> grep -v <span class="s2">&#34;#&#34;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span> <span class="p">|</span> sort -u
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Listening Ports:&#34;</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;listen&#34;</span> <span class="nv">$NGINX_PATH</span>/ <span class="p">|</span> grep -v <span class="s2">&#34;#&#34;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sort -u <span class="p">|</span> head -10
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Proxy Destinations:&#34;</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;proxy_pass&#34;</span> <span class="nv">$NGINX_PATH</span>/ <span class="p">|</span> grep -v <span class="s2">&#34;#&#34;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sort -u
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Document Roots:&#34;</span>
+</span></span><span class="line"><span class="cl">grep -r <span class="s2">&#34;root &#34;</span> <span class="nv">$NGINX_PATH</span>/ <span class="p">|</span> grep -v <span class="s2">&#34;#&#34;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span> <span class="p">|</span> sort -u
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;Potential Security Issues:&#34;</span>
+</span></span><span class="line"><span class="cl">grep -r -E <span class="s2">&#34;(server_tokens on|autoindex on|allow all)&#34;</span> <span class="nv">$NGINX_PATH</span>/ 2&gt;/dev/null
+</span></span></code></pre></div><hr>
+<h2 id="security-recommendations">Security Recommendations</h2>
+<h3 id="hardening-configuration">Hardening Configuration</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="c1"># Security headers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">add_header</span> <span class="s">X-Frame-Options</span> <span class="s">DENY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">add_header</span> <span class="s">X-Content-Type-Options</span> <span class="s">nosniff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">add_header</span> <span class="s">X-XSS-Protection</span> <span class="s">&#34;1</span><span class="p">;</span> <span class="k">mode=block&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">add_header</span> <span class="s">Strict-Transport-Security</span> <span class="s">&#34;max-age=31536000</span><span class="p">;</span> <span class="k">includeSubDomains&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Hide nginx version
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">server_tokens</span> <span class="no">off</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Rate limiting
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">limit_req_zone</span> <span class="nv">$binary_remote_addr</span> <span class="s">zone=global:10m</span> <span class="s">rate=10r/s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">limit_req</span> <span class="s">zone=global</span> <span class="s">burst=20</span> <span class="s">nodelay</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># File upload restrictions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">client_max_body_size</span> <span class="s">10M</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Disable autoindex
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">autoindex</span> <span class="no">off</span><span class="p">;</span>
+</span></span></code></pre></div><h3 id="monitoring-and-logging">Monitoring and Logging</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Enhanced logging format</span>
+</span></span><span class="line"><span class="cl">log_format detailed <span class="s1">&#39;$remote_addr - $remote_user [$time_local] &#39;</span>
+</span></span><span class="line"><span class="cl">                   <span class="s1">&#39;&#34;$request&#34; $status $body_bytes_sent &#39;</span>
+</span></span><span class="line"><span class="cl">                   <span class="s1">&#39;&#34;$http_referer&#34; &#34;$http_user_agent&#34; &#39;</span>
+</span></span><span class="line"><span class="cl">                   <span class="s1">&#39;$request_time $upstream_response_time&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Log monitoring commands</span>
+</span></span><span class="line"><span class="cl">tail -f /var/log/nginx/access.log <span class="p">|</span> grep -E <span class="s2">&#34;(4[0-9]{2}|5[0-9]{2})&#34;</span>
+</span></span><span class="line"><span class="cl">awk <span class="s1">&#39;$9 ~ /^[45]/ {print $0}&#39;</span> /var/log/nginx/access.log <span class="p">|</span> tail -20
+</span></span></code></pre></div><hr>
+<p><em>Always ensure proper authorization before analyzing nginx configurations on systems you don&rsquo;t own. This information should be used for legitimate security testing and system administration purposes only.</em></p>
+
+  </div>
+
+  <footer class="post-footer">
+    <nav class="paginav">
+      Tags:
+      <a class="tag" href="https://realspaceeagle.github.io/tags/nginx/"># Nginx</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/web-server/"># Web-Server</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/configuration-analysis/"># Configuration-Analysis</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/virtual-hosts/"># Virtual-Hosts</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/pentesting/"># Pentesting</a>
+    </nav>
+  </footer>
+</article>
+
+<style>
+.breadcrumbs {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+
+.breadcrumbs a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.post-description {
+  font-size: 1.125rem;
+  color: var(--secondary);
+  margin: 1rem 0 2rem 0;
+  font-style: italic;
+}
+
+.post-tags a {
+  display: inline-block;
+  background: var(--code-bg);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: all 0.2s ease;
+}
+
+.post-tags a:hover {
+  background: var(--primary);
+  color: var(--theme);
+  transform: translateY(-1px);
+}
+
+.tag {
+  display: inline-block;
+  background: var(--tertiary);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: var(--primary);
+  color: var(--theme);
+  transform: translateY(-1px);
+}
+
+ 
+.cheatsheet-page pre {
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.cheatsheet-page pre code {
+  display: block;
+  padding: 0;
+  margin-left: 0;
+}
+
+ 
+.cheatsheet-page pre::after {
+  content: "Copy";
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cheatsheet-page pre:hover::after {
+  opacity: 1;
+}
+
+ 
+.cheatsheet-page ul li a {
+  color: var(--primary);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.cheatsheet-page ul li a:hover {
+  color: var(--tertiary);
+  padding-left: 0.5rem;
+}
+</style>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeBlocks = document.querySelectorAll('.cheatsheet-page pre');
+  
+  codeBlocks.forEach(block => {
+    block.addEventListener('click', function(e) {
+      if (e.target === this || e.target.tagName === 'CODE') {
+        const code = this.querySelector('code');
+        if (code) {
+          navigator.clipboard.writeText(code.textContent).then(() => {
+            const button = this.querySelector('::after') || this;
+            const originalContent = button.textContent;
+            
+            
+            this.style.borderLeftColor = '#10b981';
+            setTimeout(() => {
+              this.style.borderLeftColor = '#2563eb';
+            }, 300);
+          });
+        }
+      }
+    });
+  });
+
+  
+  const headers = document.querySelectorAll('.cheatsheet-page h2, .cheatsheet-page h3');
+  headers.forEach(header => {
+    const id = header.textContent.toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    
+    header.id = id;
+    header.style.cursor = 'pointer';
+    
+    header.addEventListener('click', () => {
+      window.location.hash = '#' + id;
+      navigator.clipboard.writeText(window.location.href);
+    });
+  });
+});
+</script>
+
+    </main>
+    <footer class="footer">
+  <div class="footer_inner wrap">
+    <div class="footer_text">
+      © 2025 realspaceeagle
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

