@@ -9,7 +9,6 @@ keywords = ['hackthebox soccer', 'websocket sql injection', 'tiny file manager',
 tags = ['hackthebox', 'web-exploitation', 'websocket', 'sql-injection', 'privilege-escalation', 'doas']
 categories = ['HackTheBox']
 author = 'realspaceeagle'
-image = '/images/htb-soccer/soccer-overview.png'
 +++
 
 Soccer is a Linux machine from HackTheBox that demonstrates modern web exploitation techniques, including WebSocket-based SQL injection and privilege escalation through doas misconfigurations. This walkthrough covers the complete exploitation chain from initial reconnaissance to root access.
@@ -98,8 +97,6 @@ The enumeration reveals a `/tiny` directory containing **Tiny File Manager 2.4.3
 **Default Credentials:**
 - Username: `admin`
 - Password: `admin@123`
-
-![Tiny File Manager Interface](/images/htb-soccer/tiny-file-manager.png)
 
 The file manager allows:
 - File uploads to `/uploads` folder
@@ -425,8 +422,6 @@ uid=0(root) gid=0(root) groups=0(root)
 root@soccer:/home/player# cat /root/root.txt
 [ROOT FLAG]
 ```
-
-![Root Shell Achievement](/images/htb-soccer/root-shell.png)
 
 ## Attack Chain Summary
 
