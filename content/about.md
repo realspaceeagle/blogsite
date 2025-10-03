@@ -8,63 +8,238 @@ weight: 1
 ---
 
 <style>
-.about-page {max-width: 900px; margin: 0 auto; line-height: 1.65; font-size: 1rem;}
-.about-page h1 {font-size: 2.4rem; margin-bottom: 0.2rem; letter-spacing: 0.02em;}
-.about-page h2 {margin-top: 2.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid #e4e7ee; letter-spacing: 0.03em; text-transform: uppercase; font-size: 1.1rem; color: #1f2b3d;}
-.about-page h3 {margin-top: 0; font-size: 1.1rem; letter-spacing: 0.01em; color: #243553;}
-.about-page table {width: 100%; border-collapse: collapse; margin: 1.4rem 0 1.8rem 0; font-size: 0.95rem;}
-.about-page table td {padding: 0.45rem 0.65rem; border-bottom: 1px solid #e4e7ee;}
-.about-page table tr:nth-child(odd) td {background: #fafbff;}
-.about-page .summary-card {border: 1px solid #dfe4ef; background: #f7f9fc; border-radius: 10px; padding: 1.25rem 1.5rem; margin: 1.6rem 0; box-shadow: 0 6px 14px rgba(31, 43, 61, 0.06);}
-.about-page .focus-list {list-style: none; margin: 1.2rem 0; padding: 0; display: grid; gap: 0.65rem;}
-.about-page .focus-list li {padding: 0.7rem 0.85rem; border: 1px solid #d7dfee; border-radius: 8px; background: #ffffff; box-shadow: 0 3px 10px rgba(36, 53, 83, 0.05);}
-.about-page .focus-list strong {display: block; color: #214aaf; margin-bottom: 0.25rem; text-transform: uppercase; font-size: 0.82rem; letter-spacing: 0.04em;}
-.about-page .principles {list-style: none; margin: 1.2rem 0; padding: 0; display: grid; gap: 0.5rem;}
-.about-page .principles li {padding: 0.65rem 0.85rem; border-left: 4px solid #214aaf; background: #f1f5ff; border-radius: 6px; box-shadow: inset 0 0 0 1px #d7dfee;}
-.about-page .principles strong {color: #1c2e4d;}
-.about-page .card-grid {display: grid; gap: 1rem; margin: 1.6rem 0;}
-@media (min-width: 760px) {.about-page .card-grid {grid-template-columns: repeat(2, minmax(0, 1fr));}}
-.about-page .card {border: 1px solid #dfe4ef; border-radius: 10px; padding: 1rem 1.2rem; background: #ffffff; box-shadow: 0 6px 14px rgba(23, 35, 58, 0.04);}
-.about-page .card ul {margin: 0.8rem 0 0.5rem 1.1rem;}
-.about-page .card ul li {margin-bottom: 0.35rem;}
-.about-page .timeline {display: grid; gap: 1.1rem; margin: 1.6rem 0;}
-.about-page .timeline-card {border: 1px solid #dfe4ef; border-radius: 10px; padding: 1rem 1.2rem; background: #ffffff; box-shadow: 0 6px 14px rgba(23, 35, 58, 0.04);}
-.about-page .timeline-card em {display: block; color: #3b4b6b; margin-bottom: 0.35rem;}
-.about-page .project-grid {display: grid; gap: 1rem; margin: 1.4rem 0;}
-@media (min-width: 760px) {.about-page .project-grid {grid-template-columns: repeat(3, minmax(0, 1fr));}}
-.about-page .project-card {border: 1px solid #dfe4ef; border-radius: 10px; padding: 1rem 1.1rem; background: #ffffff; box-shadow: 0 6px 14px rgba(23, 35, 58, 0.04);}
-.about-page .project-card strong {color: #214aaf;}
-.about-page .badge-grid {display: grid; gap: 0.9rem; margin: 1.4rem 0;}
-@media (min-width: 640px) {.about-page .badge-grid {grid-template-columns: repeat(2, minmax(0, 1fr));}}
-.about-page .badge {border: 1px solid #dfe4ef; border-radius: 8px; padding: 0.9rem 1rem; background: #ffffff; box-shadow: 0 4px 12px rgba(23, 35, 58, 0.05);}
-.about-page .badge em {color: #3b4b6b; display: block; margin-top: 0.25rem;}
-.about-page .list-plain {margin: 1.1rem 0 0.6rem 1.1rem;}
-.about-page .highlights {list-style: none; margin: 1.3rem 0; padding: 0; display: grid; gap: 0.6rem;}
-.about-page .highlights li {padding: 0.65rem 0.85rem; border: 1px solid #dfe4ef; border-radius: 7px; background: #ffffff; box-shadow: 0 3px 10px rgba(31, 43, 61, 0.05);}
+:root {
+  --about-bg: #f6f7fb;
+  --about-surface: #ffffff;
+  --about-border: #d8deeb;
+  --about-accent: #3656ff;
+  --about-text: #1f2937;
+  --about-muted: #5d6a85;
+}
+
+.about-resume {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  background: var(--about-bg);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(26, 39, 75, 0.18);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--about-text);
+}
+
+.about-resume a { color: var(--about-accent); text-decoration: none; }
+.about-resume a:hover { text-decoration: underline; }
+
+.about-resume h1 {
+  font-size: 2.6rem;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.about-resume .tagline {
+  margin-top: 0.35rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--about-muted);
+}
+
+.about-resume .contact-list {
+  margin: 1.8rem 0 2.4rem;
+  padding: 1.4rem 1.8rem;
+  background: var(--about-surface);
+  border: 1px solid var(--about-border);
+  border-radius: 14px;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.about-resume .contact-item {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.about-resume .contact-item span:first-child {
+  font-weight: 600;
+  color: var(--about-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+}
+
+.about-resume h2 {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--about-muted);
+}
+
+.about-resume .summary {
+  background: linear-gradient(135deg, rgba(54, 86, 255, 0.12), rgba(54, 86, 255, 0));
+  border-left: 4px solid var(--about-accent);
+  padding: 1.2rem 1.5rem;
+  border-radius: 12px;
+}
+
+.about-resume .pill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.about-resume .pill-list li {
+  padding: 0.85rem 1.1rem;
+  background: var(--about-surface);
+  border: 1px solid var(--about-border);
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(26, 39, 75, 0.08);
+}
+
+.about-resume .pill-list strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--about-muted);
+}
+
+.about-resume .grid {
+  display: grid;
+  gap: 1.2rem;
+}
+
+@media (min-width: 720px) {
+  .about-resume .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .about-resume .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.about-resume .card {
+  background: var(--about-surface);
+  border: 1px solid var(--about-border);
+  border-radius: 14px;
+  padding: 1.2rem 1.35rem;
+  box-shadow: 0 18px 32px rgba(26, 39, 75, 0.08);
+}
+
+.about-resume .card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--about-text);
+}
+
+.about-resume .card ul {
+  margin: 0.7rem 0 0 1rem;
+  padding: 0;
+}
+.about-resume .card ul li {
+  margin-bottom: 0.35rem;
+}
+
+.about-resume .timeline {
+  border-left: 2px solid var(--about-border);
+  margin-left: 0.4rem;
+  padding-left: 1.4rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.about-resume .timeline-entry {
+  position: relative;
+}
+
+.about-resume .timeline-entry::before {
+  content: "";
+  position: absolute;
+  left: -1.65rem;
+  top: 0.35rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--about-accent);
+  box-shadow: 0 0 0 4px rgba(54, 86, 255, 0.18);
+}
+
+.about-resume .timeline-entry h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.about-resume .timeline-entry em {
+  display: block;
+  margin: 0.35rem 0 0.5rem;
+  color: var(--about-muted);
+}
+
+.about-resume .badges {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .about-resume .badges { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.about-resume .badge {
+  border: 1px solid var(--about-border);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  background: var(--about-surface);
+  box-shadow: 0 12px 24px rgba(26, 39, 75, 0.08);
+}
+
+.about-resume .badge strong { display: block; }
+.about-resume .badge em { display: block; color: var(--about-muted); margin: 0.35rem 0; }
+
+.about-resume .list-simple {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.about-resume .highlights {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.about-resume .highlights li {
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  background: var(--about-surface);
+  border: 1px solid var(--about-border);
+  box-shadow: 0 16px 28px rgba(26, 39, 75, 0.08);
+}
 </style>
 
-<div class="about-page">
+<div class="about-resume">
 
-# Araharan Loganayagam
+<h1>Araharan Loganayagam</h1>
+<p class="tagline">Cybersecurity Engineer | Cloud &amp; AI Security Specialist</p>
 
-Cybersecurity Engineer | Cloud & AI Security Specialist
-
-<table>
-<tr><td><strong>Location</strong></td><td>London, United Kingdom</td></tr>
-<tr><td><strong>Email</strong></td><td><a href="mailto:araharan.x.loganayagam@hotmail.com">araharan.x.loganayagam@hotmail.com</a></td></tr>
-<tr><td><strong>LinkedIn</strong></td><td><a href="https://www.linkedin.com/in/dream4ip/">linkedin.com/in/dream4ip</a></td></tr>
-<tr><td><strong>GitHub</strong></td><td><a href="https://github.com/realspaceeagle">github.com/realspaceeagle</a></td></tr>
-<tr><td><strong>Medium</strong></td><td><a href="https://medium.com/@haranloga95">medium.com/@haranloga95</a></td></tr>
-<tr><td><strong>Twitter</strong></td><td><a href="https://twitter.com/haran_loga">@haran_loga</a></td></tr>
-</table>
-
-## Professional Snapshot
-<div class="summary-card">
-I help teams build resilient security programs across cloud, AI, and modern application stacks. My work spans penetration testing, DevSecOps, AI security research, and incident response, with a focus on translating fast-changing threat intelligence into practical defensive strategies.
+<div class="contact-list">
+  <div class="contact-item"><span>Location</span><span>London, United Kingdom</span></div>
+  <div class="contact-item"><span>Email</span><span><a href="mailto:araharan.x.loganayagam@hotmail.com">araharan.x.loganayagam@hotmail.com</a></span></div>
+  <div class="contact-item"><span>LinkedIn</span><span><a href="https://www.linkedin.com/in/dream4ip/">linkedin.com/in/dream4ip</a></span></div>
+  <div class="contact-item"><span>GitHub</span><span><a href="https://github.com/realspaceeagle">github.com/realspaceeagle</a></span></div>
+  <div class="contact-item"><span>Medium</span><span><a href="https://medium.com/@haranloga95">medium.com/@haranloga95</a></span></div>
+  <div class="contact-item"><span>Twitter</span><span><a href="https://twitter.com/haran_loga">@haran_loga</a></span></div>
 </div>
 
-## Focus Areas
-<ul class="focus-list">
+<h2>Professional Snapshot</h2>
+<div class="summary">
+  I help teams build resilient security programs across cloud, AI, and modern application stacks. My work spans penetration testing, DevSecOps, AI security research, and incident response, with a focus on translating fast-changing threat intelligence into practical defensive strategies.
+</div>
+
+<h2>Focus Areas</h2>
+<ul class="pill-list">
   <li><strong>Cloud-native defense</strong> Harden AWS, Azure, and GCP estates with guardrails, telemetry, and automation.</li>
   <li><strong>AI security</strong> Secure architecture reviews for AI workloads and ML supply chains.</li>
   <li><strong>DevSecOps enablement</strong> Policy-as-code, automated testing, and secure delivery pipelines.</li>
@@ -72,24 +247,24 @@ I help teams build resilient security programs across cloud, AI, and modern appl
   <li><strong>Security enablement</strong> Workshops, community engagement, and long-form writing that upskills teams.</li>
 </ul>
 
-## Security Philosophy
-<ul class="principles">
-  <li><strong>Defense in depth:</strong> Layered controls that reduce blast radius and support rapid recovery.</li>
-  <li><strong>Zero trust by default:</strong> Continuous verification across identities, services, and data flows.</li>
-  <li><strong>Shift-left:</strong> Embed security guardrails into design, code, and build pipelines.</li>
-  <li><strong>Continuous monitoring:</strong> Blend telemetry, automation, and playbooks for real-time response.</li>
-  <li><strong>Shared knowledge:</strong> Open collaboration that raises the baseline for the wider security community.</li>
+<h2>Security Philosophy</h2>
+<ul class="pill-list">
+  <li><strong>Defense in depth</strong> Layered controls that reduce blast radius and support rapid recovery.</li>
+  <li><strong>Zero trust by default</strong> Continuous verification across identities, services, and data flows.</li>
+  <li><strong>Shift-left</strong> Embed security guardrails into design, code, and build pipelines.</li>
+  <li><strong>Continuous monitoring</strong> Blend telemetry, automation, and playbooks for real-time response.</li>
+  <li><strong>Shared knowledge</strong> Open collaboration that raises the baseline for the wider security community.</li>
 </ul>
 
-## Technical Expertise
-<div class="card-grid">
+<h2>Technical Expertise</h2>
+<div class="grid two">
   <section class="card">
     <h3>Cloud &amp; DevSecOps</h3>
     <ul>
       <li><strong>AWS:</strong> IAM hardening, GuardDuty, Security Hub, Config, CloudTrail analytics.</li>
       <li><strong>Azure:</strong> Sentinel playbooks, Defender for Cloud, Key Vault, Purview integration.</li>
       <li><strong>GCP:</strong> Security Command Center, IAM, Cloud Armor, Binary Authorization.</li>
-      <li><strong>Containers &amp; IaC:</strong> Kubernetes RBAC, network policies, Terraform compliance, Jenkins and GitLab CI security gates.</li>
+      <li><strong>Containers &amp; IaC:</strong> Kubernetes RBAC, network policies, Terraform compliance, GitLab CI and Jenkins security gates.</li>
     </ul>
   </section>
   <section class="card">
@@ -128,38 +303,38 @@ I help teams build resilient security programs across cloud, AI, and modern appl
   </section>
 </div>
 
-## Education
+<h2>Education</h2>
 <div class="timeline">
-  <section class="timeline-card">
+  <section class="timeline-entry">
     <h3>University of West London</h3>
     <em>MSc Cyber Security (Distinction) | London, United Kingdom | 2022-2023</em>
     <p>Coursework: Infrastructure automation, penetration testing, security operations, ML for security.</p>
   </section>
-  <section class="timeline-card">
+  <section class="timeline-entry">
     <h3>University of Moratuwa</h3>
     <em>BSc (Hons) Information Technology (Second Class Upper) | Moratuwa, Sri Lanka | 2017-2021</em>
     <p>Coursework: Data structures, software architecture, NLP, computer networks, project management.</p>
   </section>
 </div>
 
-## Research &amp; Projects
-<div class="project-grid">
-  <section class="project-card">
-    <strong>Blockchain &amp; ML-based Malware Detection (MSc)</strong>
+<h2>Research &amp; Projects</h2>
+<div class="grid three">
+  <section class="card">
+    <h3>Blockchain &amp; ML-based Malware Detection</h3>
     <p>Designed a decentralized malware detection platform combining proof-of-work consensus with ML classifiers for file integrity validation.</p>
   </section>
-  <section class="project-card">
-    <strong>Kids Learning Enhancement via NLP (BSc)</strong>
+  <section class="card">
+    <h3>Kids Learning Enhancement via NLP</h3>
     <p>Built an interactive question-driven learning assistant leveraging BERT, LSTM, and Google APIs to generate personalised educational video summaries.</p>
   </section>
-  <section class="project-card">
-    <strong>Agri Aid Social Network</strong>
+  <section class="card">
+    <h3>Agri Aid Social Network</h3>
     <p>Delivered a full-stack web and mobile solution that connects farmers and middlemen with real-time weather insights, community forums, and marketplace tooling.</p>
   </section>
 </div>
 
-## Certifications &amp; Continuous Learning
-<div class="badge-grid">
+<h2>Certifications &amp; Continuous Learning</h2>
+<div class="badges">
   <section class="badge">
     <strong>Offensive Security Certified Professional (OSCP)</strong>
     <em>Status: In progress</em>
@@ -187,16 +362,16 @@ I help teams build resilient security programs across cloud, AI, and modern appl
   </section>
 </div>
 
-## Community &amp; Leadership
-<ul class="focus-list">
-  <li><strong>Hands-on learning:</strong> Active participant in Hack The Box labs and CTF events to sharpen offensive skills.</li>
-  <li><strong>Mentorship:</strong> Volunteer and mentor across cybersecurity forums and local community initiatives.</li>
-  <li><strong>Global citizenship:</strong> AIESEC Global Village contributor supporting charity programs in Sri Lanka.</li>
-  <li><strong>Inclusive teamwork:</strong> Frequent traveller fostering multicultural awareness and collaboration.</li>
+<h2>Community &amp; Leadership</h2>
+<ul class="pill-list">
+  <li><strong>Hands-on learning</strong> Active participant in Hack The Box labs and CTF events to sharpen offensive skills.</li>
+  <li><strong>Mentorship</strong> Volunteer and mentor across cybersecurity forums and local community initiatives.</li>
+  <li><strong>Global citizenship</strong> AIESEC Global Village contributor supporting charity programs in Sri Lanka.</li>
+  <li><strong>Inclusive teamwork</strong> Frequent traveller fostering multicultural awareness and collaboration.</li>
 </ul>
 
-## What You'll Find on the Blog
-<ul class="list-plain">
+<h2>What You'll Find on the Blog</h2>
+<ul class="list-simple">
   <li>Advanced reconnaissance, OSINT, and adversary emulation walkthroughs.</li>
   <li>Linux hardening and automation playbooks for production estates.</li>
   <li>Cloud security architecture patterns spanning IAM, Kubernetes, and DevSecOps.</li>
@@ -204,7 +379,7 @@ I help teams build resilient security programs across cloud, AI, and modern appl
   <li>Capture the Flag write-ups, tooling breakdowns, and incident response primers.</li>
 </ul>
 
-## Highlights &amp; Recognition
+<h2>Highlights &amp; Recognition</h2>
 <ul class="highlights">
   <li>MSc Cyber Security (Distinction), University of West London, 2023.</li>
   <li>Published research on blockchain-backed malware detection for collaborative defense.</li>
