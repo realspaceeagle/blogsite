@@ -69,6 +69,33 @@ weight: 1
 .profile-text {
   max-width: 420px;
 }
+.working-on {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: var(--about-text);
+  background: var(--about-surface);
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--about-border);
+  box-shadow: 0 12px 28px rgba(26, 39, 75, 0.12);
+  letter-spacing: 0.04em;
+}
+
+.working-on span.label {
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--about-muted);
+}
+
+.working-on span.value {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.96rem;
+  letter-spacing: 0.02em;
+}
 
 .about-resume h1 {
   font-size: 2.6rem;
@@ -297,6 +324,7 @@ weight: 1
     <div class="profile-text">
       <h1>Araharan Loganayagam</h1>
       <p class="tagline">Cybersecurity Engineer | Cloud &amp; AI Security Specialist</p>
+      <p class="working-on"><span class="label">Working On</span><span class="value">Cybersecurity Engineer | Cloud &amp; AI Security Application DevSecOps</span></p>
     </div>
   </div>
 
@@ -462,3 +490,4 @@ weight: 1
     <li>Ongoing technical writing and workshops that equip practitioners with applied security skills.</li>
   </ul>
 </div>
+
