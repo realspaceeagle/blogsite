@@ -37,9 +37,13 @@ weight: 1
 .profile-header {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1.8rem;
   flex-wrap: wrap;
+  text-align: center;
 }
+
+.profile-text { max-width: 420px; }
 
 .avatar-frame {
   width: 168px;
@@ -63,13 +67,7 @@ weight: 1
   margin-top: 0.3rem;
   font-size: 1.1rem;
   font-weight: 500;
-  color: var(--about-muted);
-}
-
-.profile-hint {
-  margin-top: 0.6rem;
-  font-size: 0.85rem;
-  color: var(--about-muted);
+  color: var(--about-text);
 }
 
 .about-resume h2 {
@@ -97,6 +95,7 @@ weight: 1
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.6rem;
+  color: var(--about-text);
 }
 
 .contact-item span:first-child {
@@ -129,6 +128,7 @@ weight: 1
   border: 1px solid var(--about-border);
   border-radius: 14px;
   box-shadow: 0 16px 32px rgba(26, 39, 75, 0.1);
+  color: var(--about-text);
 }
 
 .pill-list strong {
@@ -136,7 +136,7 @@ weight: 1
   margin-bottom: 0.3rem;
   font-size: 0.85rem;
   letter-spacing: 0.06em;
-  color: var(--about-muted);
+  color: var(--about-text);
   text-transform: uppercase;
 }
 
@@ -156,11 +156,28 @@ weight: 1
   border-radius: 16px;
   padding: 1.2rem 1.4rem;
   box-shadow: 0 20px 36px rgba(26, 39, 75, 0.12);
+  color: var(--about-text);
 }
 
-.card h3 { margin: 0; font-size: 1.05rem; color: var(--about-text); }
-.card ul { margin: 0.75rem 0 0 1.1rem; padding: 0; }
-.card ul li { margin-bottom: 0.35rem; }
+.card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--about-text);
+}
+
+.card ul {
+  margin: 0.75rem 0 0 1.1rem;
+  padding: 0;
+}
+
+.card ul li {
+  margin-bottom: 0.35rem;
+  color: var(--about-text);
+}
+
+.card ul li strong {
+  color: var(--about-text);
+}
 
 .timeline {
   border-left: 2px solid var(--about-border);
@@ -170,7 +187,10 @@ weight: 1
   gap: 1.6rem;
 }
 
-.timeline-entry { position: relative; }
+.timeline-entry {
+  position: relative;
+  color: var(--about-text);
+}
 
 .timeline-entry::before {
   content: "";
@@ -184,8 +204,17 @@ weight: 1
   box-shadow: 0 0 0 5px var(--about-accent-soft);
 }
 
-.timeline-entry h3 { margin: 0; font-size: 1.05rem; }
-.timeline-entry em { display: block; margin: 0.4rem 0 0.55rem; color: var(--about-muted); }
+.timeline-entry h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--about-text);
+}
+
+.timeline-entry em {
+  display: block;
+  margin: 0.4rem 0 0.55rem;
+  color: var(--about-muted);
+}
 
 .badges {
   display: grid;
@@ -202,12 +231,25 @@ weight: 1
   padding: 1rem 1.2rem;
   background: var(--about-surface);
   box-shadow: 0 18px 34px rgba(26, 39, 75, 0.1);
+  color: var(--about-text);
 }
 
-.badge strong { display: block; }
-.badge em { display: block; color: var(--about-muted); margin: 0.35rem 0; }
+.badge strong {
+  display: block;
+  color: var(--about-text);
+}
 
-.list-simple { margin: 0; padding-left: 1.2rem; }
+.badge em {
+  display: block;
+  color: var(--about-muted);
+  margin: 0.35rem 0;
+}
+
+.list-simple {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--about-text);
+}
 
 .highlights {
   list-style: none;
@@ -215,6 +257,7 @@ weight: 1
   padding: 0;
   display: grid;
   gap: 1rem;
+  color: var(--about-text);
 }
 
 .highlights li {
@@ -233,7 +276,6 @@ weight: 1
     <div class="profile-text">
       <h1>Araharan Loganayagam</h1>
       <p class="tagline">Cybersecurity Engineer | Cloud &amp; AI Security Specialist</p>
-      <p class="profile-hint">Drop your headshot at <code>static/images/profile.jpg</code> (recommended 320×320) to replace the placeholder gradient.</p>
     </div>
   </div>
 
